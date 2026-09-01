@@ -274,7 +274,7 @@
 
 \section{Triangulated Categories}
 % Conteúdo do primeiro capítulo
-For the definition and fundamental properties of triangulated categories, we refer to J.L. Verdier \cite{Verdier}. Our goal in this section is to explain Verdier's axioms—especially the octahedron axiom—and to provide some complements.
+\lettrine{F}or the definition and fundamental properties of triangulated categories, we refer to J.L. Verdier \cite{Verdier}. Our goal in this section is to explain Verdier's axioms—especially the octahedron axiom—and to provide some complements.
 \bbdhead{}{1.1.1} A \emph{triangulated category} is an additive category \( \mathcal{D} \), equipped with a \emph{translation functor} \( X \mapsto X[1] \) and a collection of "triangles" \( X \to Y \to Z \to X[1] \), called \emph{distinguished triangles}. We require that the translation functor be an auto-equivalence of categories and that the collection of distinguished triangles satisfies the axioms TR 1 to TR 4 of \cite[p.~3]{Verdier}.
 We denote \( X \mapsto X[n] \) the \( n \)-th iteration of the translation functor (\( n \in \mathbb{Z} \)). In diagrams, an arrow of degree \( n \) will be labeled with \( (n) \). Distinguished triangles are often written linearly as \( X \to Y \to Z \to X[1] \) (or simply \( (X, Y, Z) \)).
 \[
@@ -357,7 +357,7 @@ S^{n+i}X \to S^{m+i}Y.
 \]
 The translation functor is \( (X, n) \mapsto (X, n+1) \simeq (SX, n) \), and the distinguished triangles are defined by embeddings of subcomplexes \( X \hookrightarrow Y \) (triangles \( X \hookrightarrow Y \to Y/X \to SX \ldots\)).
 
-The functor \( H_0 : (X, n) \mapsto H_{-n}(X) \) (reduced homology) is a cohomological functor (\([10]\) p.10): \( (\text{h. stable}) \to (\text{abelian groups}). \) The "reduced chain complex" construction allows it to be lifted into an exact functor \cite[p.~4]{Verdier}: \( (\text{h. stable}) \to D(\text{abelian groups}). \)
+The functor \( H_0 : (X, n) \mapsto H_{-n}(X) \) (reduced homology) is a cohomological functor (\cite[p.~10]{Verdier}): \( (\text{h. stable}) \to (\text{abelian groups}). \) The "reduced chain complex" construction allows it to be lifted into an exact functor \cite[p.~4]{Verdier}: \( (\text{h. stable}) \to D(\text{abelian groups}). \)
 \bbdhead{}{1.1.6} The octahedral diagram is as follows:
 \usetikzlibrary{calc}
 \begin{figure}[h!]
@@ -2165,7 +2165,7 @@ a $p$-perverse sheaf on $U_k$, let $a$ be an integer $\geq k$ such that $p\leq a
 In this proposition the $\tau_{\leq i}$ refer to the natural $t$-structure. Applying (2.1.7.1), we are reduced to checking that $(j_{k+1})_{!*}A=\tau_{\leq k}\,j_{k+1\,*}A$. Put $F=U_{k+1}-U_k$. By \rn{1.4.23} we have $(j_{k+1})_{!*}A={}^{p}\tau^{F}_{\leq -1}(j_{k+1})_{*}A$. On $F$ the function $p$ is constant, of value $k+1$, so ${}^{p}\tau^{F}_{\leq -1}$ is nothing but $\tau^{F}_{\leq k}$ (for the natural $t$-structure on $F$). Since $p\leq k$ on $U_k$, $A$ lies in $D^{\leq k}(U,\OO)$ (\rn{2.1.2.1}), and $\tau_{\leq k}(j_{k+1})_{*}A \xleftarrow{\ \sim\ } \tau^{F}_{\leq k}(j_{k+1})_{*}A$.
 
 \num{\anch{2.1.12}\footnote{\emph{Errata and Addenda} (2018), item~24: \emph{Locally constant sheaf of finite dimensional $R$-vector spaces} is a small abuse of language: it is a locally constant sheaf with finite dimensional stalks.}.} Let us explain the relation between our notation and that of M.~Goresky
-and R.~MacPherson [4], [5].
+and R.~MacPherson \cite{GMdualite,GMone}.
 
 \noindent a) They work in cohomology with coefficients in a field $R$ (chiefly $R=\mathbb{Q}$ or $\mathbb{C}$), i.e.\ they take for $\OO$ the constant sheaf with value $R$.
 
@@ -2440,7 +2440,7 @@ One finally imposes
 As in \rn{2.1.13}, this condition guarantees that for $U\xhookrightarrow{\ j\ }V\subset X$ locally closed and unions of strata, the functors $j_{*},j_{!},j^{*},j^{!}$ carry $D^{b}_{\SS,\LL}(U,\mathbb{Z}/\ell)$ and $D^{b}_{\SS,\LL}(V,\mathbb{Z}/\ell)$ into one another.
 
 \smallskip
-It follows from the constructibility theorem for $Rj_{*}$ ([3] 1.1) that for every system $(\SS',\LL')$ satisfying (a)(b) there exists $(\SS,\LL)$ refining $(\SS',\LL')$ and satisfying (a)(b)(c): if (a)(b)(c) hold for $X$ replaced by the union of the strata of dimension $\geq n$, the constructibility theorem allows one to refine $(\SS,\LL)$ into $(\SS',\LL')$ without touching the strata of dimension $\geq n$, and to make (a)(b)(c) true for $X$ replaced by the union of the strata of dimension $\geq n-1$. One iterates this construction.
+It follows from the constructibility theorem for $Rj_{*}$ (\cite[1.1]{Finitude}) that for every system $(\SS',\LL')$ satisfying (a)(b) there exists $(\SS,\LL)$ refining $(\SS',\LL')$ and satisfying (a)(b)(c): if (a)(b)(c) hold for $X$ replaced by the union of the strata of dimension $\geq n$, the constructibility theorem allows one to refine $(\SS,\LL)$ into $(\SS',\LL')$ without touching the strata of dimension $\geq n$, and to make (a)(b)(c) true for $X$ replaced by the union of the strata of dimension $\geq n-1$. One iterates this construction.
 
 \num{\anch{2.2.11}\footnote{\emph{Errata and Addenda} (2018), item~29: In particular, as in the case of stratified spaces, one has the self-dual perversity function $p_{1/2}:\SS\to\ZZ$, $S\mapsto-\dimm S$.}.} Let $p$ be as in \rn{2.2.1}, defining the perversity functions
 $p_{\SS}:\SS\to\mathbb{Z}:S\longmapsto p(2\dimm S)$. Proceeding as before, one deduces from $p$ a $t$-structure on $D^{b}_{\SS,\LL}(X,\mathbb{Z}/\ell)$. As $(\SS,\LL)$ becomes finer and finer these $t$-structures induce one another: the purity theorem SGA 4 XVI 3.7 provides the analogue of \rn{2.1.14}. Passing to the limit one obtains a $t$-structure $(D^{b,\leq p}_{c}(X,\mathbb{Z}/\ell),\,D^{b,\geq p}_{c}(X,\mathbb{Z}/\ell))$ on the filtered union $D^{b}_{c}(X,\mathbb{Z}/\ell)$ of the $D^{b}_{\SS,\LL}(X,\mathbb{Z}/\ell)$. From it one deduces a $t$-structure on $D_{c}(X,\mathbb{Z}/\ell)$ as in \rn{2.2.1}, and \rn{2.2.2} to \rn{2.2.8} remain valid, with essentially the same proof. The duality formalism in étale cohomology (SGA 4 XVIII) replaces that of Verdier duality.
@@ -2459,7 +2459,7 @@ $H^{i}i^{!}_{x}K=0$ for $i<p(2\dimm x)$).\footnote{The scan has these two inequa
 $R$-modules, with $R$ finite over $\mathbb{Z}/\ell^{n}$) one proceeds in the same way. It is convenient to keep taking for $\LL$ the datum, for each stratum, of a finite family of irreducible locally constant sheaves of $\mathbb{Z}/\ell$-modules, and to say that $K$ in $D^{b}(X,R)$ is $(\SS,\LL)$-constructible if the $\ell^{i}H^{*}K/\ell^{i+1}H^{*}K$ are $(\SS,\LL)$-constructible, as sheaves of $\mathbb{Z}/\ell$-modules.
 
 \num{\anch{2.2.14}.} For $\Zl$-sheaves (resp.\ $\Ql$-sheaves, \dots) one proceeds likewise, once
-one has defined triangulated categories $D^{b}_{c}(X,\Zl)$ (resp.\ $D^{b}_{c}(X,\Ql)$, \dots) obeying the usual variance formalism, and once one has defined their ``natural'' $t$-structure, which one wants to yield the abelian category of constructible $\Zl$-sheaves (resp.\ $\Ql$-sheaves, \dots) on $X$ (SGA 5 VII 1.1). In the case of finite or algebraically closed base fields (or more generally when for every finite extension $k'$ of $k$ the groups $H^{i}(\Gal(\overline{k}/k'),\mathbb{Z}/\ell)$ are finite), a solution is proposed in [1] \rn{1.1.2}: set
+one has defined triangulated categories $D^{b}_{c}(X,\Zl)$ (resp.\ $D^{b}_{c}(X,\Ql)$, \dots) obeying the usual variance formalism, and once one has defined their ``natural'' $t$-structure, which one wants to yield the abelian category of constructible $\Zl$-sheaves (resp.\ $\Ql$-sheaves, \dots) on $X$ (SGA 5 VII 1.1). In the case of finite or algebraically closed base fields (or more generally when for every finite extension $k'$ of $k$ the groups $H^{i}(\Gal(\overline{k}/k'),\mathbb{Z}/\ell)$ are finite), a solution is proposed in \cite[1.1.2]{WeilII}: set
 \begin{equation*}
   D^{b}_{c}(X,\Zl):=2\text{-}\lim\text{proj}\ D^{b}_{\mathrm{ctf}}(X,\mathbb{Z}/\ell^{n})
   \eqtag{2.2.14.1}
@@ -2471,7 +2471,7 @@ one has defined triangulated categories $D^{b}_{c}(X,\Zl)$ (resp.\ $D^{b}_{c}(X,
 restricting to objects of finite Tor-dimension is necessary for them to send $D^{b}$ into $D^{b}$.
 
 \smallskip
-The following proposition, together with the finiteness theorems of [3], guarantees that one does indeed obtain a triangulated category.
+The following proposition, together with the finiteness theorems of \cite{Finitude}, guarantees that one does indeed obtain a triangulated category.
 
 \num{Proposition \anch{2.2.15}.} \emph{Let $(\DD_{n})_{n\in\mathbb{N}}$ be a projective system of
 triangulated categories. The transition functors $T_{m,n}:\DD_{n}\to\DD_{m}$ are assumed exact. If, for every $n\in\mathbb{N}$ and $K,L$ in $\DD_{n}$, $\Hom(K,L)$ is finite, then the 2-projective-limit $\DD$ of the $\DD_{n}$, equipped with the family of triangles $T$ whose images in the $\DD_{n}$ are distinguished, is triangulated.}
@@ -2492,7 +2492,7 @@ $D^{b}_{c}(X,\Zl)$ is obtained by simply passing to the limit. The definition of
   \Tor_{1}(H^{i+1}(K),\mathbb{Z}/\ell^{n})\to 0 \eqtag{2.2.16.1}
 \end{equation*}
 
-For varying $n$ these form a projective system, and the projective system of the $\Tor_{1}$ is essentially zero. One defines $D^{b}_{c}(X,\Zl)^{\leq0}$ (resp.\ $D^{b}_{c}(X,\Zl)^{\geq0}$) by the conditions $H^{i}K=0$ for $i>0$ (resp.\ $i<0$). To make sure that one really obtains a $t$-structure, the essential point is the construction of the operators $\tau_{\leq i}$; this is carried out in [1] \rn{1.1.2}. The functor $H^{0}$ induces an equivalence of categories
+For varying $n$ these form a projective system, and the projective system of the $\Tor_{1}$ is essentially zero. One defines $D^{b}_{c}(X,\Zl)^{\leq0}$ (resp.\ $D^{b}_{c}(X,\Zl)^{\geq0}$) by the conditions $H^{i}K=0$ for $i>0$ (resp.\ $i<0$). To make sure that one really obtains a $t$-structure, the essential point is the construction of the operators $\tau_{\leq i}$; this is carried out in \cite[1.1.2]{WeilII}. The functor $H^{0}$ induces an equivalence of categories
 \[
   (D^{b}_{c}(X,\Zl)^{\leq0}\cap D^{b}_{c}(X,\Zl)^{\geq0})\ \to\
   (\text{constructible }\Zl\text{-sheaves}).
@@ -2579,10 +2579,10 @@ It suffices to see that the morphism ${}^{p}j_{i}^{*}A\longrightarrow A_{i}=A_{U
 \smallskip
 
 \num{\anch{3.1.1}.} The usual triangulated categories have accompanying them a ``filtered derived
-category''. The relations between the original triangulated category and this one have not yet been axiomatized. The most useful of the functors relating these categories are considered in \rn{3.1.2}, but we do not claim to have indicated all the compatibilities to which they give rise. For this reason we are obliged, in this section, to start from an abelian category $\AAA$, its derived category $D\AAA$, and its filtered derived category $DF\AAA$. Modifying the definition given in \rn{1.1.4}, we define it here as deduced by a calculus of fractions from the category of complexes equipped with a finite filtration (and not merely one finite degree by degree). This is the definition of [8] V \S1,2, where the reader will find a systematic account. Similarly for $D^{*}$, $*=+,-,b$. We shall also incidentally use the bifiltered derived category $DF^{2}\AAA$, which may be regarded as the ``filtered derived category'' companion to the triangulated category $DF\AAA$.
+category''. The relations between the original triangulated category and this one have not yet been axiomatized. The most useful of the functors relating these categories are considered in \rn{3.1.2}, but we do not claim to have indicated all the compatibilities to which they give rise. For this reason we are obliged, in this section, to start from an abelian category $\AAA$, its derived category $D\AAA$, and its filtered derived category $DF\AAA$. Modifying the definition given in \rn{1.1.4}, we define it here as deduced by a calculus of fractions from the category of complexes equipped with a finite filtration (and not merely one finite degree by degree). This is the definition of \cite[Vol.~V, \S\S~1--2]{Illusie}, where the reader will find a systematic account. Similarly for $D^{*}$, $*=+,-,b$. We shall also incidentally use the bifiltered derived category $DF^{2}\AAA$, which may be regarded as the ``filtered derived category'' companion to the triangulated category $DF\AAA$.
 
 \smallskip
-If the abelian category $\AAA$ has enough injectives, $D^{+}\AAA$ is identified with the category of left-bounded complexes of injective objects of $\AAA$, morphisms of complexes being taken up to homotopy, and $D^{+}F\AAA$ (resp.\ $D^{+}F^{2}\AAA$) is identified with the category of left-bounded filtered (resp.\ bifiltered) complexes of injective objects of $\AAA$, the filtration (resp.\ bifiltration) being finite and split in each degree, and morphisms of filtered (resp.\ bifiltered) complexes being taken modulo homotopies compatible with the filtrations (i.e.\ modulo the $dH+Hd$, where $H$, of degree $-1$, respects the filtrations) ([8] V 1.4.7 for $D^{+}F$).
+If the abelian category $\AAA$ has enough injectives, $D^{+}\AAA$ is identified with the category of left-bounded complexes of injective objects of $\AAA$, morphisms of complexes being taken up to homotopy, and $D^{+}F\AAA$ (resp.\ $D^{+}F^{2}\AAA$) is identified with the category of left-bounded filtered (resp.\ bifiltered) complexes of injective objects of $\AAA$, the filtration (resp.\ bifiltration) being finite and split in each degree, and morphisms of filtered (resp.\ bifiltered) complexes being taken modulo homotopies compatible with the filtrations (i.e.\ modulo the $dH+Hd$, where $H$, of degree $-1$, respects the filtrations) (\cite[Vol.~V, 1.4.7]{Illusie} for $D^{+}F$).
 
 \smallskip
 Our filtrations will be sometimes increasing, sometimes decreasing. One passes from one to the other by setting $F_{i}:=F^{-i}$.
@@ -2656,10 +2656,10 @@ $f=(f_{i})\in\Hom^{n}(K,L)$ lies in $F^{k}$ if $f_{i}(F^{m}K^{i})\subset F^{m+k}
 One has
 \begin{align*}
   \Gr^{k}_{F}\mathrm{RHom}(K,L) &= \prod_{m-n=k}\mathrm{RHom}(\Gr^{n}_{F}K,\Gr^{m}_{F}L)
-  \qquad([8]\ \mathrm{V}\ 1.4.9) \eqtag{3.1.3.1}\\
+  \qquad\text{(\cite[Vol.~V, 1.4.9]{Illusie})} \eqtag{3.1.3.1}\\
   \Hom_{D\AAA}(\omega K,\omega L) &= H^{0}\omega\,\mathrm{RHom}(K,L)
   \qquad(\omega=\text{forgetting }F) \eqtag{3.1.3.2}\\
-  \Hom_{DF\AAA}(K,L) &= H^{0}F^{0}\mathrm{RHom}(K,L) \qquad([8]\ \mathrm{V}\ 1.4.6).
+  \Hom_{DF\AAA}(K,L) &= H^{0}F^{0}\mathrm{RHom}(K,L) \qquad\text{(\cite[Vol.~V, 1.4.6]{Illusie}).}
   \eqtag{3.1.3.3}
 \end{align*}
 
@@ -2934,7 +2934,7 @@ For $K$ in $D(S)$, the system of its restrictions $K|U$ for $U$ in $C$ is an obj
 Let $(K_U)$ be an object of $D(S)$ given $C$-locally, with $H^iK_U = 0$ for $i$ outside an interval independent of $U$. Suppose that, whatever $U$ in $C$, one has on $U$ that $\EExt^i(K_U,K_U) = 0$ for $i<0$. Then there exists an object $K$ of $D^b(S)$ (unique by \rn{3.2.2}) giving rise to $(K_U)$.
 \end{named}
 
-The uniqueness assertion follows from \rn{3.2.2}. To prove existence we shall take our inspiration from the proof of \rn{3.1.8} and from the theory of cohomological descent (SGA4 VI B, summarized in [2] \S 5).
+The uniqueness assertion follows from \rn{3.2.2}. To prove existence we shall take our inspiration from the proof of \rn{3.1.8} and from the theory of cohomological descent (SGA4 VI B, summarized in \cite[\S~5]{HodgeIII}).
 
 \pnum{\anch{3.2.5}. Simplicial version of the problem.}
 At the cost of changing the site without changing the topos, we may suppose that the sieve $C$ is generated by an object $U$ of $\cS$ covering the final object. It then amounts to the same to give $C$-locally an object of $D(S)$, or to give an object of $D(U)$ together with an isomorphism between its two inverse images on $U \times U$ (fibre product over $S$) satisfying the usual cocycle condition on $U \times U \times U$.
@@ -3571,7 +3571,7 @@ Likewise for $(f_1\times f_2)_!$, $(f_1\times f_2)^*$ and $(f_1\times f_2)^!$. I
 \end{itemize}
 In particular, the Verdier dual $D(K\boxtimes L)$ of $K\boxtimes L$ is the $\boxtimes$ of the Verdier duals of $K$ and $L$. Likewise, trivially, with $\otimes$ replacing $\RHom$.
 
-By standard arguments (cf.\ [3] \S1), these statements reduce to (a) for direct images. Factoring $(f_1,f_2)$ as $(f_1,\mathrm{Id})\circ (\mathrm{Id},f_2)$, one may assume that $f_1$ or $f_2$ is the identity. One also reduces to the case of $\Zmod$ coefficients. In that case, and for $f_1$ the identity, the result can be deduced from the universal local acyclicity of $X_1\to\Spec(k)$, for any sheaf of coefficients ([3] 2.16).
+By standard arguments (cf.\ \cite[\S~1]{Finitude}), these statements reduce to (a) for direct images. Factoring $(f_1,f_2)$ as $(f_1,\mathrm{Id})\circ (\mathrm{Id},f_2)$, one may assume that $f_1$ or $f_2$ is the identity. One also reduces to the case of $\Zmod$ coefficients. In that case, and for $f_1$ the identity, the result can be deduced from the universal local acyclicity of $X_1\to\Spec(k)$, for any sheaf of coefficients (\cite[2.16]{Finitude}).
 
 \stat{Proposition \anch{4.2.8}.} For $X_1$ and $X_2$ of finite type over $k$, the
 bifunctor $\boxtimes$ is $t$-exact.\estat
@@ -3742,7 +3742,7 @@ O\bigl(\sup\{\prod_{a\in A}d_a\mid A\subset[2,n]\ \text{and}\\
 \qquad |A|=n-(q+1)-1\ \text{ for } q\geq0\}\bigr)
 \end{cases}
 \]
-One has (Euler--Poincaré formula, see [9]):
+One has (Euler--Poincaré formula, see \cite{Raynaud}):
 \[
 \chi(X_1,R^q\widetilde{\mathrm{pr}}_*K)=\chi(U_1)\cdot
 \rg(R^q\widetilde{\mathrm{pr}}_*K)-\sum_{x\in X_1-U_1}
@@ -3827,9 +3827,9 @@ In this section we complement the geometric results of section 4 by more arithme
 
 Let $p$ be a prime number $\ne\ell$, $q$ a power of $p$, $\Fq$ a finite field with $q$ elements, and $\Fbar$ an algebraic closure of $\Fq$.
 
-As in [1] (0.7), we denote by a subscript $o$ an object over $\Fq$ (a scheme, or a sheaf on a scheme). Dropping this subscript indicates extension of scalars from $\Fq$ to $\Fbar$.
+As in \cite[0.7]{WeilII}, we denote by a subscript $o$ an object over $\Fq$ (a scheme, or a sheaf on a scheme). Dropping this subscript indicates extension of scalars from $\Fq$ to $\Fbar$.
 
-\section{Recollections from [1]}
+\section{Recollections from \texorpdfstring{\cite{WeilII}}{[1]}}
 
 \num{\anch{5.1.1}.}  Let $X_{o}$ be a scheme of finite type over
 $\Fq$ and $F_{o}$ a $\Qlb$-sheaf on $X_{o}$. Over $\Fbar$ one has the Frobenius morphism $\Fr_{q}:X\to X$ (raising the coordinates to the $q$-th power) and an isomorphism $F^{*}_{q}:\Fr^{*}_{q}F\xrightarrow{\ \sim\ }F$ (think of $F_{o}$ as étale over $X_{o}$, giving rise to a cartesian commutative diagram whose horizontal arrows are $\Fr_{q}$:
@@ -3916,8 +3916,8 @@ We may assume $Y_{o}\ne\emptyset$. There then exists a non-empty open subset $j:
 If, for every subscheme $Y_{o}$ of $X_{o}$, one is given a full subcategory $P(Y_{o})$ of the category of perverse sheaves on $Y_{o}$, and the conditions of \rn{5.1.3} are satisfied by this system of subcategories, then the $P(Y_{o})$ are stable under subquotients. The same proof shows this. One can also deduce it from \rn{5.1.2}, \rn{5.1.3}. In this form the result holds over an arbitrary base field (as long as perverse sheaves are defined, cf.\ \rn{2.2.12}) and for an arbitrary perversity as in \rn{2.2.1} (not only for $p_{1/2}$).
 \end{rem}
 
-\num{\anch{5.1.5}.}  Recall ([1] \rn{1.2.1}, \rn{1.2.2}) that a $\Qlb$-sheaf
-$F_{o}$ on $X_{o}$ is said to be \emph{punctually pure of weight} $w$ ($w\in\Z$) if for every $n$ and every fixed point $x\in X_{o}(\Fbar)$ of $\Fr_{q^{n}}:=\Fr^{n}_{q}$ (i.e.\ every $x\in X_{o}(\mathbb{F}_{q^{n}})$), the eigenvalues of the automorphism $F^{*}_{q^{n}}$ of $F_{x}$ are algebraic numbers all of whose complex conjugates have absolute value $(q^{n})^{w/2}$. Recall ([1] \rn{1.2.2}) that $F_{o}$ is said to be \emph{mixed} if it admits a finite filtration whose successive quotients are punctually pure. The weights of those quotients which are non-zero are the \emph{punctual weights} of $F$.
+\num{\anch{5.1.5}.}  Recall (\cite[1.2.1--1.2.2]{WeilII}) that a $\Qlb$-sheaf
+$F_{o}$ on $X_{o}$ is said to be \emph{punctually pure of weight} $w$ ($w\in\Z$) if for every $n$ and every fixed point $x\in X_{o}(\Fbar)$ of $\Fr_{q^{n}}:=\Fr^{n}_{q}$ (i.e.\ every $x\in X_{o}(\mathbb{F}_{q^{n}})$), the eigenvalues of the automorphism $F^{*}_{q^{n}}$ of $F_{x}$ are algebraic numbers all of whose complex conjugates have absolute value $(q^{n})^{w/2}$. Recall (\cite[1.2.2]{WeilII}) that $F_{o}$ is said to be \emph{mixed} if it admits a finite filtration whose successive quotients are punctually pure. The weights of those quotients which are non-zero are the \emph{punctual weights} of $F$.
 
 One defines the category $\Dbm(X_{o},\Qlb)$ of \emph{mixed complexes} as the subcategory of $\Dbc(X_{o},\Qlb)$ formed by those $K$ whose cohomology sheaves $H^{i}K$ are mixed.
 
@@ -3963,7 +3963,7 @@ The fibre over $\Fbar$ of a constructible $\Qlb$-sheaf on $\Spec(\Fq)$ is equipp
 \num{\anch{5.1.12}.}  One can combine \rn{5.1.10} and \rn{5.1.11}.  For
 instance, for $(X_{o},K_{o})$ over $\Fq$ and $u:Y\to X$ of finite type, it makes sense to speak of the weights of $H^{i}(Y,K)$ (notation \rn{4.0.3}): $u$ and $Y$ are defined over $\mathbb{F}_{q^{n}}$ for $n$ sufficiently divisible, whence an action of $\Gal(\Fbar/\mathbb{F}_{q^{n}})$ on $H^{i}(Y,u^{*}K)$. Two ways of defining $u$ and $Y$ over $\mathbb{F}_{q^{n}}$ coincide over $\mathbb{F}_{q^{m}}$, for $m$ a sufficiently divisible multiple of $n$, and the two resulting Galois actions therefore coincide on the finite-index subgroup $\Gal(\Fbar/\mathbb{F}_{q^{m}})$ of $\Gal(\Fbar/\mathbb{F}_{q^{n}})$. The weights depend only on this restriction.
 
-\num{\anch{5.1.13}.}  The main theorem of [1] ([1] \rn{3.3.1}, \rn{6.2.3}) is
+\num{\anch{5.1.13}.}  The main theorem of \cite{WeilII} (\cite[3.3.1 and 6.2.3]{WeilII}) is
 that if $f:X_{o}\to Y_{o}$ is a separated morphism of schemes of finite type over $\Fq$, the functor $Rf_{!}$ sends $D^{b}_{\le w}(X_{o},\Qlb)$ into $D^{b}_{\le w}(Y_{o},\Qlb)$. It is clear that $f^{*}$ respects $D^{b}_{\le w}$, and that $\otimes$ sends $D^{b}_{\le w}$, $D^{b}_{\le w'}$ into $D^{b}_{\le w+w'}$. Invoking duality, one obtains the following table of stability properties (one writes $f_{!}$, $f^{!}$ for $Rf_{!}$, $Rf^{!}$).
 
 \begin{claim}{Stability properties \anch{5.1.14}.}
@@ -4039,7 +4039,7 @@ Let $\overline{X}_{o}$ be the smooth connected projective curve of which $X_{o}$
 \[
   H^{1}(\overline{U},{}^{0}k_{*}u^{*}L)\hookrightarrow H^{1}(U,u^{*}L),
 \]
-and $H^{1}(\overline{U},{}^{0}k_{*}u^{*}L)=H^{0}(\overline{U},k_{!*}u^{*}L[1])$ therefore admits a quotient, by a subspace of dimension $\le r$, which is of weight $\ge w$. On the other hand, this $H^{0}$ is pure of the weight of $L_{o}[1]$ ([1] \rn{3.2.3}). For suitable $U$ (for instance with $\overline{U}$ of genus $g$ such that $2g-2>r$) it has dimension $>r$ (apply the Euler--Poincaré formula cited in \rn{4.5.1}), whence one concludes that $L_{o}[1]$ is of weight $\ge w$. This completes the proof of the theorem for $X$ smooth connected of dimension 1.
+and $H^{1}(\overline{U},{}^{0}k_{*}u^{*}L)=H^{0}(\overline{U},k_{!*}u^{*}L[1])$ therefore admits a quotient, by a subspace of dimension $\le r$, which is of weight $\ge w$. On the other hand, this $H^{0}$ is pure of the weight of $L_{o}[1]$ (\cite[3.2.3]{WeilII}). For suitable $U$ (for instance with $\overline{U}$ of genus $g$ such that $2g-2>r$) it has dimension $>r$ (apply the Euler--Poincaré formula cited in \rn{4.5.1}), whence one concludes that $L_{o}[1]$ is of weight $\ge w$. This completes the proof of the theorem for $X$ smooth connected of dimension 1.
 
 \begin{rem}{Remark \anch{5.2.3}.}
 The argument that allowed us to pass from $F$ to the $\Gr^{p}_{F}F$ can be formalized as follows. Let $S$ be the category of the $u:U\to X$ with $U$ affine connected and $u$ étale. For each perverse $F$ on $X$, let $\int F$ be the presheaf $U\mapsto H^{0}(U,F)$ on $S$. Let $N$ be the category of presheaves $h$ of $\Qlb$-vector spaces on $S$ such that $\dim h(U)$ is bounded. It is a thick subcategory of the category $\pf(S)$ of presheaves of $\Qlb$-vector spaces on $S$. With this notation, for $X$ smooth of dimension $\le 1$, the functor $F\mapsto\int F$ (mod $N$) is an \emph{exact} functor
@@ -4340,7 +4340,7 @@ let $L_{o}\in \Db_{c}(Y_{o},\Qlb)$. If $L_{o}$ is pure, then $f_{*}L_{o}$ on $X_
 $\ell\in H^{2}(X_{o},\Ql(1))$ be the first Chern class of a relatively ample invertible sheaf. For any $K_{o}$ in $\Db(X_{o},\Qlb)$, $\ell$ defines a morphism from $K_{o}$ to $K_{o}[2](1)$. Iterating, one obtains $\ell^{n} : K_{o}\to K_{o}[2n](n)$. Applying $f_{*}$, one obtains $\ell^{n} : f_{*}K_{o}\to f_{*}K_{o}[2n](n)$ and morphisms $\pH^{i}f_{*}K_{o}\to \pH^{i+2n}f_{*}K_{o}(n)$.
 
 \smallskip
-The following theorem is a generalization to the relative case of [1] (6.2.13).
+The following theorem is a generalization to the relative case of \cite[6.2.13]{WeilII}.
 
 \num{Theorem \rn{5.4.10}.} \emph{(Relative hard Lefschetz theorem). If
 $F_{o}$ is a pure perverse sheaf on $X_{o}$, then for every $i\ge 0$ the morphism}
@@ -4351,7 +4351,7 @@ $F_{o}$ is a pure perverse sheaf on $X_{o}$, then for every $i\ge 0$ the morphis
 The problem is local on $Y_{o}$. Shrinking $Y_{o}$ and replacing $\ell$ by a multiple, we may and do assume that $f$ admits a factorization $X_{o}\hra \PP^{d}_{o}\times Y_{o}\to Y_{o}$, for a suitable $d\ge 0$, and that $\ell$ is the first Chern class of $\mathcal{O}(1)$.
 
 \smallskip
-\textbf{Proof for $i=1$.} In the case where $Y_{o}$ is a point, the proof of [1] consisted in taking a sufficiently general hyperplane section $H$ of $X$, viewing $\ell$ as the composite of a restriction morphism and a Gysin morphism:
+\textbf{Proof for $i=1$.} In the case where $Y_{o}$ is a point, the proof of \cite{WeilII} consisted in taking a sufficiently general hyperplane section $H$ of $X$, viewing $\ell$ as the composite of a restriction morphism and a Gysin morphism:
 \[ H^{-1}(X,F)\ \xrightarrow{\ v^{*}\ }\ H^{-1}(H,F)\
 \xrightarrow{\ v_{!}\ }\ H^{1}(X,F)(1)\ , \]
 in showing that $v^{*}$ identifies $H^{-1}(X,F)$ with the part of $H^{-1}(H,F)$ fixed by the monodromy (as $H$ varies) and that dually $v_{!}$ identifies $H^{1}(X,F)(1)$ with the coinvariants of the monodromy, and in using the semisimplicity of the monodromy representation to deduce that $v_{!}v^{*}$ is an isomorphism. The strategy will be the same here, except that one will use, not a single hyperplane section, but the universal family of hyperplane sections.
@@ -4574,7 +4574,7 @@ Let $X$ be a complex projective variety. It is defined, in $\PP^{n}(\CC)$, by a 
 Let $f : Y\to S$ be a separated morphism of schemes of finite type over $\QQ$. Then there exists a stratification $T$ of $S$ (defined over $\QQ$) such that, for each stratum $T$, the morphism $f_{T} : Y_{T}\to T$ deduced from $f$ by restriction to $T$ has ``topologically locally constant'' fibres -- for instance in the sense that $Y_{T}(\CC)\to T(\CC)$ is a topologically locally trivial fibration. This follows from Thom's isotopy theorem and from the fact that the Whitney conditions admit an algebraic formulation (see J.L. Verdier, \emph{Inventiones} \textbf{36} (1976) pp. 295--312, cor. 5.1).
 
 \smallskip
-Each connected component of each stratum has a point defined over a number field. If $s\in S(\CC)$ and $t$, in the same connected component of the same stratum as $s$, is defined over a number field, then $Y_{s}$ and $Y_{t}$ are homeomorphic. Suppose, for example, that one wishes to prove the hard Lefschetz theorem in intersection cohomology for a complex projective variety $X = Y_{s}$, knowing it for $Y_{t}$. The variety $X$, equipped with the first Chern class $\ell$ of $\mathcal{O}(1)$, will be homeomorphic to $(Y_{t},\ell)$, whence the assertion. This argument uses the topological invariance of intersection cohomology ([6]). One could dispense with it by working on $Y$, equipped with a suitable stratification.
+Each connected component of each stratum has a point defined over a number field. If $s\in S(\CC)$ and $t$, in the same connected component of the same stratum as $s$, is defined over a number field, then $Y_{s}$ and $Y_{t}$ are homeomorphic. Suppose, for example, that one wishes to prove the hard Lefschetz theorem in intersection cohomology for a complex projective variety $X = Y_{s}$, knowing it for $Y_{t}$. The variety $X$, equipped with the first Chern class $\ell$ of $\mathcal{O}(1)$, will be homeomorphic to $(Y_{t},\ell)$, whence the assertion. This argument uses the topological invariance of intersection cohomology (\cite{GMtwo}). One could dispense with it by working on $Y$, equipped with a suitable stratification.
 
 \smallskip
 Often one is interested not in a variety $X$, but in a morphism $u : X_{1}\to X_{2}$. Here again one can find a diagram defined over $\QQ$:
@@ -4729,7 +4729,7 @@ $H^i(X,F)=0$ for $i>\dim_\C X$ as soon as $X$ is a Stein space and $F$ is an abe
 
 \num{\anch{6.2.2}\footnote{\emph{Errata and Addenda} (2018), item~88: The spectral sequence in question is associated with the truncated simplicial object, as explained in \cite{MO15}, Section 4.1.2.}.} \textbf{The weight filtration}.
 \smallskip
-Let $X$ be over $\C$. To obtain the mixed Hodge structure on the cohomology of $X$, one begins by replacing $X$ by a simplicial scheme equipped with a suitable compactification $X_*\hookrightarrow\overline X_*$ ([3]). A simplicial scheme is an object of infinite nature: it involves infinitely many $X_i$, and infinitely many arrows. One is therefore not guaranteed to be able to find a version of it over $S=\operatorname{Spec}(A)$, with $A\subset\C$ of finite type over $\Z$. However, in order to study the $H^i(X)$ for $i\le n$, it suffices to have the $X_i$ and $\overline X_i$ for $i\le n+1$, and the truncation $(X_i)_{i\le n+1}\hookrightarrow(\overline X_i)_{i\le n+1}$ can be descended to $S$. The weight filtration $W_\Q$ of $H^{*}(X(\C),\Q)$ is the abutment of a spectral sequence constructed from $X_*\hookrightarrow\overline X_*$. The same spectral sequence exists in $\ell$-adic cohomology. The filtration $W_\ell$ of $H^n(X,\Ql)=H^n(X(\C),\Q)\otimes\Ql$ deduced from $W_\Q$ therefore persists over $S$: for $a:X_S\to S$, one has a filtration $W_\ell$ of $R^n a_*\Ql$ which, over $\C$, gives $W_\ell$. Shrinking $S$, one may suppose that the conditions imposed on the $X_i$ and $\overline X_i$ $(i\le n+1)$ over $\C$ persist over $S$ ($\overline X_{iS}$ proper and smooth over $S$, $X_{iS}\subset\overline X_{iS}$ the complement of a relative normal crossings divisor, surjectivity and properness of $X_{iS}\longrightarrow(\cosq_{i-1}\sq_{i-1}(X_{*S}))_i$), and that the formation of $W_\ell$ (as the abutment of such a spectral sequence) commutes with any base change. Using the Weil conjecture, one then sees that at each closed point $s$ of $S$, $W_\ell$ induces the weight filtration of $H^n(X_s,\Ql)$, as defined arithmetically, in terms of the complex absolute values of the eigenvalues of Frobenius. Here is an application.
+Let $X$ be over $\C$. To obtain the mixed Hodge structure on the cohomology of $X$, one begins by replacing $X$ by a simplicial scheme equipped with a suitable compactification $X_*\hookrightarrow\overline X_*$ (\cite{Finitude}). A simplicial scheme is an object of infinite nature: it involves infinitely many $X_i$, and infinitely many arrows. One is therefore not guaranteed to be able to find a version of it over $S=\operatorname{Spec}(A)$, with $A\subset\C$ of finite type over $\Z$. However, in order to study the $H^i(X)$ for $i\le n$, it suffices to have the $X_i$ and $\overline X_i$ for $i\le n+1$, and the truncation $(X_i)_{i\le n+1}\hookrightarrow(\overline X_i)_{i\le n+1}$ can be descended to $S$. The weight filtration $W_\Q$ of $H^{*}(X(\C),\Q)$ is the abutment of a spectral sequence constructed from $X_*\hookrightarrow\overline X_*$. The same spectral sequence exists in $\ell$-adic cohomology. The filtration $W_\ell$ of $H^n(X,\Ql)=H^n(X(\C),\Q)\otimes\Ql$ deduced from $W_\Q$ therefore persists over $S$: for $a:X_S\to S$, one has a filtration $W_\ell$ of $R^n a_*\Ql$ which, over $\C$, gives $W_\ell$. Shrinking $S$, one may suppose that the conditions imposed on the $X_i$ and $\overline X_i$ $(i\le n+1)$ over $\C$ persist over $S$ ($\overline X_{iS}$ proper and smooth over $S$, $X_{iS}\subset\overline X_{iS}$ the complement of a relative normal crossings divisor, surjectivity and properness of $X_{iS}\longrightarrow(\cosq_{i-1}\sq_{i-1}(X_{*S}))_i$), and that the formation of $W_\ell$ (as the abutment of such a spectral sequence) commutes with any base change. Using the Weil conjecture, one then sees that at each closed point $s$ of $S$, $W_\ell$ induces the weight filtration of $H^n(X_s,\Ql)$, as defined arithmetically, in terms of the complex absolute values of the eigenvalues of Frobenius. Here is an application.
 
 \medskip
 \num{Proposition \anch{6.2.3}.} \emph{Let $f:X\longrightarrow Y$ be a
