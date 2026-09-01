@@ -522,3 +522,30 @@ ul.seminar li.no-detail .sem-title { color: var(--text-soft); }
 /* the journal link reads as the secondary of the pair */
 .pub-links a:not([href*="arxiv.org"]) { color: var(--text-soft); }
 .pub-links a:not([href*="arxiv.org"]):hover { color: var(--accent); }
+
+/* one-line summary under a publication title */
+.pub-desc {
+  display: block;
+  margin: 0.45rem 0 0.15rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-soft);
+}
+
+.pub-desc + .pub-meta {
+  font-size: 0.88rem;
+  color: var(--text-mute);
+}
+
+/* year headings on the talks page sit tighter than section headings */
+.timeline + h2 { margin-top: 2.2rem; }
+
+/* month labels are words, not dates — give them the sans face */
+.timeline .when {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  /* wide enough for SEPTEMBER so every row's title starts on the same line */
+  flex: 0 0 6rem;
+}
