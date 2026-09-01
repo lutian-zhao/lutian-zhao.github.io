@@ -574,3 +574,19 @@ ul.seminar li.no-detail .sem-title { color: var(--text-soft); }
 
 .timeline.files li { padding: 1rem 0; }
 .timeline.files .when { padding-top: 0.15em; }
+
+/* small inline tag, e.g. "English translation." on the transcriptions page */
+.tag {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.1rem 0.4rem;
+  vertical-align: 0.15em;
+  white-space: nowrap;
+}
