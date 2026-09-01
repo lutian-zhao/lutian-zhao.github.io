@@ -1,0 +1,512 @@
+/* ---------------------------------------------------------------
+   Lutian Zhao — personal academic site
+   Single stylesheet. No build step, no dependencies.
+   --------------------------------------------------------------- */
+
+:root {
+  --bg:        #fdfdfb;
+  --bg-soft:   #f4f3ef;
+  --rule:      #e2e0d8;
+  --text:      #1c1b19;
+  --text-soft: #5c5a54;
+  --text-mute: #86837a;
+  --accent:    #7a2e2e;
+  --accent-soft: #a84a4a;
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
+           Georgia, "Times New Roman", serif;
+  --sans:  ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+           Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  --measure: 42rem;
+  --wide:    52rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:        #16151a;
+    --bg-soft:   #1e1d23;
+    --rule:      #302e38;
+    --text:      #e8e6e1;
+    --text-soft: #b3b0a9;
+    --text-mute: #86837c;
+    --accent:    #d99a9a;
+    --accent-soft: #e8b8b8;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap {
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ---------- header / nav ---------- */
+
+.site-header {
+  border-bottom: 1px solid var(--rule);
+  padding: 2.25rem 0 0;
+}
+
+.site-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.site-title a { color: var(--text); text-decoration: none; border-bottom: none; }
+.site-title a:hover { color: var(--accent); }
+
+.site-title .zh {
+  font-weight: 400;
+  color: var(--text-mute);
+  font-size: 0.95em;
+  margin-left: 0.35rem;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.15rem;
+  padding-bottom: 0.9rem;
+  font-family: var(--sans);
+  font-size: 0.83rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.site-nav a {
+  color: var(--text-soft);
+  text-decoration: none;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.site-nav a:hover { color: var(--text); }
+
+.site-nav a[aria-current="page"] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+/* ---------- page body ---------- */
+
+main { padding: 3rem 0 4rem; }
+
+h1 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 1.75rem;
+}
+
+h2 {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin: 3rem 0 1.1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* first section under the page intro keeps a normal rhythm; only the
+   seminar page overrides it, since its filter bar already adds space. */
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 2rem 0 0.6rem;
+}
+
+p { margin: 0 0 1.1rem; max-width: var(--measure); }
+
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(122,46,46,0.28); }
+a:hover { color: var(--accent-soft); border-bottom-color: currentColor; }
+
+@media (prefers-color-scheme: dark) {
+  a { border-bottom-color: rgba(217,154,154,0.3); }
+}
+
+/* ---------- intro block ---------- */
+
+.lede { font-size: 1.08rem; }
+
+.intro { display: flex; gap: 2.5rem; align-items: flex-start; margin-bottom: 1rem; }
+.intro-text { flex: 1 1 auto; min-width: 0; }
+
+.portrait {
+  flex: 0 0 auto;
+  width: 168px;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+
+@media (max-width: 640px) {
+  .intro { flex-direction: column-reverse; gap: 1.5rem; }
+  .portrait { width: 130px; }
+}
+
+/* ---------- key/value contact rows ---------- */
+
+.facts {
+  margin: 0 0 1.5rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+}
+
+.facts div {
+  display: flex;
+  gap: 0.9rem;
+  padding: 0.42rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.facts dt {
+  flex: 0 0 6.5rem;
+  color: var(--text-mute);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding-top: 0.12em;
+}
+
+.facts dd { margin: 0; flex: 1 1 auto; min-width: 0; }
+
+/* ---------- publication / talk lists ---------- */
+
+ol.pubs, ul.plain {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ol.pubs { counter-reset: pub; }
+
+ol.pubs > li {
+  counter-increment: pub;
+  position: relative;
+  padding: 0 0 1.35rem 2.4rem;
+  margin-bottom: 1.35rem;
+  border-bottom: 1px solid var(--rule);
+  max-width: var(--measure);
+}
+
+ol.pubs > li:last-child { border-bottom: none; margin-bottom: 0; }
+
+ol.pubs > li::before {
+  content: counter(pub) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--text-mute);
+  padding-top: 0.28em;
+}
+
+.pub-title { font-weight: 600; display: block; margin-bottom: 0.2rem; }
+.pub-meta  { color: var(--text-soft); font-size: 0.95rem; display: block; }
+
+.pub-links {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  margin-top: 0.45rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- talks: dated rows ---------- */
+
+.timeline { margin: 0; padding: 0; list-style: none; max-width: var(--measure); }
+
+.timeline li {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.timeline li:last-child { border-bottom: none; }
+
+.timeline .when {
+  flex: 0 0 4.5rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text-mute);
+  padding-top: 0.2em;
+}
+
+.timeline .what { flex: 1 1 auto; min-width: 0; }
+.timeline .what .title { display: block; }
+.timeline .what .where { display: block; color: var(--text-soft); font-size: 0.95rem; }
+
+@media (max-width: 560px) {
+  .timeline li { flex-direction: column; gap: 0.2rem; }
+  .timeline .when { flex: none; }
+}
+
+/* ---------- callout ---------- */
+
+.note {
+  background: var(--bg-soft);
+  border-left: 2px solid var(--accent);
+  padding: 0.9rem 1.2rem;
+  margin: 0 0 2rem;
+  max-width: var(--measure);
+  font-size: 0.96rem;
+  color: var(--text-soft);
+}
+
+.note p:last-child { margin-bottom: 0; }
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  padding: 1.6rem 0 3rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--text-mute);
+}
+
+.site-footer a { color: var(--text-mute); border-bottom-color: var(--rule); }
+.site-footer a:hover { color: var(--accent); }
+
+/* ---------- utility ---------- */
+
+.muted { color: var(--text-mute); }
+.sans  { font-family: var(--sans); }
+.small { font-size: 0.9rem; }
+
+/* ---------- portrait / intro refinements ---------- */
+
+/* The intro is a two-column block: text + contact table on the left,
+   portrait on the right. Pairing the photo with the contact table (rather
+   than the two short paragraphs alone) gives the column enough height to
+   sit level with the image, which is what stops the photo leaving a hole. */
+.intro {
+  align-items: start;
+  gap: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.seminar-tools + h2 { margin-top: 1.6rem; }
+
+.intro .facts { margin-bottom: 0; }
+.intro .facts dt { flex-basis: 5.8rem; }
+
+.portrait-fig {
+  flex: 0 0 auto;
+  width: 200px;
+  position: sticky;
+  top: 1.5rem;
+  margin: 0;
+  text-align: center;
+}
+
+.portrait-fig img {
+  display: block;
+  width: 100%;
+  /* height:auto is required so aspect-ratio wins over the width/height
+     attributes on the <img> (those attributes only reserve layout space). */
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center 22%;
+  border-radius: 2px;
+  border: 1px solid var(--rule);
+  filter: saturate(0.94);
+}
+
+.portrait-fig figcaption {
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: var(--text-mute);
+  margin-top: 0.55rem;
+  line-height: 1.4;
+}
+
+/* The h1 sits flush with the top of the photo. */
+.intro h1 { margin-top: -0.28rem; }
+
+@media (max-width: 720px) {
+  .intro { flex-direction: row; gap: 1.4rem; }
+  .portrait-fig { width: 118px; }
+  .portrait-fig figcaption { display: none; }
+  .intro h1 { font-size: 1.6rem; }
+}
+
+@media (max-width: 460px) {
+  .intro { flex-direction: column-reverse; }
+  .portrait-fig { width: 132px; }
+}
+
+/* ---------- seminar page ---------- */
+
+.seminar-tools {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 2rem 0 0.5rem;
+  max-width: var(--measure);
+}
+
+#seminar-filter {
+  flex: 1 1 16rem;
+  min-width: 0;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+
+#seminar-filter:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.btn {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0.85rem;
+  color: var(--text-soft);
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn:hover { color: var(--text); border-color: var(--text-mute); }
+
+.filter-count {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--text-mute);
+}
+
+h2 .count {
+  float: right;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--text-mute);
+}
+
+ul.seminar {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: var(--measure);
+}
+
+ul.seminar > li { border-bottom: 1px solid var(--rule); }
+ul.seminar > li:last-child { border-bottom: none; }
+
+ul.seminar summary,
+ul.seminar .sem-head {
+  display: flex;
+  gap: 1.25rem;
+  padding: 0.7rem 0;
+  align-items: baseline;
+}
+
+ul.seminar summary {
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+}
+
+ul.seminar summary::-webkit-details-marker { display: none; }
+
+ul.seminar summary:hover .sem-title { color: var(--accent); }
+
+.sem-date {
+  flex: 0 0 4.6rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-mute);
+}
+
+.sem-main { flex: 1 1 auto; min-width: 0; }
+.sem-title { display: block; }
+.sem-speaker {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+/* the disclosure caret */
+ul.seminar summary .sem-main::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 0.72rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--text-mute);
+  line-height: 1;
+}
+
+ul.seminar details[open] summary .sem-main::after { content: "\2212"; }
+
+ul.seminar summary { padding-right: 1.4rem; }
+
+.sem-body {
+  padding: 0 0 1.1rem 5.85rem;
+  max-width: 40rem;
+}
+
+.sem-abstract {
+  margin: 0 0 0.7rem;
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  max-width: none;
+}
+
+.sem-refs {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+}
+
+ul.seminar li.no-detail .sem-title { color: var(--text-soft); }
+
+@media (max-width: 560px) {
+  ul.seminar summary,
+  ul.seminar .sem-head { flex-direction: column; gap: 0.15rem; }
+  .sem-date { flex: none; }
+  .sem-body { padding-left: 0; }
+  h2 .count { float: none; display: block; }
+}
