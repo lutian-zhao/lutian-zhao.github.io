@@ -510,3 +510,15 @@ ul.seminar li.no-detail .sem-title { color: var(--text-soft); }
   .sem-body { padding-left: 0; }
   h2 .count { float: none; display: block; }
 }
+
+/* ---------- publication link row ---------- */
+
+.pub-links a {
+  border-bottom-color: transparent;
+  padding-bottom: 1px;
+}
+.pub-links a:hover { border-bottom-color: currentColor; }
+
+/* the journal link reads as the secondary of the pair */
+.pub-links a:not([href*="arxiv.org"]) { color: var(--text-soft); }
+.pub-links a:not([href*="arxiv.org"]):hover { color: var(--accent); }
