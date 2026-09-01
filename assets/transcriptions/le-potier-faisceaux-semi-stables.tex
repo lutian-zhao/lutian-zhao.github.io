@@ -1,0 +1,1759 @@
+% =====================================================================
+%  J. Le Potier, "Faisceaux semi-stables de dimension 1 sur le plan
+%  projectif", Rev. Roumaine Math. Pures Appl. 38 (1993), 7-8, 635-678.
+%
+%  English translation.
+%
+%  Numbering of sections, subsections and of every numbered statement
+%  follows the original paper exactly.  Page numbers of the original are
+%  recorded in the margin.
+% =====================================================================
+\IfFileExists{smfart.cls}{%
+  \documentclass[12pt,english]{smfart}%
+}{%
+  \documentclass[12pt,oneside]{amsart}%
+}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=2.5cm]{geometry}
+
+\usepackage{amssymb,amsfonts,amsmath,amsthm}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{marginnote}
+\usepackage{tikz-cd}
+\usepackage[font=small,labelfont=bf]{caption}
+\IfFileExists{newtxtext.sty}{%
+  \usepackage{newtxtext,newtxmath}%
+}{%
+  \IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}%
+}
+
+\usepackage[colorlinks=true,
+            linkcolor=blue!55!black,
+            citecolor=blue!55!black,
+            urlcolor=blue!55!black,
+            bookmarks=true,
+            bookmarksopen=true,
+            hypertexnames=false,
+            pdftitle={Semi-stable sheaves of dimension 1 on the projective plane},
+            pdfauthor={J. Le Potier}]{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+
+\AtBeginDocument{%
+  \renewcommand*{\contentsname}{Contents}%
+  \renewcommand*{\proofname}{Proof}%
+  \renewcommand*{\refname}{References}%
+  \renewcommand*{\figurename}{Figure}%
+  \renewcommand*{\tablename}{Table}%
+}
+
+% ---------------------------------------------------------------------
+%  Theorem environments.
+%
+%  In the original every numbered statement -- theorem, proposition,
+%  lemma, definition, remark, corollary, conjecture -- shares one counter
+%  which runs through each section (1.1, 2.1, ..., 2.10, 3.1, ..., 3.21,
+%  4.1, ..., 4.20, 5.1, ..., 5.9).  A single counter attached to
+%  \section reproduces this exactly.
+% ---------------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{definition}{Definition}{Definitions}
+\crefname{remark}{Remark}{Remarks}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{equation}{}{}
+
+% ---------------------------------------------------------------------
+%  Notation
+% ---------------------------------------------------------------------
+\newcommand{\PP}{\mathbf{P}}
+\newcommand{\Pd}{\PP_{2}^{*}}          % dual projective plane
+\newcommand{\NN}{\mathbf{N}}           % moduli of dimension-1 sheaves
+\newcommand{\MM}{\mathbf{M}}           % moduli of torsion-free sheaves
+\newcommand{\N}{\NN}
+\newcommand{\M}{\MM}
+\newcommand{\CX}{\mathbf{C}}           % Hilbert scheme of curves
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\Oh}{\mathcal{O}}
+\newcommand{\Oo}{\mathcal{O}}
+\newcommand{\Ll}{\mathscr{L}}
+\newcommand{\Dd}{\mathscr{D}}
+
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\NS}{NS}
+\DeclareMathOperator{\Char}{Char}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\Vect}{Vect}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\Sl}{Sl}
+\DeclareMathOperator{\PSl}{PSl}
+\DeclareMathOperator{\Gl}{Gl}
+\DeclareMathOperator{\PGl}{PGl}
+\DeclareMathOperator{\Grass}{\mathbf{Grass}}
+\DeclareMathOperator{\Syst}{\mathbf{Syst}}
+\DeclareMathOperator{\Hilb}{\mathbf{Hilb}}
+\DeclareMathOperator{\Bl}{Bl}
+\newcommand{\gcdd}{\operatorname{pgcd}}
+
+% sheaf-Hom, sheaf-Ext and the hyper-Ext of Higgs sheaves
+\newcommand{\Homsh}{\mathop{\mathcal{H}\!\mathit{om}}\nolimits}
+\newcommand{\Extsh}{\mathop{\mathcal{E}\!\mathit{xt}}\nolimits}
+\newcommand{\BHom}{\mathbf{Hom}}
+\newcommand{\BExt}{\mathbf{Ext}}
+
+% marginal page numbers of the original
+\newcommand{\origpage}[1]{\marginnote{\scriptsize\itshape p.~#1}}
+
+% translator's notes
+\newcommand{\tnote}[1]{\footnote{\emph{Translator's note}: #1}}
+
+\counterwithin*{equation}{section}
+
+\IfFileExists{microtype.sty}{\usepackage[expansion=false]{microtype}}{}
+\emergencystretch=3em
+
+\allowdisplaybreaks
+
+\title{Semi-stable Sheaves of Dimension $1$\\ on the Projective Plane}
+\author{J. Le Potier}
+\date{}
+
+\begin{document}
+\pagestyle{plain}
+
+\maketitle
+\begin{center}
+{\normalsize Rev.\ Roumaine Math.\ Pures Appl.\ \textbf{38} (1993), 7--8, 635--678\par}
+\vspace{2pt}
+{\small English translation\par}
+\end{center}
+
+\begin{center}
+\itshape To the memory of Constantin B\u{a}nic\u{a}
+\end{center}
+
+\medskip
+\tableofcontents
+\medskip
+
+% =====================================================================
+\section{Introduction}\label{sec:introduction}
+% =====================================================================
+\origpage{635}
+
+The main object of this work is to extend to the moduli spaces of semi-stable sheaves of dimension~$1$ on a projective algebraic surface $X$ the results obtained by S.~A.~Str\o mme \cite{Str} and J.~M.~Dr\'ezet \cite{Dre1} for torsion-free semi-stable sheaves, as far as the description of the irreducible components and the Picard group are concerned. Although certain results are valid without great change on some rational surfaces such as the quadrics, our statements are really satisfactory only in the case of the projective plane. We denote by $\NN_{\PP_{2}}(r,\chi)$ the moduli space of semi-stable sheaves of dimension~$1$, of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi$.
+
+\begin{theorem}\label{thm:main}
+\begin{enumerate}
+\item The moduli space $\NN_{\PP_{2}}(r,\chi)$ is an irreducible projective variety of dimension $r^{2}+1$.
+\item If $r\geq 3$, it is a locally factorial variety whose Picard group is a free abelian group on two generators.
+\end{enumerate}
+\end{theorem}
+
+This result is proved in \Cref{subsec:picard}, where a more precise form of the statement is given (\Cref{thm:picard}): we in fact give a description of a basis of this Picard group. For this we introduce the canonical morphism
+\[
+\sigma : \NN_{\PP_{2}}(r,\chi) \longrightarrow \CX_{\PP_{2}}(r)
+\]
+from the variety $\NN_{\PP_{2}}(r,\chi)$ to the projective space $\CX_{\PP_{2}}(r)$ of curves of degree $r$, which associates with a semi-stable sheaf its support, defined by the associated Fitting ideal. Above the open set of smooth curves, the moduli space under study coincides with the relative Picard variety. One may then choose as generators of the Picard group the pullback of the bundle $\Oh(1)$ under $\sigma$, and the so-called determinant bundle: above each point representing a smooth curve, this bundle is isomorphic to a power of the bundle defined by the divisor $\Theta$. In the cases $r=1$ and $r=2$, the morphism $\sigma$ is in fact an isomorphism.
+
+This determinant bundle will in fact be defined in full generality in \Cref{sec:semistable}, for the moduli space $\NN_{X}(r,\chi)$ of $S$-equivalence classes of semi-stable sheaves of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi$ on a polarised projective algebraic surface $X$. The construction is in fact directly inspired by the one we gave for the moduli spaces of classical torsion-free semi-stable sheaves on an arbitrary smooth projective variety \cite{LeP5}.
+\origpage{636}
+In that chapter we also study in the neighbourhood of which points the canonical morphism
+\[
+\sigma : \NN_{X}(r,\chi) \longrightarrow \CX_{X}(r)
+\]
+from the variety $\NN_{X}(r,\chi)$ to the Hilbert scheme $\CX_{X}(r)$ of curves of degree $r$ --- the morphism which associates with the class of a semi-stable sheaf its schematic support --- is smooth. This information is used in \Cref{subsec:irreducibility} for the study of irreducibility when $X$ is the projective plane; the proof given here for the projective plane is in fact valid without modification, for example when $X$ is a quadric.
+
+The essential point in the proof of the main \Cref{thm:main} is the computation of the Picard group of the open set $\NN^{s}_{X}(r,\chi)$ of points which represent stable sheaves. Having fixed a point $a\in\PP_{2}$, we consider for this the projection with centre $a$ onto the projective line $\PP_{1}$, and the open set $U_{a}$ of $\NN^{s}_{\PP_{2}}(r,\chi)$ corresponding to the stable sheaves whose support does not contain the point $a$: the complement of $U_{a}$ is an irreducible hypersurface, which brings us back to the computation of the Picard group of the open set $U_{a}$. The open set $U_{a}$ is interpreted as a moduli space of stable pairs $(G,\varphi)$ formed of a vector bundle $G$ on the projective line and of a morphism $\varphi:G\to G(1)$, according to a well-known method: we have not resisted the temptation to call such a pair a Higgs bundle over $(\PP_{1},\Oh_{\PP_{1}}(1))$, so similar are the statements to statements which are now classical \cite{Sim2}. The computation of the Picard group of $U_{a}$ reduces to the study of the Picard group of the open set $U_{a,\mathrm{rig}}\subset U_{a}$ of Higgs bundles $(G,\varphi)$ which are stable and quasi-rigid, that is to say such that $G$ is rigid. The computation of the Picard group of the open set $U_{a,\mathrm{rig}}$ is easy, for this open set is the quotient of an open set of an affine space by the proper and free action of an affine algebraic group; in general this algebraic group is unfortunately not reductive, which imposes a little care in the proof (\emph{cf.}\ \Cref{subsec:picard}).
+
+As in the work of J.~M.~Dr\'ezet and M.~S.~Narasimhan \cite{Dre3} on Riemann surfaces, the methods used for the computation of the Picard group are very close to those which make it possible to study the conditions for the existence of a universal sheaf on $\NN_{\PP_{2}}(r,\chi)\times\PP_{2}$: one obtains in the end the existence of a universal sheaf if and only if $r$ and $\chi$ are coprime (\Cref{thm:univ}). This makes it possible to recover, by a completely different method, a result of N.~Mestrano and S.~Ramanan \cite{Mes} concerning the existence of a universal bundle for the relative Picard group on the universal curve of the projective plane: as in the article of Dr\'ezet and Narasimhan, our method uses in an essential way the completion of the Picard variety, and in particular the existence of semi-stable non-stable points of $\NN_{\PP_{2}}(r,\chi)$.
+
+\Cref{sec:fourier} is devoted to an illustration of the main theorem. It is a matter of comparing the moduli spaces $\NN_{\PP_{2}}(r,0)$ and the classical moduli spaces $\MM_{\Pd}(r;0,r)$ of torsion-free semi-stable sheaves of rank $r$, with Chern classes $c_{1}=0$ and $c_{2}=r$, on the dual projective plane, by means of the Fourier transform defined in \Cref{subsec:Phi}. It was already known (\emph{cf.}\ \cite{Mar}) that there exists a birational transformation between these two moduli spaces; the result presented here is much more precise, in particular
+\origpage{637}
+for small values of $r$. Thus, for $r=1$ or $2$, one obtains an isomorphism (\emph{cf.}\ \Cref{cor:r12}). The study is also interesting for $r=3$ and $r=4$, for it provides a morphism
+\[
+\Phi : \NN_{\PP_{2}}(r,0) \longrightarrow \MM_{\Pd}(r;0,r)
+\]
+which is the blow-up of a point in the case $r=3$, and of a smooth subvariety isomorphic to a projective plane in the case $r=4$ (\emph{cf.}\ \Cref{thm:cubic} and \Cref{thm:quartic}): the exceptional divisor which appears is precisely the divisor $\Theta$, the divisor of the classes of semi-stable sheaves having at least one non-zero section. This makes it possible to understand why the Picard group of the moduli spaces $\MM_{\Pd}(r;0,r)$ is infinite cyclic (a result of Dr\'ezet \cite{Dre1}), whereas in our case the Picard group is a free group on two generators.
+
+In \Cref{sec:rationality} we prove (\Cref{thm:rational}) the rationality of certain moduli spaces $\NN_{\PP_{2}}(r,\chi)$, in particular if $\chi\equiv\pm 1\bmod r$ or if $\chi\equiv\pm 2\bmod r$. We have had to restrict ourselves to these particular cases, for the method used consists essentially, after reduction to the cases $\chi=1$ and $\chi=2$, in reducing to the problem of the rationality of the moduli spaces of torsion-free semi-stable sheaves of rank $\chi$ on the projective plane; the rationality of these moduli spaces is not known in general, and seems to be known only in rank $1$ or $2$: in rank $1$ it is the Hilbert scheme of points of $\PP_{2}$; in rank $2$ these are classical results, inspired by the work of Barth \cite{Bar}, proved by Hulek \cite{Hul}, Str\o mme \cite{Str} and Maeda \cite{Mae}. For $\chi=1$, the proof we propose is in fact a little more direct. If one adds to our results those of Formanek \cite{For}, one obtains in particular the rationality of the moduli spaces $\NN_{\PP_{2}}(r,\chi)$ for $r\leq 5$, apart from $\NN_{\PP_{2}}(5,\chi)$, the first case for which we do not know how to answer the question of rationality.
+
+% =====================================================================
+\section{Semi-stable sheaves of dimension 1}\label{sec:semistable}
+% =====================================================================
+
+\subsection{The moduli space \texorpdfstring{$\NN_{X}(r,\chi)$}{N\_X(r,chi)}}\label{subsec:moduli}
+
+Let $(X,\Oh_{X}(1))$ be a polarised smooth projective algebraic surface. We consider the Grothendieck algebra $K(X)$ of classes of coherent algebraic sheaves, equipped with the quadratic form $x\mapsto\chi(x^{2})$, whose associated polar form we denote by $\langle\,,\rangle$. We denote by $h$ the class in $K(X)$ of the structure sheaf of a hyperplane section. For every coherent algebraic sheaf $F$ of dimension~$1$, the positive integer $r=\langle F,h\rangle$ is called the \emph{multiplicity} of $F$. The Hilbert polynomial of $F$ is then written $\chi(F(m))=rm+\chi$, where $\chi$ is the Euler--Poincar\'e characteristic. We shall still denote by $h$ the Chern class of $\Oh_{X}(1)$, and by $(\,,)$ the intersection form on $H^{2}(X,\ZZ)$; if $c_{1}\in H^{2}(X,\ZZ)$ is the first Chern class of $F$, one also has $r=(c_{1},h)$.
+
+If $\chi$ is the Euler--Poincar\'e characteristic of such a sheaf, one calls \emph{slope} of $F$ the number
+\[
+\mu(F) \;=\; \frac{\chi}{r}.
+\]
+\origpage{638}
+
+\begin{definition}\label{def:semistable}
+A coherent algebraic sheaf $F$ of dimension~$1$ on $X$ is said to be \emph{semi-stable} (resp.\ \emph{stable}) if
+\begin{enumerate}
+\item it is pure, that is to say it has no coherent subsheaf of dimension~$0$;
+\item for every non-zero coherent subsheaf $F'\subset F$ distinct from $F$ one has
+\[
+\mu(F') \leq \mu(F) \qquad (\text{resp. } <).
+\]
+\end{enumerate}
+\end{definition}
+
+The semi-stable coherent sheaves of fixed slope constitute an abelian category; the stable sheaves are the simple objects of this category. For each semi-stable sheaf $F$ of slope $\mu$ one may define the notion of Jordan--H\"older filtration: this is an increasing filtration
+\[
+\{0\} \subset F_{1} \subset F_{2} \subset \dots \subset F_{k} = F
+\]
+such that the quotients $gr_{i}=F_{i}/F_{i-1}$ are stable of slope $\mu$. The direct sum $gr(F)=\oplus_{i} gr_{i}$ is called the \emph{graded object associated with the Jordan--H\"older filtration}. If $F$ is semi-stable, the graded objects associated with two Jordan--H\"older filtrations are isomorphic. Two semi-stable sheaves are said to be \emph{$S$-equivalent} if their Jordan--H\"older graded objects are isomorphic. A semi-stable sheaf is said to be \emph{polystable} if it is a direct sum of stable sheaves of the same slope.
+
+We consider the functor $\mathcal{N}_{X}(r,\chi)$ which associates with an algebraic variety $S$ the set of isomorphism classes of $S$-flat families of coherent algebraic sheaves on $X$ of dimension~$1$, of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi$.
+
+\begin{theorem}[\cite{Sim2}]\label{thm:moduli}
+\begin{enumerate}
+\item The functor $\mathcal{N}_{X}(r,\chi)$ has a coarse moduli space $\NN_{X}(r,\chi)$ whose points are the classes of $S$-equivalence of semi-stable sheaves on $X$.
+\item The variety $\NN_{X}(r,\chi)$ is projective.
+\item The classes of stable sheaves of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi$ form an open set $\NN^{s}_{X}(r,\chi)$.
+\end{enumerate}
+\end{theorem}
+
+Each point of the moduli space $\NN_{X}(r,\chi)$ has a polystable representative, and only one up to isomorphism. Let $\NS(X)$ be the N\'eron--Severi group of $X$. One evidently has a decomposition into disjoint components
+\[
+\NN_{X}(r,\chi) \;=\; \coprod_{\substack{c_{1}\in \NS(X)\\ (c_{1},h)=r}}
+\NN_{X}(c_{1},\chi)
+\]
+corresponding to the sheaves with the same Chern class $c_{1}$, also called the \emph{fundamental class}.
+
+The construction is carried out in the following way: one first shows that the semi-stable sheaves with fixed Hilbert polynomial constitute a bounded family. In what follows, one chooses $m$ in such a way that for every semi-stable sheaf $F$ of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi$ the sheaf $F(m)$ is generated by its sections and $H^{1}(F(m))=0$. Such an integer having been chosen, one considers a vector space $H$ of dimension $n=rm+\chi$ and the vector bundle $B=H\otimes\Oh_{X}(-m)$. On the Hilbert--Grothendieck scheme $\Hilb^{r,\chi}(B)$ of quotient sheaves of $B$ of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi$, the group $\Sl(H)$ acts naturally.
+\origpage{639}
+If the integer $m$ is large enough, the open set $\Omega^{ss}$ of semi-stable points for the action of $\Sl(H)$ corresponds to the quotient sheaves of $B$ which are semi-stable and such that the evaluation morphism $H \to H^{0}(F(m))$ is an isomorphism. Then the Mumford quotient
+\[
+\mathbf{N}_{X}(r,\chi) \;=\; \Omega^{ss}/\Sl(H)
+\]
+is a projective variety: one checks that it is a coarse moduli space for the functor under consideration.
+
+\begin{proposition}\label{prop:smooth-omega}
+Let $c_{1}\in \NS(X)$, and let $\Omega^{ss}(c_{1})$ be the component of $\Omega^{ss}$ corresponding to the quotients $F$ of $B$ with fundamental class $c_{1}$. Let $\omega_{X}$ be the canonical bundle on $X$. Assume $(c_{1},\omega_{X})<0$.
+\begin{enumerate}
+\item The open set $\Omega^{ss}(c_{1})$ is smooth of dimension $n^{2}+c_{1}^{2}$.
+\item The variety of stable points $\mathbf{N}^{s}_{X}(c_{1},\chi)$ is smooth of dimension $c_{1}^{2}+1$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Let $q$ be a point of $\Omega^{ss}(c_{1})$ corresponding to a semi-stable quotient $F=B/A$. The Zariski tangent space at $q$ to the open set $\Omega^{ss}$ is identified with $\Hom(A,F)$. Moreover, we know by Grothendieck's smoothness criterion that this open set is smooth in a neighbourhood of $q$ if $\Ext^{1}(A,F)=0$. Now we have the exact sequence
+\[
+\Ext^{1}(B,F) \longrightarrow \Ext^{1}(A,F) \longrightarrow \Ext^{2}(F,F)
+\longrightarrow 0 .
+\]
+Since $H^{1}(F(m))=0$, we see that it suffices to check that $\Ext^{2}(F,F)=0$. By Serre duality, it suffices to check that $\Hom(F,F\otimes \omega_{X})=0$. But we have the formula
+\[
+\chi(F\otimes \omega_{X}) \;=\; (c_{1},\omega_{X}) + \chi ,
+\]
+and consequently $\mu(F\otimes\omega_{X})<\mu(F)$. Thus the asserted statement follows from the definition of semi-stability. Taking into account the Riemann--Roch formula, this proves assertion~1.
+
+For assertion~2, we observe that the stabiliser of a point of $\Omega^{ss}$ embeds into the group of automorphisms of the corresponding quotient sheaf $F$. Now we have the following lemma.
+\end{proof}
+
+\begin{lemma}\label{lem:homothety}
+Let $F$ be a stable sheaf of dimension~$1$. Then every endomorphism of $F$ is a homothety.
+\end{lemma}
+
+It follows that $\mathbf{N}^{s}_{X}(c_{1},\chi)$ is the quotient of the smooth variety $\Omega^{ss}(c_{1})$ by the proper and free action of the group $\PSl(H)$. Hence this open set is smooth of dimension $c_{1}^{2}+1$. \qed
+
+\begin{proof}[Proof of \Cref{lem:homothety}]
+We must check that if $F$ is a stable sheaf and $f:F\to F$ a non-zero morphism, then it is invertible, and algebraic. For the first assertion, this follows from the definition of stability. For the second, one may project onto $\PP_{1}$ by choosing a centre of projection which does not meet the support of $F$: the direct image sheaf $G$ is then locally free of rank $r$ on $\PP_{1}$; we then have a homomorphism of algebras
+\[
+\Hom(F,F) \longrightarrow \Hom(G,G)
+\]
+which is injective. By the Cayley--Hamilton theorem the endomorphism $g$ of $G$ associated with $f$ satisfies an algebraic equation. Hence the same holds for $f$.
+\end{proof}
+
+\origpage{640}
+\subsection{The schematic support}\label{subsec:support}
+
+Let $F$ be a pure coherent sheaf of dimension~$1$ on $X$, of fundamental class $c_{1}$. This sheaf is Cohen--Macaulay and consequently admits a resolution by locally free sheaves
+\[
+0 \longrightarrow A \stackrel{u}{\longrightarrow} B \longrightarrow F
+\longrightarrow 0 .
+\]
+The curve $C$ defined by the determinant of $u$ is independent of the chosen resolution, and can in fact already be obtained from a local resolution. It is in general a non-reduced curve; the underlying reduced curve is the support of $F$. The curve $C$ is called the \emph{schematic support} of $F$. Its fundamental class is $c_{1}$, and hence its degree is the multiplicity $r=(c_{1},h)$.
+
+\begin{remark}\label{rem:irred-support}
+A sheaf whose schematic support is irreducible and reduced is obviously stable.
+\end{remark}
+
+\begin{remark}\label{rem:invertible}
+An invertible sheaf on an integral curve $C\subset X$ defines a pure sheaf of dimension~$1$ on $X$. In general it is not true that it is stable; it is however true for the structure sheaf of $C$ if the Picard group of $X$ is a cyclic group.
+\end{remark}
+
+Let $\mathbf{C}_{X}(r)$ be the Hilbert scheme of curves of degree $r$ on $X$. The construction of the schematic support can be carried out in families: a flat family $F$ of pure sheaves of dimension~$1$ and multiplicity $r$, parametrised by an algebraic variety $S$, defines a morphism $S\to \mathbf{C}_{X}(r)$. The coarse moduli property of $\mathbf{N}_{X}(r,\chi)$ then provides a morphism
+\[
+\sigma : \mathbf{N}_{X}(r,\chi) \longrightarrow \mathbf{C}_{X}(r).
+\]
+
+\begin{definition}\label{def:smooth-sheaf}
+A pure coherent sheaf $F$ of dimension~$1$ on $X$ is said to be \emph{smooth} if it is locally free on its support. Otherwise we say that $F$ is \emph{singular}.
+\end{definition}
+
+\begin{proposition}\label{prop:sigma-smooth}
+Let $c_{1}\in \NS(X)$ be such that $(c_{1},\omega_{X})<0$. Let $F$ be a stable sheaf of dimension~$1$, smooth, of fundamental class $c_{1}$, and let $q$ be the point of $\mathbf{N}_{X}(r,\chi)$ defined by $F$. Then the morphism
+\[
+\sigma : \mathbf{N}_{X}(r,\chi) \longrightarrow \mathbf{C}_{X}(r)
+\]
+is smooth in a neighbourhood of the point $q$.
+\end{proposition}
+
+\begin{proof}
+The hypothesis implies that the point $q$ is smooth; the Zariski tangent space to $\mathbf{N}_{X}(r,\chi)$ is identified with $\Ext^{1}(F,F)$. Let $C$ be the schematic support of $F$. The spectral sequence relating global $\Ext$'s and local $\Extsh$'s, given by $E_{2}^{i,j}=H^{i}(\Extsh^{\,j}(F,F))$ and abutting to $\Ext^{k}(F,F)$ in degree $k=i+j$, provides a morphism
+\begin{equation}
+\Ext^{1}(F,F) \longrightarrow H^{0}(\Extsh^{1}(F,F))
+\end{equation}
+which, since $H^{2}(\Oh_{C})=0$, is surjective. As $F$ is an invertible sheaf on $C$, $\Extsh^{1}(F,F)$ is isomorphic to the normal bundle $N_{C}$ of the curve $C$, and hence $H^{0}(\Extsh^{1}(F,F))$ is isomorphic to the Zariski tangent space to $\mathbf{C}_{X}(r)$ at the point defined by the curve $C$. Likewise, the spectral sequence provides an isomorphism
+\[
+\Ext^{2}(F,F) \;\simeq\; H^{1}(\Extsh^{1}(F,F))
+\]
+\origpage{641}%
+which proves that $H^{1}(N_{C})=0$, and hence, by Grothendieck's smoothness criterion, the point $C$ is a smooth point of the Hilbert scheme $\mathbf{C}_{X}(r)$.
+
+It remains to see that the canonical morphism (1) is identified with the tangent linear map to $\sigma$ at the point $q$. This point comes from a point $p\in\Omega^{ss}$ representing a quotient sheaf $F=B/A$. In fact we must compute the tangent linear map at $p$ to the canonical morphism $\rho:\Omega^{ss}\to\mathbf{C}_{X}(r)$. Denote by $u:A\to B$ the inclusion morphism; the associated curve $C$ is the section of the bundle $\det(B)\otimes\det(A)^{-1}$ defined by $\det(u)$, and the normal bundle is therefore the restriction of this bundle to the curve $C$.
+
+Recall that $T_{p}\Omega^{ss}=\Hom(A,F)$. To compute the tangent linear map at the point $p$ to the morphism $\rho:\Omega^{ss}\to\mathbf{C}_{X}(r)$, one introduces, for each point $x\in X$, the derivative at $u(x)$ of the $n$-linear map $\Hom(A(x),B(x))\to\CC$ defined by $w\mapsto \det w$. Let $v\in\Hom(A,F)$; since $A$ is locally free, one may then choose locally, on an affine open set $U_{i}$, a lift $v_{i}\in H^{0}(U_{i},\Homsh(A,B))$. Then the section of $N_{C}$ defined on $U_{i}$ by
+\[
+w_{i} \;=\; \det{}'(u;v_{i})\big|_{C\cap U_{i}}
+\]
+does not depend on the choice of the lift $v_{i}$. Consequently, these various local sections glue together and provide a global section $w\in H^{0}(N_{C})$: the linear map $v\mapsto w$ is the derivative we are looking for. Let us observe that if one could lift $v$ globally to an element of $\Hom(B,F)$, the section $w$ so computed would indeed be zero: indeed, by the definition of the open set $\Omega^{ss}$ we have an isomorphism $\Hom(B,B)\simeq\Hom(B,F)$ and $v$ would then come from an element $v'\in\Hom(A,B)$ defined by $v'=gu$, with $g\in\Hom(B,B)$. It follows that the section $\det(u;v')$ would be divisible by the equation of $C$.
+
+We know that $F$ is locally free on its support; thus, for $x\in C$, we have $\dim F(x)=1$. In a neighbourhood $U$ of a point $x$ one may write $A=A'\oplus A''$ and $B=B'\oplus B''$, with $A'$ and $B'$ of rank~$1$, and the matrix of $u$ is written in these direct sums as
+\[
+u \;=\; \begin{pmatrix} u' & 0 \\ 0 & u'' \end{pmatrix}
+\]
+with $u''$ invertible. Then $\det u''$ induces an isomorphism $A'^{-1}\otimes B' \simeq (\det A)^{-1}\otimes\det B$, and $F$ is identified with the cokernel of the morphism $u':A'\to B'$. The section $v\in\Hom(A,F)$ lifts to a section $A\to B$ with matrix
+\[
+v \;=\; \begin{pmatrix} v' & v'' \\ 0 & 0 \end{pmatrix}
+\]
+so that $w|_{U\cap C}=v'\det u''$.
+
+Consider the commutative diagram of coherent algebraic sheaves on the open set $U$ induced by the inclusions $A'\hookrightarrow A$ and $B'\hookrightarrow B$:
+\[
+\begin{tikzcd}[column sep=small]
+0 \arrow[r] & \Homsh(B,F) \arrow[r]\arrow[d] & \Homsh(A,F) \arrow[r]\arrow[d]
+  & \Extsh^{1}(F,F) \arrow[r]\arrow[d,equal] & 0 \\
+0 \arrow[r] & \Homsh(B',F) \arrow[r] & \Homsh(A',F) \arrow[r]
+  & \Extsh^{1}(F,F) \arrow[r] & 0
+\end{tikzcd}
+\]
+\origpage{642}%
+Thus the section of $\Extsh^{1}(F,F)$ obtained on $U$ is the one associated with $v'$ via the second exact sequence; if one identifies it with a section of $(\det A)^{-1}\otimes\det B$, one obtains exactly $w|_{U\cap C}$.
+\end{proof}
+
+The above proof has in fact established the following result.
+
+\begin{proposition}\label{prop:rho-smooth}
+Let $c_{1}\in\NS(X)$ be such that $(c_{1},\omega_{X})<0$. Let $p$ be a point of $\Omega^{ss}\subset \Hilb^{r,\chi}(X)$ representing a smooth quotient sheaf of fundamental class $c_{1}$. Then the canonical morphism
+\[
+\rho : \Omega^{ss} \longrightarrow \mathbf{C}_{X}(r)
+\]
+is smooth in a neighbourhood of $p$.
+\end{proposition}
+
+\subsection{Invertible bundles on \texorpdfstring{$\mathbf{N}_{X}(c_{1},\chi)$}{N\_X(c1,chi)}}\label{subsec:invertible}
+
+On the Grothendieck algebra $K(X)$ we consider the quadratic form $\xi\mapsto\chi(\xi^{2})$. It comes from a quadratic form on the topological Grothendieck algebra $K_{\mathrm{top}}(X)$: if $r$ denotes the rank, $c_{1}$ the Chern class and $\chi$ the Euler--Poincar\'e characteristic, one has
+\[
+\chi(\xi^{2}) \;=\; 2r\chi + c_{1}^{2} - \chi(\Oh_{X})r^{2}.
+\]
+
+The orthogonal complement of an element $\xi\in K(X)$ therefore depends only on its image in $K_{\mathrm{top}}(X)$. If $\xi$ is the class in $K(X)$ of a sheaf of dimension~$1$, of fundamental class $c_{1}$ and Euler--Poincar\'e characteristic $\chi$, the orthogonal complement of $\xi$ consists of the elements $\xi'\in K(X)$ of rank $r'$, Chern class $c_{1}'$ and Euler--Poincar\'e characteristic $\chi'$ such that $(c_{1},c_{1}')+r'\chi=0$. We shall denote this orthogonal complement by $Z(c_{1},\chi)$. It contains in particular the ideal $A^{2}(X)$ of cycles of dimension~$0$; if $r=\langle c_{1},h\rangle$ is the multiplicity of $\xi$ and $\delta=\gcdd(r,\chi)$, it also contains the element
+\[
+\eta \;=\; \frac{1}{\delta}\,(-r + \chi h).
+\]
+
+Consider a flat family $\mathscr{F}$ of semi-stable sheaves of dimension~$1$ on $X$, parametrised by an algebraic variety $S$. On the other hand consider the diagram
+\[
+\begin{tikzcd}
+S\times X \arrow[r,"p"] \arrow[d,"q"'] & X \\
+S &
+\end{tikzcd}
+\]
+where $p$ and $q$ are the canonical projections. For $u\in K(X)$, the product $\mathscr{F}\cdot p^{*}(u)$ makes sense in the Grothendieck group $K(S\times X)$, and by direct image one obtains an element in the Grothendieck group $K(S)$ generated by the algebraic vector bundles. Consequently, the formula
+\[
+\mathscr{L}_{\mathscr{F}}(u) \;=\; \det\bigl(q_{!}(\mathscr{F}\cdot p^{*}(u))\bigr)
+\]
+makes sense and defines a class of invertible bundles on $S$. In particular, if one applies this to the universal quotient sheaf on $\Omega^{ss}\times X$, one obtains an invertible bundle, defined up to isomorphism, on $\Omega^{ss}$, and this bundle is endowed with a natural action of the group $\Gl(H)$. This bundle does not necessarily descend to $\mathbf{N}_{X}(c_{1},\chi)$. If $u\in Z(c_{1},\chi)$ one obtains a quotient on
+\origpage{643}%
+the open set $\mathbf{N}^{s}_{X}(c_{1},\chi)$ of stable points; if one wants to obtain a quotient on the whole variety, the condition is more complicated: as in \cite{LeP5} one checks the following result.
+
+\begin{proposition}\label{prop:Lu}
+Let $\mathscr{H}$ be the subalgebra of $K(X)$ generated by $h$. If $u\in\mathscr{H}^{\perp\perp}\cap Z(c_{1},\chi)$, there exists in $\Pic(\mathbf{N}_{X}(c_{1},\chi))$ an element $\mathscr{L}(u)$ characterised by the following universal property: for every flat family $\mathscr{F}$ of semi-stable sheaves on $X$ of fundamental class $c_{1}$ and Euler--Poincar\'e characteristic $\chi$ parametrised by the algebraic variety $S$, one has
+\[
+\mathscr{L}_{\mathscr{F}}(u) \;=\; f_{\mathscr{F}}^{*}(\mathscr{L}(u))
+\]
+where $f_{\mathscr{F}}:S\to\mathbf{N}_{X}(c_{1},\chi)$ is the modular morphism associated with the family $\mathscr{F}$.
+\end{proposition}
+
+\medskip
+\noindent\textbf{Particular cases.}
+\begin{enumerate}
+\item For $u\in A^{2}(X)$ one obtains an invertible bundle $\mathscr{L}(u)$ on $\mathbf{N}_{X}(c_{1},\chi)$; this bundle is in fact the pullback of an invertible bundle defined on the Hilbert scheme $\mathbf{C}_{X}(r)$. If $u$ is the class of a point $a\in X$, the bundle $\mathscr{L}(a)$ has a section whose zero scheme corresponds to the sheaves whose support passes through $a$.
+
+\item If one takes
+\[
+u \;=\; \eta \;=\; \frac{-r+\chi h}{\delta}
+\]
+one also obtains an invertible bundle $\mathscr{D}=\mathscr{L}(\eta)$ on $\mathbf{N}_{X}(c_{1},\chi)$, called the \emph{determinant bundle}. For $\chi=0$, it possesses a section whose zero scheme has as underlying closed set the points of $\mathbf{N}_{X}(c_{1},\chi)$ corresponding to the sheaves $F$ such that $h^{0}(F)\neq 0$.
+\end{enumerate}
+
+Indeed, consider in the product $\Omega^{ss}\times X$ the subscheme $\mathscr{C}$ defined by the Fitting ideal of the universal sheaf $\mathscr{F}$; consider the canonical projections
+\[
+\begin{tikzcd}
+\mathscr{C} \arrow[r,"p"] \arrow[d,"q"'] & X \\
+\Omega^{ss} &
+\end{tikzcd}
+\]
+On $\mathscr{C}$ we have a universal exact sequence $0\to\mathscr{A}'\to\mathscr{B}'\to\mathscr{F}\to 0$ where $\mathscr{B}'$ denotes the pullback of $B$ under the projection $p$. If $m$ has been chosen large enough, $q_{*}(\mathscr{B}')=0$ and $R^{1}q_{*}(\mathscr{B}')$ is locally free of rank $\rho$; and the same holds for the $\Omega^{ss}$-flat sheaf $\mathscr{A}'$: one has $q_{*}(\mathscr{A}')=0$ and $R^{1}q_{*}(\mathscr{A}')$ is locally free of the same rank $\rho$. By direct image one obtains the exact sequence
+\[
+0 \to q_{*}(\mathscr{F}) \to R^{1}q_{*}(\mathscr{A}')
+\stackrel{f}{\longrightarrow} R^{1}q_{*}(\mathscr{B}') \to R^{1}q_{*}(\mathscr{F})
+\to 0
+\]
+Each of these sheaves is endowed with a natural action of $\Gl(H)$, and the morphism $f$ is equivariant. One then has
+\[
+\det q_{!}(\mathscr{F})^{-1} \;=\; \det R^{1}q_{*}(\mathscr{B}') \otimes
+\bigl(\det R^{1}q_{*}(\mathscr{A}')\bigr)^{-1}
+\]
+and $\det f$ defines an invariant section of the invertible bundle $(\det q_{!}(\mathscr{F}))^{-1}$. This bundle comes from $\mathbf{N}_{X}(r,\chi)$ and one thus obtains a representative for the determinant bundle $\mathscr{D}$; the above section, being invariant, comes from a
+\origpage{644}%
+section of $\mathscr{D}$ whose zero scheme indeed corresponds to the sheaves $F$ such that $h^{0}(F)\neq 0$.
+
+Over a smooth curve, one of course obtains the divisor $\Theta$.
+
+\section{The case of the projective plane}\label{sec:plane}
+
+In the case where $X$ is the projective plane $\PP_{2}$, the classes $c_{1}\in H^{2}(X,\ZZ)$ which represent effective curves of course satisfy the condition $(c_{1},\omega_{X})<0$, so that one may apply the results of the preceding section.
+
+\subsection{Irreducibility}\label{subsec:irreducibility}
+
+\begin{theorem}\label{thm:irred}
+The variety $\mathbf{N}_{\PP_{2}}(r,\chi)$ is irreducible of dimension $r^{2}+1$.
+\end{theorem}
+
+As in the preceding section, we consider the open set $\Omega^{ss}$ of $\Hilb^{r,\chi}(B)$, where $B$ is the trivial bundle $B=H\otimes\Oh_{X}(m)$ and $H$ a vector space of dimension $n=rm+\chi$. It obviously suffices to prove that the open set $\Omega^{ss}$ is irreducible. We already know that it is a smooth variety of dimension $r^{2}+n^{2}$.
+
+\begin{lemma}\label{lem:singular-codim}
+The closed subset of $\Omega^{ss}$ consisting of the points representing singular quotient sheaves has codimension $\geq 2$.
+\end{lemma}
+
+\begin{proof}
+A point $a\in\PP_{2}$ is singular for the semi-stable sheaf $F$ if $\dim F(a)\geq 2$. Let $\mathscr{F}$ be the universal quotient sheaf on $\Omega^{ss}\times\PP_{2}$. Consider the closed set $\Sigma_{l}$ of pairs $(p,a)\in\Omega^{ss}\times\PP_{2}$ such that $\dim\mathscr{F}(p,a)\geq l$. This closed set underlies a determinantal variety: if we set $\mathscr{B}=\Oh_{\Omega^{ss}}\otimes B$ and if we denote by $\mathscr{A}$ the universal subsheaf, and by $u:\mathscr{A}\to\mathscr{B}$ the inclusion morphism, it is the variety of minors of order $n-l+1$ of $u$. This variety has codimension $l^{2}$: to see this it suffices to observe that the Petri differential at the point $(p,a)$
+\[
+T_{p}\Omega^{ss} \oplus T_{a}\PP_{2} \longrightarrow
+L\bigl(\ker u(p,a),\ \mathrm{coker}\, u(p,a)\bigr)
+\]
+is surjective. We shall show that this is already the case for the partial differential at the point $(p,a)$: $T_{p}\Omega^{ss}\to L(\ker u(p,a),\mathrm{coker}\, u(p,a))$. Set $A=\mathscr{A}(p)$, $F=\mathscr{F}(p)$. One has $F(a)=\mathrm{coker}\, u(p,a)$ and $\ker u(p,a)\subset A(a)$; the tangent space $T_{p}\Omega^{ss}$ is isomorphic to $\Hom(A,F)$ and the above partial differential is given by
+\[
+v \longmapsto v(a)\big|_{\ker u(p,a)}
+\]
+so that we are reduced to proving the following lemma.
+\end{proof}
+
+\begin{lemma}[C. Sorger]\label{lem:sorger}
+Let $p$ be a point of $\Omega^{ss}$ representing a quotient sheaf $F=B/A$. The sheaf $\Homsh(A,F)$ is generated by its sections.
+\end{lemma}
+
+\begin{proof}
+We have the exact sequence
+\[
+\Homsh(B,F) \longrightarrow \Homsh(A,F) \longrightarrow \Extsh^{1}(F,F)
+\longrightarrow 0
+\]
+The sheaf $\Homsh(B,F)$ is obviously generated by its sections. It therefore suffices to prove that $\Extsh^{1}(F,F)$ is generated by its sections: indeed, the morphism $\Ext^{1}(F,F)\to H^{0}(\Extsh^{1}(F,F))$ is surjective because $H^{2}(\Homsh(F,F))=0$,
+\origpage{645}%
+and by the fact that $\Ext^{1}(B,F)=0$ the elements of $\Ext^{1}(F,F)$ come from $\Hom(A,F)$, that is to say from sections of $\Homsh(A,F)$.
+
+By the Castelnuovo criterion, it suffices to check that $H^{i}(\Extsh^{1}(F,F)(j))=0$ for $j\geq -i$. This is of course obvious for $i=2$; for $i=1$ we have, by the fact that $F$ is Cohen--Macaulay, an isomorphism
+\[
+\Ext^{2}(F,F(j)) \;\simeq\; H^{1}(\Extsh^{1}(F,F(j))).
+\]
+But, by Serre duality, the first member of this equality is zero. Whence the lemma.
+\end{proof}
+
+If we consider the projection $\Sigma_{l}\to\Omega^{ss}$ we see that its image has codimension $\geq 4-2=2$; this is the closed set of points of $\Omega^{ss}$ representing singular quotient sheaves. \qed
+
+\begin{proof}[End of the proof]
+The points of $\Omega^{ss}$ which represent a smooth quotient sheaf form a dense open set by \Cref{lem:singular-codim}. The image of this open set is an open set of $\mathbf{C}_{\PP_{2}}(r)$ and therefore contains points representing sheaves carried by smooth curves. But, over the open set of smooth curves, the morphism
+\[
+\rho : \mathbf{N}_{\PP_{2}}(r,\chi) \longrightarrow \mathbf{C}_{\PP_{2}}(r)
+\]
+is identified with the relative Picard variety $P$ of invertible bundles of Euler--Poincar\'e characteristic $\chi$ on the universal curve of degree $r$ of the projective plane: it is therefore an irreducible variety of dimension $r^{2}+1$. Such an invertible bundle obviously defines a stable sheaf of dimension~$1$. It follows that, over this open set $P$, the projection morphism $\Omega^{ss}\to\mathbf{N}_{\PP_{2}}(r,\chi)$ has irreducible fibres of dimension $n^{2}+1$: the preimage of $P$ is therefore an irreducible open set of dimension $r^{2}+n^{2}$. Since this open set is everywhere dense, it follows that $\Omega^{ss}$ is irreducible.
+\end{proof}
+
+\begin{proposition}\label{prop:stable-codim}
+Let $r$ be an integer $\geq 2$. The complement of the open set $\mathbf{N}^{s}_{\PP_{2}}(r,\chi)$ of isomorphism classes of stable sheaves has codimension $\geq 2r-3$.
+\end{proposition}
+
+\begin{proof}
+Let $(r',\chi')$ and $(r'',\chi'')$ be integers satisfying the following conditions: $r'>0$, $r''>0$, $r'+r''=r$ and $\chi'+\chi''=\chi$ and
+\[
+\frac{\chi'}{r'} \;=\; \frac{\chi''}{r''} \;=\; \mu \;=\; \frac{\chi}{r}.
+\]
+If $F'$ and $F''$ are semi-stable sheaves of multiplicity $r'$ and $r''$ and of Euler--Poincar\'e characteristic $\chi'$ and $\chi''$ respectively, then $F'\oplus F''$ is semi-stable of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi$. This provides a canonical morphism
+\[
+\mathbf{N}_{\PP_{2}}(r',\chi') \times \mathbf{N}_{\PP_{2}}(r'',\chi'')
+\longrightarrow \mathbf{N}_{\PP_{2}}(r,\chi)
+\]
+The closed set of classes of non-stable sheaves is the union of the images of these morphisms. Consequently, its codimension is $\geq r^{2}-r'^{2}-r''^{2}-1 = 2r'r''-1 \geq 2r-3$.
+\end{proof}
+
+\subsection{The Picard group}\label{subsec:picard}
+
+The Hilbert scheme of curves of $\PP_{2}$ of degree $r$ is the projective space $|\Oh_{\PP_{2}}(r)|$ of dimension $\tfrac{1}{2}r(r+3)$.
+
+\origpage{646}
+\begin{theorem}\label{thm:picard}
+\begin{enumerate}
+\item For $r=1$ or $2$, the morphism $\sigma:\mathbf{N}_{\PP_{2}}(r,\chi)\to\mathbf{C}_{\PP_{2}}(r)$ is an isomorphism, and consequently its Picard group is $\ZZ$, with generator the bundle $\mathscr{L}(a)$ associated with a point.
+\item For $r\geq 3$, the Picard group is a free group on $2$ generators: one may choose as generators the bundle $\mathscr{L}(a)$ associated with a point --- the pullback of $\Oh(1)$ under the morphism $\sigma$ --- and the determinant bundle $\mathscr{D}$.
+\item The variety $\mathbf{N}_{\PP_{2}}(r,\chi)$ is locally factorial.
+\end{enumerate}
+\end{theorem}
+
+This result is analogous to the one obtained by Str\o mme \cite{Str} and Dr\'ezet \cite{Dre1} for the moduli spaces of torsion-free semi-stable sheaves on the projective space. The case $r=1$ is obvious. In the case $r=2$, one reduces by normalisation to the cases $\chi=0$ or $\chi=1$.
+
+\medskip
+\noindent\textbf{The case $r=2$, $\chi=1$.} A semi-stable sheaf of multiplicity~$2$ and characteristic $\chi=1$ necessarily has a section, whence a non-zero morphism $\Oh_{C}\to F$, and $\Oh_{C}$ is stable (cf. C. Sorger \cite{Sor}), of characteristic $\chi=1$. This morphism is necessarily an isomorphism. The coarse moduli property applied to the family of stable sheaves $\Oh_{C}$, parametrised by the conics $C$ of the projective plane, defines a morphism $\mathbf{C}_{\PP_{2}}(2)\to\mathbf{N}_{\PP_{2}}(2,1)$ which is the inverse of $\sigma$.
+
+\medskip
+\noindent\textbf{The case $r=2$, $\chi=0$.} The fibre of $\sigma$ is obviously reduced to one point above a smooth conic $C$. If $F$ is a semi-stable sheaf whose schematic support is a singular conic $C$, the conic $C$ contains a line $l$ of equation $z=0$, with $z\in H^{0}(\Oh_{\PP_{2}}(1))$. Then the morphism $z:F\to F(1)$, if it is non-zero, has image of multiplicity~$1$, and consequently $F$ is not stable. This is still the case if it is zero, for $F$ is then a free $\Oh_{l}$-module; it cannot be stable. This sheaf is then $S$-equivalent to $F'\oplus F''$ with $F'$ and $F''$ of multiplicity~$1$ and Euler--Poincar\'e characteristic $\chi=0$. This equivalence class is obviously determined by the conic. The morphism $\sigma:\mathbf{N}_{\PP_{2}}(2,0)\to\mathbf{C}_{\PP_{2}}(2)$ is then bijective; the two varieties being normal, it is an isomorphism.
+
+\medskip
+\noindent\textbf{The open set $U_{a}$.} From now on we place ourselves under the hypothesis $r\geq 3$. If need be, one may assume $0\leq\chi<r$. Let $a\in X$. Consider the open set $U_{a}$ of $\mathbf{N}_{\PP_{2}}(r,\chi)$ of isomorphism classes of stable sheaves whose support does not contain the point $a$.
+
+\begin{proposition}\label{prop:Ua}
+The open set $U_{a}$ is a smooth variety of dimension $r^{2}+1$ whose Picard group is an infinite cyclic group with generator the determinant bundle $\mathscr{D}$.
+\end{proposition}
+
+This open set $U_{a}$ has a simple description in terms of Higgs bundles on the projective line. Let us begin with some generalities.
+
+\medskip
+\noindent\textbf{Higgs bundles.} In this paragraph we fix a smooth projective curve $C$, and an invertible bundle $L$ on $C$, of degree $l$.
+
+\begin{definition}\label{def:higgs}
+A \emph{Higgs sheaf} on $(C,L)$ is a pair $F=(G,\varphi)$ formed of a coherent algebraic sheaf $G$ on $C$ and a morphism $\varphi:G\to G\otimes L$. Such a pair is said to be \emph{stable} (resp. \emph{semi-stable}) if the
+\origpage{647}%
+sheaf $G$ is locally free, and if for every subsheaf $G'\subset G$, of rank $0<r'<r$ and such that $\varphi(G')\subset G'\otimes L$, one has
+\[
+\mu(G') < \mu(G) \quad (\text{resp. } \leq).
+\]
+\end{definition}
+
+When $G$ is locally free, one says that such a pair $F=(G,\varphi)$ is a \emph{Higgs bundle} on $(C,L)$. When one takes for $L$ the canonical bundle $\omega_{C}$, this is therefore the standard notion of Higgs bundle introduced by Hitchin \cite{Hit} and Simpson \cite{Sim2,Sim1}. One defines in the obvious way the notion of morphism of Higgs sheaves. When one fixes the rank $r$ and the Euler--Poincar\'e characteristic $\chi$, one obtains for the stable Higgs bundles a coarse moduli space: it is a quasi-projective algebraic variety, whose points correspond to the isomorphism classes of Higgs bundles. One can also define the notion of Harder--Narasimhan filtration of a Higgs bundle, which will be useful to us a little later: this is an increasing filtration
+\[
+0 = F_{0} \subset F_{1} \subset F_{2} \subset \dots \subset F_{k} = F
+\]
+by Higgs subsheaves, such that the quotients $gr_{i}=F_{i}/F_{i-1}$ are semi-stable, and such that the slope $i\mapsto\mu_{i}:=\mu(gr_{i})$ is strictly decreasing. One sets $\mu_{\max}(F):=\mu_{1}$ and $\mu_{\min}(F):=\mu_{k}$.
+
+\begin{definition}\label{def:higgs-cohom}
+Let $F=(G,\varphi)$ be a Higgs sheaf on $(C,L)$. The cohomology $\mathbf{H}^{i}(F)$ of $F$ is defined by the hypercohomology of the complex
+\[
+0 \longrightarrow G \stackrel{\varphi}{\longrightarrow} G\otimes L \longrightarrow 0
+\]
+\end{definition}
+
+This cohomology vector space is therefore finite dimensional, and zero for $q>2$. Given two Higgs bundles $F'=(G',\varphi')$ and $F''=(G'',\varphi'')$ one defines the Higgs bundle $\Homsh(F',F'')$ by the pair $(\Homsh(G',G''),\varphi)$ where $\varphi$ is given by the formula $\varphi(f)=\varphi''f-f\varphi'$, where $f$ is a local section of the bundle of homomorphisms $\Homsh(G',G'')$. We shall set
+\[
+\BExt^{q}(F',F'') \;=\; \mathbf{H}^{q}(\Homsh(F',F'')).
+\]
+Thus $\BExt^{0}(F',F'')$ is identified with the vector space $\BHom(F',F'')$ of morphisms of Higgs bundles $F'\to F''$. The dual of an $L$-Higgs bundle $F=(G,\varphi)$ is defined by the pair $(G^{*}\otimes L^{*},{}^{t}\varphi)$, where $G^{*}\otimes L^{*}$ is endowed with the transposed morphism ${}^{t}\varphi:G^{*}\otimes L^{*}\to G^{*}$.
+
+\begin{proposition}\label{prop:higgs-RR}
+Let $F=(G,\varphi)$ be a Higgs bundle on $(C,L)$, with $G$ of rank $r$ and Euler--Poincar\'e characteristic $\chi$.
+\begin{enumerate}
+\item[(1)] \emph{(Riemann--Roch formula)} One has
+\[
+\sum_{q}(-1)^{q}\dim \mathbf{H}^{q}(F) \;=\; -rl.
+\]
+\item[(2)] \emph{(Serre duality)} One has a canonical isomorphism
+\[
+\mathbf{H}^{q}(F) \;\simeq\; \mathbf{H}^{2-q}(F^{*}\otimes\omega_{C})^{*}.
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+One has
+\[
+\sum_{q}(-1)^{q}\dim\mathbf{H}^{q}(F) \;=\; \chi(G) - \chi(G\otimes L).
+\]
+\origpage{648}%
+Assertion (1) is therefore a trivial consequence of the Riemann--Roch formula. For assertion (2) it suffices to apply the Serre duality theorem in hypercohomology to the complex $0\to G\stackrel{\varphi}{\to}G\otimes L\to 0$.
+\end{proof}
+
+\medskip
+\noindent\textbf{Description of $U_{a}$.} Consider a projective line $\PP_{1}$ not passing through $a$, and the canonical projection $\pi:\PP_{2}-\{a\}\to\PP_{1}$ with centre $a$. The open set $\PP_{2}-\{a\}$ is identified with the total space of the normal bundle $N=\Oh_{\PP_{1}}(1)$ of $\PP_{1}$ in $\PP_{2}$.
+
+\begin{proposition}\label{prop:Ua-higgs}
+Let $N$ be the normal bundle of $\PP_{1}$ in the projective plane $\PP_{2}$. The open set $U_{a}$ of $\mathbf{N}_{\PP_{2}}(r,\chi)$ is isomorphic to the coarse moduli space of isomorphism classes of stable Higgs bundles $(G,\varphi)$ on $(\PP_{1},N)$.
+\end{proposition}
+
+\begin{proof}
+The correspondence is obtained in the following way: to the stable sheaf $F$ on $\PP_{2}$, whose support does not pass through $a$, one associates the direct image $G=\pi_{*}(F)$; since $F$ is pure, this sheaf is locally free of rank $r$; it is endowed with a structure of $\pi_{*}(\Oh_{N})$-module, which provides a morphism $\varphi:G\to G\otimes N$. Conversely, such a morphism defines a module structure over the algebra $\pi_{*}(\Oh_{N})$ and consequently a coherent sheaf on the total space $N=\PP_{2}-\{a\}$ with finite support over $\PP_{1}$; this sheaf is pure and has as support the spectral curve associated with the morphism $\varphi$, that is, the curve defined by the determinant $\gamma\in H^{0}(N^{\otimes r})$ of the morphism
+\[
+\varphi - \lambda\, id_{G} : \pi^{*}(G) \longrightarrow \pi^{*}(G)\otimes\pi^{*}(N)
+\]
+where $\lambda$ is the canonical section of the bundle $\pi^{*}(N)$. The associated sheaf $F$ is then the cokernel of the morphism $\psi=(\varphi-\lambda\, id_{G})\otimes id_{N^{-1}}$. The two constructions are inverse to each other (\cite{Har}, exercise 5.17). It is clear that if the sheaf $F$ is stable, the Higgs bundle $(G,\varphi)$ is stable; conversely, a stable Higgs bundle $(G,\varphi)$ provides by the above construction a stable sheaf: this follows from the fact that the multiplicity and the Euler--Poincar\'e characteristic are invariant under direct image.
+\end{proof}
+
+\begin{definition}\label{def:spectrum}
+Given a locally free sheaf $G$ on $\PP_{1}$, one writes $G=\oplus_{k\in\ZZ}\Oh(k)^{r_{k}}$. The sequence of integers $k$ such that $r_{k}\neq 0$ is called the \emph{spectrum} of $G$. The integers $r_{k}$ are the \emph{multiplicities}.
+\end{definition}
+
+This spectrum is therefore determined by the sequence $k\mapsto h^{0}(G(-k))$.
+
+\begin{lemma}\label{lem:spectrum-connected}
+If $(G,\varphi)$ is a semi-stable Higgs bundle on $(\PP_{1},N)$, the spectrum of $G$ is connected.
+\end{lemma}
+
+\begin{proof}
+This means that the set of integers $k$ such that $r_{k}\neq 0$ is an interval of $\ZZ$. If the spectrum were not connected, one could write $G=G'\oplus G''$, with $\Hom(G',G''(1))=0$, so that the matrix of $\varphi$ would be of the form
+\[
+\varphi \;=\; \begin{pmatrix} \alpha & \beta \\ 0 & \gamma \end{pmatrix}
+\]
+But one has the inequality $\mu(G')>\mu(G'')$, which contradicts the semi-stability of the pair $(G,\varphi)$.
+\end{proof}
+
+\begin{definition}\label{def:quasirigid}
+One says that a Higgs bundle $F=(G,\varphi)$ on $(\PP_{1},N)$ is \emph{quasi-rigid} if $G$ is rigid, that is to say if
+\[
+\Ext^{1}(G,G)=0 .
+\]
+\end{definition}
+
+\origpage{649}
+This therefore means that the spectrum of $G$ is connected and reduced to at most two points. In the normalised case $0\leq\chi<r$, this therefore means that $G=\Oh^{\chi}\oplus\Oh(-1)^{r-\chi}$.
+
+\begin{proposition}\label{prop:quasirigid-open}
+In the open set $U_{a}$, the points corresponding to quasi-rigid Higgs bundles on $(\PP_{1},N)$ constitute an open set whose complement is of codimension $\geq 2$ if $\chi\not\equiv 0 \bmod r$, and, if $\chi\equiv 0\bmod r$, an irreducible hypersurface whose associated invertible bundle is the determinant bundle.
+\end{proposition}
+
+\begin{proof}
+The construction of $U_{a}$ can be carried out in the following manner: one considers an integer $m$ large enough so that for every pair $(G,\varphi)$ of $U_{a}$ the bundle $G(m)$ is generated by its sections and such that $h^{1}(G(m))=0$. Given a vector space $H$ of dimension $n=rm+\chi$, one considers the vector bundle $E=H\otimes\Oh_{\PP_{1}}(-m)$, the Hilbert--Grothendieck scheme $\Hilb^{r,\chi}(E)$ of quotient sheaves $G$ of rank $r$ and Euler--Poincar\'e characteristic $\chi$, and the universal quotient sheaf $\mathscr{G}$ on the product $\Hilb^{r,\chi}(E)\times\PP_{1}$, and one denotes by $p$ and $q$ the canonical projections
+\[
+\begin{tikzcd}
+\Hilb^{r,\chi}(E)\times\PP_{1} \arrow[r,"p"] \arrow[d,"q"'] & \PP_{1} \\
+\Hilb^{r,\chi}(E) &
+\end{tikzcd}
+\]
+One considers the coherent algebraic sheaf on $\Hilb^{r,\chi}(H\otimes\Oh_{\PP_{1}}(-m))$ defined by $\mathscr{E}=\Extsh^{1}_{q}(\mathscr{G},\mathscr{G}(-3))$; its fibre over a point representing a quotient sheaf $G$ is $\Ext^{1}(G,G(-3))$. Consider the associated vector bundle (in the sense of Grothendieck)
+\[
+\nu = \Vect(\mathscr{E}) \longrightarrow \Hilb^{r,\chi}(E)
+\]
+the points of $\nu$ correspond to the Higgs bundles $(G,\varphi)$, where $G$ is a quotient of $E$ and $\varphi$ is a linear form on $\Ext^{1}(G,G(-3))$, that is to say, by Serre duality, an element of $\Hom(G,G(1))$. Consider, in $\nu$, the open set $\nu^{s}$ of pairs $(G,\varphi)$ satisfying the following conditions:
+\begin{enumerate}
+\item[(1)] the Higgs sheaf $(G,\varphi)$ is stable;
+\item[(2)] the morphism $H\to H^{0}(G(m))$ induced by the evaluation morphism is an isomorphism.
+\end{enumerate}
+Then the group $\PGl(H)$ acts freely on $\nu^{s}$ and the open set $U_{a}$ is a geometric quotient of $\nu^{s}$ by $\PGl(H)$. The variety $\nu^{s}$ is isomorphic to an open set of the variety $\Omega^{ss}$ considered in \Cref{subsec:moduli}, and hence smooth irreducible of dimension $n^{2}+r^{2}$ by \Cref{prop:smooth-omega} and \Cref{subsec:irreducibility}. In a neighbourhood of an orbit $O$ of $\PGl(H)$ in $\Hilb^{r,\chi}(E)$ of a point representing a quotient $G$ satisfying condition (2), the Hilbert scheme $\Hilb^{r,\chi}(E)$ is smooth of dimension $n^{2}-r^{2}$, and above such an orbit the bundle $\nu$ is of constant rank $\rho$, given by the following formula
+\[
+\rho \;=\; 2r^{2} + \dim\Ext^{1}(G,G(1))
+\]
+where $G$ is a quotient of $E$ representing a point of this orbit. Denote by $\nu_{O}$ the preimage of $O$ in $\nu^{s}$. The codimension of the orbit $O$ in $\Hilb^{r,\chi}(E)$ is given by $\dim\Ext^{1}(G,G)$ and hence the locally
+\origpage{650}%
+closed variety $\nu_{O}$ has codimension $\dim\Ext^{1}(G,G)-\dim\Ext^{1}(G,G(1))$. If one writes $G=\oplus_{k}\Oh(k)^{r_{k}}$ this codimension is
+\[
+\sum_{i-j\geq 2} r_{i} r_{j}
+\]
+
+By reason of the connectedness property, the only case where $\nu_{O}$ has codimension~$1$ in $\nu^{s}$ is that where $G\simeq\Oh(k+1)\oplus\Oh(k)^{r-2}\oplus\Oh(k-1)$: this entails $\chi=r(k+1)$ and therefore $\chi\equiv 0\bmod r$. The variety $\nu_{O}$ is then an irreducible variety of codimension~$1$. Thus, the points of $\nu^{s}$ representing non quasi-rigid Higgs bundles $(G,\varphi)$ form a $\PGl(H)$-invariant closed set (by the semi-continuity theorem) of codimension $\geq 2$ in the case $\chi\not\equiv 0\bmod r$ and irreducible of codimension~$1$ in the case $\chi\equiv 0\bmod r$. Since the projection $\nu^{s}\to U_{a}$ is smooth of relative dimension $r^{2}-1$, the same will hold for the image in $U_{a}$.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{prop:Ua}]
+Denote by $U_{a,\mathrm{rig}}$ the open set of $U_{a}$ representing quasi-rigid Higgs bundles. Consider a point of $\Hilb^{r,\chi}$ representing a rigid quotient $G$ of $E$, and denote by $O$ its orbit. On the other hand consider the open set $\Hom^{s}(G,G(1))$ of morphisms $G\to G(1)$ such that the pair $(G,\varphi)$ is stable; the group of automorphisms $\Aut(G)$ of $G$ is identified with the stabiliser of $G$ in $\Gl(H)$; this group acts on $\Hom(G,G(1))$ by conjugation and in the diagram
+\[
+\begin{tikzcd}
+\Hom^{s}(G,G(1)) \arrow[r,"j"] \arrow[dr,"g"'] & \nu_{O} \arrow[d,"f"] \\
+& U_{a,\mathrm{rig}}
+\end{tikzcd}
+\]
+the inclusion morphism $j$ is compatible with the actions of the groups $\Aut(G)$ and $\Gl(H)$. The right-hand vertical morphism is a geometric quotient; from the fact that $O$ is the orbit of the point of $\Hilb^{r,\chi}(E)$ defined by the quotient $G$, it follows that $g$ is also a geometric quotient by the action of the group $\Aut(G)$. Let us observe moreover that this action descends through $P\Aut(G):=\Aut(G)/\CC^{*}$ to a free action.
+\end{proof}
+
+\begin{lemma}\label{lem:homs-codim}
+The complement of the open set $\Hom^{s}(G,G(1))$ has codimension $2$ in $\Hom(G,G(1))$.
+\end{lemma}
+
+This lemma will be proved below. Let us first see how it implies \Cref{prop:Ua}. We shall assume here that $G$ is normalised. It follows from this lemma that there are no regular invertible functions on $\Hom^{s}(G,G(1))$ other than the constants. One then has an isomorphism
+\[
+\Pic^{P\Aut(G)}(\Hom^{s}(G,G(1))) \;\simeq\; \Char(P\Aut(G))
+\]
+where the second member denotes the group of characters, and the canonical morphism
+\[
+\Pic(U_{a,\mathrm{rig}}) \longrightarrow \Char(P\Aut(F))
+\]
+is injective. To check that it is surjective, it suffices to observe that the character associated with the determinant bundle $\mathscr{D}$ generates the group $\Char(P\Aut(G))$. Consider the universal quotient sheaves $\mathscr{F}$ and $\mathscr{G}$ on $\nu^{s}\times\PP_{2}$ and
+\origpage{651}%
+$\nu^{s}\times\PP_{1}$ respectively. Restricting to the fibre of $\nu^{s}$ above the point corresponding to the quotient $G$ one has isomorphisms
+\[
+\Oh\otimes H^{1}(G(-1)) \simeq R^{1}q_{*}(\mathscr{F}(-1))
+\]
+\[
+\Oh\otimes H^{0}(G) \simeq q_{*}(\mathscr{F})
+\]
+Moreover, these isomorphisms are compatible with the action of the stabiliser of $G$, that is to say $\Aut(G)$. By definition, the determinant bundle corresponds on $\nu^{s}$ to the bundle $\mathscr{D}=\mathscr{L}(\eta)$, and one therefore has on $\Hom^{s}(G,G(1))$
+\[
+\mathscr{D} \;=\; \Oh \otimes \bigl(\det H^{1}(G(-1))\bigr)^{\otimes \frac{\chi}{\delta}}
+\otimes \bigl(\det H^{0}(G)\bigr)^{\otimes \frac{\chi-r}{\delta}}
+\]
+This invertible bundle induces the trivial character in the case $\chi=0$ (there are no others); in the case where $0<\chi<r$, the group of automorphisms of $G=\Oh^{\chi}\oplus\Oh(-1)^{r-\chi}$ consists of matrices $f$ of the form
+\[
+f \;=\; \begin{pmatrix} \alpha & \gamma \\ 0 & \beta \end{pmatrix}
+\]
+The group of characters of $P\Aut(G)$ is given by the homomorphisms $f\mapsto(\det\alpha)^{k}(\det\beta)^{l}$ where the integers $k$ and $l$ satisfy the equation $k\chi+l(r-\chi)=0$. The character corresponding to the determinant bundle is given by
+\[
+f \longmapsto (\det\alpha)^{\frac{\chi-r}{\delta}} (\det\beta)^{\frac{\chi}{\delta}}.
+\]
+
+This is indeed a generator of the group of characters: thus, the determinant bundle generates $\Pic(U_{a,\mathrm{rig}})$. Taking \Cref{lem:homs-codim}\tnote{the original refers here to ``lemme 3.14'', evidently a misprint for Lemma~3.15.} into account, this proves \Cref{prop:Ua}. \qed
+
+\medskip
+\noindent\textbf{The family of quasi-rigid Higgs bundles.} Let $F=(G,\varphi)$ be a Higgs bundle on $(\PP_{1},\Oh(1))$. One considers the Hilbert--Grothendieck scheme $\Hilb^{r'',\chi''}(F)$ of quotient sheaves $G''=G/G'$, of rank $r''$ and characteristic $\chi''$, such that $\varphi(G')\subset G'(1)$. The pair $F'=(G',\varphi')$, with $\varphi'=\varphi|_{G'}$, defines a Higgs subsheaf; let $F''=(G'',\varphi'')$ be the quotient $F/F'$. The scheme $\Hilb^{r'',\chi''}(F)$ is a projective scheme, whose tangent space at a point $q$ defined by the quotient $F''=F/F'$ is the vector space $\BHom(F',F'')$ of morphisms of Higgs sheaves.
+
+We set $S=\Hom(G,G(1))$. The construction of the Hilbert--Grothendieck scheme can be carried out relatively over $S$: one has a universal family $\mathscr{F}$ of Higgs bundles parametrised by $S$ and the relative Hilbert--Grothendieck scheme
+\[
+\Hilb^{r'',\chi''}(\mathscr{F}/S) \stackrel{\rho}{\longrightarrow} S
+\]
+represents the pairs $(\varphi,F'')$ formed of an element $\varphi\in S=\Hom(G,G(1))$ and of a Higgs quotient sheaf $F''=F/F'$ of the Higgs bundle $F=(G,\varphi)$. It is therefore the closed subscheme of the product $S\times\Hilb^{r'',\chi''}(G)$ of pairs $(\varphi,G''=G/G')$ defined by the following condition: the composed morphism
+\[
+G' \stackrel{i}{\longrightarrow} G \stackrel{\varphi}{\longrightarrow} G(1)
+\stackrel{j}{\longrightarrow} G''(1)
+\]
+is zero.
+
+\origpage{652}
+\begin{lemma}\label{lem:higgs-exact}
+Let $q$ be a point of $\Hilb^{r'',\chi''}(\mathscr{F}/S)$ corresponding to a quotient Higgs bundle $F''=F/F'$ of $F=(G,\varphi)$. One has an exact sequence
+\[
+0 \to \BHom(F',F'') \to T_{q}\Hilb^{r'',\chi''}(\mathscr{F}/S)
+\stackrel{T_{q}\rho}{\longrightarrow} \Hom(G,G(1))
+\stackrel{\delta}{\longrightarrow} \BExt^{1}(F',F'')
+\]
+\end{lemma}
+
+This exact sequence is the Higgs version of Proposition 1.5 of \cite{Dre2}, but it is much easier to prove for the family of Higgs bundles considered here.
+
+\begin{proof}
+At the point $q$, the Zariski tangent space $T_{q}\Hilb^{r'',\chi''}(\mathscr{F}/S)$ is given by the pairs $(u,v)\in\Hom(G,G(1))\times\Hom(G',G'')$ which satisfy, with the notations above, the equation $jui+\varphi''v-v\varphi'=0$. The arrow $\delta$ is defined in the following way: for $u\in\Hom(G,G(1))$, $\delta(u)$ is the class of $jui$ in the cokernel of the morphism $v\mapsto\varphi''v-v\varphi'$:
+\[
+\Hom(G',G'') \longrightarrow \Hom(G',G''(1))
+\]
+The hypercohomology exact sequence identifies this cokernel with a subspace of $\BExt^{1}(F',F'')$, which defines the arrow $\delta$. The tangent linear map $T_{q}\rho$ is given by $(u,v)\mapsto u$. Its kernel is identified with the Zariski tangent space to the Hilbert scheme $\Hilb^{r'',\chi''}(F)$, that is to say with $\BHom(F',F'')$; from the above formula it follows that an element $u\in\Hom(G,G(1))$ comes from $T_{q}\Hilb^{r'',\chi''}(\mathscr{F}/S)$ if and only if $\delta(u)=0$. This provides the exact sequence of the lemma.
+\end{proof}
+
+\begin{lemma}\label{lem:delta-surj}
+We keep the notations of the preceding lemma, and we assume that $G$ is rigid, and that $\mu_{\min}(F')\geq\mu_{\max}(F'')$. Then the arrow $\delta$ above is surjective.
+\end{lemma}
+
+\begin{proof}
+The hypercohomology exact sequence provides an exact sequence
+\[
+\Hom(G,G(1)) \longrightarrow \BExt^{1}(F,F) \longrightarrow \Ext^{1}(G,G)
+\]
+and the rigidity hypothesis implies that the arrow $\Hom(G,G(1))\to\BExt^{1}(F,F)$ is surjective. The connecting arrow $\delta$ of \Cref{lem:higgs-exact} is the composite
+\[
+\begin{tikzcd}
+\Hom(G,G(1)) \arrow[r] & \BExt^{1}(F,F) \arrow[d] \\
+& \BExt^{1}(F',F'')
+\end{tikzcd}
+\]
+where the vertical arrow is induced by the inclusion $F'\hookrightarrow F$ and the projection $F\to F''$. It therefore suffices to check that this vertical arrow is surjective. But by virtue of the spectral sequence of a filtered complex, it suffices to check that one has
+\[
+\BExt^{2}(F',F') = \BExt^{2}(F'',F'') = 0
+\]
+\[
+\BExt^{2}(F'',F') = 0
+\]
+By Serre duality, this amounts to checking that
+\[
+\BHom(F',F'(-3)) = \BHom(F'',F''(-3)) = 0
+\]
+\[
+\BHom(F'',F'(-3)) = 0
+\]
+\origpage{653}%
+But from the fact that $G$ is rigid, and from the hypothesis $\mu_{\min}(F')\geq\mu_{\max}(F'')$, it follows that one has $0\leq\mu_{\max}(F')-\mu_{\min}(F'')\leq 1$, $\mu_{\max}(F')-\mu_{\min}(F')\leq 1$, and $\mu_{\max}(F'')-\mu_{\min}(F'')\leq 1$. The above equalities follow immediately, and consequently so does the surjectivity of the morphism $\delta$.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{lem:homs-codim}]
+The points $\varphi\in S$ for which the Higgs bundle $F=(G,\varphi)$ is not stable are those for which there exists a Higgs subbundle $F'\subset F$ of rank $r'$ satisfying the conditions of \Cref{lem:delta-surj}. In other words, such a point is the image of a point $q\in\Hilb^{r'',\chi''}(\mathscr{F}/S)$ under the morphism $\rho$ representing a Higgs bundle $F''=F/F'$, and one has the condition $\mu_{\min}(F')\geq\mu_{\max}(F'')$. At such a point the tangent linear map to $\rho$ has rank $\leq\dim S-\dim\BExt^{1}(F',F'')$. One has, since $F$ is quasi-rigid, $\BExt^{2}(F,F)=0$, and consequently $\BExt^{2}(F',F'')=0$. By the Riemann--Roch formula 3.9, this entails $\dim\BExt^{1}(F',F'')\geq r'r''$, and consequently $T_{q}\rho$ has rank $\leq\dim S-r'r''$.
+
+It follows from the Bertini--Sard theorem that the point $\varphi$ belongs to a finite union of closed subvarieties of codimension $\geq r-1$. Outside these subvarieties, the Higgs bundle $F$ is stable. Whence the lemma.
+\end{proof}
+
+\medskip
+\noindent\textbf{The complement of $U_{a}$.} To compute the Picard group of $\mathbf{N}^{s}_{\PP_{2}}(r,\chi)$, it remains to check the following lemma.
+
+\begin{lemma}\label{lem:complement-Ua}
+Let $a\in\PP_{2}$; the complement of the open set $U_{a}$ in $\mathbf{N}^{s}_{\PP_{2}}(r,\chi)$ is an irreducible hypersurface.
+\end{lemma}
+
+\begin{proof}[End of the proof of \Cref{thm:picard}]
+The complement of $U_{a}$ in $\mathbf{N}^{s}_{\PP_{2}}(r,\chi)$ is a hypersurface which can be described as the zero scheme of the bundle $\mathscr{L}(a)$. This entails that the group $\Pic(\mathbf{N}^{s}_{\PP_{2}}(r,\chi))$ is a free abelian group on $2$ generators: one may choose as a basis $(\mathscr{D},\mathscr{L}(a))$. This also entails, taking into account the fact that $\mathbf{N}_{\PP_{2}}(r,\chi)$ is a normal variety, that the inclusion of the open set of smooth points in $\mathbf{N}_{\PP_{2}}(r,\chi)$ induces an isomorphism on the Picard groups. Consequently, the variety $\mathbf{N}_{\PP_{2}}(r,\chi)$ is locally factorial.
+\end{proof}
+
+\begin{proof}[Proof of \Cref{lem:complement-Ua}]
+Let $a$ and $b$ be two points of $\PP_{2}$. Interchanging the roles of $a$ and $b$, we must show that the sheaves $F$ whose support does not contain the point $b$ form an irreducible hypersurface. Consider the isomorphism
+\[
+\Hom^{s}(G,G(1))/\Aut(G) \;\simeq\; U_{a,\mathrm{rig}}
+\]
+If $(G,\varphi)$ is the pair associated with $F$ on $\PP_{1}$, the support of the sheaf $F$ is given by the pairs $(x,\lambda)\in N$ such that $\det(\varphi(x)-\lambda\, id_{G(x)})=0$. Since the bundle $\Homsh(G,G(1))$ is generated by its sections, this defines, for $(x,\lambda)$ fixed, an irreducible hypersurface of $\Hom^{s}(G,G(1))$, invariant under the group of automorphisms of $G$. By passing to the quotient, this defines in the open set $U_{a,\mathrm{rig}}$ an irreducible hypersurface (good quotient property). In the case $\chi\not\equiv 0\bmod r$ this entails that the hypersurface complementary to $U_{b}$ in $U_{a}$ is irreducible.
+
+\origpage{654}
+In the case $\chi\equiv 0\bmod r$, one must further check that this hypersurface does not contain the irreducible hypersurface of non-rigid pairs of $U_{a}$. It suffices to check that if $G=\Oh\oplus\Oh(-1)^{r-2}\oplus\Oh(-2)$ in the open set $\Hom^{s}(G,G(1))$ the morphisms $\varphi$ defining pairs $(G,\varphi)$ which do not belong to $U_{b}$ again define a hypersurface. Here the bundle $\Homsh(G,G(1))$ is no longer generated by its sections; however, the image of the evaluation morphism at $x$
+\[
+\Hom(G,G(1)) \longrightarrow \Homsh(G,G(1))(x)
+\]
+is a hyperplane distinct from the irreducible homogeneous hypersurface of degree $r$ of the linear maps $G(x)\to G(x)(1)$ of zero determinant. Hence this hypersurface cuts the hyperplane image of $\Hom(G,G(1))$ along a closed set of codimension~$2$. Consequently, there exist non-rigid pairs of $U_{a}$ which belong to $U_{b}$. Whence the lemma.
+\end{proof}
+
+\subsection{The universal sheaf}\label{subsec:universal}
+
+\begin{theorem}\label{thm:univ}
+\begin{enumerate}
+\item If $r$ and $\chi$ are coprime there exists on $\mathbf{N}_{\PP_{2}}(r,\chi)\times\PP_{2}$ a universal sheaf.
+\item Let $U$ be an open set of $\mathbf{N}^{s}_{\PP_{2}}(r,\chi)$. If $r$ and $\chi$ are not coprime there does not exist a universal sheaf on $U\times\PP_{2}$.
+\end{enumerate}
+\end{theorem}
+
+The first part of this statement is analogous to the well-known result of Maruyama for torsion-free semi-stable sheaves. The second part is a particular case of a statement of N.~Mestrano and S.~Ramanan \cite{Mes} for the relative Picard group. The proof we give here is different, and inspired by the one given by Dr\'ezet and Narasimhan \cite{Dre3} for vector bundles on curves; it rests on the study of the existence of invertible bundles endowed with an action of $\Gl(H)$ on the open set $\Omega^{ss}$ of the Hilbert scheme. This study involves in an essential way the semi-stable non-stable points.
+
+\medskip
+\noindent\textbf{Existence.} We take up the notations of \Cref{subsec:moduli,subsec:invertible,subsec:irreducibility}. Consider, on the product $\Hilb^{r,\chi}(B)\times\PP_{2}$ the universal sheaf $\mathscr{F}$ and, for $\xi\in K(\PP_{2})$, the invertible sheaf $\mathscr{L}_{\mathscr{F}}(\xi)$ on the Hilbert--Grothendieck scheme $\Hilb^{r,\chi}(B)$. This invertible bundle is endowed with a natural action of the group $\Gl(H)$. If $c\in K_{\mathrm{top}}(\PP_{2})$ is the class determined in the topological Grothendieck group by $(r,\chi)$, the induced action on the centre $\CC^{*}$ is given by
+\[
+\alpha \longmapsto \alpha^{\langle c,\xi\rangle}
+\]
+If $r$ and $\chi$ are coprime, it is possible to choose $\xi$ so that $\langle c,\xi\rangle=1$. Set $L=\mathscr{L}_{\mathscr{F}}(\xi)$, and consider on the open set $\Omega^{ss}\times\PP_{2}$ the inclusion morphism $v=u\otimes id_{L^{-1}}:\mathscr{A}\otimes q^{*}(L^{-1})\to\mathscr{B}\otimes q^{*}(L^{-1})$, where $q$ denotes the first projection $\Omega^{ss}\times\PP_{2}\to\Omega^{ss}$. These bundles are in fact $\PGl(H)$-vector bundles, which descend to $\mathbf{N}_{\PP_{2}}(r,\chi)\times\PP_{2}$ and the cokernel of the morphism obtained by passing to the quotient is a universal family on $\mathbf{N}_{\PP_{2}}(r,\chi)\times\PP_{2}$.
+
+\origpage{655}
+\medskip
+\noindent\textbf{Non-existence.} Suppose that $r$ and $\chi$ are not coprime, and that there exists a universal family of sheaves parametrised by an open set $U$ of $\mathbf{N}^{s}_{\PP_{2}}(r,\chi)$. One obtains a universal family $\mathscr{F}'$ parametrised by the preimage $U'$ of $U$; consider the projection $q:U'\times\PP_{2}\to U'$. The sheaf $\mathscr{L}=\Homsh_{q}(\mathscr{F}',\mathscr{F})$ is, by the semi-continuity theorem, an invertible bundle; moreover, it is endowed with an action of $\Gl(H)$, and the action induced by the centre $\CC^{*}$ is given by $\alpha\mapsto\alpha\, id_{\mathscr{L}}$. But this vector bundle extends to the open set $\Omega^{ss}$ as a $\Gl(H)$-vector bundle. That the underlying bundle extends is of course obvious; to extend the action of $\Gl(H)$ it suffices, the question being local over the moduli space $\mathbf{N}_{\PP_{2}}(r,\chi)$, to check the following lemma.
+
+\begin{lemma}\label{lem:extend-action}
+Let $X$ be a smooth irreducible affine variety on which a reductive connected group $G$ acts, and $f\in\Oh(X)$ a non-zero element invariant under the action of $G$. Let $U$ be the open set defined by $f\neq 0$. Let $L$ be an invertible bundle on $X$. Every linear action of $G$ on the bundle $L|_{U}$ extends to $X$.
+\end{lemma}
+
+\begin{proof}
+Proceeding step by step, one may assume that the element $f$ is irreducible in the coordinate ring $\Oh(X)$. Denote by $\sigma:(g,x)\mapsto gx$ the morphism $G\times X\to X$ which defines the action of $G$. The structure of $G$-vector bundle is then given by a morphism of vector bundles $\varphi:L|_{G\times U}\to\sigma^{*}(L)|_{G\times U}$. One denotes by $\varphi(g,x):L(x)\to L(gx)$ the (invertible) linear map induced on the fibre, for $g\in G$ and $x\in U$. One then has $\varphi(g'g,x)=\varphi(g',gx)\varphi(g,x)$ for $g,g'\in G$ and $x\in U$. One may then write on $G\times U$
+\[
+\varphi(g,x) \;=\; \frac{\psi(g,x)}{f^{n}(x)}
+\]
+where $\psi:L\to\sigma^{*}(L)$ is a morphism of invertible vector bundles on $G\times X$, and where $n$ is a relative integer, which we shall take as small as possible. Let $e$ be the neutral element of $G$. This identity shows, for $g=e$, that one has $\psi(e,x)=f^{n}(x)$, on $U$, and consequently $n\geq 0$. The hypersurface of zeros of $\psi$ is contained in the hypersurface of equation $f=0$. The variety $X$ being smooth and $f$ irreducible, the hypersurface of zeros of $f$ is integral, and $G$ being connected, the same holds for its preimage in $G\times X$. Now, by the definition of an action of $G$ and by the fact that $f$ is invariant, one obtains for $(g,x)\in G\times X$
+\[
+\psi(g'g,x) f^{n}(x) \;=\; \psi(g',gx)\,\psi(g,x)
+\]
+If $n>0$, this entails that $f$ divides $\psi$. But this contradicts the definition of the integer $n$. Consequently, $n=0$ and $\psi$ does not vanish on $G\times X$. Thus, $\psi$ defines an action of $G$ which extends $\varphi$.
+\end{proof}
+
+\begin{proof}[End of the proof of \Cref{thm:univ}]
+Let $\delta=\gcdd(r,\chi)$ and let $F'$ be a stable sheaf of dimension~$1$, of multiplicity $r'=\frac{r}{\delta}$ and Euler--Poincar\'e characteristic $\chi'=\frac{\chi}{\delta}$. Consider the sheaf $F=F'\otimes\CC^{\delta}$, isomorphic to the direct sum of $\delta$ copies of $F'$. This sheaf
+\origpage{656}%
+defines a point of $\mathbf{N}_{\PP_{2}}(r,\chi)$ and, the integer $m$ being chosen as in \Cref{subsec:moduli}, the choice of an isomorphism $\tau:H\simeq H^{0}(F(m))$ defines a point $(F,\tau)$ of $\Omega^{ss}$. The stabiliser of this point in $\Gl(H)$ is isomorphic to the group of automorphisms of $F$. The above direct sum decomposition induces an isomorphism
+\[
+H^{0}(F(m)) \;=\; H^{0}(F'(m)) \otimes \CC^{\delta}
+\]
+The group of automorphisms of $F$ is isomorphic to the linear group $\Gl(\delta,\CC)$, and this group embeds as a subgroup of $\Gl(H)$ via the homomorphism
+\[
+\Aut(F) = \Gl(\delta,\CC) \hookrightarrow \Gl(H^{0}(F(m))) \simeq \Gl(H),
+\]
+defined by $g\mapsto id_{H^{0}(F'(m))}\otimes g$. Consider the invertible bundle $\mathscr{L}$ constructed above, endowed with the action of $\Gl(H)$. Above the above point, one associates with this $\Gl(H)$-invertible bundle a character of $\Aut(F)$, hence of the form $g\mapsto(\det g)^{k}$ for $g\in\Aut(F)=\Gl(\delta,\CC)$ and $k$ an integer. Restricting to the centre $\CC^{*}\subset\Aut(F)$, one obtains the homomorphism
+\[
+\alpha \longmapsto \alpha^{k\delta}.
+\]
+
+But by construction one knows that the action induced by an element $\alpha\in\Gl(H)$ on $\mathscr{L}$ is the homothety of ratio $\alpha$ above the open set $U'$. By density, this is still true on the irreducible open set $\Omega^{ss}$, and should therefore be true at the point defined by $(F,\tau)$. This forces $\delta=1$ and hence $r$ and $\chi$ coprime.
+\end{proof}
+
+\begin{remark}\label{rem:DN}
+\Cref{lem:extend-action} is analogous to \Cref{def:coherent-system} of Dr\'ezet and Narasimhan \cite{Dre3}. However, in our situation, the complement of the invariant open set $U$ has codimension~$1$. This makes it possible to avoid Dr\'ezet and Narasimhan's argument of passage to the projective bundle, which is crucial in our situation. It would also allow one to treat directly the particular cases which have to be studied separately in the proof of Dr\'ezet and Narasimhan.
+\end{remark}
+
+\section{Fourier transform}\label{sec:fourier}
+
+The object of this chapter is to give an illustration of the main theorem: it is a matter of comparing certain moduli spaces of semi-stable sheaves of dimension~$1$ on the projective plane $\PP_{2}$, and the classical moduli spaces of torsion-free semi-stable sheaves on the dual projective space. The correspondence is made through the Fourier transformation.
+
+\subsection{The morphism \texorpdfstring{$\Phi$}{Phi}}\label{subsec:Phi}
+
+Consider the standard diagram
+\[
+\begin{tikzcd}
+D \arrow[r,"p"] \arrow[d,"q"'] & \PP_{2} \\
+\PP_{2}^{*} &
+\end{tikzcd}
+\]
+\origpage{657}%
+where $D$ is the incidence variety of pairs (line, point). If $F$ is a stable sheaf of dimension~$1$, of multiplicity $r$ and characteristic $\chi=0$ on $\PP_{2}$, the sheaf $F'=q_{*}(p^{*}(F(2)))(-1)$ is in general a stable sheaf on $\PP_{2}^{*}$ of rank $r'=r$, of Chern classes $c_{1}'=0$ and $c_{2}'=r$; it will be called the \emph{Fourier transform} of $F$. One then obtains a birational correspondence (cf. Maruyama \cite{Mar}):
+\[
+\Phi : \mathbf{N}_{\PP_{2}}(r,0) \dashrightarrow \mathbf{M}_{\PP_{2}^{*}}(r;0,r)
+\]
+
+The inverse map, defined on an everywhere dense open set, associates with a stable sheaf $F'$ the sheaf $F=R^{1}p_{*}(q^{*}(F'(-1)))(-1)$ carried by the jumping lines of $F'$. In the cases $r\leq 4$, we shall see that one can extend the morphism $\Phi$ to the moduli space itself. Let us begin by checking that if $F$ is semi-stable, the sheaf $q_{*}(p^{*}(F(2)))$ is torsion-free and has the expected Chern classes. This follows from the following more general statement.
+
+\begin{lemma}\label{lem:direct-image}
+If $F$ is a semi-stable sheaf of dimension~$1$, of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi\geq 0$\tnote{the original reads ``de dimension $1$ et multiplicit\'e $\chi\geq 0$''; the multiplicity is $r$ and the hypothesis bears on the Euler--Poincar\'e characteristic, as the proof shows.} on the projective plane $\PP_{2}$, one has $R^{1}q_{*}(p^{*}(F))=0$ and the sheaf $F'=q_{*}(p^{*}(F))$ is a torsion-free sheaf of rank $r'=r$, of Chern class $c_{1}'=\chi-r$ and Euler--Poincar\'e characteristic $\chi'=\chi$.
+\end{lemma}
+
+\begin{proof}
+Let us first show that $R^{1}q_{*}(p^{*}(F))=0$. It suffices to prove that if $l$ is a line of $\PP_{2}$, one has $H^{1}(F|_{l})=0$. But $F|_{l}$ is a quotient of $F$; if it is of dimension~$0$, the result is obvious. If it is of dimension~$1$, it is perhaps not pure, but it has a pure quotient of dimension~$1$: this is a locally free sheaf on $l$ which decomposes as a direct sum of invertible bundles by Grothendieck's theorem. Each of these invertible sheaves is again a quotient of $F$, hence of Euler--Poincar\'e characteristic $>0$ by the stability hypothesis. Consequently $H^{1}(F|_{l})=0$. It follows from the Riemann--Roch formula that the direct image $q_{*}(p^{*}(F))$ has the Chern classes of the element of $K(\PP_{2}^{*})$ defined by $q_{!}(p^{*}(F))$; consequently it has the expected Chern classes.
+
+To see that $q_{*}(p^{*}(F))$ is torsion-free, one chooses a resolution
+\[
+0 \to A \to B \to F \to 0
+\]
+with $B$ a direct sum of invertible sheaves on the projective plane, each of them of degree $<0$. One then has $q_{*}(p^{*}(B))=0$ which leads to the exact sequence
+\[
+0 \to q_{*}(p^{*}(F)) \to R^{1}q_{*}(p^{*}(A)) \to R^{1}q_{*}(p^{*}(B)) \to 0
+\]
+But since $F$ is Cohen--Macaulay, $A$ is locally free, and $p^{*}(A)$ is flat over $\PP_{2}^{*}$. By the semi-continuity theorem, the direct image $R^{1}q_{*}(p^{*}(A))$ is locally free. Then the subsheaf $q_{*}(p^{*}(F))$ is torsion-free.
+\end{proof}
+
+We denote by $Q_{\PP_{2}}$ the canonical quotient bundle on the projective plane $\PP_{2}$.
+
+\begin{lemma}\label{lem:Phi-defined}
+The morphism $\Phi$ is defined on the complement of the divisor $\Theta$ in $\mathbf{N}_{\PP_{2}}(r,0)$ and induces an isomorphism onto the open set of points of $\mathbf{M}_{\PP_{2}^{*}}(r;0,r)$ representing polystable sheaves $F'$ which are trivial on at least one line of $\PP_{2}^{*}$.
+\end{lemma}
+
+\origpage{658}
+\begin{proof}
+This statement is a variant of Maruyama's result, who restricted his study to vector bundles on $\PP_{2}^{*}$. If $F$ is a semi-stable sheaf of multiplicity $r$ and Euler--Poincar\'e characteristic $0$ which has no non-zero section, one has $h^{0}(F(j))=0$ for $j\leq 0$, and one determines the $h^{1}(F(j))$ using the Riemann--Roch formula. From the Beilinson spectral sequence, it follows that such a semi-stable sheaf has a presentation as the cokernel of a morphism
+\begin{equation}
+0 \to \Oh_{\PP_{2}}(-2)^{r} \stackrel{u}{\longrightarrow} \Oh_{\PP_{2}}(-1)^{r}
+\to F \to 0 .
+\end{equation}
+This then leads to an exact sequence on $\PP_{2}^{*}$
+\begin{equation}
+0 \to \Oh_{\PP_{2}^{*}}(-1)^{r} \stackrel{u^{*}}{\longrightarrow}
+\Oh_{\PP_{2}^{*}}^{r} \otimes Q_{\PP_{2}^{*}} \to F' \to 0 .
+\end{equation}
+
+The computation of $u^{*}$ from $u$ is clear: one has to observe that one has a canonical identification $H^{0}(\Oh_{\PP_{2}}(1))\simeq H^{0}(Q_{\PP_{2}^{*}})$. It follows that the jumping lines of $F'$ are those which correspond to the points $x\in\PP_{2}$ such that $\det u(x)\neq 0$. Thus, the curve of jumping lines of $F'$ (and of the sheaves $S$-equivalent to $F'$) is exactly the schematic support of $F$. This implies that for a generic line $l$ of $\PP_{2}^{*}$ one has $F'|_{l}=\Oh_{l}^{r}$. We already knew by \Cref{lem:direct-image} that $F'$ is torsion-free; it follows that $F'$ is $\mu$-semi-stable. But in this particular case, the notions of semi-stability and $\mu$-semi-stability coincide: consequently $F'$ is semi-stable.
+
+Conversely, a semi-stable sheaf $F'$ of rank $r$ and Chern classes $(0,r)$ on the dual projective plane has a presentation of type (2), and if there exists a line on which it is trivial, the sheaf $F=R^{1}p_{*}(q^{*}(F'(-1)))(-1)$ is a sheaf of dimension~$1$ on the projective plane, of multiplicity $r$ and Euler--Poincar\'e characteristic $0$. It has no section: it follows that it is semi-stable. The two constructions are obviously inverse to each other: indeed, such a sheaf $F'$ is always the cokernel of a morphism $u^{*}$ as above, and the inverse of $\Phi$ is constructed by considering the cokernel sheaf of the corresponding morphism $u$. This entails the statement.
+\end{proof}
+
+\begin{corollary}\label{cor:r12}
+If $r=1$ or $2$, the morphism $\Phi$ is an isomorphism
+\[
+\mathbf{N}_{\PP_{2}}(r,0) \longrightarrow \mathbf{M}_{\PP_{2}^{*}}(r;0,r)
+\]
+\end{corollary}
+
+Indeed, in this case, one has $H^{0}(F)=0$ for every semi-stable sheaf $F$ of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi=0$.
+
+\subsection{The cubic case}\label{subsec:cubic}
+
+\begin{theorem}\label{thm:cubic}
+\begin{enumerate}
+\item[(1)] Let $F$ be a semi-stable sheaf of dimension~$1$, of multiplicity $r=3$ and Euler--Poincar\'e characteristic $\chi=0$. Then $F'=q_{*}(p^{*}(F(2)))(-1)$ is a semi-stable sheaf of rank $3$, with Chern classes $c_{1}=0$, $c_{2}=3$.
+\item[(2)] The map $F\mapsto F'$ induces a morphism of varieties
+\[
+\Phi : \mathbf{N}_{\PP_{2}}(3,0) \longrightarrow \mathbf{M}_{\PP_{2}^{*}}(3;0,3)
+\]
+which is the blow-up of the point $a$ representing the homogeneous vector bundle $Q_{1}=S^{2}Q_{\PP_{2}^{*}}(-1)$.
+\end{enumerate}
+\end{theorem}
+
+\origpage{659}%
+The bundle $Q_1$ is also the bundle of trace-free endomorphisms of $Q$; it is a stable sheaf, and consequently the moduli space $\MM_{\Pd}(3;0,3)$ is smooth in a neighbourhood of $a$. Away from $a$, for every semi-stable sheaf $F'$ of rank $3$ with Chern classes $(0,3)$ there exists a line of $\Pd$ on which $F'$ is trivial: by \Cref{lem:Phi-defined} the inverse of $\Phi$, defined only away from $a$, associates to the class of the sheaf $F'$ the point defined by the sheaf
+\[
+F \;=\; R^1p_*\bigl(q^*(F'(-1))\bigr)(-1),
+\]
+whose schematic support is the curve of jumping lines of $F'$.
+
+\begin{proof}
+If $F$ has no nonzero section, the statement follows from \Cref{lem:Phi-defined}. If $F$ has a nonzero section, this section defines a nonzero morphism $\Oo_C \to F$, where $C$ is the cubic which is the schematic support of $F$. Since the sheaf $\Oo_C$ is stable (cf.\ C.\ Sorger \cite{Sor}), this morphism is obviously an isomorphism, and one then has a presentation
+\[
+0 \longrightarrow \Oo_{\PP_2}(-3) \longrightarrow \Oo_{\PP_2}
+\longrightarrow F \longrightarrow 0,
+\]
+which shows that $q_*(p^*(F(2))) = S^2Q_{\Pd}$, a vector bundle which is well known to be semi-stable. This proves assertion (1).
+
+For assertion (2), one may observe that the construction of $F'$ from $F$ can be carried out starting from flat families parametrized by an integral variety: the resulting family of sheaves $F'$, of rank $r$ and Chern classes $(0,r)$, is again flat. The coarse moduli property then defines $\Phi$. The two projective varieties $\NN_{\PP_2}(3,0)$ and $\MM_{\Pd}(3;0,3)$ are irreducible of dimension $10$; the morphism $\Phi$ is surjective and contracts the divisor $\Theta$ to a point $a$. Moreover, as we have already seen, one obtains that $\Phi$ induces an isomorphism from the open subset of $\NN_{\PP_2}(3,0)$ complementary to the divisor $\Theta$ onto the open subset of $\MM_{\Pd}(3;0,3)$ corresponding to the polystable sheaves $F'$ for which there exists a line $l$ on which $F'$ is trivial; this open subset is necessarily the complement of the point $a$.
+\end{proof}
+
+More precisely:
+
+\begin{lemma}\label{lem:Phi-inv-a}
+The inverse image of the point $a$ defined by the bundle $Q_1$ is a smooth hypersurface.
+\end{lemma}
+
+\begin{proof}
+From what we have just seen, the closed set $\Phi^{-1}(a)$ is obviously supported on the divisor $\Theta$. It is therefore the schematic union of a hypersurface and, possibly, of subvarieties immersed in this hypersurface; since $\NN_{\PP_2}(3,0)$ is locally factorial, this hypersurface is given locally by an equation $f=0$. In fact, the points of the divisor $\Theta$ represent the sheaves $\Oo_C$, where $C$ is a cubic: we have already seen that these sheaves are stable, and hence $\NN_{\PP_2}(3,0)$ is smooth in a neighbourhood of the divisor $\Theta$. To see that the hypersurface $\Phi^{-1}(a)$ is smooth, it suffices to check that the tangent linear map $T\Phi$ has rank $1$ along the divisor $\Theta$. Let $(z_1,z_2,z_3)$ be a basis of $H^0(\Oo_{\PP_2}(1))$. Put $A=\Oo_{\PP_2}(-2)^3$ and $B=\Oo_{\PP_2}(-1)^3$. The homogeneous sheaf $Q_1$ is isomorphic to the cokernel of a morphism $u^*$ corresponding to the morphism $u:A\to B$ on $\PP_2$ defined by the matrix
+\[
+\begin{pmatrix}
+0 & -z_3 & z_2\\
+z_3 & 0 & -z_1\\
+-z_2 & z_1 & 0
+\end{pmatrix}
+\]
+\origpage{660}%
+whose image is isomorphic to the cotangent bundle of $\PP_2$.
+\end{proof}
+
+The tangent vector space to $\MM_{\Pd}(3;0,3)$ at the point $a$ is isomorphic to the cokernel of the linear map
+\[
+\End(A)\oplus \End(B) \longrightarrow \Hom(A,B)
+\]
+defined by $(\alpha,\beta)\mapsto \beta u - u\alpha$. We consider, for $v\in\Hom(A,B)$, the family of morphisms $u_t = u + tv : A\to B$.
+
+\begin{lemma}\label{lem:det-prime}
+The linear map
+\[
+v \longmapsto \lim_{t\to 0}\frac1t \det(u_t)
+\]
+induces an isomorphism $T_a\MM_{\Pd}(3;0,3)\simeq H^0(\Oo_{\PP_2}(3))$.
+\end{lemma}
+
+\begin{proof}
+Let us first note that this linear map, also denoted $v\mapsto \det'(u;v)$ in \Cref{subsec:support}, vanishes on the image of $\End(A)\oplus\End(B)$ and hence factors through the tangent space $T_a\MM_{\Pd}(3;0,3)$. The minors of order $2$ of $u$ are the products $z_iz_j$, and consequently the map is surjective. Since these two vector spaces have the same dimension, it is an isomorphism.
+\end{proof}
+
+Let us now complete the proof of \Cref{lem:Phi-inv-a}. Let $C$ be a cubic with equation $w=0$, where $w\in H^0(\Oo_{\PP_2}(3))$ is nonzero. To this equation corresponds a nonzero tangent vector, which comes from a morphism $v$. To the family of morphisms $u_t$ there is associated, for $t\neq 0$ near $0$, a family of sheaves $F_t$ of dimension $1$ defined by
+\[
+F_t = \coker u_t .
+\]
+
+These sheaves have no nonzero section, are of multiplicity $3$ and of Euler--Poincar\'e characteristic $\chi = 0$. Consequently they are semi-stable. The point $F_0 = \lim_{t\to 0}F_t$ then has a meaning in the moduli space $\NN_{\PP_2}(3,0)$; its schematic support is the cubic $C$, and its image under $\Phi$ in the moduli space $\MM_{\Pd}(3;0,3)$ is the point $a$ defined by the bundle $Q_1 = \coker u^*$. Consequently $F_0\simeq \Oo_C$. Moreover, the derivative at $t=0$ of $t\mapsto \Phi(F_t)$ is exactly the image of $v$ in the tangent space. This completes the proof of \Cref{lem:Phi-inv-a}.\qed
+
+\medskip
+\noindent\textbf{End of the proof of \Cref{thm:cubic}.} By the universal property of blow-ups (cf.\ Hartshorne \cite{Har}) one obtains a birational morphism of irreducible, locally factorial projective varieties
+\[
+\Phi^{\vee} : \NN_{\PP_2}(3,0)\longrightarrow \Bl_a\MM_{\Pd}(3;0,3),
+\]
+where the right-hand side is the blow-up of the point $a$. We have seen that the Picard group of the left-hand side is free abelian of rank $2$; by Dr\'ezet's result \cite{Dre1} the same holds for the right-hand side. It follows that the morphism $\Phi^{\vee}$ is an isomorphism (cf.\ \cite{Shaf}, Theorem 2 of Chapter II).\qed
+
+\begin{remark}\label{rem:not-ample}
+This statement implies in particular that the determinant bundle $\mathcal{D}$
+\origpage{661}%
+is not ample, since its restriction to the exceptional divisor, isomorphic to $\PP_9$, is the bundle $\Oo_{\PP_9}(-1)$. It is however relatively ample over the projective space of cubics.
+\end{remark}
+
+\subsection{The quartic case}\label{subsec:quartic}
+
+\begin{theorem}\label{thm:quartic}\
+\begin{enumerate}
+\item[(1)] Let $F$ be a semi-stable sheaf of dimension $1$, of multiplicity $4$ and of Euler--Poincar\'e characteristic $\chi = 0$. Then the sheaf $F' = q_*(p^*(F(2)))(-1)$ is a semi-stable sheaf of rank $4$, with Chern classes $c_1 = 0$, $c_2 = 4$.
+\item[(2)] The map $F\mapsto F'$ induces a morphism
+\[
+\Phi : \NN_{\PP_2}(4,0)\longrightarrow \MM_{\Pd}(4;0,4)
+\]
+which is the blow-up of the subvariety, isomorphic to the projective plane, given by the classes of the sheaves $F'_x = S^2Q_{\Pd}(-1)\otimes I_x$, where $x$ is a point of $\Pd$ and $I_x$ the ideal defined by the point $x$.
+\end{enumerate}
+\end{theorem}
+
+\begin{lemma}\label{lem:h0-vanish}
+Let $F$ be a semi-stable sheaf of multiplicity $r$ and slope $\mu < \tfrac12(3-r)$ on $\PP_2$. Then $h^0(F)=0$.
+\end{lemma}
+
+\begin{proof}
+If $h^0(F)\neq 0$, a nonzero section defines a nonzero morphism $f:\Oo_C\to F$; it is known \cite{Sor} that the structure sheaf $\Oo_C$ is stable. Consequently $\mu(\Oo_C)\le \mu$; moreover, the genus formula reads $\mu(\Oo_C)=\tfrac12(3-r)$, which yields the statement.
+\end{proof}
+
+\begin{lemma}\label{lem:quartic-ext}
+Let $F$ be a stable sheaf of multiplicity $4$ and Euler--Poincar\'e characteristic $\chi = 0$ on $\PP_2$. If $h^0(F)\neq 0$, there exist a quartic $C$ and an exact sequence
+\[
+0 \longrightarrow \Oo_C \longrightarrow F \longrightarrow T \longrightarrow 0
+\]
+where $T$ is a coherent module isomorphic to the structure sheaf of a finite subscheme of length $2$ contained in $C$. Moreover, the line containing the schematic support of $T$ is not contained in $C$.
+\end{lemma}
+
+The schematic support is defined by the Fitting ideal; for the sheaf $T$ appearing in the statement, this is the same thing as the annihilator.
+
+\begin{proof}
+A nonzero section of $F$ defines a nonzero morphism $f:\Oo_C\to F$. If the image $I$ of $f$ were of multiplicity $<4$, one would have, using Sorger's result,
+\[
+-\tfrac12 \;<\; \mu_{\min}(I)\;<\;0 .
+\]
+Consequently the sheaf $\Oo_C$ would have a semi-stable quotient $J$ of slope $-\tfrac13$, hence of multiplicity $3$ and Euler--Poincar\'e characteristic $-1$. But then the kernel $N$ of the morphism $\Oo_C\to J$ would be of
+\origpage{662}%
+multiplicity $1$ and Euler--Poincar\'e characteristic $\chi = -1$. Since the sheaves $N$ and $J$ have no nonzero section by \Cref{lem:h0-vanish}, the same would have to hold for $\Oo_C$, which is absurd. Consequently $I$ is of multiplicity $4$ and, since $F$ is Cohen--Macaulay, the morphism $f$ is injective. The cokernel $T$ of $f$ then has finite support and $\chi(T)=2$. Moreover, $F$, and hence $T$, is annihilated by the equation of $C$: thus $T$ is an $\Oo_C$-module.
+
+To see that $T$ is isomorphic to the structure sheaf of a subscheme of length $2$, it suffices to check the same thing for the dual $T^{\vee}=\Ext^2(T,\omega_{\PP_2})$. Let us first remark that one has an involution $F\mapsto F^{\vee}:=\Ext^1(F,\omega_{\PP_2})$ which respects the notion of stability (cf.\ \cite{Sor}); moreover $\Ext^2(F,\omega_{\PP_2})=0$ and by duality one obtains an exact sequence
+\[
+0 \longrightarrow F^{\vee}\hookrightarrow \Oo_C(1)\longrightarrow T^{\vee}
+\longrightarrow 0,
+\]
+from which the result follows. Let us check that the line $l$ containing the schematic support of $T$ is not contained in $C$. If $l$ were contained in $C$, one would have, denoting by $C'$ the residual cubic, a commutative diagram
+\[
+\begin{array}{ccccccccc}
+&&&& 0 &&&&\\
+&&&& \downarrow &&&&\\
+&&&& F^{\vee} &&&&\\
+&&&& \downarrow &&&&\\
+0 &\to& \Oo_{C'} &\to& \Oo_C(1) &\to& \Oo_l(1) &\to& 0\\
+&&&& \downarrow && \downarrow &&\\
+&&&& T^{\vee} &=& T^{\vee} &&\\
+&&&& \downarrow &&&&\\
+&&&& 0 &&&&
+\end{array}
+\]
+It follows that the sheaf $\Oo_{C'}$ would be a subsheaf of $F^{\vee}$, which contradicts stability.
+\end{proof}
+
+\medskip
+\noindent\textbf{Proof of \Cref{thm:quartic}.} By \Cref{lem:Phi-defined}, in order to verify assertion (1) we may restrict ourselves to the study of sheaves $F$ of multiplicity $4$ and Euler--Poincar\'e characteristic $\chi=0$ which have a nonzero section. If $F$ is not stable, it is an extension of sheaves $G$ of multiplicity $<4$ and of zero Euler--Poincar\'e characteristic: by \Cref{lem:direct-image} they satisfy the condition $R^1q_*(p^*(G(2)))=0$, and $q_*(p^*(G(2)))$ is semi-stable. It follows that $F' = q_*(p^*(F(2)))(-1)$ is an extension of semi-stable sheaves with Chern class $c_1=0$ and Euler--Poincar\'e characteristic $\chi=0$, and consequently it is again semi-stable. We are thus reduced to the case where $F$ is stable. By \Cref{lem:quartic-ext}, such a sheaf is an extension
+\begin{equation}
+0 \longrightarrow \Oo_C \longrightarrow F \longrightarrow T \longrightarrow 0
+\end{equation}
+where $C$ is a quartic and $T$ a coherent $\Oo_C$-module of finite support and length $2$. One deduces that one has an embedding
+\[
+S^2Q_{\Pd} = q_*(p^*(\Oo_{\PP_2}(2)))\hookrightarrow q_*(p^*(\Oo_C(2)))
+\hookrightarrow q_*(p^*(F(2))).
+\]
+
+\origpage{663}%
+We shall show that the cokernel $\mathscr{X}$ of the composed morphism is a torsion-free sheaf of rank $1$ on $\Pd$, of course with Chern class $c_1=1$ and Euler--Poincar\'e characteristic $\chi=2$. We shall see (cf.\ \Cref{lem:Xcal}) that this sheaf is in fact isomorphic to $I_l(1)$, where $I_l$ is the ideal of the point $l\in\Pd$ corresponding to the line containing the schematic support of $T$. One then has an extension $0\to Q_1\to F'\to \mathscr{X}(-1)\to 0$, whence it follows that $F'$ is semi-stable.
+
+The involution $F\mapsto F^{\vee}:=\Ext^1(F,\omega_{\PP_2})$ respects semi-stability and the schematic support; from the exact sequence (3) applied to $F^{\vee}$ one deduces by duality an embedding $F\hookrightarrow \Oo_C(1)$ and consequently an inclusion
+\[
+q_*(p^*(F(2)))\hookrightarrow q_*(p^*(\Oo_C(3))) = S^3Q_{\Pd}.
+\]
+
+To verify our assertion, it suffices to check that the cokernel $\mathcal{D}$ of the composed morphism $S^2Q_{\Pd}\to S^3Q_{\Pd}$ is torsion-free. This morphism is obtained by multiplication by the section $t\in H^0(Q_{\Pd})\simeq H^0(\Oo_{\PP_2}(1))$ corresponding to the composed morphism $\Oo_C\hookrightarrow F\hookrightarrow \Oo_C(1)$: it is the equation of the line $l$ containing the schematic support of $T$. The cokernel $\mathcal{D}$ is then isomorphic to $q_*(p^*(\Oo_l)(3))$. The fact that it is torsion-free is therefore a particular case of the following statement:
+
+\begin{lemma}\label{lem:Dk}
+For $k\ge 0$, the sheaf $\mathcal{D}_k = q_*(p^*(\Oo_l)(k))$ is isomorphic to $I_l^k(k)$, where $I_l$ is the ideal of the point $l$ of $\Pd$.
+\end{lemma}
+
+\begin{proof}
+One has a resolution
+\[
+0 \longrightarrow S^{k-1}Q_{\Pd}\;\xrightarrow{\;\nu\;}\; S^kQ_{\Pd}
+\longrightarrow \mathcal{D}_k\longrightarrow 0
+\]
+where the morphism $\nu$ is induced by multiplication by $t\in V^{*}=H^0(Q_{\Pd})$. Suppose coordinates $(x,y,t)$ chosen in $V^{*}=H^0(\Oo_{\PP_2}(1))$ so that the equation of $l$ is $t=0$; in a neighbourhood of the point $l\in\Pd$, a point with coordinates $(\xi,\eta)$ corresponds to the line of $\PP_2$ with equation $t=\xi x+\eta y$. One has a trivialization of the bundle $Q_{\Pd}$ in a neighbourhood of $l$ given by the sections $(x,y)$, from which one deduces a trivialization of $S^kQ_{\Pd}$, given by the sections $(x^k, x^{k-1}y,\dots,y^k)$; one deduces that the morphism $\nu$ is given by the matrix
+\[
+\nu=
+\begin{pmatrix}
+\xi & 0 & 0 & \cdots & 0\\
+\eta & \xi & 0 & \cdots & 0\\
+0 & \eta & \xi & \cdots & 0\\
+\vdots & \vdots & \vdots & & \vdots\\
+0 & 0 & 0 & \cdots & \xi\\
+0 & 0 & 0 & \cdots & \eta
+\end{pmatrix}
+\]
+so that in a neighbourhood of the point $l$ the cokernel is isomorphic to the ideal generated by the functions $\xi^i\eta^{k-i}$, that is, the ideal $I_l^k$. Consequently $\mathcal{D}_k = I_l^k(k)$. This proves the lemma.
+\end{proof}
+
+\origpage{664}%
+To find the image, under the morphism $\Phi$, of the point defined by $F$, we need to identify the sheaf $\mathscr{X}$ introduced in the proof above. Let us begin by describing, on the dual projective plane $\Pd$, the coherent module $T' = q_*(p^*(T))$.
+
+\begin{lemma}\label{lem:Tprime}\
+\begin{enumerate}
+\item[a)] The sheaf $T'$ is a sheaf of dimension $1$, semi-stable, of multiplicity $2$, whose Euler--Poincar\'e characteristic is $2$.
+\item[b)] The schematic support of $T'$ is a conic $C'$ singular at the point $l\in\Pd$ corresponding to the line of the plane $\PP_2$ containing the schematic support of $T$.
+\item[c)] One has an isomorphism
+\[
+T' \simeq I_l\,\Oo_{C'}(1)
+\]
+where $I_l$ is the ideal of the point $l$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+One uses the presentation, in $\PP_2$,
+\[
+0 \longrightarrow \Oo_l(-1)\longrightarrow \Oo_l(1)\longrightarrow T
+\longrightarrow 0
+\]
+which yields, by applying the functor $q_*(p^*(-))$, the exact sequence (cf.\ \Cref{lem:Dk})
+\begin{equation}
+0 \longrightarrow \Oo_{\Pd}(-1)\;\xrightarrow{\;\gamma\;}\; I_l(1)
+\longrightarrow T'\longrightarrow 0 .
+\end{equation}
+
+It follows that the coherent module $T'$ is of dimension $1$, Cohen--Macaulay, of multiplicity $2$ and Euler--Poincar\'e characteristic $2$. Its schematic support is the conic defined away from $l$ by the morphism $\gamma$. One evidently has an exact sequence $0\to T_1\to T\to T_2\to 0$ where the $T_i$ are sheaves of length $1$, supported at points $a_i$ of $\PP_2$ (possibly coincident). By direct image, one obtains the exact sequence
+\[
+0 \longrightarrow \Oo_{a_1}\longrightarrow T' \longrightarrow \Oo_{a_2}
+\longrightarrow 0
+\]
+where the sheaves $\Oo_{a_i}$ are the structure sheaves of the lines of $\Pd$ corresponding to $a_i$. This proves that $T'$ is semi-stable. In $\Pd$, each of the two lines $a_i$ contains the point $l$ and is contained in $C'$; it follows that $l$ belongs to the conic $C'$ and that it is a singular point of $C'$. Assertion c) follows trivially from the exact sequence (4).
+\end{proof}
+
+\begin{lemma}\label{lem:Xcal}
+The sheaf $\mathscr{X}$ considered above is isomorphic to $I_l(1)$.
+\end{lemma}
+
+\begin{proof}
+By the construction of $\mathscr{X}$, one has an exact sequence
+\[
+0 \longrightarrow \Oo_{\Pd}(-1)\longrightarrow \mathscr{X}\longrightarrow T'
+\longrightarrow 0,
+\]
+and the sheaf $\mathscr{X}$ is a coherent subsheaf of $\Oo_{\Pd}(1)$. The composed morphism $\Oo_{\Pd}(-1)\to\Oo_{\Pd}(1)$ is the one giving the equation of the singular conic $C'$, the schematic support of $T'$. It follows that the dimension of the fibre $\mathscr{X}(l)$ of $\mathscr{X}$ at the point $l$ is equal to the dimension of the fibre of $T'$ at that point. This dimension is $2$ by the description of $T'$ given in \Cref{lem:Tprime}. Hence $l$ is a singular point of $\mathscr{X}$; since $c_2(\mathscr{X})=1$ it is the only singular point, and consequently $\mathscr{X}\simeq I_l(1)$. This completes the proof of \Cref{lem:Xcal}.
+\end{proof}
+
+\origpage{665}%
+\subsubsection*{The divisor $\Theta$ of $\NN_{\PP_2}(4,0)$}\tnote{the original heading prints the arguments in the order $(0,4)$.}
+
+\begin{lemma}\label{lem:Theta-irred}
+The divisor $\Theta$ is irreducible.
+\end{lemma}
+
+\begin{proof}
+It is the image of the variety $\mathscr{C}$ of pairs $(C,D)$, where $C$ is a quartic of $\PP_2$ and $D$ a subscheme of length $2$ of $C$, under the morphism $\psi:\mathscr{C}\to \NN_{\PP_2}(0,4)$ which associates to $(C,D)$ the point of $\NN_{\PP_2}(4,0)$ defined by the kernel $F$ of the surjective morphism $\Oo_C(1)\to T$, with $T=\Oo_D(1)$.
+
+Indeed, let us first observe that this kernel is always semi-stable, which gives a meaning to the morphism $\psi$: for if it were not semi-stable, it would have a maximal subsheaf $F_1$ of slope $0<\mu_1<\tfrac12$. Thus $F_1$ would be of multiplicity $3$ and characteristic $\chi=1$. The quotient $F_2=F/F_1$ would necessarily be isomorphic to $\Oo_l(-2)$, where $l$ is a line. One would then have a morphism of extensions
+\[
+\begin{array}{ccccccccc}
+0 &\to& F &\to& \Oo_C(1) &\to& T &\to& 0\\
+&& \downarrow && \downarrow && \| &&\\
+0 &\to& F_2 &\to& G &\to& T &\to& 0
+\end{array}
+\]
+where the sheaf $G$ is a quotient of $\Oo_C(1)$ of multiplicity $1$ and Euler--Poincar\'e characteristic $\chi=1$. It is necessarily Cohen--Macaulay, hence isomorphic to $\Oo_l$. But this is absurd, since $\Hom(\Oo_C(1),\Oo_l)=0$.
+
+It is clear that every point of the divisor $\Theta$ is the image under $\psi$ of a pair $(C,D)$: this follows from \Cref{lem:quartic-ext} if it is a stable point; if it is not stable, it is the class of a sheaf $\Oo_{C'}\oplus \Oo_l(-1)$, with $C'$ a cubic and $l$ a line of $\PP_2$. But then one chooses $C=C'\cup l$ and $D\subset l$ arbitrarily. This proves the lemma.
+\end{proof}
+
+\begin{corollary}\label{cor:Theta-l}
+The fibre $\Theta_l := \Phi^{-1}(l)$ is irreducible of dimension $14$.
+\end{corollary}
+
+\begin{proof}
+The projective group $PGl(3)$ acts naturally on the moduli spaces $\NN_{\PP_2}(4,0)$ and $\MM_{\Pd}(4;0,4)$, and the morphism $\Phi$ is equivariant. The plane $\Pd$ is invariant, and this group acts homogeneously on this plane. The total space being irreducible of dimension $16$, the fibres are irreducible of the same dimension $14$. Since $\Phi$ is a birational morphism between normal projective varieties, the irreducibility of $\Theta_l$ also follows from Zariski's ``Main theorem''.
+\end{proof}
+
+\subsubsection*{The normal cone of $\Pd$ in $\MM_{\Pd}(4;0,4)$}
+
+Let us first give a local analytic description of $\MM := \MM_{\Pd}(4;0,4)$ in a neighbourhood of a point $a_l$ of $\Pd$. Such a point is represented by the semi-stable sheaf $F' = Q_1\oplus I_l$. The group of automorphisms of $F'$, isomorphic to $\CC^{*}\times\CC^{*}$, acts naturally on the vector space $\Ext^1(F',F')$, and from the analytic point of view one has a local isomorphism
+\[
+(\MM, a_l)\;\simeq\;\bigl(\Ext^1(F',F')/\Aut(F'),\,0\bigr)
+\]
+where the quotient appearing on the right-hand side is the Mumford quotient. The vector space $\Ext^1(F',F')$ decomposes as a direct sum of $4$ factors which we write in matrix form
+\[
+\begin{pmatrix}
+\Ext^1(Q_1,Q_1) & \Ext^1(I_l,Q_1)\\
+\Ext^1(Q_1,I_l) & \Ext^1(I_l,I_l)
+\end{pmatrix}
+\]
+
+\origpage{666}%
+The group $\Aut(F')$ acts trivially on the first and fourth factors; for $(\lambda,\mu)\in\Aut(F')$, it acts by multiplication by $\mu/\lambda$ on the factor $\Ext^1(I_l,Q_1)$ and by multiplication by $\lambda/\mu$ on the factor $\Ext^1(Q_1,I_l)$. This quotient is therefore isomorphic to $\Ext^1(Q_1,Q_1)\times \Ext^1(I_l,I_l)\times R$, where $R$ denotes the subvariety of $\Ext^1(I_l,Q_1)\otimes \Ext^1(Q_1,I_l)$ of decomposable tensors.
+
+It follows that the normal cone $N_l$ of $\Pd$ in $\MM$ is isomorphic to the product $\Ext^1(Q_1,Q_1)\times R$.
+
+\medskip
+\noindent\textbf{End of the proof of \Cref{thm:quartic}.} It is inspired by that of \Cref{thm:cubic}; however it is more delicate, owing to the fact that the plane $\Pd$ of $\MM$ is contained in the singular locus. We have seen that the divisor $\Theta$ is contracted to the projective plane $\Pd$, and taking Lemma 4.2 into account we obtain that the inverse image of $\Pd$ under $\Phi$ is, at least set-theoretically, the divisor $\Theta$. This inverse image is therefore again the union of a hypersurface, given locally by an equation since $\NN_{\PP_2}(4,0)$ is locally factorial, and possibly of immersed subvarieties. To see that $\Phi^{-1}(\Pd)$ is a hypersurface, it suffices to show that the tangent linear map $T\Phi$, obviously of rank $\ge 2$ at every point of $\Theta$ by the description given in the proof of \Cref{lem:Theta-irred}, is in fact of rank $3$. We place ourselves above the point $a_l$ corresponding to the polystable sheaf $F'=Q_1\oplus I_l$. We may assume that $l$ is the line with equation $z_1=0$. Put $A=\Oo^4_{\PP_2}(-2)$ and $B=\Oo^4_{\PP_2}(-1)$. The sheaf $F'$ has a presentation of type (2), to which corresponds a morphism $u:A\to B$ on $\PP_2$ given by the matrix
+\[
+u=
+\begin{pmatrix}
+0 & -z_3 & z_2 & 0\\
+z_3 & 0 & -z_1 & 0\\
+-z_2 & z_1 & 0 & 0\\
+0 & 0 & 0 & z_1
+\end{pmatrix}
+\]
+
+Consider an element $\nu = (r, s_1\otimes s_2)$ of the normal cone $N_l$ of $\Pd$ in $\MM$. Such an element is represented by the element of $\Ext^1(F',F')$ with matrix
+\[
+\begin{pmatrix} r & s_1\\ s_2 & 0\end{pmatrix}.
+\]
+
+The vector space $\Ext^1(F',F')$ can be represented by a vector subspace of $\Hom(A,B)$ transverse to the orbit of the point $u$ under the group $\Aut(A)\times\Aut(B)$; in the direct sums $A = \Oo^3_{\PP_2}(-2)\oplus \Oo_{\PP_2}(-2)$ and $B = \Oo^3_{\PP_2}(-1)\oplus \Oo_{\PP_2}(-1)$ one obtains a representative $v$ whose matrix will again be denoted
+\[
+v=\begin{pmatrix} r & s_1\\ s_2 & 0\end{pmatrix}
+\]
+
+\origpage{667}%
+Here the matrices $r$, $s_1$ and $s_2$ have coefficients in $H^0(\Oo_{\PP_2}(1))$. Consider, for $t\in\CC$, the morphism $u_t:A\to B$ with matrix
+\[
+u_t=\begin{pmatrix} u_{11}+tr & s_1\\ ts_2 & z_1\end{pmatrix}
+\]
+where $u_{11}:\Oo^3_{\PP_2}(-2)\to \Oo^3_{\PP_2}(-1)$ is given by the matrix
+\[
+\begin{pmatrix}
+0 & -z_3 & z_2\\
+z_3 & 0 & -z_1\\
+-z_2 & z_1 & 0
+\end{pmatrix}
+\]
+
+\begin{lemma}\label{lem:w-poly}\
+\begin{enumerate}
+\item[(i)] The polynomial $w\in H^0(\Oo_{\PP_2}(4))$ defined by
+\[
+w = \lim_{t\to 0}\frac1t \det(u_t)
+\]
+depends only on $\nu$.
+\item[(ii)] The map $\nu\mapsto w: N_l\to H^0(\Oo_{\PP_2}(4))$ is surjective, and is induced by a linear map whose kernel meets $N_l$ only at the point $\{0\}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+s_1 = \begin{pmatrix} a_1\\ b_1\\ c_1\end{pmatrix};\qquad
+s_2 = \begin{pmatrix} a_2 & b_2 & c_2\end{pmatrix}.
+\]
+The computation shows that
+\[
+w = z_1\det{}'(u_{11};r) - (a_1z_1 + b_1z_2 + c_1z_3)(a_2z_1+b_2z_2+c_2z_3).
+\]
+One sees therefore that this polynomial depends only on $\nu = (r, s_1\otimes s_2)$ and that the map $\nu\mapsto w$ is induced by a linear map. By \Cref{lem:det-prime} every polynomial of degree $3$ is of the form $\det'(u_{11};r)$; it follows that every polynomial of degree $4$ is of the above form. If this polynomial is zero, then $z_1$ divides either $s_1$ or $s_2$. But this means that the class of $s_1$ (or the class of $s_2$) in $\Ext^1(I_l,Q_1)$ (resp.\ $\Ext^1(Q_1,I_l)$) is zero. Now by the choice of our representative $v$ this implies that $s_1=0$ or $s_2=0$. Then $\det'(u_{11};r)=0$; by \Cref{lem:det-prime} this forces $r=0$ and consequently $\nu=0$. This proves \Cref{lem:w-poly}.
+\end{proof}
+
+We now suppose $\nu\neq 0$. Then, for $t$ near $0$ and nonzero, the morphism $u_t:A\to B$ constructed above is generically of rank $4$, and its cokernel $F_t=\coker u_t$ is a sheaf of dimension $1$, of multiplicity $4$ and of Euler--Poincar\'e characteristic $\chi=0$; it has no nonzero section, and consequently it is semi-stable. It therefore defines a point in the moduli space $\NN_{\PP_2}(4,0)$. Consider the point
+\[
+F_0 = \lim_{t\to 0}F_t .
+\]
+\origpage{668}%
+The image $\Phi(F_0)$ is the point defined by the cokernel of the matrix $u_0^{*}$ on $\Pd$ associated with the matrix
+\[
+u_0 = \begin{pmatrix} u_{11} & s_1\\ 0 & z_1\end{pmatrix}
+\]
+and consequently the associated sheaf on $\Pd$ is an extension of $I_l$ by $Q_1$. Hence $\Phi(F_0)=a_l$: thus $F_0$ is a point of the divisor $\Theta$. Moreover, the derivative at the point $t=0$ of the arc $t\mapsto \Phi(F_t)$ is obviously the vector $\nu\in N_l$, nonzero by hypothesis. We have thus shown that the tangent linear map $T\Phi$ has rank $3$ at the point $F_0$. It remains to show that every point of the divisor $\Theta$ is of the form $F_0$.
+
+\begin{lemma}\label{lem:F0}
+The point $F_0$ does not depend on the representative $v$ chosen in $\Ext^1(F',F')$, but only on $\nu$, and the map $N_l\smallsetminus\{0\}\to \Theta$ defined by $\nu\mapsto F_0$ is surjective.
+\end{lemma}
+
+\begin{proof}
+Consider the canonical morphism
+\[
+\Theta_l \;\xrightarrow{\;\sigma\;}\; |\Oo_{\PP_2}(4)| .
+\]
+This morphism is generically finite of degree $6$. The point $F_0$ depends regularly on
+\[
+v = \begin{pmatrix} r & s_1\\ s_2 & 0\end{pmatrix}
+\]
+and, for the natural action of $\Aut(F')$ on $\Ext^1(F',F')$, the composed morphism $v\mapsto w = \sigma(F_0)$ is invariant. It follows that $F_0$ itself does not depend on $v$, but only on $\nu$. In fact, it depends only on the class of $\nu$ in the projective variety $\PP(N_l)$. One then has a commutative diagram
+\[
+\begin{array}{ccc}
+\PP(N_l) & \longrightarrow & \Theta_l\\
+& \searrow & \downarrow{\scriptstyle\sigma}\\
+& & |\Oo_{\PP_2}(4)|
+\end{array}
+\]
+in which the oblique morphism is surjective by \Cref{lem:w-poly}. Thus the image of the horizontal arrow is a closed set of dimension $14$. Since $\Theta_l$ is irreducible by \Cref{cor:Theta-l}, this arrow is surjective. This completes the proof of the lemma.
+\end{proof}
+
+The proof ends as in the case $r=3$: by the universal property of blow-ups (cf.\ Hartshorne \cite{Har}) one obtains a birational morphism of irreducible, locally factorial projective varieties
+\[
+\Phi^{\vee} : \NN_{\PP_2}(4,0)\longrightarrow \Bl_{\Pd}\MM_{\Pd}(4;0,4)
+\]
+where the right-hand side is the blow-up of the plane $\Pd$. We have seen that the Picard group of the left-hand side is a free abelian group of rank $2$; by Dr\'ezet's result \cite{Dre1} the same holds for the right-hand side. Theorem 2 of Chapter II of \cite{Shaf} remains true for locally factorial varieties: it follows that the morphism $\Phi^{\vee}$ is an isomorphism.\qed
+
+\origpage{669}%
+\subsection{Sheaves of multiplicity \texorpdfstring{$r>4$}{r>4}}\label{subsec:rgt4}
+
+If $F$ is a sheaf of dimension $1$ and multiplicity $r>4$, with Euler--Poincar\'e characteristic $\chi=0$, the sheaf $F' = q_*(p^*(F(2)))(-1)$ is torsion-free of rank $r$ and with Chern classes $(0,r)$ by \Cref{lem:direct-image}, but it is not necessarily stable:
+
+\begin{proposition}\label{prop:unstable}
+For every integer $r>4$ there exists a stable sheaf $F$ of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi=0$ on the projective plane such that $G=q_*(p^*(F(2)))$ is unstable.
+\end{proposition}
+
+\begin{proof}
+Suppose first that $r$ is odd, and consider a plane curve $C$ of degree $r$. Put $r=2k+3$ and consider the sheaf $F=\Oo_C(k)$. By C.\ Sorger's result \cite{Sor}, this is obviously a stable sheaf of characteristic $\chi=0$. Moreover the exact sequence
+\[
+0\longrightarrow \Oo_{\PP_2}(-(k+1))\longrightarrow \Oo_{\PP_2}(k+2)
+\longrightarrow F(2)\longrightarrow 0
+\]
+leads to the exact sequence
+\[
+0\longrightarrow S^{k+2}Q_{\Pd}\longrightarrow G\longrightarrow
+S^{k-1}Q^{*}_{\Pd}\longrightarrow 0
+\]
+which implies that the sheaf $G=q_*(p^*(F(2)))$ is locally free of rank $r$, of slope $\mu=1$, and that $G$ has a locally free quotient of slope $-\frac{k-1}{2}<1$, hence is not semi-stable.
+
+Now suppose that $r$ is even; put $r=2k+4$. Consider a smooth plane curve $C$ of degree $r$ and $k+2$ distinct smooth points on $C$. Let $J$ be the ideal of $C$ defined by these points and $F = \Ext^1(J,\omega_{\PP_2})(-(k+1))$. Since $C$ is irreducible, $F$ is a stable sheaf, of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi=0$, and one has an exact sequence
+\[
+0\longrightarrow \Oo_C(k)\longrightarrow F\longrightarrow T^{\vee}
+\longrightarrow 0 .
+\]
+It follows that $G=q_*(p^*(F(2)))$ is a torsion-free sheaf of rank $r$ with Chern class $c_1=r$, hence of slope $1$. It contains as a subsheaf $S^{k+2}Q_{\Pd}$, which is of slope $\frac k2+1$, and consequently it is an unstable sheaf for $r>4$.
+\end{proof}
+
+Let $F$ be a semi-stable sheaf of dimension $1$, of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi$. One may of course think of studying whether the direct images $G_i = q_*(p^*(F(i)))$, for $i>0$ a suitable integer, are still semi-stable. We already know by \Cref{lem:direct-image} that these sheaves are torsion-free, of rank $r$, with Chern class $c_1=(i-1)r$ and Euler--Poincar\'e characteristic $\chi=ir$. One has for instance:
+
+\begin{proposition}\label{prop:Gk}
+We consider, for $F$ generic, the sheaf $G_k = q_*(p^*(F(k)))$.
+\begin{enumerate}
+\item[(1)] If $r=2k-1$, the sheaf $G_k$ is stable.
+\item[(2)] If $r=2k$, the sheaf $G_k$ is semi-stable.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+It suffices to study the sheaves constructed in \Cref{prop:unstable}. If $r=2k-1$ the direct image $G_k = q_*(p^*(F(k)))$ of the sheaf $\Oo_C(k-2)$, where $C$ is a curve of degree $r$, is isomorphic to $S^{r-1}Q_{\Pd}$ and consequently
+\origpage{670}%
+stable. In the case $r=2k$, one considers a smooth curve and the ideal $J\subset\Oo_C$ of $k$ smooth collinear points on $C$. Then for the sheaf $F=J(k-1)$ the direct image $G_k = q_*(p^*(F(k)))$ is again semi-stable: one has inclusions
+\[
+\Oo_C(k-2)\hookrightarrow F\hookrightarrow \Oo_C(k-1),
+\]
+where the inclusion $\Oo_C(k-2)\hookrightarrow \Oo_C(k-1)$ is induced by the equation of the line containing the marked points on $C$. The proof ends exactly as that of assertion (1) of \Cref{thm:quartic}.
+\end{proof}
+
+One then obtains, for $i=\left[\frac{r+1}{2}\right]$, a rational map
+\[
+\Phi_i : \NN_{\Pd}(r,0)\dashrightarrow \MM_{r,i}
+\]
+where $\MM_{r,i}$ denotes the moduli space associated with semi-stable sheaves of rank $r$, Chern class $c_1=(i-1)r$ and Euler--Poincar\'e characteristic $\chi=ir$ on the dual projective plane.
+
+\begin{conjecture}\label{conj:Phi-i}
+For $i=\left[\frac{r+1}{2}\right]$ the rational map $\Phi_i$ extends to the global moduli space $\NN_{\Pd}(r,0)$.
+\end{conjecture}
+
+The moduli space $\MM_{r,i}$ has dimension $(i^2-i-1)r^2+1$, hence greater than $r^2+1$ as soon as $i>2$. However, the rational map $\Phi_i$ is not an embedding, as the proof of the last proposition shows.
+
+\section{Questions of rationality}\label{sec:rationality}
+
+We have already identified, for $r=1$ or $2$, the moduli spaces $\NN_{\PP_2}(r,\chi)$: they are isomorphic, for $r=1$, to the projective plane, and for $r=2$ to the projective space of conics. We propose to study the rationality of the moduli spaces $\NN_{\PP_2}(r,\chi)$.
+
+\begin{theorem}\label{thm:rational}
+Suppose $r\ge 3$.
+\begin{enumerate}
+\item[(1)] For $r=3$, the moduli spaces $\NN_{\PP_2}(r,\chi)$ are isomorphic to the universal cubic in the projective plane if $\chi \equiv \pm 1 \bmod 3$, and rational if $\chi\equiv 0\bmod 3$.
+\item[(2)] The moduli spaces $\NN_{\PP_2}(r,\chi)$ are rational if $\chi\equiv\pm 1\bmod r$ or $\chi\equiv \pm 2 \bmod r$.\tnote{The original prints ``et''; the Introduction states the same result with ``ou''.}
+\item[(3)] The moduli space $\NN_{\PP_2}(r,\chi)$ is rational if $r\le 4$.
+\end{enumerate}
+\end{theorem}
+
+The universal curve $\mathfrak{U}(r)$ of degree $r$ in $\PP_2$ is obviously rational, since it is a locally trivial bundle in projective spaces over the projective plane. The rationality of $\NN_{\PP_2}(r,0)$ for $r=3$ or $r=4$ follows from a statement of Formanek \cite{For}: indeed, we have seen that $\NN_{\PP_2}(r,0)$ contains an open set isomorphic to the open set of quasi-rigid stable Higgs bundles (cf.\ \Cref{sec:plane}) on $(\PP_1,\Oo_{\PP_1}(1))$. This open set is isomorphic to the Mumford quotient $\Hom^s(G,G(1))/\Aut(G)$, where $G$ denotes the trivial bundle of rank $r$ on $\PP_1$. The vector space of morphisms $\Hom(G,G(1))$ is also the vector space of pairs of square matrices of order $r$, and the group
+\origpage{671}%
+$\Aut(G)\simeq Gl(r,\CC)$ acts on this space by conjugation on each of the factors. Formanek's result asserts that this quotient is a rational variety. It remains to verify assertions (1) and (2).
+
+\medskip
+\noindent\emph{Proof of \Cref{thm:rational}.} One has an isomorphism
+\[
+\NN_{\PP_2}(r,\chi)\simeq \NN_{\PP_2}(r,\chi+ir).
+\]
+Using duality in addition, we are reduced to studying the cases $\chi=1$ and $\chi=2$.
+
+\subsubsection*{1. The case $r=3$, $\chi=1$}
+
+Let $F$ be a stable sheaf of dimension $1$, multiplicity $r$, and Euler--Poincar\'e characteristic $\chi=1$; by \Cref{lem:spectrum-connected} the spectrum (with multiplicities) of the associated Higgs bundle on $(\PP_1,\Oo_{\PP_1}(1))$ is $(0,(-1)^2)$. It follows that $h^0(F)=1$. One then has a morphism $\Oo_C\xrightarrow{\;j\;}F$, where $C$ is the cubic which is the schematic support of $F$. Since $\Oo_C$ and $F$ are stable, this morphism is necessarily injective. The cokernel of $j$ is then isomorphic to the structure sheaf of a point $p$ placed on the curve $C$. Conversely, given a pair $(C,p)$ formed of a cubic $C$ and a point $p$ placed on $C$, one defines the sheaf $F^{\vee}$ by the kernel of the canonical morphism $\Oo_C\to \CC_p$. This sheaf is of multiplicity $3$ and characteristic $\chi=-1$. It is stable: for if $F'$ is a subsheaf of $F^{\vee}$ of multiplicity $r'<3$, its slope $\mu'$ is $<0$ and consequently $\mu'<-\tfrac12$. The sheaf $F$ is then stable of multiplicity $3$ and $\chi=1$. We have thus obtained an isomorphism
+\[
+\NN_{\PP_2}(3,1)\simeq \mathfrak{U}(3)
+\]
+with the universal cubic of degree $3$ in the projective plane, by associating to $F$ the pair $(C,p)$.
+
+\subsubsection*{2. The case $r>3$, $\chi=1$}
+
+The same proof as in the case $r=3$ shows that on the open set corresponding to quasi-rigid Higgs bundles one has $h^0(F)=1$. If $C$ is the curve of degree $r$ defined by the schematic support of $F$, one then has a canonical morphism (up to a homothety) $\Oo_C\to F$. In general (for instance if $C$ is irreducible) this morphism is injective and its cokernel is isomorphic to the structure sheaf of a subscheme of $C$ of length
+\[
+g = \frac{r(r-3)}{2}+1 .
+\]
+
+Conversely, given a pair $(C,Y)$ formed of a curve of degree $r$ and a subscheme $Y$ of length $g$, one considers the sheaf defined by $F = \Ext^1(J_Y(r-3),\omega_{\PP_2})$, where $J_Y$ is the ideal of $Y$ in $C$. Then $F$ is a sheaf of dimension $1$, of multiplicity $r$ and of Euler--Poincar\'e characteristic $\chi=1$. In general (for instance if the curve $C$ is irreducible) it is stable. We have therefore obtained a birational transformation
+\[
+\NN_{\PP_2}(r,1)\dashrightarrow \Div^g(\mathfrak{U}/\PP_2)
+\]
+onto the relative variety of Weil divisors of degree $g$ on the universal curve of degree $r$.\tnote{The original prints $\NN_{\PP_2}(r,0)$; the sheaves under discussion have $\chi=1$.} Locally, over an open set of the Hilbert scheme of finite subschemes of length $g$ of $\PP_2$, this variety is a bundle in projective
+\origpage{672}%
+spaces of dimension $3r-1$. Since this Hilbert scheme is a rational variety, one obtains the announced result.
+
+\subsubsection*{3. The case $r>3$, $\chi=2$}
+
+The case $\chi=2$ is much more difficult; for $r>4$, the proof relies on the results of Hulek \cite{Hul}, Str\o mme \cite{Str} and Maeda \cite{Mae}, which give the rationality of the moduli spaces of stable rank-2 vector bundles on the projective plane. For the proof it is convenient to introduce the moduli varieties of coherent systems, constructed in \cite{LeP3}, which generalize those of linear systems.
+
+\subsubsection*{Coherent systems}
+
+We work on a smooth, connected, polarized projective algebraic variety $X$ of dimension $n$, and we denote by $P_X$ the Hilbert polynomial of $\Oo_X$. If $F$ is a coherent algebraic sheaf of dimension $d$ on $X$, the Hilbert polynomial $P_F$ of $F$ is written
+\[
+P_F(m) = r\,\frac{m^d}{d!} + \text{terms of lower degree},
+\]
+where $r$ is an integer, called the \emph{multiplicity} of $F$. If $F$ is torsion-free, this integer is the product of the rank of $F$ by the degree of $X$. The reduced Hilbert polynomial of $F$ is defined by
+\[
+p_F = \frac{P_F}{r}.
+\]
+
+\begin{definition}\label{def:coherent-system}
+A \emph{coherent system} of dimension $d$ on the variety $X$ is a pair $(\Gamma,F)$, where $F$ is a coherent algebraic sheaf of dimension $d$ on $X$, and $\Gamma$ a vector subspace of $H^0(F)$.
+
+A coherent system $(\Gamma,F)$ of dimension $n$ is called a \emph{level structure} if the vector space $\Gamma$ has dimension equal to the multiplicity of $F$.
+
+Given a coherent system $(\Gamma,F)$ of dimension $d$ on the variety $X$, the reduced Hilbert polynomial of $(\Gamma,F)$ is defined by
+\[
+p_{(\Gamma,F)} = \frac{\dim\Gamma}{r}\,P_X + p_F,
+\]
+where $r$ is the multiplicity of $F$.
+\end{definition}
+
+\begin{definition}[Semi-stability]\footnote{The polynomials are ordered by the lexicographic order on the coefficients, starting with the terms of highest degree.}\label{def:cs-semistable} A coherent system $(\Gamma,F)$ of dimension $d$ is said to be \emph{semi-stable} (resp.\ \emph{stable}) if
+\begin{enumerate}
+\item[a)] the sheaf $F$ is pure of dimension $d$;
+\item[b)] for every nonzero coherent submodule $F'\subset F$, and every vector subspace $\Gamma'\subset H^0(F')\cap\Gamma$, one has
+\[
+p_{(\Gamma',F')}\;\le\; p_{(\Gamma,F)}
+\]
+\end{enumerate}
+\end{definition}
+
+\origpage{673}%
+The inequality of assertion b) means that one has
+\[
+\frac{\dim\Gamma'}{r'}\;\le\;\frac{\dim\Gamma}{r}
+\qquad\text{and, in case of equality,}\qquad
+p_{F'}\le p_F \quad(\text{resp.\ }<)
+\]
+where $r$ and $r'$ are the respective multiplicities of $F$ and $F'$.
+
+\medskip
+\noindent\emph{Example.} If $F$ is a coherent algebraic sheaf on $X$, the coherent system $(\{0\},F)$ is semi-stable if and only if the sheaf $F$ is semi-stable. In general, if a coherent system $(\Gamma,F)$ is semi-stable, this does not imply that $F$ is a semi-stable sheaf.
+\medskip
+
+A morphism of coherent systems $(\Gamma,F)\to(\Gamma',F')$ is a morphism of algebraic sheaves $f:F\to F'$ such that $f(\Gamma)\subset\Gamma'$. The coherent systems with fixed reduced Hilbert polynomial constitute an abelian category, in which the notion of Jordan--H\"older filtration makes sense; up to isomorphism, the Jordan--H\"older graded object of a semi-stable coherent system is therefore well defined. Two semi-stable coherent systems are said to be \emph{$S$-equivalent} if their Jordan--H\"older graded objects are isomorphic.
+
+\begin{theorem}\label{thm:syst}
+Let $P$ be a polynomial of degree $d$. There exists, for the semi-stable coherent systems $(\Gamma,F)$ of dimension $d$ on $X$ such that $P_F=P$, a coarse moduli space $\Syst_X(P)$. This variety has the following properties:
+\begin{enumerate}
+\item It is projective.
+\item The closed points of $\Syst_X(P)$ are the $S$-equivalence classes of semi-stable coherent systems $(\Gamma,F)$ such that $P_F=P$.
+\item The set of isomorphism classes of stable coherent systems $(\Gamma,F)$ such that $P_F=P$ is identified with an open set $\Syst^s_X(P,i)$ of the variety $\Syst_X(P)$.
+\end{enumerate}
+\end{theorem}
+
+Naturally, one has a decomposition into disjoint components
+\[
+\Syst_X(P)=\coprod_i \Syst_X(P,i)
+\]
+where $\Syst_X(P,i)$ is the component corresponding to the coherent systems $(\Gamma,F)$ such that $\dim\Gamma = i$.
+
+From now on we assume that $X$ is a smooth projective algebraic surface, and that $\omega_X$ is numerically equivalent to $\alpha\Oo_X(1)$, where $\alpha$ is a rational number. Given two integers $r$ and $\chi$, we put $P(m)=rm+\chi$. Given a semi-stable coherent system $(\Gamma,F)$, where $F$ is of dimension $1$, of multiplicity $r$ and Euler--Poincar\'e characteristic $\chi$, with $\dim\Gamma=i$, one may consider the sheaf $G=\Ext^1(F,\Oo_X)$: this sheaf then has Hilbert polynomial $P^{*}(m)=rm-(\alpha r+\chi)$. Since the sheaf $F$ is Cohen--Macaulay, one has also $F\simeq \Ext^1(G,\Oo_X)$ and consequently $H^0(F)\simeq \Ext^1(G,\Oo_X)$, so that one may associate to the above coherent system a canonical class in $\Ext^1(G,\Gamma^{*}\otimes\Oo_X)$. This provides an extension
+\[
+0\longrightarrow \Gamma^{*}\otimes\Oo_X\longrightarrow E\longrightarrow G
+\longrightarrow 0 .
+\]
+
+We have thus associated to $(\Gamma,F)$ a level structure $(\Gamma^{*},E)$ with $E$ of dimension $2$, with Hilbert polynomial $iP_X+P^{*}$. The following theorem is proved in \cite{LeP3}.
+
+\origpage{674}%
+\begin{theorem}\label{thm:syst-iso}
+The coherent system $(\Gamma^{*},E)$ is semi-stable. The functorial morphism $(\Gamma,F)\mapsto(\Gamma^{*},E)$ induces an isomorphism
+\[
+\Syst_X(P,i)\;\xrightarrow{\;\sim\;}\;\Syst_X(iP_X+P^{*},i)
+\]
+which exchanges the open sets of stable points $\Syst^s_X(P,i)$ and $\Syst^s_X(iP_X+P^{*},i)$.
+\end{theorem}
+
+\subsubsection*{Return to the projective plane}
+
+We suppose for the moment $0<\chi\le r$. Let $U$ be the open set of $\Syst^s_{\PP_2}(P,\chi)$ corresponding to the classes of coherent systems $(\Gamma,F)$ such that $h^0(F)=\chi$. This open set is obviously nonempty: it suffices to choose, on a smooth curve of degree $r$, an invertible sheaf $F$ such that $h^0(F)=\chi$. Then the complete linear system $(H^0(F),F)$ is stable and defines a point of $U$. Note moreover that in this example $F$ is itself stable. One then has an open embedding $U'\hookrightarrow \NN_{\PP_2}(r,\chi)$, defined on the open set $U'\subset U$ of classes of stable coherent systems $(\Gamma,F)$ such that $F$ is stable --- an open set which is likewise nonempty by what we have just seen --- which associates to the class of $(\Gamma,F)$ the class of $F$. Thus we have obtained a birational isomorphism
+\[
+U\dashrightarrow \NN_{\PP_2}(r,\chi).
+\]
+
+Let $P^{*}$ be the polynomial defined by $P^{*}(m)=rm+3r-\chi$. To the open set $U$ there corresponds, in the moduli space $\Syst^s_{\PP_2}(\chi P_X+P^{*},\chi)$, the open set $U^{*}$ of stable level structures $(\Gamma^{*},E)$ where $E$ is a torsion-free sheaf satisfying the following conditions:
+\[
+r(E)=\chi,\quad c_1(E)=r,\quad \chi(E)=3r,\quad h^0(E)=3r .
+\]
+
+Note that the sheaf $E$ is not necessarily stable: the computation shows in fact that one has
+\[
+\bigl(2rc_2-(r-1)c_1^2\bigr)(E) = (r-\chi)(r-2\chi)
+\]
+which is positive only if $0<2\chi\le r$.
+
+\subsubsection*{The case $r=4$, $\chi=2$}
+
+In this case, the open set $U^{*}$ meets the open set of stable coherent systems $(\Gamma^{*},E)$ such that $E$ is semi-stable: the Chern classes in fact force such a sheaf to be isomorphic to $(\Oo_{\PP_2}(2))^2$. Consider indeed the open set $\Grass^s(2,H^0(\Oo_{\PP_2}(2)))$ of stable points of the Grassmannian of $2$-dimensional vector subspaces under the action of $Gl(2,\CC)$, and the Mumford quotient
+\[
+\mathfrak{B}^s = \Grass^s\bigl(2,H^0(\Oo_{\PP_2}(2))\otimes\CC^2\bigr)/
+Gl(2,\CC).
+\]
+
+\begin{lemma}\label{lem:B-s}
+Let $E=(\Oo_{\PP_2}(2))^2$. Outside a closed set of codimension $10$, a point $a\in\mathfrak{B}^s$ defines an isomorphism class of stable coherent systems $(\Gamma^{*},E)$.
+\end{lemma}
+
+\begin{proof}
+Since the bundle $E$ is semi-stable, in order to check that $(\Gamma^{*},E)$ is a stable coherent system it suffices to note that if $E'\subset E$ is a rank-one subbundle one has $\dim \Gamma^{*}\cap H^0(E')\le 1$, except for the subbundles $E'$ with Chern class $c_1=2$, for which one must verify the strict inequality. But if $E'\simeq \Oo_{\PP_2}(2)$ this strict inequality follows from the definition of the stable points of $\Grass(2,H^0(\Oo_{\PP_2}(2))\otimes\CC^2)$ under the action of $Gl(2,\CC)$ (cf.\ \cite{Mum}; \cite{LeP4}). The Hilbert scheme of rank-1 subbundles $E'\subset E$ with Chern class $c_1=1$ is a quasi-projective variety of dimension $5$; such a
+\origpage{675}%
+subbundle being fixed, the points $\Gamma^{*}\in\Grass(2,H^0(\Oo_{\PP_2}(2))\otimes\CC^2)$ contained in $H^0(E')$ form a projective plane; consequently the $\Gamma^{*}$ which do not satisfy the required condition belong to a closed set of dimension $\le 7$ in $\Grass(2,H^0(\Oo_{\PP_2}(2))\otimes\CC^2)$. If $c_1(E')\le 0$, the condition is always satisfied. Passing to the image in $\mathfrak{B}^s$ one obtains the result.
+\end{proof}
+
+We have thus obtained a birational isomorphism $\mathfrak{B}^s\dashrightarrow U^{*}$, and consequently a birational isomorphism $\mathfrak{B}^s\dashrightarrow \NN_{\PP_2}(4,2)$. We are therefore reduced to proving that the Mumford quotient $\mathfrak{B}^s$ is a rational variety. This follows from the following more general statement:
+
+\begin{lemma}\label{lem:BW-rational}
+Let $W$ be a vector space of dimension $\ge 3$. Denote by $\Grass^{ss}(2,W\otimes\CC^2)$ the open set of semi-stable points in the Grassmannian of $2$-dimensional subspaces of $W\otimes\CC^2$. Then the Mumford quotient
+\[
+\mathfrak{B}_W := \Grass^{ss}(2,W\otimes\CC^2)/Gl(2,\CC)
+\]
+is a rational variety of dimension $4\dim W-7$.
+\end{lemma}
+
+\begin{proof}
+Consider the projective space $\PP(W)$ of hyperplanes of $W$, and denote by $A$ the trivial bundle of rank $2$ on $\PP(W)$; finally put $B=A(1)$. Let $\mathscr{X}$ be the vector space of Kronecker morphisms $u:A\to B$ on the projective space $\PP(W)$. Let $\mathscr{X}^{ss}$ be the open set of $\mathscr{X}$ of semi-stable Kronecker modules. This open set is invariant under the action of $\Aut(A)\times\Aut(B)$ by conjugation, and one has an isomorphism
+\[
+\mathfrak{B}_W \simeq \mathscr{X}^{ss}/\Aut(A)\times\Aut(B)
+\]
+where the right-hand side denotes again the Mumford quotient. Recall that this quotient is a good quotient.
+
+For $\dim W=3$, it is isomorphic to the Hilbert scheme of conics of the projective plane: to the class of $u$ one associates the conic defined by $\det u$. For $\dim W=4$, it is birational to the relative Picard scheme of invertible sheaves $L$ on smooth quadrics satisfying the numerical conditions $\langle L,h\rangle = 4$ and $\chi(L)=6$: indeed, if $\det u$ defines a smooth quadric, one associates to $u$ the cokernel of $u$, which is an invertible bundle on this quadric. For each smooth quadric there exist only two such bundles, corresponding to the two systems of lines on the quadric. This relative Picard scheme is an unramified double cover of the open set of $\PP_9:=|\Oo_{\PP_3}(2)|$ of smooth quadrics, and it is well known that this variety is a rational variety.
+
+In the case $\dim W\ge 5$, all the Kronecker modules $u$ of one and the same orbit vanish on a projective subspace of codimension $\le 4$. A Kronecker module which vanishes on a projective subspace of codimension $\le 3$ will be called \emph{degenerate}. The degenerate Kronecker modules constitute a closed set of codimension $\dim W-3$ in $\mathscr{X}$. This closed set is invariant under $\Aut(A)\times\Aut(B)$; its image in $\mathfrak{B}_W$ is a closed set whose complement is an open set denoted $\mathfrak{B}_{W,0}$. The inverse image of this open set will be denoted $\mathscr{X}^0$. One then has a morphism $\psi:\mathscr{X}^0\to \Grass(W,4)$ into the Grassmannian of vector subspaces $K$ of $W$ of codimension $4$: to the Kronecker morphism $u$ one associates the vector subspace $K$ associated with the projective subspace on which this morphism vanishes. The morphism $\psi$ passes to the quotient to give a morphism
+\[
+\bar\psi : \mathfrak{B}_{W,0}\longrightarrow \Grass(W,4)
+\]
+\origpage{676}%
+equivariant for the action of the projective group $PGl(W)$. It follows that this morphism is a locally trivial bundle in the Zariski topology, and its fibre over the point defined by the vector subspace $K\subset W$ is obviously isomorphic to $\mathfrak{B}_{W/K,0}$. The fibres of $\bar\psi$ are rational by what we have already seen. The lemma follows.
+\end{proof}
+
+\subsubsection*{The case $\chi=2$, $r>4$}
+
+In this case we have the following result.
+
+\begin{lemma}\label{lem:chi2-r4}
+If $\chi=2$ and $r>4$, the open set $U^{*}$ contains points corresponding to stable coherent systems $(\Gamma,E)$ such that $E$ is stable.
+\end{lemma}
+
+\begin{proof}
+The proof is a variant of that of \Cref{lem:B-s}. We have seen that for a point $(\Gamma,E)$ of $U^{*}$, $E$ is of rank $2$, and the computation of the Chern classes has shown that $(4c_2-c_1^2)(E)=(r-2)(r-4)\ge 3$, and $\neq 4$.
+
+Conversely, these numerical conditions are sufficient to assert that the moduli space $\MM_r := \MM(2;r,g+1)$ of semi-stable sheaves of rank $2$, with Chern class $c_1=r$ and Euler--Poincar\'e characteristic $3r$ --- in other words with Chern class $c_2 = 2+\tfrac12 r(r-3) := g-1$ --- is nonempty and irreducible. Moreover, it is well known \cite{LeP1} that the open set $\MM^0_r$ corresponding to the stable points which are represented by locally free sheaves $E$ satisfying the condition $h^0(E)=3r$ is likewise nonempty. One may even assume that $E$ has natural cohomology, which implies that if $h^0(E(-i))\neq 0$ one necessarily has
+\[
+h^0(E(-i)) = \chi(E(-i)) = -(i-3)(r-i).
+\]
+
+Consider then such a bundle $E$. It suffices to check that in the Grassmannian $\Grass(2,H^0(E))$ the open set of points $\Gamma^{*}$ for which the coherent system $(\Gamma^{*},E)$ is stable is nonempty. It amounts to the same to observe that the complement is of dimension $<2(3r-2)$. To say that $(\Gamma^{*},E)$ is unstable means here that there exists a subbundle $L\simeq\Oo_{\PP_2}(i)\subset E$ such that $\Gamma^{*}\subset H^0(L)$, except perhaps for $i=\tfrac r2$, where it suffices to require that $\Gamma^{*}\cap H^0(E)\neq\{0\}$. But we must have $2i<r$ by the stability condition of $E$, so this last case does not occur; in fact one must have $i<3$ since $h^0(E(-i))\neq 0$.
+
+The dimension of the Hilbert scheme of invertible subbundles of Chern class $c_1=i$ is $(3-i)(r-i)-1$; consequently the unstable points constitute a closed set of dimension less than the maximum of the two numbers
+\[
+(3-i)(r-i)+2\left[\tfrac12(i+1)(i+2)-2\right] = r(3-i)+2i^2-4
+\]
+for $i=1$ and $2$. Consequently this closed set is of codimension $\ge 4r-1$. This implies the result.
+\end{proof}
+
+\subsubsection*{The case $\chi=2$, $r$ odd $\ge 5$}
+
+In this case there exists a universal sheaf $\mathbf{E}\to \MM_r\times\PP_2$; let $p:\MM_r\times\PP_2\to\MM_r$ be the first projection. The direct image
+\origpage{677}%
+$\mathscr{E}=p_*(\mathbf{E})$ is locally free of rank $3r$ over the open set $\MM^0_r$. In this case one may consider the relative Grassmannian $\Grass(2,\mathscr{E})$ over $\MM^0_r$: it is a Grassmannian bundle, locally trivial in the Zariski topology, whose points are interpreted as coherent systems $(\Gamma^{*},E)$. On account of the above lemma, one obtains a birational morphism
+\[
+\psi : \Grass(2,\mathscr{E})\dashrightarrow U^{*}.
+\]
+
+We know by Hulek's result \cite{Hul} that the moduli space $\MM_r$ is rational: it follows that $U^{*}$, and consequently $\NN_{\PP_2}(r,2)$, is rational.
+
+\subsubsection*{The case $\chi=2$, $r$ even $\ge 6$}
+
+This case is much more delicate, since over no Zariski open set of $\MM_r$ does a universal sheaf exist. We shall show, however, that there exists a variety $\mathfrak{B}$, relatively projective and locally trivial over $\MM^0_r$, whose fibre over the point $x\in\MM^0_r$ representing a vector bundle $E$ is the Grassmannian $\Grass(2,H^0(E))$.
+
+\begin{lemma}\label{lem:Fk}
+There exists on $\MM^0_r$ a vector bundle $\mathscr{F}_k$ such that over each point $x$ represented by a stable bundle $E$ one has
+\[
+\mathscr{F}_k(x) = \textstyle\bigwedge^{2k}H^0(E).
+\]
+Moreover, there exists a canonical morphism $S^k\mathscr{F}_1\to\mathscr{F}_k$ inducing over each point the exterior multiplication.
+\end{lemma}
+
+\begin{proof}
+Let $n=\tfrac14(4c_2-c_1^2)=\tfrac14(r-2)(r-4)$, let $G$ be the trivial bundle of rank $n$ on the dual projective plane, and let $\mathscr{X}$ be the vector space of Kronecker morphisms $G\xrightarrow{\;u\;}G(1)$. The group $\Aut(G)=Gl(n,\CC)$ acts on $\mathscr{X}$ by conjugation. It is known \cite{Bar} that the open set $\MM^0_r$ is identified with a good quotient of a locally closed subscheme $\mathscr{M}$ of $\mathscr{X}$ invariant under the action of $Gl(n,\CC)$; the stabilizer of a point $u$ is identified with the group of automorphisms of determinant $1$ of the associated bundle $E$. Since the points of $\MM^0_r$ correspond to stable bundles, the stabilizer of such a point $x$ is reduced to $\pm\,\mathrm{id}$. Moreover, the action of $Gl(n,\CC)$ on $\mathscr{M}$ is proper \cite{LeP2}; it follows that the quotient $\MM^0_r$ is a geometric quotient of $\mathscr{M}$.
+
+On $\mathscr{M}\times\PP_2$ there exists a universal bundle, still denoted $\mathbf{E}$; it is a vector bundle equipped with a linear action of $Gl(n,\CC)$ above the action of $Gl(n,\CC)$ on $\mathscr{M}$. If $p:\mathscr{M}\times\PP_2\to\mathscr{M}$ again denotes the first projection, one may consider the direct image $\mathscr{E}=p_*(\mathbf{E})$ on $\mathscr{M}$. It is a locally free sheaf of rank $3r$ which is again equipped with a linear action of $Gl(n,\CC)$. Since the action of the stabilizer of a point is not trivial, this bundle does not descend to a vector bundle on $\MM^0_r$. On the other hand, on the vector bundle $\bigwedge^{2k}\mathscr{E}$, the action of the stabilizer is trivial. The bundle $\mathscr{F}_k$ is defined by
+\[
+\mathscr{F}_k = \textstyle\bigwedge^{2k}\mathscr{E}\,/\,Gl(n,\CC).
+\]
+
+The operation of exterior multiplication $S^k(\bigwedge^2\mathscr{E})\to\bigwedge^{2k}\mathscr{E}$ is compatible with the action of $Gl(n,\CC)$ and passes to the quotient, which completes the proof of the lemma.
+\end{proof}
+
+The natural morphism $\lambda:S^2\mathscr{F}_1\to\mathscr{F}_2$ which we have just constructed is of constant rank. It follows that the relative cone $\mathscr{C}\to\MM^0_r$ defined by the vectors $\xi\in\mathscr{F}_1$ such that $\lambda(\xi^2)=0$ is locally trivial over $\MM^0_r$. Let $\mathscr{C}^{*}$ be the complement of the zero section in $\mathscr{C}$. The quotient
+\[
+\mathfrak{B} := \mathscr{C}^{*}/\CC^{*}\longrightarrow \MM^0_r
+\]
+is a relatively projective variety, locally trivial over $\MM^0_r$, whose fibre over the point representing the bundle $E$ is the Grassmannian $\Grass(2,H^0(E))$.
+
+\Cref{lem:chi2-r4} again provides a birational morphism $\psi:\mathfrak{B}\dashrightarrow U^{*}$. We know by Maeda's result \cite{Mae} that the moduli space $\MM_r$ is rational: it follows that $U^{*}$, and consequently $\NN_{\PP_2}(r,2)$, is rational.\qed
+
+\origpage{678}
+\begin{thebibliography}{99}
+
+\bibitem{Bar} W.~Barth, \emph{Moduli of vector bundles on the projective plane}. Invent. Math. \textbf{42} (1977), 63--91.
+
+\bibitem{Dre1} J.~M.~Dr\'ezet, \emph{Groupe de Picard des vari\'et\'es de modules de faisceaux semi-stables sur $\PP_{2}(\CC)$}. Ann. Inst. Fourier (Grenoble) \textbf{38} (1988), 105--168.
+
+\bibitem{Dre2} J.~M.~Dr\'ezet and J.~Le Potier, \emph{Fibr\'es stables et fibr\'es exceptionnels sur le plan projectif}. Ann. Sci. \'Ecole Norm. Sup. (4) \textbf{18} (1985), 193--244.
+
+\bibitem{Dre3} J.~M.~Dr\'ezet and M.~S.~Narasimhan, \emph{Groupe de Picard des vari\'et\'es de modules de fibr\'es semi-stables sur les courbes alg\'ebriques}. Invent. Math. \textbf{97} (1989), 53--94.
+
+\bibitem{For} E.~Formanek, \emph{Rational function fields, Noether's problem and related questions}. J. Pure Appl. Algebra \textbf{31} (1984), 28--36.
+
+\bibitem{Har} R.~Hartshorne, \emph{Algebraic Geometry}. Springer, Berlin, 1977.
+
+\bibitem{Hit} N.~Hitchin, \emph{The self-duality equations on a Riemann surface}. Proc. London Math. Soc. (3) \textbf{55} (1987), 59--126.
+
+\bibitem{Hul} K.~Hulek, \emph{Stable rank-2 vector bundles on $\PP_{2}$ with $c_{1}$ odd}. Math. Ann. \textbf{242} (1979), 241--266.
+
+\bibitem{LeP1} J.~Le Potier, \emph{Stabilit\'e et amplitude sur $\PP_{2}$}. In: \emph{Vector Bundles and Differential Equations (Proceedings, Nice, 1979)}, pp.~145--182. Progress in Math. Vol.~7, Birkh\"auser, Basel, 1980.
+
+\bibitem{LeP2} J.~Le Potier, \emph{Sur le groupe de Picard des espaces de modules de fibr\'es stables sur le plan projectif}. Ann. Sci. \'Ecole Norm. Sup. (4) \textbf{13} (1981), 141--155.
+
+\bibitem{LeP3} J.~Le Potier, \emph{Syst\`emes coh\'erents et structures de niveau}. Preprint, Universit\'e Paris 7, 1992.
+
+\bibitem{LeP4} J.~Le Potier, \emph{Fibr\'es vectoriels sur les courbes alg\'ebriques}. Cours de D.E.A., Universit\'e Paris 7, 1991.
+
+\bibitem{LeP5} J.~Le Potier, \emph{Fibr\'e d\'eterminant et courbes de saut sur les surfaces alg\'ebriques}. In: Lecture Note Series Vol.~\textbf{179}, pp.~213--240, London Math. Soc., 1992.
+
+\bibitem{Mae} T.~Maeda, \emph{An elementary proof of the rationality of the moduli space for rank-2 vector bundles on $\PP_{2}$}. Hiroshima Math. J. \textbf{20} (1990), 103--107.
+
+\bibitem{Mar} M.~Maruyama, \emph{Vector bundles and torsion sheaves}. In: \emph{International Colloquium on Vector Bundles on Algebraic Varieties} (1984), pp.~275--339, Oxford Univ. Press, 1987.
+
+\bibitem{Mes} N.~Mestrano and S.~Ramanan, \emph{Poincar\'e bundles for families of curves}. J. Reine Angew. Math. \textbf{362} (1985).
+
+\bibitem{Mum} D.~Mumford and J.~Fogarty, \emph{Geometric Invariant Theory}. Springer, Berlin, 1982.
+
+\bibitem{Shaf} I.~R.~Shafarevich, \emph{Basic Algebraic Geometry}. Springer, Berlin, 1977.
+
+\bibitem{Sim1} C.~Simpson, \emph{Higgs bundles and local systems}. Preprint, Princeton University, 1990.
+
+\bibitem{Sim2} C.~Simpson, \emph{Moduli of representations of the fundamental group of a smooth projective variety}. Preprint, Princeton University, 1990.
+
+\bibitem{Sor} C.~Sorger, \emph{Th\^eta caract\'eristiques des courbes trac\'ees sur une surface lisse}. J. Reine Angew. Math., \`a para\^itre.
+
+\bibitem{Str} S.~A.~Str\o mme, \emph{Ample divisors on fine moduli spaces on the projective plane}. Math. Z. \textbf{187} (1984), 405--423.
+
+\end{thebibliography}
+
+\vspace{1em}
+\noindent\emph{Received 2 December 1992.}
+
+\begin{flushright}
+\itshape
+Universit\'e Paris 7\\
+UFR de Math\'ematiques et URA 212\\
+F-75251 Paris Cedex 05\\
+2, Place Jussieu\\
+France
+\end{flushright}
+
+\end{document}
