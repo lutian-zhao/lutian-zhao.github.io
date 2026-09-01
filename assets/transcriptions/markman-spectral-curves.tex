@@ -1,0 +1,1396 @@
+%% Eyal Markman, "Spectral curves and integrable systems"
+%% Compositio Mathematica 93 (1994), no. 3, 255-290.
+%% Transcription checked against the Numdam scan CM_1994__93_3_255_0.pdf.
+%% Theorem/equation numbering reproduces the printed numbering exactly.
+
+\documentclass[12pt,a4paper,oneside,english]{smfart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\IfFileExists{microtype.sty}{\usepackage[protrusion=true,expansion=false]{microtype}}{}
+
+% New TX must supply the AMS symbols itself.  Loading amssymb as well is what
+% causes the duplicate \Bbbk definition on installations where both are present.
+\usepackage{newtxtext}
+\makeatletter
+\let\Bbbk\@undefined
+\makeatother
+\usepackage{newtxmath}
+
+\usepackage{enumerate}
+\usepackage{mathtools}
+\usepackage[all,arc]{xy}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{tikz-cd}
+
+% --- hyperlinks: \cite, \ref, \eqref and the table of contents become clickable.
+\usepackage[
+  colorlinks=true,
+  linkcolor={blue!45!black},
+  citecolor={green!35!black},
+  urlcolor={blue!45!black},
+  linktocpage=true,
+  pdfborder={0 0 0},
+  bookmarksnumbered=true,
+  pdftitle={Spectral curves and integrable systems},
+  pdfauthor={Eyal Markman}
+]{hyperref}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{}
+
+% Use the SMF page design but suppress running headers.
+\pagestyle{plain}
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{3em}
+\tolerance=2000
+\hbadness=10000
+\vbadness=10000
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{qthm}[thm]{Quasi-Theorem}
+\newtheorem*{mainthm}{Main Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+\newtheorem*{idea*}{Idea}
+
+% --- operators and shorthands
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\length}{length}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\image}{Im}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Prym}{Prym}
+\DeclareMathOperator{\Sol}{Sol}
+\DeclareMathOperator{\Orb}{Orb}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\gcdop}{gcd}
+
+\newcommand{\Hig}{\mathrm{Higgs}}
+\newcommand{\MH}{M_{\Hig}}
+\newcommand{\MHp}{M'_{\Hig}}
+\newcommand{\MHs}{M^{s}_{\Hig}}
+\newcommand{\MHds}{M^{\delta\text{-}s}_{\Hig}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\KK}{\mathscr{K}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\lbar}{\bar{l}}
+\newcommand{\tot}[1]{\lvert #1 \rvert}
+\newcommand{\HL}{\widetilde{H}_{L}}
+
+\title{Spectral curves and integrable systems}
+\author{Eyal Markman}
+\address{Department of Mathematics, University of Michigan, Ann Arbor, Michigan 48109}
+\date{Received 20 July 1993; accepted in final form 10 September 1993}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{plain}
+
+\section{Introduction}\label{sec:1}
+
+The theory of algebraically completely integrable hamiltonian systems demonstrates a fruitful interaction between dynamical systems and the geometry of vector bundles over algebraic curves. Classically, dating back to Jacobi's work on the geodesic flow on the ellipsoid, algebro-geometric methods have been used to solve differential equations arising from mechanical systems, by linearizing the flow on the Jacobian of an algebraic curve.
+
+Hitchin discovered \cite{H1}, that the cotangent bundle of the moduli space of stable vector bundles on an algebraic curve is an integrable system fibered, over a space of invariant polynomials, by Jacobians of spectral curves. These curves are branched coverings of the base curve, $\Sigma$, associated to twisted endomorphisms of vector bundles on $\Sigma$ with values in the canonical line bundle. This result plays a central role in recent work on the geometry of the moduli space of vector bundles \cite{B-N-R}, conformal field theory \cite{H2}, and non abelian Hodge theory \cite{Sim}.
+
+Several of these works suggest considering spectral varieties obtained from endomorphisms twisted by vector bundles other than the canonical line bundle. Simpson replaces the canonical line bundle by the cotangent vector bundle. Beauville studied spectral curves over $\mathbb{P}^1$ obtained by twisting with any positive line bundle \cite{B}. He found an integrable system and showed that certain classical systems, such as Neumann's system, geodesic flow on the ellipsoid, and certain Euler--Arnold systems, embed in his as symplectic leaves.
+
+In this work we study families of Jacobians of spectral curves over algebraic curves of any genus, obtained by twisting with any sufficiently positive line bundle. We prove:
+
+\begin{mainthm}\label{mainthm}
+Let $\Sigma$ be a nonsingular complete algebraic curve, $K_{\Sigma}$ its canonical line bundle. Let $L$ be a positive line bundle on $\Sigma$ satisfying $L \geqslant K_{\Sigma}$. Let $\MH$ be the moduli space of $L$-twisted Higgs pairs (pairs consisting of a vector bundle and an $L$-twisted endomorphism satisfying a stability condition). Then
+\begin{enumerate}
+    \item $\MH$ is fibered, via an invariant polynomial map $H_L \colon \MH \to B_L$, by Jacobians of spectral curves.
+    \item For every non zero $s \in H^0(\Sigma, L \otimes K_{\Sigma}^{-1})$, there exists a canonical Poisson structure, $\Omega_s$, on $\MH$.
+    \item $H_L \colon \MH \to B_L$ is an integrable system.
+\end{enumerate}
+\end{mainthm}
+
+Here are a few special cases:
+\begin{enumerate}
+    \item When $L = K_{\Sigma}$ we get the Hitchin system.
+    \item \textbf{Corollary:} (Beauville \cite{B}). $GL(n)$ acts by conjugation on the space of everywhere regular $n \times n$ matrices with polynomial entries of degree $\leqslant d$. The quotient is an integrable system.
+    \item \textbf{Corollary:} (Reyman and Semenov-Tian-Shansky \cite{R-S}). Let $D$ be an effective divisor on an elliptic curve, $\Sigma$, invariant under the subgroup, $\Sigma[n]$, of points of order $n$. The space of $\Sigma[n]$-invariant, meromorphic, $sl(n)$ valued functions, whose entries have poles dominated by $D$, is an integrable system.
+    \item \textbf{Corollary:} (A.~Treibich and J.~L.~Verdier \cite{T-V}). The space of KP elliptic solutions with fixed period lattice is an integrable system.
+\end{enumerate}
+
+Many classical integrable systems embed as symplectic leaves of those in 2 and 3.
+
+The moduli space $\cU_{\Sigma}(r, d, D)$, of vector bundles with $D$-level structure (in the sense of \cite{Se}) is key to understanding the geometry of our systems. It is the space parameterizing vector bundles together with a frame over $D$. The Poisson structure on $\MH$ is obtained via Hamiltonian reduction from the canonical symplectic structure on $T^*\cU_{\Sigma}(r, d, D)$.
+
+The systems in Corollaries 2 and 3 have been extensively studied using Lax equations with rational or elliptic parameter. A standard technique in these studies, (see for example \cite{R-S}, \cite{A-vM}, \cite{A-H-H}, \cite{A-H-P}), is to construct an infinite dimensional Lie algebra of meromorphic (or analytic or formal) sections of a Lie algebra bundle (loop algebra), and then to reduce the Kostant--Kirillov Poisson structure to finite dimensional subspace of global meromorphic sections with poles of bounded order. The meromorphic sections translate to Higgs fields in our dictionary.
+
+The loop group approach has been successfully applied to the study of finite dimensional algebraically completely integrable systems mainly in the cases of a rational or elliptic base curve $\Sigma$. Over $\mathbb{P}^1$ there is a unique semistable vector bundle of rank $r$ and degree $0$. Over an elliptic curve, the endomorphism bundles of all stable rank $r$ vector bundles are isomorphic. Thus, the translation of Corollaries 2 and 3 and the related results in \cite{R-S}, \cite{A-vM}, \cite{A-H-H}, \cite{A-H-P} to the language of Higgs pairs involves special cases of our results where the Higgs fields arise from a \emph{fixed} bundle of Lie algebras over a rational or elliptic base curve.
+
+The moduli space approach enables us to study the higher genus base curve case which requires varying the isomorphism class of the Lie algebra bundle. This approach has both conceptual advantage of working with finite dimensional algebraic varieties and the technical advantage gained by using deformation theory to analyze the integrable systems.
+
+Sections \ref{sec:2}--\ref{sec:5} contain preliminary material. In Section \ref{sec:6} we carry out the main construction. We study the realization of a dense open subset of $\MH$ as the orbit space for the Poisson action of the level group on the cotangent bundle $\tot{T^*\cU_{\Sigma}(r, d, D)}$. This realization endows an open set of $\MH$ with a canonical Poisson structure.
+
+Unfortunately, the geometric construction of the Poisson structure in Section \ref{sec:6} does not exhibit its extension to the whole smooth locus of the moduli space of Higgs pairs. From a dynamical system point of view, the extension is of major importance since it assures that the Hamiltonian spectral flow is a \emph{linear} flow along the spectral Jacobians. The extension is carried out in Section \ref{sec:7} via a study of the deformation theory of Higgs pairs with and without level structure. We identify cohomologically the extension of the Poisson structure over the moduli space of stable $L$-twisted Higgs pairs using the duality theorem. We recommend to skip Section \ref{sec:7} on first reading since the section is rather technical.
+
+The main theorem (\ref{t8.5}) is proven in Section \ref{sec:8}. In Subsection \ref{sec:8.1} we use the cohomological identification of Section \ref{sec:7} to show that the invariant polynomial map $H_L \colon \MHs \to B_L$ is a Lagrangian fibration. This completes the proof of the main theorem which is formulated in a canonical way in Subsection \ref{sec:8.2}. We conclude this section with the description of the symplectic leaf foliation in Subsection \ref{sec:8.3}.
+
+Section \ref{sec:9} contains examples with rational, elliptic and hyperelliptic base curves.
+
+This paper is based on a PhD thesis written at the University of Pennsylvania. I would like to express my deepest gratitude to my advisor Professor Ron Donagi for introducing me to the problem and for many invaluable discussions. I would like to thank my friends Ludmil Katzarkov, Alexis Kouvidakis and Toni Pantev for many useful remarks and suggestions. (\emph{Note}: similar results were obtained independently by F.~Bottacin).
+
+\section{Spectral curves}\label{sec:2}
+
+Let $\Sigma$ be a smooth algebraic curve of genus $g$. Let $L$ be a line bundle, $E$ a vector bundle of rank $r$ on $\Sigma$. Let $\varphi \in H^0(\Sigma, \End E \otimes L)$. We will review the definitions of the spectral curve and characteristic polynomial associated to $\varphi$. These are relative versions of the notions of eigenvalues and characteristic polynomial for an endomorphism. For more details see \cite{B-N-R}.
+
+The $i$-th characteristic coefficient $b_i$ of $\varphi$ is $(-1)^i \tr(\wedge^i \varphi)$. The characteristic polynomial $P_b(y)$ of $\varphi$, written formally as
+\[
+P_b(y) := y^r + b_1 y^{r-1} + \cdots + b_r,
+\]
+may be interpreted as a polynomial map from $(\End F) \otimes L$ to $L^{\otimes r}$ for any vector bundle $F$ on $\Sigma$. By Cayley--Hamilton's theorem $P_b(\varphi) = 0$.
+
+Let $B_L(r) := \bigoplus_{i=1}^{r} H^0(\Sigma, L^{\otimes i})$. $B_L(r)$ may be viewed as the space of characteristic polynomials of $L$-twisted endomorphisms of vector bundles of rank $r$. Denote by $\tot{L}$ the total space $\Spec(\Sym(L^{-1}))$ of the line bundle $L$.
+
+For every $b \in B_L(r)$ there corresponds an $r$-sheeted branched covering $\pi_b \colon \Sigma_b \to \Sigma$, called a \emph{spectral curve}. $\Sigma_b$ is the subscheme $P_b^{-1}(0)$ (zero section) of $\tot{L}$ where $P_b$ is interpreted as a morphism from $\tot{L}$ to $\tot{L^{\otimes r}}$. The ideal sheaf $\mathfrak{j}_b$ of $\Sigma_b$ is generated by the image of the $\cO_\Sigma$-module homomorphism $f \colon L^{\otimes(-r)} \to \Sym(L^{-1})$, where $f := \sum_{i=0}^{r} f_i$, $f_i \colon L^{\otimes(-r)} \to L^{\otimes(i-r)}$ is tensorization by $b_i$ $(b_0 = 1)$. So $\Sigma_b$ is $\Spec(\Sym(L^{-1})/\mathfrak{j}_b)$ and $\pi_{b*}(\cO_{\Sigma_b}) \cong \Sym(L^{-1})/\mathfrak{j}_b$ as $\cO_\Sigma$-algebras and $\pi_{b*}(\cO_{\Sigma_b}) \cong \bigoplus_{i=0}^{r-1} L^{\otimes -i}$ as $\cO_\Sigma$-modules. Thus, if $\deg L > 0$, the arithmetic genus $g_{\Sigma_b}$ of $\Sigma_b$ is $\deg L \cdot r(r-1)/2 + r(g-1) + 1$.
+
+$B_L(r)$ may be interpreted as an open affine subset of a linear system on $\mathbb{P}(L \oplus \cO_\Sigma)$ via a projective analogue of the above affine construction. It may be regarded as the moduli space of $r$-sheeted spectral curves in $\tot{L}$.
+
+\begin{prop}\label{t2.1}
+Assume $L^{\otimes r}$ is very ample. Then for generic $b \in B_L(r)$, $\Sigma_b$ is a smooth connected algebraic curve.
+\end{prop}
+
+\begin{defn}\label{t2.2}
+An \emph{$L$-twisted Higgs pair} $(E, \varphi)$ is a pair consisting of a vector bundle $E$ and a section $\varphi \in H^0(\Sigma, \End E \otimes L)$.
+\end{defn}
+
+\begin{prop}[\cite{B-N-R}]\label{t2.3}
+Assume that $\Sigma_b$ is an integral curve. Then there is a canonical bijection between:
+\begin{enumerate}
+    \item Isomorphism classes of rank $1$ torsion free sheaves on $\Sigma_b$ with Euler characteristic $d - r(g-1)$.
+    \item Isomorphism classes of $L$-twisted Higgs pairs $(E, \varphi)$ of rank $r$ and degree $d$ with characteristic polynomial $b$.
+\end{enumerate}
+\end{prop}
+
+\begin{rem}[\cite{B}]\label{t2.4}
+The line bundles in the bijection above correspond to everywhere regular Higgs pairs.
+\end{rem}
+
+\begin{rem}\label{t2.5}
+The line bundle $\pi_b^*(L)$ has a tautological section $y_b$. Given a rank $1$ torsion free sheaf $F$ on $\Sigma_b$ we may regard $y_b$ as an element of $\Hom(F, F \otimes \pi_b^* L)$. The Higgs pair corresponding to $F$ is the pair $(\pi_{b*}F, \pi_{b*}(y_b))$.
+\end{rem}
+
+\begin{rem}\label{t2.6}
+The degree of the line bundle corresponding to an $L$-twisted Higgs pair of rank $r$ and degree $d$ is $\delta(d) = d + r(1-g) + g_{\Sigma_b} - 1$.
+\end{rem}
+
+\begin{lem}\label{t2.7}
+Assume that $\Sigma_b$ is smooth. Let $F$ be a line bundle on $\Sigma_b$. Let $(E, \varphi)$ be the corresponding Higgs pair. Let $\Delta$ be the ramification divisor. Then we have a canonical exact sequence:
+\begin{equation}\label{eq1}
+0 \to F(-\Delta) \to \pi_b^* E \xrightarrow{\ \pi_b^*\varphi - \otimes\, y_b\ } \pi_b^*(E \otimes L) \to F \otimes \pi_b^* L \to 0.
+\end{equation}
+\end{lem}
+
+\begin{proof}
+See \cite{B-N-R}.
+\end{proof}
+
+\begin{rem}\label{t2.8}
+Ron Donagi has generalized recently the above definitions to the case of principal bundles with a reductive structure group by using:
+\begin{enumerate}
+    \item A definition of a pair $(\tilde{\Sigma}, f \colon \tilde{\Sigma} \to L)$ of a spectral curve $\tilde{\Sigma}$ and a morphism $f$ associated to a principal Higgs bundle in a canonical way which is independent of a representation. This gives rise to a generalized Hitchin map.
+    \item Identification of the fibers of the Hitchin map with a generalized Prym (an abelian variety isogenous to a subvariety of the Jacobian of the spectral curve).
+\end{enumerate}
+\end{rem}
+
+\section{The moduli space of Higgs pairs}\label{sec:3}
+
+The moduli space of Higgs pairs are the underlying spaces of our integrable systems. We will review their construction in this section.
+
+Let $L$ be a line bundle on $\Sigma$.
+
+\begin{defn}\label{t3.1}
+Let $(E, \varphi)$ be an $L$-twisted Higgs pair.
+\begin{enumerate}
+    \item A \emph{Higgs subbundle} $(F, \psi)$ is a Higgs pair consisting of a $\varphi$-invariant subbundle $F$ of $E$ such that $\psi$ is the restriction of $\varphi$.
+    \item $(E, \varphi)$ is \emph{semistable} (resp. \emph{stable}) if every Higgs subbundle $(F, \psi)$ satisfies:
+    \[
+    \frac{\deg F}{\rank F} \leqslant \frac{\deg E}{\rank E} \quad (\text{resp. } <).
+    \]
+\end{enumerate}
+\end{defn}
+
+The above definition can be generalized to Higgs pairs consisting of a vector bundle $E$ over a smooth projective variety of any dimension and an endomorphism twisted by another vector bundle $L$. Simpson \cite{Sim} has described a detailed construction of the moduli space of semistable Higgs pairs twisted by the cotangent bundle. His construction is based on a general construction of a moduli space of sheaves with support of pure dimension $n$ on the total space of a vector bundle over a smooth $n$-dimensional projective variety. The moduli space of semistable $L$-twisted Higgs pairs is isomorphic to the moduli space of semistable sheaves on $\tot{L}$ with support of pure dimension $n$. We will describe the main existence result.
+
+Any semistable Higgs pair $(E, \varphi)$ has a filtration
+\[
+0 = E_0 \subset E_1 \subset \cdots \subset E_k = E
+\]
+of Higgs subbundles such that the quotients $(E_i / E_{i-1}, \bar{\varphi}_i)$ are stable with the same slopes. This filtration is not unique but the isomorphism class of the corresponding graded object:
+\[
+\gr(E, \varphi) := \bigoplus (E_i / E_{i-1}, \bar{\varphi}_i)
+\]
+is unique.
+
+\begin{defn}\label{t3.2}
+Two semistable Higgs bundles $(E, \varphi)$, $(E', \varphi')$ are \emph{equivalent} if
+\[
+\gr(E, \varphi) \cong \gr(E', \varphi').
+\]
+\end{defn}
+
+\begin{thm}[\cite{Sim}]\label{t3.3}
+There exists a quasi-projective algebraic variety $\MH$ with the following properties:
+\begin{enumerate}
+    \item The points of $\MH$ represent equivalence classes of semistable $L$-twisted Higgs pairs of rank $r$ and degree $d$.
+    \item If $\cE$ is a flat family of semistable $L$-twisted Higgs pairs of rank $r$ and degree $d$ parameterized by a scheme $S$ then there is a unique morphism $S \to \MH$. $\MH$ is universal for this property.
+    \item There is an open subset $\MHp \subset \MH$ whose points represent isomorphism classes of stable Higgs pairs. Locally in the etale topology on $\MHp$, there is a universal family such that if $\cE$ is a family as in 2 whose fibers are stable then the pullback of the universal family is isomorphic to $\cE$ after tensoring with a line bundle on $S$.
+    \item The function $H_L \colon \MH \to B_L$, which sends a Higgs pair to its characteristic polynomial, is a proper morphism.
+\end{enumerate}
+\end{thm}
+
+We will refer to $\MHp$ as a coarse moduli space (in the spirit of \cite{N} Ch.~5, Section 5), i.e., we identify any two families $(\cE, \varphi)$, $(\cE \otimes p_S^* F, \varphi)$ over $S$ for any line bundle $F$ on $S$.
+
+\begin{rems}\label{t3.4}
+(1) Let $b \in B_L$ such that $\Sigma_b$ is an integral spectral curve. Let $F$ be a torsion free sheaf of rank $1$ on $\Sigma_b$ and let $(E, \varphi)$ be the corresponding Higgs pair. Then $(E, \varphi)$ is stable. Thus, by Proposition \ref{t2.1}, if $L^{\otimes r}$ is very ample then $H_L$ is dominant and its generic fiber is a Jacobian of a smooth spectral curve.
+
+(2) Let $E$ be a stable vector bundle. Then any Higgs pair $(E, \varphi)$ is stable.
+
+(3) Assume that $L \cong K(D)$ for some effective divisor $D$ of degree $\delta \geqslant 0$. It follows that $\MHp$ is nonempty if
+\begin{enumerate}
+    \item[(a)] $g = 0$ and $\delta \geqslant 3$ or
+    \item[(b)] $g = 1$, $\delta = 0$ and $\gcd(r, d) = 1$ or
+    \item[(c)] $g = 1$ and $\delta > 0$ or
+    \item[(d)] $g \geqslant 2$.
+\end{enumerate}
+We will restrict our attention to these cases. In all these cases $H_L$ is dominant and the generic fiber is the Jacobian of a smooth spectral curve.
+\end{rems}
+
+Denote by $\MHs$ the unique irreducible component of $\MHp$ which dominates $B_L$.
+
+\section{The moduli space of vector bundles with level structures}\label{sec:4}
+
+We will show in Section \ref{sec:6} that the moduli space $\MHs$ of Higgs pairs is birationally isomorphic to the orbit space of a group action on the cotangent bundle of the moduli space $\cU_\Sigma(r, d, D)$ of pairs of a vector bundle with level structure. The relationship between the two moduli spaces introduces a Poisson structure on the moduli space of Higgs pairs. We review the construction of $\cU_\Sigma(r, d, D)$ in this section.
+
+Let $D$ be a closed zero dimensional subscheme of $\Sigma$. We will denote also by $D$ the corresponding effective divisor. Let $\delta$ be its degree.
+
+\begin{defn}\label{t4.1}
+A vector bundle $E$ is \emph{$\delta$-stable} (resp. \emph{semistable}) if every proper subbundle $F$ of $E$ satisfies:
+\[
+\frac{\deg F}{\rank F} < \frac{\deg E}{\rank E} + \delta \left( \frac{1}{\rank F} - \frac{1}{\rank E} \right) \quad (\text{resp. } \leqslant).
+\]
+\end{defn}
+
+\begin{defn}\label{t4.2}
+Let $E$ be a rank $r$ vector bundle on $\Sigma$. A \emph{$D$-level structure} on $E$ is an isomorphism $\eta \in \Isom_{\cO_D}\bigl(E|_D, \bigoplus_{i=1}^{r} \cO_D\bigr)$. We will say that a pair $(E, \eta)$ is \emph{stable} (resp. \emph{semistable}) if $E$ is $\delta$-stable.
+\end{defn}
+
+\begin{rems}\label{t4.3}
+(1) If $E$ is semistable and $\delta > 0$ or if $E$ is stable then $E$ is $\delta$-stable.
+
+(2) If $g = 0$ and $d = q \cdot r + \rho$, $0 \leqslant \rho \leqslant r$ and $E = \cO_{\mathbb{P}^1}(q)^{\oplus (r-\rho)} \oplus \cO_{\mathbb{P}^1}(q+1)^{\oplus \rho}$ then $E$ is $\delta$-stable if and only if $\delta > \rho$.
+\end{rems}
+
+We will consider the moduli space $\cU_\Sigma(r, d, D)$ parameterizing rank $r$, degree $d$ $\delta$-stable vector bundles with $D$-level structure. The construction of this space is carried out by C.~S.~Seshadri in \cite{Se}. The definition of $D$-level structures in \cite{Se} allows a nonzero homomorphism $\eta \in \Hom_{\cO_D}\bigl(E|_D, \bigoplus_{i=1}^{r} \cO_D\bigr)$. Seshadri introduces an extended notion of semistability for a pair $(E, \eta)$ of a coherent sheaf $E$ with $D$-level structure and the resulting moduli space is projective. It turns out that if we consider only vector bundles and only trivializations as level structures then a vector bundle $E$ with $D$-level structure $\eta$ is stable (resp. semistable) in the sense of Seshadri if and only if $E$ is $\delta$-stable (resp. $\delta$-semistable). The construction in \cite{Se} assumes $g \geqslant 2$ but it is valid (though possibly empty) for rational and elliptic curves.
+
+\begin{rem}\label{t4.4}
+It follows from Remarks \ref{t4.3} that $\cU_\Sigma(r, d, D)$ is not empty if
+\begin{enumerate}
+    \item $g = 0$ and $\delta > \rho$
+    \item $g = 1$ and $\delta > 0$
+    \item $g = 1$ and $\delta = 0$ and $\gcd(r, d) = 1$
+    \item $g \geqslant 2$.
+\end{enumerate}
+\end{rem}
+
+\begin{defn}\label{t4.5}
+A vector bundle $E$ is \emph{$D$-simple} if $H^0(\Sigma, (\End E)(-D)) = (0)$ if $D > 0$ or $\mathbb{C}$ if $D = 0$.
+\end{defn}
+
+\begin{lem}\label{t4.6}
+A $\delta$-stable vector bundle is $D$-simple for every divisor $D$ of degree $\delta$.
+\end{lem}
+
+\begin{proof}
+Suppose $E$ is $\delta$-stable but not $D$-simple. Let $f$ be a nonzero section of $H^0(\Sigma, (\End E)(-D))$. $N := \Ker(f)$ is a proper subbundle of $E(D)$ and $Q := \image(f)$ is a proper subsheaf of $E$. Let $\mu$ denote the slope function.
+\begin{align*}
+\mu(Q) &= \frac{\deg E(D) - \deg N}{\rank E - \rank N} = \frac{\deg E + \delta \cdot \rank E - \deg N}{\rank E - \rank N} \\[1ex]
+&\overset{\delta\text{-stability}}{>}
+\frac{\begin{aligned}\deg E + \delta \cdot \rank E {}&- \rank N\biggl[\mu(E) \\[-1mm]
+&+ \delta \left(1 + \dfrac{1}{\rank N} - \dfrac{1}{\rank E}\right)\biggr]\end{aligned}}{\rank E - \rank N} \\[1ex]
+&= \mu(E) + \frac{\delta \left[ \rank E - \rank N \left( 1 + \dfrac{1}{\rank N} - \dfrac{1}{\rank E} \right) \right]}{\rank E - \rank N} \\[1ex]
+&= \mu(E) + \delta \left( 1 - \frac{1}{\rank E} \right) \\
+&\geqslant \mu(E) + \delta \left( \frac{1}{\rank Q} - \frac{1}{\rank E} \right).
+\end{align*}
+This contradicts the $\delta$-stability of $E$.
+\end{proof}
+
+\begin{defn}\label{t4.7}
+Let $G_D := \bigl[\Aut_{\cO_D}\bigl(\bigoplus_{i=1}^{r} \cO_D\bigr)\bigr] / \mathbb{C}^*$. Let $\mathfrak{g}_D$ be its Lie algebra.
+\end{defn}
+
+We will refer to $G_D$ as the \emph{level group}. If $D$ is reduced then $G_D$ is isomorphic to $GL(r) \times \cdots \times GL(r)/\mathbb{C}^*$.
+
+$G_D$ acts on $\cU_\Sigma(r, d, D)$. It follows from Lemma \ref{t4.6} that the stabilizer of $[(E, \eta)] \in \cU_\Sigma(r, d, D)$ is anti isomorphic to $\Aut(E)/\mathbb{C}^*$ (where an anti isomorphism means an isomorphism composed with the inversion map).
+
+\section{Symplectic geometry}\label{sec:5}
+
+We will review in this section a few basic facts in symplectic geometry. For more information see for example \cite{A-G} or \cite{W}. Throughout this section, a variety will mean a complex algebraic quasiprojective variety.
+
+\begin{defn}\label{t5.1}
+Let $X$ be a smooth variety. A \emph{symplectic structure} $\omega$ on $X$ is an everywhere nondegenerate closed 2-form on $X$.
+\end{defn}
+
+\begin{exmp}\label{t5.2}
+Let $M$ be a smooth algebraic variety. Let $p \colon \tot{T^*M} \to M$ be its cotangent bundle. $\tot{T^*M}$ admits a canonical symplectic structure $\omega$, where $\omega := d\theta$, $\theta \in H^0(\tot{T^*M}, p^*(T^*M)) \subset H^0(\tot{T^*M}, T^*\tot{T^*M})$ is the tautological 1-form.
+\end{exmp}
+
+\begin{defn}\label{t5.3}
+Let $X$ be a smooth algebraic variety. A \emph{Poisson structure} $\Omega$ on $X$ is a section $\Omega \in H^0(X, \wedge^2 TX)$ such that the Poisson bracket
+\[
+\{F, G\} := \langle (dF, dG), \Omega \rangle
+\]
+defines a Lie algebra structure on the structure sheaf $\cO_X$ and satisfies the Liebniz identity
+\[
+\{FG, H\} = F\{G, H\} + \{F, H\}G.
+\]
+\end{defn}
+
+Conversely any Lie algebra structure on $\cO_X$ satisfying the Liebniz identity arises in this way.
+
+\begin{rem}\label{t5.4}
+Given a symplectic structure $\omega$ on $M$ we get an isomorphism $TM \cong T^*M$ and thus a section $\Omega \in \wedge^2 TX$ which defines a Poisson structure. Conversely, any nondegenerate Poisson structure is of this form.
+\end{rem}
+
+\begin{exmp}\label{t5.5}
+Let $G$ be a Lie group, $\mathfrak{g}$ its Lie algebra. The dual $\mathfrak{g}^*$ admits a canonical Poisson structure called the \emph{Kostant--Kirillov} Poisson structure. It corresponds to the Poisson bracket
+\[
+\{F, G\}(\xi) := \langle \xi, [dF|_{\xi}, dG|_{\xi}] \rangle,
+\]
+i.e., $\Omega|_{\xi}(\cdot, \cdot) = \xi([\cdot, \cdot])$.
+\end{exmp}
+
+Given a Poisson structure $\Omega$ on $X$ we get a homomorphism $f_\Omega \colon T^*X \to TX$. Given a function $F$ on $X$, $\xi_F := f_\Omega(dF)$ is a vector field on $X$ which is called a \emph{Hamiltonian vector field}. This defines a Lie algebra homomorphism from $(\cO_X, \{\,,\})$ to $(TX, [\,,])$. If $\xi_F$ is a Hamiltonian vector field then the Lie derivative $\mathcal{L}_{\xi_F} \Omega = 0$ and $dF(\xi_F) = 0$. This corresponds to the fact that $F$ and $\Omega$ are invariant under the Hamiltonian action of the 1-parameter group corresponding to $\xi_F$.
+
+\begin{defn}\label{t5.6}
+A morphism $f \colon X \to Y$ of Poisson varieties is a \emph{Poisson map} if it preserves the Poisson bracket, i.e., $f^*\{F, G\}_Y = \{f^*F, f^*G\}_X$ or equivalently $df(\Omega_X) = f^*(\Omega_Y)$.
+\end{defn}
+
+The rank of the Poisson structure at a point $x \in X$ is the rank of the homomorphism $f_\Omega$. It defines a stratification of $X$. Let $X_r$ be the stratum of rank $r$. Then $\Omega|_{X_r} \in \wedge^2 TX_r$ and is a Poisson structure on $X_r$. Each stratum has a canonical (analytic in general) foliation into symplectic leaves defined by the involutive subbundle $\Omega|_{X_r}(T^*X_r)$. If $S \subset X_r$ is a symplectic leaf, then $\Omega|_S \in \wedge^2 TS$ and is nondegenerate (i.e., defines a symplectic structure).
+
+\begin{defn}\label{t5.7}
+A \emph{Casimir function}, or \emph{invariant function}, on a Poisson variety is a function $F$ with zero Hamiltonian vector field.
+\end{defn}
+
+Locally on $X_r$ the Casimir functions define the foliation into symplectic leaves.
+
+\begin{exmp}\label{t5.8}
+On the dual $\mathfrak{g}^*$ of a Lie algebra the symplectic leaves of the Kostant--Kirillov Poisson structure are the coadjoint orbits. The global Casimir functions are the invariant polynomials.
+\end{exmp}
+
+Let $G$ be a connected algebraic group acting on a smooth connected symplectic variety $(S, \omega)$. We have a canonical homomorphism $\mathfrak{g} \to H^0(S, TS)$. The action is \emph{Hamiltonian} if the vector fields corresponding to elements of $\mathfrak{g}$ are Hamiltonian. This implies, in particular, that $G$ acts by Poisson automorphisms. Given $\xi, \eta \in \mathfrak{g}$ we can choose corresponding Hamiltonian functions $H_\xi$, $H_\eta$. If there is a consistent choice $\mathfrak{g} \to \Gamma(S, \cO_S)$ which is a Lie algebra homomorphism, then the action is called \emph{Poisson}. The corresponding morphism $\mu \colon S \to \mathfrak{g}^*$ is called a \emph{moment map}.
+
+Suppose that $\mu$ is submersive. Suppose that the quotient $Q := S/G$ exists and is smooth. Then $Q$ has a canonical Poisson structure. Let $\mathcal{O} \subset \mathfrak{g}^*$ be a coadjoint orbit. Given $\xi \in \mathcal{O}$ let $G_\xi := \Stab_G(\xi)$. Let $S_\xi := \mu^{-1}(\xi)$. Then the connected components of $S_\xi / G_\xi$ are symplectic leaves of $Q$. If $\mu$ has connected fibers, then there is a canonical bijection between coadjoint orbits in $\mu(S)$ and symplectic leaves of $Q$. $S_\xi / G_\xi$ is called \emph{the reduced space} and the above procedure is called \emph{Marsden--Weinstein reduction}.
+
+\begin{defn}\label{t5.9}
+Let $(X, \omega)$ be a symplectic variety. An irreducible subvariety $Y \subset X$ is \emph{isotropic} if for a generic $y \in Y$, the subspace $T_y Y$ is an isotropic subspace of $\omega$, i.e., $\omega|_{T_y Y} = 0$. It is \emph{Lagrangian} if $\dim Y = \frac{1}{2}\dim X$.
+\end{defn}
+
+\begin{defn}\label{t5.10}
+Let $(X, \Omega)$ be a Poisson variety. An irreducible subvariety $Y \subset X$ is \emph{isotropic} (resp. \emph{Lagrangian}) if it is generically an isotropic (resp. Lagrangian) subariety of a symplectic leaf; i.e., $Y$ is contained in the closure $\overline{S}$ of a symplectic leaf $S \subset X$ and the intersection $Y \cap S$ is an isotropic (resp. Lagrangian) subvariety of $S$.
+\end{defn}
+
+An algebraically completely integrable Hamiltonian system structure on a family $H \colon X \to B$ of abelian varieties is a Poisson structure on $X$ with respect to which $H \colon X \to B$ is a Lagrangian fibration. We will extend this definition to families of abelian varieties with degenerate fibers:
+
+\begin{defn}\label{t5.11}
+Let $X$ be a smooth algebraic variety (not necessarily complete), $B$ an algebraic variety, $\Delta$ a proper closed subvariety of $B$, and $H \colon X \to B$ a proper morphism such that the fibers over the complement of $\Delta$ are isomorphic to abelian varieties. A Poisson structure on $X$ is an \emph{algebraically completely integrable Hamiltonian system structure} on $H \colon X \to B$ if $H \colon X \to B$ is a Lagrangian fibration over the complement of $\Delta$.
+\end{defn}
+
+\begin{rem}\label{t5.12}
+It follows from the definition that, away from $\Delta$, the Hamiltonian vector fields corresponding to functions on $B$ are tangent to the fibers of $H$ and are translation invariant.
+\end{rem}
+
+\section{The moduli space of Higgs pairs as an orbit space}\label{sec:6}
+
+\subsection{The cotangent bundle}\label{sec:6.1}
+
+We show in this section that a Zariski open subset of the moduli space $\MH$ of Higgs pairs is the orbit space of the action of the level group on the cotangent bundle to the moduli space of vector bundles with $D$-level structure.
+
+This realization introduces a canonical Poisson structure on an open dense subset of $\MHs$. In Section \ref{sec:7} the Poisson structure will be extended to the smooth locus of $\MHs$.
+
+We will first realize the cotangent bundle $\tot{T^*\cU_\Sigma(r, d, D)}$ as a moduli space of triples $(E, \varphi, \eta)$ of $L$-twisted Higgs pairs with $D$-level structure (Definition \ref{t6.5}).
+
+Let $D$ be an effective divisor of degree $\delta \geqslant 0$.
+
+\begin{prop}\label{t6.1}
+$\cU_\Sigma(r, d, D)$ is a smooth quasi projective variety. The tangent space $T_{[(E,\eta)]}\cU_\Sigma(r, d, D)$ is canonically isomorphic to $H^1(\Sigma, \End E(-D))$.
+\end{prop}
+
+\begin{rem}\label{t6.2}
+The isomorphism
+\[
+\tau_{(E, \eta)} \colon T_{[(E, \eta)]}\cU_\Sigma(r, d, D) \to H^1(\Sigma, \End E(-D))
+\]
+depends on the representative $(E, \eta) \in [(E, \eta)]$. Given $f \in \Aut(E)$ we have:
+\[
+\tau_{(E, \eta \circ f^{-1})} = H^1(\Ad(f)) \circ \tau_{(E, \eta)}.
+\]
+\end{rem}
+
+\begin{proof}[Proof of Proposition \ref{t6.1}]
+The smoothness follows from that of the bundle over the Hilbert scheme of which it is a geometric quotient. One carries out the construction of the infinitesimal deformation maps along the lines of the construction for deformations of vector bundles alone (see \cite{Se}, Appendix 3). The result is:
+\end{proof}
+
+\begin{lem}\label{t6.3}
+Let $S$ be a smooth quasiprojective variety. Let $(\cE, \eta)$ be a family of rank $r$ vector bundles of degree $d$ with $D$ level structure. There exists a canonical sheaf homomorphism
+\[
+\tau \colon TS \to R^1 p_{S*}\bigl(\End \cE \otimes \cO_{S \times \Sigma}(-S \times D)\bigr)
+\]
+called the infinitesimal deformation map associated to the family.
+\end{lem}
+
+\begin{proof}
+Let $\KK_{\cE, \eta}$ be the complex
+\[
+\End \cE \xrightarrow{\ \eta \circ (\cdot)\ } \Hom\Bigl(\cE, \bigoplus_{i=1}^{r} \cO_{S \times D}\Bigr).
+\]
+We first construct an infinitesimal deformation map $\tau' \colon TS \to R^1 p_{S*}(\KK_{\cE, \eta})$. Then we use the quasi isomorphism induced by the injection of complexes:
+\[
+\bigl((\End \cE)(-S \times D) \to 0\bigr) \to \KK_{\cE, \eta}
+\]
+to obtain $\tau$.
+\end{proof}
+
+The proposition follows from the lemma via standard deformation theoretic arguments.
+
+\begin{rem}\label{t6.4}
+The cotangent space $T^*_{[(E, \eta)]}\cU_\Sigma(r, d, D)$ is canonically isomorphic, by Serre's duality, to $H^0(\Sigma, (\End E)^* \otimes K(D))$ and via the trace form to $H^0(\Sigma, \End E \otimes K(D))$. This is the \emph{key} observation relating the moduli space $\cU_\Sigma(r, d, D)$ with the moduli space $\MH$ of $K(D)$-twisted Higgs pairs.
+\end{rem}
+
+\begin{defn}\label{t6.5}
+Let $L$ be a line bundle on $\Sigma$. A rank $r$ \emph{$L$-twisted Higgs pair with $D$-level structure} is a triple $(E, \varphi, \eta)$, where $\varphi \in H^0(\Sigma, \End E \otimes L)$ and $(E, \eta)$ is a rank $r$ vector bundle with $D$-level structure.
+\end{defn}
+
+Two $L$-twisted Higgs pairs with $D$-level structures $(E_1, \varphi_1, \eta_1)$, $(E_2, \varphi_2, \eta_2)$ are said to be isomorphic if there exists an isomorphism $f \colon E_1 \xrightarrow{\sim} E_2$ such that $\eta_2 \circ f = \eta_1$ and $\varphi_2 \circ f = (f \otimes \mathrm{id}_L) \circ \varphi_1$.
+
+Let $L = K_\Sigma(D)$. The closed points of $\tot{T^*\cU_\Sigma(r, d, D)}$ parameterize isomorphism classes of $L$-twisted Higgs pairs with $D$-level structure.
+
+Let $\MHds$ be the open subset of $\MHs$ of stable Higgs pairs with a $\delta$-stable vector bundle. Let $\tot{T^*\cU_\Sigma(r, d, D)}^{H-s}$ be the open subset of $\tot{T^*\cU_\Sigma(r, d, D)}$ of triples $(E, \varphi, \eta)$ with a stable Higgs pair $(E, \varphi)$. Let
+\[
+\lbar \colon \tot{T^*\cU_\Sigma(r, d, D)}^{H-s} \to \MHds
+\]
+be the forgetful morphism. (It is indeed an algebraic morphism because $\MHs$ is a coarse moduli space and $\tot{T^*\cU_\Sigma(r, d, D)}$ is the descent of a bundle over a Hilbert scheme which is (by Proposition \ref{t6.1}) the base of a family of Higgs pairs.)
+
+\begin{rem}\label{t6.6}
+$\tot{T^*\cU_\Sigma(r, d, D)}^{H-s}$ is nonempty if
+\begin{enumerate}
+    \item $g = 0$ and $\delta > \max(2, \rho)$ ($\rho$ as in Remarks \ref{t4.3}).
+    \item $g = 1$ and $\delta > 0$
+    \item $g = 1$ and $\delta = 0$ and $\gcd(r, d) = 1$
+    \item $g \geqslant 2$.
+\end{enumerate}
+\end{rem}
+
+We will restrict attention to these cases only.
+
+Let $\HL \colon \tot{T^*\cU_\Sigma(r, d, D)} \to B_L$ be the invariant polynomial morphism. (Defined in Section \ref{sec:2}).
+
+The $G_D$-action on $\cU_\Sigma(r, d, D)$ may be lifted to $\tot{T^*\cU_\Sigma(r, d, D)}$. $\tot{T^*\cU_\Sigma(r, d, D)}^{H-s}$ and $\lbar$ are $G_D$-invariant. Moreover each fiber of $\lbar$ consists of a single (closed) $G_D$-orbit.
+
+\begin{lem}\label{t6.7}
+$G_D$ acts freely on $\tot{T^*\cU_\Sigma(r, d, D)}^{H-s}$.
+\end{lem}
+
+\begin{proof}
+It follows from Lemma \ref{t4.6} and Remark \ref{t6.2} that the stabilizer of $(E, \varphi, \eta)$ is anti isomorphic to $\Aut(E, \varphi)$ or $\Aut(E)/(\mathbb{C}^* \cdot \mathrm{id})$ if $\varphi = 0$. But a stable Higgs pair is simple. Here we call an isomorphism composed with the inversion map an anti isomorphism.
+\end{proof}
+
+By the general construction described in Section \ref{sec:5} we get:
+
+\begin{cor}\label{t6.8}
+The open subset $\MHds$ of stable Higgs pairs with $\delta$-stable vector bundle has a canonical Poisson structure.
+\end{cor}
+
+\subsection{The action of the level group is Poisson}\label{sec:6.2}
+
+The lifting of a group action on a manifold $U$ to its cotangent bundle $T^*U$ is always Hamiltonian and has a canonical moment map (see \cite{A-G}). We will identify the moment map for the action of the level group (Definition \ref{t6.10} and Remark \ref{t6.11}). The moment map will be used later (Proposition \ref{t8.8}) to identify the symplectic leaves foliation of $\MH$.
+
+The proof (Proposition \ref{t6.12}) of this identification consists of a lengthy unwinding of the cohomological identifications. We include it for the sake of completeness, though the reader might prefer to be convinced by the naturality of its definition and the a priori knowledge of its existence.
+
+Let $E$ be a vector bundle of rank $r$ and degree $d$. We have a short exact sequence:
+\[
+0 \to (\End E) \otimes \cO_\Sigma(-D) \xrightarrow{\ i\ } \End E \to \End E|_D \to 0.
+\]
+
+Hence the long exact cohomology sequence:
+\[
+0 \to H^0(\Sigma, \End E(-D)) \xrightarrow{\ H^0(i)\ } H^0(\Sigma, \End E) \to H^0(D, \End E|_D)
+\]
+\[
+\xrightarrow{\ \delta\ } H^1(\Sigma, \End E(-D)) \xrightarrow{\ H^1(i)\ } H^1(\Sigma, \End E) \to 0.
+\]
+
+Using Serre's duality we get the commutative diagram:
+\[
+\begin{tikzcd}[column sep=large]
+H^1(\Sigma, \End E(-D)) \arrow[r, "H^1(i)"] \arrow[d, "\cong"'] & H^1(\Sigma, \End E) \arrow[d, "\cong"] \\
+H^0(\Sigma, (\End E)^* \otimes K(D))^* \arrow[r, "{H^0(i \otimes \mathrm{id}_K)^*}"'] & H^0(\Sigma, (\End E)^* \otimes K)^*.
+\end{tikzcd}
+\]
+
+Thus we get canonical isomorphisms:
+\begin{align*}
+\bigl[H^0(D, \End E|_D) / H^0(\Sigma, \End E)\bigr] &\cong \Ker\bigl[H^0(i \otimes \mathrm{id}_K)^*\bigr] \\
+&\cong \bigl[\coker\bigl(H^0(i \otimes \mathrm{id}_K)\bigr)\bigr]^* \\
+&\cong \left[\frac{H^0(\Sigma, (\End E)^* \otimes K(D))}{H^0(\Sigma, (\End E)^* \otimes K)}\right]^*.
+\end{align*}
+
+Let $\alpha$ be the dual of the composition of the above isomorphisms.
+
+\begin{defn}\label{t6.9}
+Let $\mu_E$ be the homomorphism defined by composing $\alpha$ with the canonical projection and injection:
+\begin{align*}
+H^0(\Sigma, (\End E)^* \otimes K(D)) &\to \left[\frac{H^0(\Sigma, (\End E)^* \otimes K(D))}{H^0(\Sigma, (\End E)^* \otimes K)}\right] \\
+&\xrightarrow{\ \alpha\ } \bigl[H^0(D, \End E|_D) / H^0(\Sigma, \End E)\bigr]^* \\
+&\hookrightarrow \bigl[H^0(D, \End E|_D) / \mathbb{C}\bigr]^*.
+\end{align*}
+\end{defn}
+
+\begin{defn}\label{t6.10}
+Let $\mu \colon \tot{T^*\cU_\Sigma(r, d, D)} \to \mathfrak{g}_D^*$ be the morphism sending $[(E, \varphi, \eta)]$ to $\eta \circ (\mu_E \varphi) \circ \eta^{-1}$.
+\end{defn}
+
+Notice that although $\eta$ is defined only up to an orbit of $\Aut(E)$, $\eta \circ (\mu_E \varphi) \circ \eta^{-1}$ is well defined.
+
+\begin{rem}\label{t6.11}
+$\mu_E$ and $\alpha$ are induced by the pairing
+\[
+H^0(\Sigma, (\End E)^* \otimes K(D)) \otimes H^0(D, \End E|_D) \to H^0(D, K(D)|_D) \xrightarrow{\ \text{residue}\ } \mathbb{C}.
+\]
+\end{rem}
+
+\begin{prop}\label{t6.12}
+The morphism $\mu$ is the canonical moment map for the Poisson $G_D$-action on $\tot{T^*\cU_\Sigma(r, d, D)}$.
+\end{prop}
+
+\begin{proof}
+Let $G$ be a group acting on a manifold $U$. The canonical moment map of the lifted action to $T^*U$ sends a pair $(u, \varphi)$ of a point $u \in U$ and a covector $\varphi \in T_u^*U$ to $d\rho_u^*(\varphi)$ where $\rho_u \colon G \to U$ sends $g \in G$ to $gu$ (see \cite{A-G}).
+
+Let $[(E, \eta)] \in \cU_\Sigma(r, d, D)$ be a fixed pair and $\rho_{E, \eta} \colon G_D \to \cU_\Sigma(r, d, D)$ the morphism induced by the action onto the orbit of $[(E, \eta)]$. Lemma \ref{t6.13} identifies the differential of $\rho_{E, \eta}$.
+\end{proof}
+
+\begin{lem}\label{t6.13}
+The infinitesimal deformation map of vector bundles with level structure gives rise to a right exact sequence:
+\[
+\mathfrak{g}_D \xrightarrow{\ \sigma\ } H^1(\Sigma, \End E(-D)) \to H^1(\End E) \to 0,
+\]
+depending canonically on a choice of a pair $(E, \eta)$ in an isomorphism class $[(E, \eta)]$. The homomorphism $\sigma$ is canonically identified with the differential of $\rho_{E, \eta}$.
+\end{lem}
+
+\begin{proof}
+Consider the short exact sequence of complexes:
+\[
+0 \to \Bigl(0 \to \Hom\Bigl(E|_D, \bigoplus_{i=1}^{r} \cO_D\Bigr)\Bigr) \xrightarrow{\ a\ } (\KK_{E, \eta}) \to (\End E \to 0) \to 0.
+\]
+The one dimensional hypercohomology of these complexes computes the spaces of infinitesimal deformations of the space of level structures on $E$, the moduli space of pairs of vector bundles with level structures (see Lemma \ref{t6.3}), and the moduli space of vector bundles respectively. The exact sequence
+\begin{align*}
+0 \to H^0(\Sigma, \End E) &\to H^0\Bigl(D, \Hom\Bigl(E|_D, \bigoplus_{i=1}^{r} \cO_D\Bigr)\Bigr) \\
+&\to \HH^1(\KK_{E, \eta}) \to H^1(\Sigma, \End E) \to 0
+\end{align*}
+is part of the corresponding long exact hypercohomology sequence. The induced homomorphism
+\begin{align*}
+\bar{a} \colon \frac{H^0\Bigl(D, \Hom\bigl(E|_D, \bigoplus_{i=1}^{r} \cO_D\bigr)\Bigr)}{H^0(\Sigma, \End E)}
+&\to \HH^1(\KK_{E, \eta}) \\
+&\xrightarrow{\ \sim\ } H^1(\Sigma, \End E(-D))
+\end{align*}
+is the corresponding differential of the morphism from the space of \emph{isomorphism classes} of level structures on $E$ to the moduli space of pairs $\cU_\Sigma(r, d, D)$.
+
+The level structure $(E, \eta)$ induces a surjective homomorphism
+\[
+\mathfrak{g}_D \xrightarrow{\ b\ } H^0\Bigl(D, \Hom\Bigl(E|_D, \bigoplus_{i=1}^{r} \cO_D\Bigr)\Bigr) \Big/ H^0(\Sigma, \End E).
+\]
+Define $\sigma$ to be $\bar{a} \circ b$. The differential of $\rho_{E, \eta}$ is identified by $\sigma$.
+\end{proof}
+
+Comparing Definition \ref{t6.10} with Lemma \ref{t6.13} we see that $\sigma^*$ is equal to the restriction of $\mu$ to the cotangent space $T^*_{[(E, \eta)]}\cU_\Sigma(r, d, D) \cong H^1(\End E(-D))^*$. This completes the proof of Proposition \ref{t6.12}.
+
+\section{The Poisson structure}\label{sec:7}
+
+In this section we extend the Poisson structure to the smooth locus of the moduli space $\MHs$ of Higgs pairs (Corollary \ref{t7.15}). As a result, the complete Jacobians of smooth spectral curves will be contained in the Poisson variety.
+
+In Section \ref{sec:7.1} we provide a cohomological identification of the tangent spaces to points in the moduli spaces:
+\begin{itemize}
+    \item $\MHs$ of Higgs pairs (Corollary \ref{t7.9}) and
+    \item $\tot{T^*\cU_\Sigma(r, d, D)}$ of Higgs pairs with $D$-level structure (Corollary \ref{t7.8}).
+\end{itemize}
+In Section \ref{sec:7.2}, we use the duality theorem to construct cohomologically an anti symmetric bilinear form on the tangent bundle to the \emph{smooth locus} of the moduli space of Higgs pairs. We then show that it extends the Poisson structure constructed in Section \ref{sec:6}, Corollary \ref{t6.8} over a Zariski open subset.
+
+The section is quite technical and one might prefer to skip it on his first reading.
+
+\subsection{Deformations of Higgs pairs with level structure}\label{sec:7.1}
+
+Let $D, D'$ be two effective divisors of degrees $\delta$, $\delta'$ (possibly zero) and let $L = K(D)$. Assume that there exists a coarse moduli space $M(D, D')$ of isomorphism classes of triples $(E, \varphi, \eta)$ of Higgs pairs $(E, \varphi)$ with $D'$-level structure $\eta$. We will identify the infinitesimal deformation spaces of such triples. The case $D' = o$ will specialize to the case of Higgs pairs and the case $D = D'$ will compute the tangent space to the cotangent bundle $\tot{T^*\cU_\Sigma(r, d, D)}$ of the moduli space of vector bundles with $D$-level structure.
+
+Given a twisted endomorphism $\varphi \in H^0(\Sigma, \End E \otimes L)$ define $\ad \varphi \colon \End E \to \End E \otimes L$ by $\ad \varphi(\psi) = \varphi \circ \psi - \psi \circ \varphi$. Let $s$ be the section $1 \in H^0(\Sigma, \cO_\Sigma(D'))$. Let $\partial := -\ad \varphi \circ (\otimes s)$ and let $\KK_{E, \varphi, D'}$ be the complex:
+\[
+(\End E) \otimes \cO_\Sigma(-D') \xrightarrow{\ \partial\ } (\End E) \otimes L.
+\]
+
+\begin{prop}\label{t7.1}
+Let $[(E, \varphi, \eta)]$ be a point of $M(D, D')$. A representative $(E, \varphi, \eta) \in [(E, \varphi, \eta)]$ determines a canonical isomorphism between the Zariski tangent space $T_{[(E, \varphi, \eta)]}M(D, D')$ and the hypercohomology $\HH^1(\KK_{E, \varphi, D'})$ of the complex.
+\end{prop}
+
+\begin{rem}\label{t7.2}
+The isomorphism in Proposition \ref{t7.1} depends on the representative $(E, \varphi, \eta)$ in the isomorphism class $[(E, \varphi, \eta)]$ in the same manner as in Remark \ref{t6.2}.
+\end{rem}
+
+\begin{proof}[Proof of Proposition \ref{t7.1}]
+The proof ends with Lemma \ref{t7.6}. We first prove it with the complex $\KK_{\cE, \varphi, \eta}$ (defined below) instead of $\KK_{E, \varphi, D'}$. We then show that the two complexes are quasi isomorphic (Lemma \ref{t7.6}).
+
+Let $S$ be a smooth quasiprojective variety. Let $(\cE, \varphi, \eta)$ be a family of $L$-twisted Higgs pairs with $D'$ level structure. Let $m_\eta \colon \End \cE \to \Hom(\cE, \bigoplus_{i=1}^{r} \cO_{S \times D'})$ be composition with $\eta$. Let $\partial_{\varphi, \eta} := -(\ad \varphi, m_\eta)$. Let $\KK_{\cE, \varphi, \eta}$ be the complex
+\[
+\End \cE \xrightarrow{\ \partial_{\varphi, \eta}\ } (\End \cE \otimes p_\Sigma^* L) \oplus \Hom\Bigl(\cE, \bigoplus_{i=1}^{r} \cO_{S \times D'}\Bigr).
+\]
+\end{proof}
+
+\begin{lem}\label{t7.3}
+There exists a canonical sheaf homomorphism
+\[
+\rho \colon TS \to R^1 p_{S*}(\KK_{\cE, \varphi, \eta})
+\]
+called the infinitesimal deformation map associated to the family.
+\end{lem}
+
+The construction of the infinitesimal deformation map is a straightforward modification of the construction for deformations of vector bundles alone (see \cite{Se}, Appendix 3). We will describe the construction only in the case of an infinitesimal family $S = \Spec(\mathbb{C}[\varepsilon]/(\varepsilon^2))$.
+
+Choose a \v{C}ech covering $\mathcal{U} := (U_\alpha)$ of $\Sigma$. Let $\mathcal{W} := (W_\alpha)$ be the covering of $S \times \Sigma$ by $W_\alpha = S \times U_\alpha$. The definition of the complex $\KK_{\cE, \varphi, \eta}$ is motivated by:
+
+\begin{lem}\label{t7.4}
+Fix a Higgs pair $(E_0, \varphi_0)$. A cochain $(\hat{f}, \hat{\varphi}, \hat{\eta}) := ((\hat{f}_{\alpha \beta}), (\hat{\varphi}_\alpha), (\hat{\eta}_\alpha))$ in $C^0(\mathcal{W}, \KK_{E_0, \varphi_0, \eta_0})$ is a cocycle if and only if
+\begin{enumerate}
+    \item The cochain $\hat{f}$ is a cocycle in $Z^1(\mathcal{U}, \End E)$,
+    \item The cochain $\varphi_0 + \varepsilon \cdot \hat{\varphi}$ in $C^0(\mathcal{W}, p_\Sigma^*(\End E \otimes L))$ is a global section $\varphi$ of $\End \cE \otimes p_\Sigma^*(L)$ where $\cE$ is the infinitesimal family of vector bundles over $S \times \Sigma$ defined by the new gluing transformations $(f_{\alpha \beta}) := (\mathrm{id} + \varepsilon \cdot \hat{f}_{\alpha \beta})$ for $p_\Sigma^* E$, and
+    \item The cochain $(\eta_0 + \varepsilon \cdot \hat{\eta})$ in $C^0(\mathcal{W}, \Hom(p_\Sigma^* E, \bigoplus_{i=1}^{r} \cO_{S \times D'}))$ is a global section $\eta$ of $\Hom(\cE, \bigoplus_{i=1}^{r} \cO_{S \times D'})$.
+\end{enumerate}
+Moreover, two cocycles $((\hat{f}_{\alpha \beta}), (\hat{\varphi}_\alpha), (\hat{\eta}_\alpha))$, $((\hat{f}'_{\alpha \beta}), (\hat{\varphi}'_\alpha), (\hat{\eta}'_\alpha))$ represent the same hypercohomology class if and only if the corresponding infinitesimal families $(\cE, \varphi, \eta)$ and $(\cE', \varphi', \eta')$ are isomorphic.
+\end{lem}
+
+\begin{proof}
+The cochain $(\hat{f}, \hat{\varphi}, \hat{\eta})$ is a cocycle if and only if
+\begin{enumerate}
+    \item[(i)] $\delta(\hat{f}) = 0$ and
+    \item[(ii)] $-\ad_{\varphi_0}(\hat{f}) = \delta(\hat{\varphi})$ and
+    \item[(iii)] $-\eta_0 \circ \hat{f} = \delta(\hat{\eta})$.
+\end{enumerate}
+In order to verify that 2 and (ii) are equivalent we need to show that $f_{\alpha \beta} \circ \varphi_\beta \circ f_{\alpha \beta}^{-1} = \varphi_\alpha$ if and only if $-\ad_{\varphi_0}(\hat{f}) = \delta(\hat{\varphi})$. Indeed,
+\begin{align*}
+f_{\alpha \beta} \circ \varphi_\beta \circ f_{\alpha \beta}^{-1} &= (\mathrm{id} + \varepsilon \cdot \hat{f}_{\alpha \beta}) \circ (\varphi_0 + \varepsilon \cdot \hat{\varphi}_\beta) \circ (\mathrm{id} - \varepsilon \cdot \hat{f}_{\alpha \beta}) \\
+&= \varphi_0 + \varepsilon \cdot \hat{\varphi}_\beta + \varepsilon(\hat{f}_{\alpha \beta}\varphi_0 - \varphi_0 \hat{f}_{\alpha \beta}) \\
+&= \varphi_0 + \varepsilon \cdot \hat{\varphi}_\beta - \varepsilon \cdot \ad_{\varphi_0}(\hat{f}_{\alpha \beta}) \\
+&= \varphi_0 + \varepsilon \cdot \hat{\varphi}_\alpha - \varepsilon\bigl[\ad_{\varphi_0}(\hat{f}_{\alpha \beta}) - (\hat{\varphi}_\alpha - \hat{\varphi}_\beta)\bigr].
+\end{align*}
+
+In order to verify that 3 and (iii) are equivalent we need to show that $\eta_\alpha = \eta_\beta \circ f_{\beta \alpha}$ if and only if $-\eta_0 \circ \hat{f} = \delta(\hat{\eta})$. Indeed,
+\[
+\eta_\beta \circ f_{\beta \alpha} = (\eta_0 + \varepsilon \cdot \hat{\eta}_\beta) \circ (\mathrm{id} + \varepsilon \cdot \hat{f}_{\beta \alpha}) = \eta_0 + \varepsilon \cdot \hat{\eta}_\alpha + \varepsilon\bigl[\eta_0 \circ \hat{f}_{\beta \alpha} - (\hat{\eta}_\alpha - \hat{\eta}_\beta)\bigr].
+\]
+
+It remains to check that the cocycle $(\hat{f}, \hat{\varphi}, \hat{\eta})$ is a coboundary if and only if the family $(\cE, \varphi, \eta)$ is a trivial deformation. Indeed, given a cochain $\hat{g} := (\hat{g}_\alpha)$ in $C^0(\KK_{E_0, \varphi_0, \eta_0})$ (which is in fact in $C^0(\End E_0)$) it cobounds $(\hat{f}, \hat{\varphi}, \hat{\eta})$ if and only if
+\begin{enumerate}
+    \item $\hat{f}_{\alpha \beta} = \hat{g}_\alpha - \hat{g}_\beta$
+    \item $\hat{\varphi}_\alpha = -\ad \varphi_0(\hat{g}_\alpha)$
+    \item $\hat{\eta}_\alpha = -\eta_0 \circ \hat{g}_\alpha$
+\end{enumerate}
+if and only if the isomorphism $g \colon p_\Sigma^* E_0 \xrightarrow{\sim} \cE$ defined by $g_\alpha := (\mathrm{id} + \varepsilon \cdot \hat{g}_\alpha)$ relates the family $(\cE, \varphi, \eta)$ to the trivial family $(p_\Sigma^* E_0, p_\Sigma^* \varphi_0, p_\Sigma^* \eta_0)$.
+\end{proof}
+
+Given a family $(\cE, \varphi, \eta)$ on $S \times \Sigma$ restricting to $(E_0, \varphi_0, \eta_0)$ at $0 \times \Sigma$ we can choose a cocycle $(\hat{f}_{\alpha \beta})$ in $Z^1(\mathcal{U}, \End E_0)$ such that $\cE$ is the infinitesimal family of vector bundles which corresponds to the new gluing transformations $(\mathrm{id} + \varepsilon \cdot \hat{f}_{\alpha \beta})$ for $p_\Sigma^* E_0$. The cocycle $(\hat{f}_{\alpha \beta})$ determines unique cochains $(\hat{\varphi}_\alpha), (\hat{\eta}_\alpha)$ such that $\varphi$, $\eta$ are the global sections $(\varphi_0 + \varepsilon \cdot \hat{\varphi}_\alpha)$, $(\eta_0 + \varepsilon \cdot \hat{\eta}_\alpha)$. Lemma \ref{t7.4} implies that $((\hat{f}_{\alpha \beta}), (\hat{\varphi}_\alpha), (\hat{\eta}_\alpha))$ is a cocycle. The infinitesimal deformation map $\rho$ in Lemma \ref{t7.3} sends the canonical tangent vector of $S$ to the hypercohomology class represented by $((\hat{f}_{\alpha \beta}), (\hat{\varphi}_\alpha), (\hat{\eta}_\alpha))$.
+
+Conversely, given a hypercohomology class in $\HH^1(\KK_{E_0, \varphi_0, \eta_0})$ we get by Lemma \ref{t7.4} an infinitesimal family $(\cE, \varphi, \eta)$ over $S \times \Sigma$ and hence a tangent vector in the Zariski tangent space to the coarse moduli space $M(D, D')$. Thus we get:
+
+\begin{cor}\label{t7.5}
+Let $[(E, \varphi, \eta)]$ be a point of $M(D, D')$. There exists a canonical isomorphism
+\[
+\rho_{(E, \varphi, \eta)} \colon T_{[(E, \varphi, \eta)]}M(D, D') \to \HH^1(\KK_{E, \varphi, \eta}).
+\]
+\end{cor}
+
+Lemma \ref{t7.6} completes the proof of Proposition \ref{t7.1}.
+
+\begin{lem}\label{t7.6}
+Let $(\cE, \varphi, \eta)$ be a flat family of semistable $L$-twisted Higgs pairs with $D'$-level structure parameterized by $S$. There exists a canonical quasi-isomorphism identifying
+\[
+R^i p_{S*}(\KK_{\cE, \varphi, \eta}) \cong R^i p_{S*}(\KK_{\cE, \varphi, D'})
+\]
+for every $i \geqslant 0$.
+\end{lem}
+
+\begin{proof}
+Let $qi \colon \KK_{\cE, \varphi, D'} \to \KK_{\cE, \varphi, \eta}$ be the morphism of complexes defined by
+\[
+qi_0 \colon \End \cE(-D' \times S) \hookrightarrow \End \cE \quad \text{is the sheaf inclusion.}
+\]
+\[
+qi_1 \colon \End \cE \otimes p_\Sigma^* L \xrightarrow{\ (\mathrm{id}, 0)\ } (\End \cE \otimes p_\Sigma^* L) \oplus \Hom\Bigl(\cE, \bigoplus_{i=1}^{r} \cO_{D' \times S}\Bigr).
+\]
+One checks that $qi$ is a quasi isomorphism.
+\end{proof}
+
+The following lemma relates the notions of stability to smoothness of points in $M(D, D')$:
+
+Let $k(D, D')$ be the number of zero divisors among $(D, D')$.
+
+\begin{lem}\label{t7.7}
+The dimension of the Zariski tangent space $T_{(E, \varphi, \eta)}M(D, D')$ at a point $(E, \varphi, \eta)$ is $k(D, D') + r^2((2g - 2) + \delta + \delta')$ provided that either $(E, \varphi)$ is stable or that $E$ is $\min\{\delta, \delta'\}$-stable. In particular, if $\dim M(D, D') = k(D, D') + r^2((2g - 2) + \delta + \delta')$ then such a point is a smooth point.
+\end{lem}
+
+\begin{proof}
+Consider the exact sequence of complexes:
+\[
+0 \to (0 \to \End E \otimes L) \to \KK_{E, \varphi, D'} \to (\End E(-D') \to 0) \to 0
+\]
+and its long exact hypercohomology sequence:
+\begin{align*}
+0 &\to \HH^0(\KK_{E, \varphi, D'}) \to H^0(\End E(-D')) \\
+&\to H^0(\End E \otimes L) \to \HH^1(\KK_{E, \varphi, D'}) \to H^1(\End E(-D')) \\
+&\to H^1(\End E \otimes L) \to \HH^2(\KK_{E, \varphi, D'}) \to 0.
+\end{align*}
+If $(E, \varphi)$ is stable then $\HH^0(\KK_{E, \varphi, D'})$ is isomorphic to $(0)$ or $\mathbb{C}$ (depending whether $D' = 0$ or $D' > 0$). The same holds if $E$ is $D'$-stable. In this case Lemma \ref{t4.6} implies that $H^0(\Sigma, \End E(-D'))$ is isomorphic to $(0)$ or $\mathbb{C}$ and thus $\HH^0(\KK_{E, \varphi, D'})$ is isomorphic to $H^0(\Sigma, \End E(-D'))$. A dual argument (using Grothendieck duality as in Section \ref{sec:7.2}) shows that $\HH^2(\KK_{E, \varphi, D'})$ is isomorphic to $(0)$ or $\mathbb{C}$ (depending whether $D = 0$ or $D > 0$). Thus
+\begin{align*}
+\dim \HH^1(\KK_{E, \varphi, D'}) &= k(D, D') - \chi(\KK_{E, \varphi, D'}) \\
+&= k(D, D') + \chi(\End E \otimes L) - \chi(\End E(-D')) \\
+&= k(D, D') + r^2((2g - 2) + \delta + \delta').
+\end{align*}
+\end{proof}
+
+The cotangent bundle $\tot{T^*\cU_\Sigma(r, d, D)}$ may be regarded as the subset of a moduli space $M(D, D)$ (the case $D = D'$) parameterizing triples $[(E, \varphi, \eta)]$ with $\delta$-stable vector bundle $E$. Lemma \ref{t7.7} implies that $\tot{T^*\cU_\Sigma(r, d, D)}$ is an open subset. Let $\KK_{E, \varphi}$ be the complex $\KK_{E, \varphi, D}$. Proposition \ref{t7.1} implies in this case:
+
+\begin{cor}\label{t7.8}
+Let $[(E, \varphi, \eta)] \in \tot{T^*\cU_\Sigma(r, d, D)}$. Fix a representative $(E, \varphi, \eta) \in [(E, \varphi, \eta)]$.
+\begin{enumerate}
+    \item There is an isomorphism
+    \[
+    T_{[(E, \varphi, \eta)]}\tot{T^*\cU_\Sigma(r, d, D)} \cong \HH^1(\KK_{E, \varphi})
+    \]
+    (the hypercohomology of the complex) depending canonically on the representative $(E, \varphi, \eta)$.
+    \item The differential $d\tilde{p}$ of the bundle map $\tilde{p} \colon \tot{T^*\cU_\Sigma(r, d, D)} \to \cU_\Sigma(r, d, D)$ is canonically identified by the exact sequence:
+    \[
+    0 \to H^0(\Sigma, \End E \otimes L) \to \HH^1(\KK_{E, \varphi}) \xrightarrow{\ d\tilde{p}\ } H^1(\Sigma, \End E(-D)) \to 0.
+    \]
+\end{enumerate}
+\end{cor}
+
+The moduli space of stable $K(D)$-twisted Higgs pairs may be regarded as the moduli space $M(D, 0)$. Let $\overline{\KK}_{E, \varphi}$ be the complex $\KK_{E, \varphi, 0}$ i.e., the complex:
+\[
+\End E \xrightarrow{\ -\ad \varphi\ } (\End E) \otimes L.
+\]
+
+Proposition \ref{t7.1} and Lemma \ref{t7.7} imply in this case:
+
+\begin{cor}\label{t7.9}
+The moduli space $\MHs$ is smooth. Let $[(E, \varphi)]$ be a stable point in $\MHs$. A representative $(E, \varphi)$ of an isomorphism class $[(E, \varphi)]$ determines a canonical isomorphism
+\[
+T_{[(E, \varphi)]}\MHs \cong \HH^1(\overline{\KK}_{E, \varphi}).
+\]
+\end{cor}
+
+We will need also the cohomological identification of the differential of the forgetful morphism $\lbar \colon \tot{T^*\cU_\Sigma(r, d, D)}^{H-s} \to \MHs$ from the subset of the cotangent bundle consisting of triples $(E, \varphi, \eta)$ with a stable Higgs pair $(E, \varphi)$ to the moduli $\MHs$.
+
+\begin{cor}\label{t7.10}
+Let $[(E, \varphi, \eta)]$ be a stable Higgs pair with a $D$-level structure. Assume that $E$ is $\delta$-stable. The infinitesimal deformation spaces with and without level structures are related by the following canonical exact sequence
+\[
+0 \to \mathfrak{g}_D \to \HH^1(\KK_{E, \varphi}) \xrightarrow{\ \sigma\ } \HH^1(\overline{\KK}_{E, \varphi}) \to 0.
+\]
+The projection $\sigma$ is canonically identified with the differential of the forgetful morphism $\lbar \colon \tot{T^*\cU_\Sigma(r, d, D)}^{H-s} \to \MHs$.
+\end{cor}
+
+\begin{proof}
+This is part of the long exact sequence associated to the exact sequence of complexes:
+\[
+0 \to \KK_{E, \varphi} \to \overline{\KK}_{E, \varphi} \to (\End E|_D \to 0) \to 0.
+\]
+$\HH^0(\overline{\KK}_{E, \varphi}) \cong \mathbb{C}$ because $(E, \varphi)$ is stable. The level structure induces a canonical isomorphism $\mathfrak{g}_D \cong H^0(\End E|_D)/\HH^0(\overline{\KK}_{E, \varphi})$.
+\end{proof}
+
+\subsection{Extension of the Poisson structure}\label{sec:7.2}
+
+The symplectic form on $\tot{T^*\cU_\Sigma(r, d, D)}$ can be identified (Proposition \ref{t7.12}) using the duality theorem for hypercohomology (Grothendieck duality). Throughout the discussion we will use the terminology of \cite{Ha}. Let $(E, \varphi, \eta) \in \tot{T^*\cU_\Sigma(r, d, D)}$. There is a canonical symmetric $\Ad$-invariant bilinear form on $\mathfrak{gl}(r, \mathbb{C})$. We get canonical isomorphisms:
+\[
+[\End E \otimes L]^* \otimes K \xrightarrow{\ i_0\ } \End E(-D)
+\]
+\[
+[\End E(-D)]^* \otimes K \xrightarrow{\ i_1\ } \End E \otimes L.
+\]
+
+Given two bounded complexes of coherent sheaves $F^{\textstyle\cdot}$, $G^{\textstyle\cdot}$ define the complex of sheaves $\Hom^{\textstyle\cdot}(F^{\textstyle\cdot}, G^{\textstyle\cdot})$ by
+\[
+\Hom^n(F^{\textstyle\cdot}, G^{\textstyle\cdot}) := \prod_{p \in \mathbb{Z}} \Hom(F^p, G^{p+n}) \quad \text{and} \quad d = d_F + (-1)^{n+1} d_G.
+\]
+
+Given a bounded complex $L^{\textstyle\cdot}$ of locally free sheaves let $L^{\textstyle\cdot \wedge} := \Hom^{\textstyle\cdot}(L^{\textstyle\cdot}, \cO_\Sigma)$. Let $\KK^*_{E, \varphi} := (\widehat{\KK}_{E, \varphi} \otimes K_\Sigma)[1]$. It is the complex
+\[
+\KK^*_{E, \varphi} = \bigl([\End E \otimes L]^* \otimes K \xrightarrow{\ i^\vee \otimes \mathrm{id}_K\ } [\End E(-D)]^* \otimes K\bigr)
+\]
+where the sheaves are in degrees $-2$ and $-1$. By Grothendieck duality theorem (\cite{Ha} p.~210, Theorem 11.1), we have canonical isomorphisms:
+\[
+\HH^*(\Sigma, \KK^*_{E, \varphi}) \xrightarrow{\ \sim\ } \HH^{-*}(\Sigma, \KK_{E, \varphi})^*.
+\]
+In particular $\gr \colon \HH^1(\KK^*_{E, \varphi}[-2]) \xrightarrow{\sim} \HH^1(\KK_{E, \varphi})^*$.
+
+Let $(i_0, -i_1) \colon \KK^*_{E, \varphi}[-2] \to \KK_{E, \varphi}$ be the isomorphism of complexes. Let
+\[
+f := \HH^1(i_0, -i_1) \circ \gr^{-1} \colon \HH^1(\KK_{E, \varphi})^* \to \HH^1(\KK_{E, \varphi}).
+\]
+It is an anti selfdual isomorphism.
+
+\begin{defn}\label{t7.11}
+Let $\omega'$ be the global 2-form on $\tot{T^*\cU_\Sigma(r, d, D)}$ associated with $f^{-1}$.
+\end{defn}
+
+\begin{prop}\label{t7.12}
+$\omega = \omega'$. (Recall that $\omega$ is the canonical symplectic structure).
+\end{prop}
+
+\begin{proof}
+We have functorial identifications of the pullback of both $\omega$ and $\omega'$ on any family of $L$-twisted rank $r$ Higgs pairs of degree $d$ with $D$ level structure. The proof reduces to a \v{C}ech cocycle calculation by pulling back both forms to simple infinitesimal families.
+
+Let $(E_0, \varphi_0, \eta_0) \in \tot{T^*\cU_\Sigma(r, d, D)}$. Let $\sigma, \tau \in T_{(E_0, \varphi_0, \eta_0)}\tot{T^*\cU_\Sigma(r, d, D)}$. Denote by $\sigma, \tau$ also the corresponding classes in $\HH^1(\KK_{E_0, \varphi_0})$. Let $\mathcal{U} := \{U_\alpha\}$ be an affine open covering of $\Sigma$. Let
+\[
+\frac{\partial a}{\partial s} := \left(\frac{\partial a_{\alpha \beta}}{\partial s}\right), \quad \frac{\partial a}{\partial t} := \left(\frac{\partial a_{\alpha \beta}}{\partial t}\right) \in Z^1(\mathcal{U}, \End E_0(-D))
+\]
+be cocycles representing $d\tilde{p}(\sigma)$, $d\tilde{p}(\tau)$. Let
+\[
+\frac{\partial \varphi}{\partial s} := \left(\frac{\partial \varphi_\alpha}{\partial s}\right), \quad \frac{\partial \varphi}{\partial t} := \left(\frac{\partial \varphi_\alpha}{\partial t}\right) \in C^0(\mathcal{U}, \End E_0 \otimes L)
+\]
+be cochains such that
+\[
+\left(\frac{\partial a}{\partial s}, \frac{\partial \varphi}{\partial s}\right), \quad \left(\frac{\partial a}{\partial t}, \frac{\partial \varphi}{\partial t}\right)
+\]
+are cocycles in $Z^1(\mathcal{U}, \KK_{E_0, \varphi_0})$ representing $\sigma, \tau$ respectively.
+
+Let $X := \Spec(\mathbb{C}[s, t]/(s^2, st, t^2))$. Let $\mathcal{W} := \{U_\alpha \times X\}$ be the affine open covering of $\Sigma \times X$. Let
+\begin{align*}
+a &:= (a_{\alpha, \beta}) := \left(\mathrm{id} + s \frac{\partial a_{\alpha \beta}}{\partial s} + t \frac{\partial a_{\alpha \beta}}{\partial t}\right) \in Z^1(\mathcal{W}, \Aut(p_\Sigma^* E_0)), \\
+\varphi &:= (\varphi_\alpha) := \left(\varphi_0 + s \frac{\partial \varphi_\alpha}{\partial s} + t \frac{\partial \varphi_\alpha}{\partial t}\right) \in C^0(\mathcal{W}, p_\Sigma^* \End E_0 \otimes L), \\
+\eta &:= (\eta_\alpha) := (\eta_0).
+\end{align*}
+Then $(a, \varphi, \eta)$ defines a deformation $(\cE, \varphi, \eta)$ of $(E_0, \varphi_0, \eta_0)$ over $\Sigma \times X$ (in particular $\varphi \in H^0(\Sigma \times X, \End \cE \otimes p_\Sigma^* L)$).
+
+Let $\gamma \colon X \to \tot{T^*\cU_\Sigma(r, d, D)}$ be the unique morphism such that $d\gamma$ sends $(\partial/\partial s)$, $(\partial/\partial t)$ to $\sigma, \tau$ (it is in fact the canonical morphism induced by the family into the moduli space). The proposition follows from the following two lemmas:
+\end{proof}
+
+\begin{lem}\label{t7.13}
+$(\gamma^*\omega)((\partial/\partial s), (\partial/\partial t))$ is represented by the cocycle
+\[
+\tr\left(\frac{\partial \varphi}{\partial s} \circ \frac{\partial a}{\partial t}\right) - \tr\left(\frac{\partial \varphi}{\partial t} \circ \frac{\partial a}{\partial s}\right) \in Z^1(\mathcal{U}, K_\Sigma).
+\]
+\end{lem}
+
+\begin{proof}
+\[
+(\gamma^*\omega)\left(\frac{\partial}{\partial s}, \frac{\partial}{\partial t}\right) = \frac{\partial}{\partial s}\left[\gamma^*(\theta)\left(\frac{\partial}{\partial t}\right)\right] - \frac{\partial}{\partial t}\left[\gamma^*(\theta)\left(\frac{\partial}{\partial s}\right)\right] - \gamma^*(\theta)\left(\left[\frac{\partial}{\partial s}, \frac{\partial}{\partial t}\right]\right).
+\]
+$[\partial/\partial s, \partial/\partial t] = 0$. By Corollary \ref{t7.8} $d\gamma(\partial/\partial s)$ is a section of $R^1 p_{X*}(\KK_{\cE, \varphi})$ and $d\tilde{p} \circ d\gamma(\partial/\partial s)$ is a section of $R^1 p_{X*}(\End \cE(-D))$ represented by $(\partial a/\partial s)$ (the infinitesimal deformation map $\rho$ in Lemma \ref{t7.3} involves partial differentiation of $(a, \varphi, \eta)$ along $X$).
+\[
+\gamma^*(\theta)\left(\frac{\partial}{\partial s}\right) = \gamma^*(\theta)\left(d\gamma\left(\frac{\partial}{\partial s}\right)\right) = \tr\left(\varphi \circ \left[(d\tilde{p} \circ d\gamma)\left(\frac{\partial}{\partial s}\right)\right]\right) = \tr\left(\varphi \circ \frac{\partial a}{\partial s}\right).
+\]
+Thus
+\[
+\frac{\partial}{\partial t} \gamma^*(\theta)\left(\frac{\partial}{\partial s}\right) = \tr\left(\frac{\partial \varphi}{\partial t} \circ \frac{\partial a}{\partial s}\right). \qedhere
+\]
+\end{proof}
+
+\begin{lem}\label{t7.14}
+$\omega'(\sigma, \tau) \in H^1(\Sigma, K_\Sigma)$ is represented by
+\[
+\tr\left(\frac{\partial \varphi}{\partial s} \circ \frac{\partial a}{\partial t}\right) - \tr\left(\frac{\partial \varphi}{\partial t} \circ \frac{\partial a}{\partial s}\right).
+\]
+\end{lem}
+
+\begin{proof}
+The pairing $\omega'$
+\begin{align*}
+\HH^1(\KK_{E, \varphi}) \otimes \HH^1(\KK_{E, \varphi})
+&\xrightarrow{\ [\HH^1(i_0, -i_1)]^{-1} \otimes \mathrm{id}\ } \HH^1(\KK^*_{E, \varphi}[-2]) \otimes \HH^1(\KK_{E, \varphi}) \\
+&\longrightarrow H^1(\Sigma, K_\Sigma)
+\end{align*}
+is induced by the pairing (of degree $-1$) on the level of complexes of sheaves:
+\[
+\KK_{E, \varphi} \otimes \KK_{E, \varphi} \xrightarrow{\ (i_0, -i_1)^{-1} \otimes \mathrm{id}\ } (\widehat{\KK}_{E, \varphi} \otimes K_\Sigma)[-1] \otimes \KK_{E, \varphi} \to K_\Sigma
+\]
+where $i_0$ and $i_1$ are defined by the trace pairing.
+\end{proof}
+
+This completes the proof of Proposition \ref{t7.12}.
+
+We are now able to extend the Poisson structure from the dense open subset of $\MHs$ parameterizing orbits of the level group action on the cotangent bundle $\tot{T^*\cU_\Sigma(r, d, D)}$ to whole of $\MHs$.
+
+Using the canonical symmetric $\Ad$-invariant bilinear form on $\mathfrak{gl}(r, \mathbb{C})$ we get canonical injections:
+\[
+[\End E \otimes L]^* \otimes K \xhookrightarrow{\ j_0\ } \End E,
+\]
+\[
+[\End E]^* \otimes K \xhookrightarrow{\ j_1\ } \End E \otimes L.
+\]
+Let
+\[
+\bar{f} := \HH^1(j_0, -j_1) \circ \gr^{-1} \colon \HH^1(\overline{\KK}_{E, \varphi})^* \to \HH^1(\overline{\KK}_{E, \varphi}).
+\]
+Let $\Omega_D$ be the corresponding section of $\wedge^2 T\MHs$.
+
+\begin{cor}\label{t7.15}
+$\Omega_D$ is a Poisson structure on $\MHs$. It extends the Poisson structure on $\MHs \cap \image(\lbar)$ obtained via symplectic reduction.
+\end{cor}
+
+\begin{proof}
+We need to show that (a) $\Omega_D$ satisfies the condition in the Definition \ref{t5.3} of a Poisson structure, and (b) it coincides with the reduction of the symplectic structure $\omega$ on $\tot{T^*\cU_\Sigma(r, d, D)}$ to the open subset $\MHds$ of $\MHs$ (Corollary \ref{t6.8}).
+
+Clearly (b) implies (a). Part (b) follows from the cohomological identification of $\omega$ (Proposition \ref{t7.12}), the cohomological identification of the differential of $\lbar \colon \tot{T^*\cU_\Sigma(r, d, D)}^{H-s} \to \MHs$ (Corollary \ref{t7.10}) and the commutative diagram:
+\[
+\begin{tikzcd}[column sep=large]
+\HH^1(\KK_{E, \varphi})^* \arrow[r, "f"] & \HH^1(\KK_{E, \varphi}) \arrow[d, "d\lbar"] \\
+\HH^1(\overline{\KK}_{E, \varphi})^* \arrow[u, "(d\lbar)^*"] \arrow[r, "\bar{f}"'] & \HH^1(\overline{\KK}_{E, \varphi}).
+\end{tikzcd} \qedhere
+\]
+\end{proof}
+
+\begin{rem}\label{t7.16}
+Notice that $j_0, j_1$ are defined using the section $1 \in H^0(\Sigma, \cO_\Sigma(D))$. In fact, letting $j_0 := (\otimes s) \circ i_0$ and $j_1 := (\otimes s) \circ i_1$ for any choice of a nonzero section $s$ gives rise to a Poisson structure $\Omega_s$. Notice that the map $s \mapsto \Omega_s$ is linear.
+\end{rem}
+
+The cohomological identification of the Poisson structure enables us to determine its rank on the symplectic leaf containing a given Higgs pair $(E, \varphi)$:
+
+\begin{prop}\label{t7.17}
+Let $(E, \varphi) \in \MHs$ be a stable Higgs pair. Assume that $D$ is an effective divisor of positive degree. The rank of $\Omega_D$ at $(E, \varphi)$ is equal to
+\[
+\dim \MH + 1 - \length \Ker(\ad \varphi|_D \colon \End E|_D \to \End E \otimes L|_D).
+\]
+The maximal rank is $\dim \MH + 1 - r \cdot \deg D$. The pair $(E, \varphi)$ belongs to a symplectic leaf of maximal rank if and only if $\varphi$ is regular over $D$.
+\end{prop}
+
+\begin{rem}\label{t7.18}
+Notice that on the image of $\lbar \colon \tot{T^*\cU_\Sigma(r, d, D)}^{H-s} \to \MHs$ this agrees with the fact that $\length \Ker(\ad \varphi|_D) - 1$ is equal to the codimension of the coadjoint orbit of $\mu(E, \varphi, \eta)$.
+\end{rem}
+
+\begin{proof}[Proof (of Proposition \ref{t7.17})]
+Consider the exact sequence of complexes:
+\[
+0 \to \overline{\KK}^*_{E, \varphi}[-2] \xrightarrow{\ (j_0, j_1)\ } \overline{\KK}_{E, \varphi} \to \bigl(\End E|_D \xrightarrow{\ -\ad \varphi|_D\ } \End E \otimes L|_D\bigr) \to 0.
+\]
+$\HH^0(\overline{\KK}^*_{E, \varphi}[-2]) = (0)$ and $\HH^0(\overline{\KK}_{E, \varphi}) \cong \mathbb{C}$ because the Higgs pair $(E, \varphi)$ is stable. Thus $\Ker \HH^1(j_0, j_1) \cong \HH^0(\End E|_D \xrightarrow{-\ad \varphi|_D} \End E \otimes L|_D)/\mathbb{C}$.
+\end{proof}
+
+\section{The moduli space of Higgs pairs as a completely integrable system}\label{sec:8}
+
+In this section we assemble the previous results to a complete proof of the main theorem (Theorem \ref{t8.5}). In Subsection \ref{sec:8.1} we show that the proper morphism $H_L \colon \MHs \to B_L$ is a Lagrangian fibration (Proposition \ref{t8.3}). Having developed the required deformation theory, the proof reduces to an infinitesimal verification. This is the last step in the proof of the main theorem.
+
+Subsection \ref{sec:8.2} consists of the statement of the main theorem in a canonical form. In Subsection \ref{sec:8.3} we describe the symplectic leaf foliation of $\MHs$ (Corollary \ref{t8.10}) using the identification of the moment map for the level group action.
+
+\subsection{The Lagrangian fibration}\label{sec:8.1}
+
+We begin by an infinitesimal identification of the embedding of the spectral Jacobians in $\MH$.
+
+Let $L := K_\Sigma(D)$. Let $\pi_b \colon \Sigma_b \to \Sigma$ be a smooth spectral curve. Let $F$ be a line bundle on $\Sigma_b$, $E := \pi_{b*}F$, $\varphi := \pi_{b*}(\otimes y_b)$ where $y_b$ is the tautological section of $\pi_b^* L$. Let $s = 1 \in H^0(\Sigma, \cO_\Sigma(D))$.
+
+\begin{lem}\label{t8.1}
+We have the following canonical exact sequence:
+\begin{equation}\label{eq2}
+0 \to \pi_{b*}\cO_{\Sigma_b} \to \End E \xrightarrow{\ \ad \varphi\ } \End E \otimes L \to \pi_{b*}(K_{\Sigma_b})(D) \to 0.
+\end{equation}
+\end{lem}
+
+\begin{proof}
+Lemma \ref{t2.7} implies that we have a canonical exact sequence:
+\begin{align*}
+0 \to \cO_{\Sigma_b} \to \pi_b^* E \otimes F^*(\Delta)
+&\xrightarrow{\ \pi_b^*\varphi \otimes \mathrm{id} - \mathrm{id} \otimes (\otimes y_b)\ } \pi_b^*(E \otimes L) \otimes F^*(\Delta) \\
+&\longrightarrow \pi_b^* L(\Delta) \to 0.
+\end{align*}
+We know that $K_{\Sigma_b}(\pi_b^* D)$ is canonically isomorphic to $\pi_b^* L(\Delta)$. Pushing forward the above sequence we get the sequence \eqref{eq2}.
+\end{proof}
+
+\begin{prop}\label{t8.2}
+Let $[(E, \varphi)] \in \MHs$ correspond to a smooth spectral curve $\Sigma_b$. The differential of the embedding $i_b \colon J^{\delta(d)}_{\Sigma_b} \hookrightarrow \MH$ is canonically identified by the exact sequence:
+\begin{equation}\label{eq3}
+0 \to H^1(\Sigma, \pi_{b*}\cO_{\Sigma_b}) \xrightarrow{\ d i_b\ } \HH^1(\overline{\KK}_{E, \varphi}) \to H^0(\Sigma, \pi_{b*}(K_{\Sigma_b})(D)) \to 0.
+\end{equation}
+\end{prop}
+
+\begin{proof}
+We have a short exact sequence of complexes
+\[
+0 \to (\pi_{b*}\cO_{\Sigma_b} \to 0) \to \overline{\KK}_{E, \varphi} \to (\image(\ad \varphi) \hookrightarrow \End E \otimes L) \to 0.
+\]
+The complex $(\image(\ad \varphi) \hookrightarrow \End E \otimes L)$ is quasi isomorphic to the complex $(0 \to \pi_{b*}(K_{\Sigma_b})(D))$. The exact sequence \eqref{eq3} is part of the corresponding long exact hypercohomology sequence.
+
+The image of $H^1(\Sigma, \pi_{b*}\cO_{\Sigma_b})$ consists of isospectral deformations since its hypercohomology classes are represented by \v{C}ech cocycles $((\hat{f}_{\alpha \beta}), 0)$ where the Higgs field is not deformed. Conversely, let $((\hat{f}_{\alpha \beta}), (\hat{\varphi}_\alpha))$ be a cocycle in $Z^1(\mathcal{U}, \overline{\KK}_{E, \varphi})$ representing an infinitesimal isospectral deformation of the Higgs pair $(E, \varphi)$ with respect to a \v{C}ech covering $\mathcal{U}$ as in the Proof of \ref{t7.1}. Being isospectral is equivalent to the fact that $(\hat{\varphi}_\alpha)$ is a cochain in the cochain group $C^0(\mathcal{U}, \image(\ad \varphi))$ of the subsheaf $\image(\ad \varphi)$ of $\End E \otimes L$. It follows that the hypercohomology class of $((\hat{f}_{\alpha \beta}), (\hat{\varphi}_\alpha))$ is in the kernel of the homomorphism to $H^0(\Sigma, \pi_{b*}(K_{\Sigma_b})(D))$ in the sequence \eqref{eq3} and is hence in the image of $H^1(\Sigma, \pi_{b*}\cO_{\Sigma_b})$.
+\end{proof}
+
+\begin{prop}\label{t8.3}
+Let $\Sigma_b$ be a smooth spectral curve. Then the fiber $H_L^{-1}(b)$ is Lagrangian (in the sense of Definition \ref{t5.10}).
+\end{prop}
+
+\begin{proof}
+Let $\partial$ be the differential $-\ad \varphi$ of the complex $\overline{\KK}_{E, \varphi}$. Let $\hat{\partial}$ be the differential of the complex $\overline{\KK}^*_{E, \varphi}[-2]$. Proposition \ref{t8.2} implies that the conormal space to a point in $H^{-1}(b)$ is identified with $H^0(\Sigma, \coker \partial)^*$. Corollary \ref{t7.15} reduces the proof to checking that
+\[
+\bar{f}(H^0(\Sigma, \coker \partial)^*) = H^1(\Sigma, \Ker \partial).
+\]
+$(\bar{f} = \HH^1(j_0, -j_1) \circ \gr^{-1})$. The equality follows from the commutative diagram:
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+H^0(\coker(\partial))^* \arrow[d]
+  & H^1(\Ker(\hat{\partial})) \arrow[l, "\gr|"', "\cong"] \arrow[r, "H^1(j_{0|})"] \arrow[d]
+  & H^1(\Ker(\partial)) \arrow[d] \\
+\HH^1(\overline{\KK}_{E, \varphi})^* \arrow[d]
+  & \HH^1(\overline{\KK}^*_{E, \varphi}[-2]) \arrow[l, "\gr"', "\cong"] \arrow[r, "{\HH^1(j_0, j_1)}"] \arrow[d]
+  & \HH^1(\overline{\KK}_{E, \varphi}) \arrow[d] \\
+H^1(\Ker(\partial))^*
+  & H^0(\coker(\hat{\partial})) \arrow[l, "\gr"', "\cong"] \arrow[r, "H^0(\bar{j}_1)"]
+  & H^0(\coker(\partial)).
+\end{tikzcd}
+\]
+$H^1(j_{0|})$ is the homomorphism $H^1(\pi_{b*}\cO_{\Sigma_b}(-D)) \to H^1(\pi_{b*}\cO_{\Sigma_b})$ induced by the sheaf inclusion. It is thus surjective.
+\end{proof}
+
+\begin{rem}\label{t8.4}
+Let $\Sigma_b$ be an integral spectral curve. The fiber $H_L^{-1}(b)$ is isomorphic to the compactification of the generalized Jacobian by its embedding in the moduli space of (stable) rank $1$ torsion free sheaves on $\Sigma_b$. It is hence an irreducible subvariety of $\MH$ (see \cite{A-I-K}) with stratification indexed by the lattice of partial normalizations of $\Sigma_b$. Let $\nu \colon \tilde{\Sigma}_b \to \Sigma_b$ be a partial normalization. It is natural to ask when the stratum is Lagrangian in its symplectic leaf. Proposition \ref{t7.17} implies that this holds only for normalizations of points in the support of $D$. The general condition should depend on the type of the singularity and the multiplicity of $x \in D$. We claim that if $\nu \colon \tilde{\Sigma}_b \to \Sigma_b$ is the normalization of a normal crossing singularity $x_b$ over a point $x \in \Sigma$ appearing with multiplicity one in $D$ and if $\pi_b \circ \nu$ is unramified over $x$ then the stratum is Lagrangian. To see that let $(E, \varphi) \in \MHs$ correspond to the torsion free sheaf $F$ on $\Sigma_b$ such that $F \cong \nu_* \tilde{F}$ for some line bundle $\tilde{F}$ on $\tilde{\Sigma}_b$. We need to show that
+\[
+\length(\Ker(\ad \varphi|_D)) - \length(\Ker(\ad \tilde{\varphi}|_D)) = 2(g_{\Sigma_b} - g_{\tilde{\Sigma}_b}).
+\]
+If $x_b \in \Sigma_b$ is the crossing of $t$ branches over $x \in \supp(D)$ then it contributes $t^2 - t$ to both sides.
+\end{rem}
+
+\subsection{The main theorem}\label{sec:8.2}
+
+Let $\Sigma$ be a curve of genus $g$. Let $L$ be a line bundle on $\Sigma$. Let $\delta := \deg(L) - (2g - 2)$. Assume that $g, r, d, \delta$ satisfy the nonemptiness condition \ref{t6.6}. Let $\cS := (H^0(\Sigma, L \otimes K^{-1}) - \{0\})$. We will show that for any choice of a section $s \in \cS$, there is a canonical Poisson structure $\Omega_s$ on $\MHs$ making $(\MHs, \Omega_s, H_L)$ an integrable system. More canonically:
+
+\begin{thm}\label{t8.5}
+(1) The generic fiber of $\mathrm{id} \times H_L \colon \cS \times \MHs \to \cS \times B_L$ is a complete Jacobian of a spectral curve; (2) There exists a canonical Poisson structure $\Omega$ on $\cS \times \MHs$; (3) $(\cS \times \MHs, \Omega, \mathrm{id}_{\cS} \times H_L)$ is an algebraically completely integrable Hamiltonian system.
+\end{thm}
+
+\begin{proof}
+(1) Follows from Proposition \ref{t2.3} and Remarks \ref{t3.4}, Part 1.
+
+Let $s \in \cS$, $D$ its zero divisor. Corollary \ref{t7.15} implies that there exists a canonical Poisson structure $\Omega_D$ on $\MHs(K(D))$. The section $s$ induces an isomorphism $\MHs(K(D)) \cong \MHs(L)$ and a Poisson structure $\Omega_s$ on $\MHs(L)$.
+
+The map $s \mapsto \Omega_s$ is linear (Remark \ref{t7.16}), in particular algebraic, so the Poisson structure glues as a global structure $\Omega$. (3) Proposition \ref{t8.3} implies that the generic fiber of $H_L$ is Lagrangian.
+\end{proof}
+
+\begin{rem}\label{t8.6}
+It seems that Theorem \ref{t8.5} generalizes to principal bundles with reductive structure group via Donagi's definition of the spectral curve and its Prym (see Remark \ref{t2.8}) using essentially the same techniques.
+\end{rem}
+
+\begin{rem}\label{t8.7}
+The case of $SL(r)$-bundles follows from Theorem \ref{t8.5}. Let $B_L^0$ be the space of traceless polynomials $\bigoplus_{i=2}^{r} H^0(\Sigma, L^{\otimes i}) \subset B_L$. Let $\gamma \in J_\Sigma^d$. Let $M^0_{\Hig, \gamma}$ be the moduli space of traceless semistable rank $r$ $L$-twisted Higgs pairs with fixed determinant $\gamma$. It is a subvariety of $\MH$ and has an induced Poisson structure $\Omega_{s, \gamma}$. Let $H_L^0 \colon M^0_{\Hig, \gamma} \to B_L^0$ be the restriction of $H_L$. Then $(M^0_{\Hig, \gamma}, \Omega_{s, \gamma}, H_L^0)$ is an ACIHS. For generic $b \in B_L^0$, the fiber of $H_L^0$ is canonically isomorphic to the Prym $(\det \circ \pi_{b*})^{-1}(\gamma)$.
+\end{rem}
+
+\subsection{The foliation by symplectic leaves}\label{sec:8.3}
+
+Fix an isomorphism $L \cong K_\Sigma(D)$ giving rise to a Poisson structure. The foliation of the Poisson moduli space $\MHs$ of stable $L$-twisted Higgs pairs by symplectic leaves is induced generically by a foliation of the space of characteristic polynomials. This is a consequence of the fact that the Jacobian of a smooth spectral curve is Lagrangian and is contained in the strata of $\MHs$ of maximal rank (Proposition \ref{t7.17}), hence, contained in a single symplectic leaf. The foliation of the space of characteristic polynomials turns out to be simply a coset foliation.
+
+Let $B_0 = H^0\bigl(\Sigma, [\bigoplus_{i=1}^{r} L^{\otimes i}] \otimes \cO_\Sigma(-D)\bigr)$. Let $q \colon B_L \to B_L/B_0$ be the quotient map.
+
+\begin{prop}\label{t8.8}
+There is a canonical isomorphism $B_L/B_0 \cong \mathfrak{g}_D^*/G_D$ giving rise to the following commutative diagram:
+\[
+\begin{tikzcd}[column sep=large, row sep=large]
+& B_L \arrow[r, "q"] & B_L/B_0 \arrow[dd, "\cong"] \\
+\tot{T^*\cU_\Sigma(r, d, D)} \arrow[ur, "\HL"] \arrow[dr, "\mu"'] & & \\
+& \mathfrak{g}_D^* \arrow[r, "c.q."'] & \mathfrak{g}_D^*/G_D.
+\end{tikzcd}
+\]
+\end{prop}
+
+\begin{proof}
+Fix $(E, \eta) \in [(E, \eta)] \in \cU_\Sigma(r, d, D)$. $q \circ \HL \colon H^0(\Sigma, \End E \otimes L) \to B_L/B_0$ factors through $H^0(\Sigma, \End E \otimes L)/H^0(\Sigma, \End E \otimes K)$ and thus through $[H^0(D, (\End E)|_D)/\mathbb{C}]^*$ (see Definition \ref{t6.9}). The rest follows from the definition of $\mu$ and of the categorical quotient $\mathfrak{g}_D^*/G_D$.
+\end{proof}
+
+\begin{rem}\label{t8.9}
+Let $R \subset \tot{T^*\cU_\Sigma(r, d, D)}$ be the open subset of isomorphism classes of triples $(E, \varphi, \eta)$ with a stable Higgs pair and which maps to the smooth locus of $\MHs$. There is a bijection between coadjoint orbits of $\mathfrak{g}_D^*$ in $\mu(R)$ and symplectic leaves of $\MHs$ intersecting $\lbar(R)$.
+\end{rem}
+
+\begin{cor}\label{t8.10}
+The foliation of $\MHs$ by symplectic leaves is a refinement of the foliation by fibers of $q \circ H_L$. Every fiber contains a unique symplectic leaf of maximal rank.
+\end{cor}
+
+\begin{proof}
+In view of Proposition \ref{t8.8} we may identify $q \circ \HL$ with $c.q. \circ \mu$.
+\end{proof}
+
+\section{Examples}\label{sec:9}
+
+A remarkable fact about the integrable systems $H \colon \MHs \to B_L$ is that many classical as well as recently discovered integrable systems are in fact symplectic leaves of them for suitable choices of $\Sigma$, $L$, $r$ and $d$. This section is devoted to the demonstration of this general phenomena.
+
+\subsection{Rational base curve}\label{sec:9.1}
+
+The moduli space of semistable vector bundles over $\mathbb{P}^1$, $\cU_{\mathbb{P}^1}(r, d)$, is empty if $r$ does not divide $d$. If $r \mid d$ then it consists of the single isomorphism class of the semistable vector bundle $E := \bigoplus_{i=1}^{r} \cO_{\mathbb{P}^1}(d/r)$. In this case $\Aut(E) \cong GL(r, \mathbb{C})$.
+
+Let $D \subset \mathbb{P}^1$ be an effective divisor of degree $\geqslant 3$. Let $L := K_{\mathbb{P}^1}(D)$. Let $\cU_{\mathbb{P}^1}(r, -r, D)'$ be the Zariski open subset of $\cU_{\mathbb{P}^1}(r, -r, D)$ parameterizing isomorphism classes of semistable vector bundles with $D$-level structure. $\cU_{\mathbb{P}^1}(r, -r, D)'$ is isomorphic to $\Isom_{\cO_D}(E|_D, \bigoplus_{i=1}^{r} \cO_D)/\Aut(E)$. It is a homogeneous $G_D$-space of dimension $r^2(\deg D - 1)$. By Proposition \ref{t6.1}, given an isomorphism class of level structures $[(E, \eta)]$, $T^*_{[(E, \eta)]}\cU_{\mathbb{P}^1}(r, -r, D)'$ is canonically isomorphic to $H^0(\mathbb{P}^1, (\End E)^* \otimes L)$. $\Stab_{G_D}[(E, \eta)] = PGL(r)$. So an element $x = [(E, \varphi, \eta)] \in \tot{T^*\cU_{\mathbb{P}^1}(r, -r, D)'}$ is regular w.r.t the lifted $G_D$-action if and only if it is regular w.r.t the $PGL(r)$ action. $G_D$ acts freely on the fibers of $\HL$ over polynomials of integral spectral curves (Lemma \ref{t6.7}).
+
+Let $B_L^{sm} \subset B_L^{int} \subset B_L$ be the Zariski open loci of integral and smooth spectral curves. Let
+\[
+\tot{T^*\cU_{\mathbb{P}^1}(r, -r, D)'}_{sm} \subset \tot{T^*\cU_{\mathbb{P}^1}(r, -r, D)'}_{int} \subset \tot{T^*\cU_{\mathbb{P}^1}(r, -r, D)'}^{H-s}
+\]
+be $\HL^{-1}(B_L^{sm})$, $\HL^{-1}(B_L^{int})$ and the locus of stable Higgs pairs. Since $G_D$ acts transitively on $\cU_{\mathbb{P}^1}(r, -r, D)$, then
+\begin{align*}
+M_D &:= \tot{T^*\cU_{\mathbb{P}^1}(r, -r, D)'}^{H-s}/G_D \\
+&\cong \frac{[T^*_{[(E, \eta)]}\cU_{\mathbb{P}^1}(r, -r, D)]^{H-s}}{\Stab_{G_D}([(E, \eta)])} \\
+&\cong [H^0(\mathbb{P}^1, \End E \otimes L)]^{H-s}/\mathrm{AUT}(E).
+\end{align*}
+
+$M_D$ embeds as an open subset of $\MH$. The moment map $\mu$ induces also a Poisson embedding of $M_D$ into the categorical quotient $\mathfrak{g}_D^*/PGL(r)$. See \cite{Ar} Section 12 for the analysis of this action when $D$ is reduced.
+
+$[H^0(\mathbb{P}^1, \End E \otimes L)]_{sm}/\mathrm{AUT}(E)$ is exactly Beauville's system (see \cite{B}). Let $d = \deg D - 2$. If we choose coordinates on $\mathbb{P}^1$ and set $L := \cO_{\mathbb{P}^1}(d \cdot \infty)$, Theorem \ref{t8.5} has the following explicit form: Let $s \in H^0(\mathbb{P}^1, L \otimes K_{\mathbb{P}^1}^{-1})$. Let $D$ be its zero divisor. A section $\varphi \in H^0(\mathbb{P}^1, \End E \otimes L)$ is just a polynomial matrix. Let $Q$ be
+\begin{align*}
+Q=\bigl\{A(x) \colon {}&A(x) \text{ is an } r \times r \text{ polynomial matrix} \\
+&\text{with entries of degree } \leqslant d\bigr\}^{H-s}/PGL(r).
+\end{align*}
+The section $s$ induces an isomorphism between $M_D$ and $Q$.
+
+\begin{thm}[\cite{B}]\label{t9.1}
+\begin{enumerate}
+    \item The fiber of $H_L \colon Q \to B_L$ over a polynomial of an integral spectral curve is canonically isomorphic to the complement of the theta divisor in the compactification of the generalized Jacobian of the spectra curve.
+    \item There exists a canonical Poisson structure $\Omega_s$ on $Q$ such that $(Q, \Omega_s, H_L)$ is an ACIHS.
+    \item The foliation by symplectic leaves is a refinement of the foliation by the fibers of $q \circ H_L$. The generic fiber is a symplectic leaf.
+\end{enumerate}
+\end{thm}
+
+Beauville shows that several classical ACIHS, such as geodesic flow on the ellipsoid, Neumann's system, and certain Euler--Arnold systems, embed in his system as symplectic leaves.
+
+\subsection{Elliptic base curve, stable bundles}\label{sec:9.2}
+
+\subsubsection{Moduli space approach}\label{sec:9.2.1}
+
+Let $\Sigma$ be an elliptic curve. Assume that $r$ and $d$ are relatively prime. A vector bundle of rank $r$ and degree $d$ is stable if and only if it is indecomposable (see \cite{Tu}). The determinant morphism $\det \colon \cU_\Sigma(r, d) \xrightarrow{\sim} J_\Sigma^d$ is an isomorphism (see \cite{At}).
+
+Let $D$ be an effective divisor on $\Sigma$. Let $L := K(D)$. Theorem \ref{t8.5} applies and we have a canonical Poisson structure $\Omega_D$ such that $(M^{sm}_{\Hig}, \Omega_D, H_L)$ is an ACIHS. Let $M_L$ be the geometric quotient $\tot{T^*\cU_\Sigma(r, d, D)}/G_D$. It is a trivial vector bundle over $\cU_\Sigma(r, d)$ which embeds as an open subvariety of $\MHs$. Since $\mu$ is $G_D$-equivariant, it descends to a surjective vector bundle homomorphism $\bar{\mu} \colon M_L \to \bar{M}_L := [(\mathfrak{g}_D^*)_{\cU_\Sigma(r, d, D)}]/G_D$ (the quotient w.r.t the $\Ad_{G_D}$-twisted action). $\bar{\mu}$ factors through an isomorphism of $M_L/T^*\cU_\Sigma(r, d)$ with $\bar{M}_L$.
+
+Let $M_L^0$ be the subbundle of $M_L$ of traceless Higgs pairs. $\bar{\mu}$ restricts to an isomorphism of $M_L^0 \xrightarrow{\sim} [(\mathfrak{sl}_D^*)_{\cU_\Sigma(r, d, D)}]/G_D$.
+
+The $SL(r)$ version of Theorem \ref{t8.5} becomes:
+
+\begin{thm}\label{t9.2}
+Let $(E, \eta)$ be a stable rank $r$ vector bundle of degree $d$ with $D$-level structure. Let $\gamma := \det(E)$. Then (notation as in Remark \ref{t8.7}).
+\begin{enumerate}
+    \item There is a Poisson isomorphism between $M^0_{L, \gamma}$ and $\mathfrak{sl}_D^*$ depending canonically on $(E, \eta)$.
+    \item The fiber of $H_L^0 \colon \mathfrak{sl}_D^* \to B_L^0$ over a generic polynomial $b$ is canonically isomorphic to a Zariski open subset of the $\Prym(\det \circ \pi_{b*})^{-1}(\gamma)$ of the spectral curve $\pi_b \colon \Sigma_b \to \Sigma$.
+    \item $(\mathfrak{sl}_D^*, H_L^0)$ is an ACIHS.
+    \item $q^0 \circ H_L^0 \colon \mathfrak{sl}_D^* \to B_L^0/B_0^0$ is the categorical quotient of the coadjoint action.
+\end{enumerate}
+\end{thm}
+
+\begin{rem}\label{t9.3}
+This integrable system was discovered by A.~G.~Reyman and M.~A.~Semenov-Tyan-Shansky (see \cite{R-S}). They have shown that several ACIHS arising from mechanical systems such as spinning tops, $n$-interacting spinning tops and movement of a body in a liquid, embed as symplectic leaves in $\mathfrak{sl}_D^*$.
+\end{rem}
+
+We will compare their approach with ours in Subsection \ref{sec:9.2.2}.
+
+\subsubsection{Comparison with the bialgebra approach}\label{sec:9.2.2}
+
+Consider a Physical system whose phase space can be identified with coadjoint orbits of a Lie algebra isomorphic to $\mathfrak{sl}_D$. Its equations of motion are usually given by a Hamiltonian. One may try to solve these equations by exhibiting it as a completely integrable system. The spectral construction introduces the ``rest of the conserved quantities'', i.e., a maximal involutive algebra of Hamiltonian functions.
+
+The bialgebra construction embeds $\mathfrak{sl}_D^*$ in the dual of the infinite dimensional Lie algebra $\mathfrak{L} := \bigoplus_{p \in \supp D} \mathbb{C}((\lambda)) \otimes_{\mathbb{C}} \mathfrak{sl}(r)$. The rest of the Hamiltonian functions are obtained by restricting the invariant polynomials on $\mathfrak{L}^*$ to $\mathfrak{sl}_D^*$.
+
+Let $\Sigma$ be an elliptic curve with a fixed point $p_0$. Let $\Sigma[r]$ be the subgroup of points of order $r$. The discussion in \cite{R-S} does not involve a stable vector bundle. Instead they consider $\Sigma[r]$-invariant $\mathfrak{sl}(r)$-valued functions with poles dominated by $D$. The following is a translation of the result of \cite{R-S} to the language of vector bundles:
+
+\begin{prop}\label{t9.4}
+Let $E$ be a stable vector bundle of rank $r$ and degree $d$ on $\Sigma$. Assume that $\gcd(r, d) = 1$. Let $\mu_r \colon (\Sigma, p_0) \to (\Sigma, p_0)$ be multiplication by $r$. Then $\mu_r^*(\End E) \cong \mathfrak{gl}(r, \mathbb{C}) \otimes \cO_\Sigma$.
+\end{prop}
+
+\begin{proof}
+$\End E \cong \bigoplus \{L_a \colon a \in J_\Sigma^0[r]\}$ (see \cite{At}).
+\end{proof}
+
+Let $L := K_\Sigma(D)$. Choose a section $s \in H^0(\Sigma, K_\Sigma)$. We get a canonical isomorphism $\cO_\Sigma \cong K_\Sigma$.
+
+\begin{cor}\label{t9.5}
+The space of $J_\Sigma^0[r]$-invariant sections of $\mathfrak{gl}(r, \mathbb{C}) \otimes \mu_r^* L$ is isomorphic to $H^0(\Sigma, (\End E) \otimes L)$.
+\end{cor}
+
+\subsection{Elliptic base curves, semistable bundles}\label{sec:9.3}
+
+\subsubsection{General discussion}\label{sec:9.3.1}
+
+Let $\Sigma$ be an elliptic curve. Let $h := \gcd(r, d)$. If $h \neq 1$ then $\cU_\Sigma^s(r, d)$ is empty. $\MH$ has a Zariski open subset $\MHp$ parameterizing Higgs pairs with semistable vector bundle. $\MHp$ maps canonically to the moduli space $\cU_\Sigma(r, d)$ parameterizing $S$-equivalence classes of semistable vector bundles.
+
+$\cU_\Sigma(r, d)$ is isomorphic to $\Sym^h \Sigma$. A choice of a point $q \in \Sigma$ determines this isomorphism canonically (see \cite{Tu}). The generic point of $\cU_\Sigma(r, d)$ represents an $S$-equivalence class $\bigoplus_{i=1}^{h} F_i$ where the summands $F_i$ are \emph{distinct} stable vector bundles of rank $r' := r/h$ and degree $d' := d/h$. It consists of a \emph{unique} isomorphism class.
+
+A Zariski open subset of $\MH$ is Poisson isomorphic to an open subset of the quotient of $\tot{T^*\cU_\Sigma(r, d, D)}$ by the level group $G_D$. Let $\delta := \deg(D)$. Thus
+\[
+\dim \MH = 2 \dim \cU_\Sigma(r, d, D) - \dim G_D = 2r^2 \cdot \delta - (r^2 \cdot \delta - 1) = r^2 \cdot \delta + 1.
+\]
+The dimension of the generic symplectic leaf is
+\[
+\dim \MH - \rank G_D = (r^2 - r)\delta + 2.
+\]
+
+\subsubsection{KP elliptic solitons}\label{sec:9.3.2}
+
+Let $\Lambda$ be a rank $2$ lattice in $\mathbb{C}$. Let $\Sigma := \mathbb{C}/\Lambda$.
+
+\begin{defn}\label{t9.6}
+A $\Lambda$-periodic KP elliptic soliton of order $r$ is a solution of the equation:
+\[
+3 \frac{\partial^2}{\partial y^2} u = \frac{\partial}{\partial x}\left\{ 4 \frac{\partial}{\partial t} u + 6u \frac{\partial}{\partial x} u - \frac{\partial^3}{\partial x^3} u \right\}
+\]
+of the form
+\[
+u(x, y, t) = 2 \sum_{i=1}^{r} \mathcal{P}(x - x_i(y, t)),
+\]
+where $\mathcal{P}$ is the Weierstrass function with period lattice $\Lambda$ and $\{x_i\} \colon \mathbb{C}^2 \to \Sym^r(\Sigma)$ is an analytic function.
+\end{defn}
+
+Let $q \in \Sigma$ be the zero point. Let $L := K_\Sigma(q)$. Let $\lambda \in L|_q$ be the point with residue $1$. Let $\Sol(\Lambda, r)$ be the space of $\Lambda$-periodic KP elliptic solitons of order $r$. Let $M(KP, r)^{int}$ be the subset of $\MH$ parameterizing isomorphism classes of $L$ twisted Higgs pairs $(E, \varphi)$ of rank $r$ and degree $0$ with integral spectral curve $\pi_b \colon \Sigma_b \to \Sigma$ such that $\varphi|_q$ is conjugate to $\diag(-\lambda, -\lambda, \ldots, -\lambda, (r-1)\lambda)$. A.~Treibich and J.~L.~Verdier have demonstrated in \cite{T-V}, using results of I.~M.~Krichever, a bijection between $\Sol(\Lambda, r)$ and $M(KP, r)^{int}$.
+
+\begin{rem}\label{t9.7}
+Such a Higgs pair corresponds to a torsion free sheaf $F$ on a spectral curve $\Sigma_b$ with two points $-\lambda, (r-1)\lambda$ over $q$. When $r > 2$ the point $-\lambda$ is singular and $F$ is the push forward of a torsion free sheaf $\tilde{F}$ on the normalization $\nu \colon \tilde{\Sigma}_b \to \Sigma_b$ of $-\lambda$. $\pi_b \circ \nu \colon \tilde{\Sigma}_b \to \Sigma$ is unramified over $q$.
+\end{rem}
+
+\begin{rem}\label{t9.8}
+A beautiful description of KP elliptic solitons is given in \cite{T-V} by an intermediate bijection with isomorphism classes of triples $(\Gamma, k, \xi)$ where $\pi \colon \Gamma \to \Sigma$ is a minimal tangential morphism of degree $r$, $k$ a tangential function on $\Gamma$ and $\xi$ is a torsion free sheaf of rank $1$ with zero Euler characteristic.
+\end{rem}
+
+Let $\Orb(KP)$ be the coadjoint orbit in $\mathfrak{g}_D^*$ of
+\[
+\diag(-1, -1, \ldots, -1, r-1) \in \mathfrak{sl}(r) \overset{\text{Killing form}}{\cong} \mathfrak{sl}(r)^* \cong \mathfrak{g}_D^*.
+\]
+
+Let $M(KP, r)$ be the symplectic leaf of $\MH$ corresponding to $\Orb(KP)$ (see Remark \ref{t8.9}). $\Sol(\Lambda, r)$ embeds in $\MH$ as the open subset $M(KP, r)^{int}$ of $M(KP, r)$.
+
+As a result of Theorem \ref{t8.5} we get:
+
+\begin{cor}\label{t9.9}
+The space $\Sol(\Lambda, r)$ of $\Lambda$-periodic KP elliptic solitons of order $r$ is endowed with a canonical ACIHS structure.
+\end{cor}
+
+\begin{rem}\label{t9.10}
+In the absence of Theorem \ref{t8.5}, the symplectic structure on $\Sol(\Lambda, r)$ was introduced in \cite{T-V} via a rather long auxiliary construction of a birational isomorphism with $T^*\Sym^r \Sigma$.
+\end{rem}
+
+The dimension of a generic symplectic leaf in $\MH$ is $r^2 - r + 2$. The dimension of the coadjoint orbit $\Orb(KP)$ is $(r-2)(r-1)$ less than the generic one. Thus the dimension of $M(KP, r)$ is $(r^2 - r + 2) - (r-2)(r-1) = 2r$. (See also Remark \ref{t8.4}). It is the symplectic leaf over the coset $\bar{b} \in B_L/H^0(\Sigma, \bigoplus_{i=1}^{r} K_\Sigma^{\otimes i})$ where $\bar{b}$ is the coefficients vector of the polynomial $P_b(y) = (y + \lambda)^{r-1}(y - (r-1)\lambda)$. (The generic symplectic leaf consists of spectral Jacobians over a coset of $H^0(\Sigma, \bigoplus_{i=1}^{r} K_\Sigma^{\otimes i}((i-1)q))$).
+
+\subsection{Hyperelliptic base curves}\label{sec:9.4}
+
+The moduli spaces of rank $2$ semistable vector bundles over a Hyperelliptic curve of genus $g$ have been described explicitly by M.~S.~Narasimhan and S.~Ramanan in \cite{N-R} in the case $g = 2$ and by U.~V.~Desale and S.~Ramanan in \cite{D-R} for arbitrary genus. As a result we obtain an explicit description of the phase spaces of our integrable systems.
+
+Let $W = \{w_1, \ldots, w_{2g+2}\} \subset \mathbb{A}^1 \subset \mathbb{P}^1$. Let $\Sigma$ be the nonsingular Hyperelliptic curve of genus $g$ branched over $W$. Let $\gamma$ be a line bundle on $\Sigma$. Let
+\[
+Q_1 := \sum_{i=1}^{2g+2} X_i^2 = 0, \qquad Q_2 := \sum_{i=1}^{2g+2} w_i X_i^2 = 0
+\]
+be the quadrics in the $2g + 1$ projective space $P := \mathbb{P}(\Sigma_{w \in W} \gamma_w)$.
+
+\begin{thm}[\cite{D-R}]\label{t9.11}
+$(\deg \gamma$ is odd$)$. $\cU_\Sigma(2, \gamma)$ is isomorphic to the variety of $(g-2)$-dimensional linear subspaces of $P$ contained in $Q_1$ and $Q_2$.
+\end{thm}
+
+\begin{thm}[\cite{D-R}]\label{t9.12}
+$(\deg \gamma$ is even$)$. Let $\gamma = \cO_\Sigma$. Let $i \colon \mathcal{SU}_\Sigma(2) \to \mathcal{SU}_\Sigma(2)$ be the automorphism induced by pulling back via the Hyperelliptic involution. $\mathcal{SU}_\Sigma(2)/i$ is isomorphic to the variety of $g$-dimensional linear subspaces of $P$ which belong to a fixed system of maximal isotropic subspaces of $Q_1$ and intersect $Q_2$ in quadrics of rank $\leqslant 4$.
+\end{thm}
+
+Note that when $g = 2$ or $3$ the second condition is always satisfied.
+
+The case of even determinant and $g = 2$ has a further description:
+
+\begin{thm}[\cite{N-R}]\label{t9.13}
+$(g = 2)$. $\mathcal{SU}_\Sigma(2)$ is canonically isomorphic to $\mathbb{P}H^0(J_\Sigma^1, 2\Theta) \cong \mathbb{P}^3$ (the $2\Theta$-linear system, $\Theta = $ the Riemann theta divisor).
+\end{thm}
+
+Let $M^0_{L, \gamma}$ be the open subset of $M^0_{\Hig, \gamma}$ of Higgs pairs with a semistable vector bundle.
+
+\begin{exmp}\label{t9.14}
+$(g = 2$, even determinant, $L = K)$. The ACIHS $(M^0_{L, \gamma}, \Omega_\gamma, H_L)$ lives on the cotangent bundle of $\mathcal{SU}_\Sigma(2) \cong \mathbb{P}^3$. Choosing a nonzero element $\beta \in (B_L^0)^*$ we get that $H_L^*(\beta) \in H^0(\mathcal{SU}_\Sigma(2), S^2 T^*\mathcal{SU}_\Sigma(2))$ corresponds to a meromorphic ``metric'' on $\mathbb{P}^3$ (need not be positive definite on $\mathbb{R}\mathbb{P}^3$) with ``geodesic'' flow along 3-dimensional Prymians of spectral curves of genus 5.
+\end{exmp}
+
+\begin{exmp}\label{t9.15}
+$(g = 2$, odd determinant, $L = K)$. Same as Example \ref{t9.14} with $\mathbb{P}^3$ replaced by $Q_1 \cap Q_2 \subset \mathbb{P}^5$.
+\end{exmp}
+
+\begin{exmp}\label{t9.16}
+$(g = 2$, even (odd) determinant, $L = K(p_0)$ for some $p_0 \in \Sigma)$. $M^0_{L, \gamma}$ is a rank 6 vector bundle over $\mathbb{P}^3$ (resp. $Q_1 \cap Q_2$) and the generic symplectic leaf is a subbundle of quadric hypersurfaces.
+\end{exmp}
+
+It would be interesting to find out if suitable choices of Hamiltonian functions on the systems with hyperelliptic base curve give rise to differential equations with physical interpretation. In view of their explicit description one may hope to write solutions to such equations in terms of theta functions.
+
+\begin{thebibliography}{99}
+
+\bibitem[A-H-H]{A-H-H} Adams, M. R., Harnad, J. and Hurtubise, J., Isospectral Hamiltonian flows in finite and infinite dimensions, II. Integration of flows, \emph{Commun. Math. Phys.} \textbf{134} (1990), 555--585.
+
+\bibitem[A-H-P]{A-H-P} Adams, M. R., Harnad, J. and Previato, E., Isospectral Hamiltonian flows in finite and infinite dimensions, I. Generalized Moser systems and moment maps into loop algebras, \emph{Commun. Math. Phys.} \textbf{117} (1988), 451--500.
+
+\bibitem[A-I-K]{A-I-K} Altman, A., Iarrobino, A. and Kleiman, S., Irreducibility of the Compactified Jacobian, \emph{Proc. Nordic Summer School}, 1--12 (1976).
+
+\bibitem[A-vM]{A-vM} Adler, M. and van Moerbeke, P., Completely integrable systems, Euclidean Lie algebras, and curves, \emph{Advances in Math.} \textbf{38} (1980), 267--317.
+
+\bibitem[A-G]{A-G} Arnol'd, V. I. and Givental', A. B., Symplectic geometry, in: \emph{Dynamical systems IV}, (eds.) Arnol'd, V. I. and Novikov, S. P., (EMS, vol. 4, pp. 1--136) Berlin Heidelberg, Springer: New York, 1988.
+
+\bibitem[Ar]{Ar} Artin, M., On Azumaya algebras and finite dimensional representations of rings, \emph{J. Algebra} \textbf{2} (1969), 532--563.
+
+\bibitem[At]{At} Atiyah, M., Vector bundles over an elliptic curve, \emph{Proc. Lond. Math. Soc.} \textbf{7} (1957), 414--452.
+
+\bibitem[B]{B} Beauville, A., Jacobiennes des courbes spectrales et syst\`emes Hamiltoniens compl\`etement int\'egrables, \emph{Acta Math.} \textbf{164} (1990), 211--235.
+
+\bibitem[B-N-R]{B-N-R} Beauville, A., Narasimhan, M. S. and Ramanan, S., Spectral curves and the generalized theta divisor, \emph{J. Reine Angew. Math.} \textbf{398} (1989), 169--179.
+
+\bibitem[D-R]{D-R} Desale, U. V. and Ramanan, S., Classification of vector bundles of rank 2 on hyperelliptic curves, \emph{Invent. Math.} \textbf{38} (1976), 161--185.
+
+\bibitem[Ha]{Ha} Hartshorne, R., \emph{Residues and Duality}, Lect. Notes Math., Vol. 20, Springer-Verlag, 1966.
+
+\bibitem[H1]{H1} Hitchin, N. J., Stable bundles and integrable systems, \emph{Duke Math. J.} \textbf{54}, No. 1, 91--114 (1987).
+
+\bibitem[H2]{H2} Hitchin, N. J., Flat connections and geometric quantization, \emph{Comm. Math. Phys.} \textbf{131} (1990), 347--380.
+
+\bibitem[N]{N} Newstead, P. E., \emph{Introduction to moduli problems and orbit spaces}, Springer-Verlag, 1978.
+
+\bibitem[N-R]{N-R} Narasimhan, M. S. and Ramanan, S., Moduli of vector bundles on a compact Riemann surface, \emph{Ann. Math.} \textbf{89}, No 1 (1969), 19--51.
+
+\bibitem[R-S]{R-S} Reyman, A. G. and Semenov-Tyan-Shansky, M. A., Group theoretical methods in the theory of finite dimensional integrable systems, in: \emph{Dynamical Systems 7} (eds.) Arnol'd, V. I. and Novikov, S. P., (EMS, vol. 16, pp. 119--193), 1987 (Russian).
+
+\bibitem[Se]{Se} Seshadri, C. S., Fibr\'es vectoriels sur les courbes alg\'ebriques, \emph{ast\'erisque} \textbf{96} (1982).
+
+\bibitem[Sim]{Sim} Simpson, C., Moduli of representations of the fundamental group of a smooth projective variety, Preprint, Princeton University (1989).
+
+\bibitem[T-V]{T-V} Treibich, A. and Verdier, J.-L., \emph{Vari\'et\'es de Kritchever des Solitons Elliptiques de KP}, Preprint.
+
+\bibitem[Tu]{Tu} Tu, L., Semistable bundles over an elliptic curve, Preprint, to appear in \emph{Adv. Math.}
+
+\bibitem[W]{W} Weinstein, A., The local structure of Poisson manifolds, \emph{J. Diff. Geom.} \textbf{18} (1983), 523--557.
+
+\end{thebibliography}
+
+\end{document}
