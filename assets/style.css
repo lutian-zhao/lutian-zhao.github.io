@@ -549,3 +549,28 @@ ul.seminar li.no-detail .sem-title { color: var(--text-soft); }
   /* wide enough for SEPTEMBER so every row's title starts on the same line */
   flex: 0 0 6rem;
 }
+
+/* ---------- file links (transcriptions page) ---------- */
+
+.filelinks {
+  display: flex;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.filelinks a {
+  border-bottom-color: transparent;
+  padding-bottom: 1px;
+}
+.filelinks a:hover { border-bottom-color: currentColor; }
+
+/* the source link is the quieter of the pair */
+.filelinks a:not([href$=".pdf"]) { color: var(--text-soft); }
+.filelinks a:not([href$=".pdf"]):hover { color: var(--accent); }
+
+.timeline.files li { padding: 1rem 0; }
+.timeline.files .when { padding-top: 0.15em; }

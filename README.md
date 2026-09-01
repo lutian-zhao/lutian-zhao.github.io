@@ -25,13 +25,17 @@ minute.
 index.html          Home — bio, portrait, contact, background
 publications.html   Papers, preprints, thesis
 talks.html          Invited talks and seminars
-teaching.html       Teaching + PlanetTerp link
+teaching.html       Teaching, course list, worksheets
+transcriptions.html LaTeX transcriptions and translations (PDF + source)
 seminar.html        Sheldon's Student Seminar, 2017–2020 (94 talks)
+                    — not in the nav; reached from the Talks page
 archive.html        Older writing, seminars, LaTeX transcriptions
 404.html            Not-found page
 assets/style.css    All styling (light + dark, responsive)
 assets/portrait.jpg Homepage photo — REPLACE THIS PLACEHOLDER
 assets/archive/     PDFs linked from the archive page (currently empty)
+assets/teaching/    Worksheets linked from the teaching page (currently empty)
+assets/transcriptions/  PDFs and .tex sources for the transcriptions page
 .nojekyll           Tells GitHub Pages to serve files as-is
 README.md           This file — not published, just notes for you
 ```
@@ -277,7 +281,7 @@ unsharing a file actually revokes access.
 
 ---
 
-## Adding a paper or a talk
+## Adding a paper
 
 Copy an existing `<li>` block and edit it. In `publications.html`:
 
@@ -293,17 +297,29 @@ Numbering is automatic — the CSS counts list items, so you never renumber by
 hand. When a preprint gets accepted, move its block from the first list to the
 second and the numbers on both lists fix themselves.
 
-In `talks.html`:
+### Adding a talk
+
+`talks.html` is grouped by year, newest first, with an **Organizing** section at
+the top for conferences and seminars you run (currently the 2026 Kavli IPMU
+workshop and Sheldon's Student Seminar, which links through to `seminar.html`).
+
+Nothing is left pending — every talk on the page is published and linked to its
+source. Find the right year heading and copy a block:
 
 ```html
 <li>
-  <span class="when">2026.03</span>
+  <span class="when">March</span>
   <span class="what">
     <span class="title">Title of the talk</span>
-    <span class="where">Seminar, Institution</span>
+    <span class="where">Seminar name, Institution, City</span>
   </span>
 </li>
 ```
+
+The left column takes the month as a word. For a new year, add
+`<h2>2027</h2>` followed by its own `<ul class="timeline">` in the right place.
+To link a talk to its seminar page, wrap the title in an `<a href="...">`. A
+template with both variants is in a comment at the bottom of the file.
 
 You can edit these directly on GitHub: open the file in the repository, click
 the pencil icon, make the change, click **Commit changes**. The site updates a
@@ -445,3 +461,91 @@ what the filter reads — keep it in sync with the visible text, lowercased:
   </details>
 </li>
 ```
+
+
+---
+
+## Adding worksheets to the teaching page
+
+`teaching.html` has a **Worksheets & notes** section ready for the files on your
+disk. Three steps:
+
+1. **Name and upload the PDF.** Put it in `assets/teaching/` with a name that has
+   no spaces and says what it is, e.g. `math406-quadratic-reciprocity.pdf`.
+   (Remember: click *into* the `assets/teaching` folder on GitHub first, then
+   Add file → Upload files.)
+2. **Un-hide the list.** In `teaching.html`, delete the paragraph with
+   `id="worksheets-empty"` and remove the word `hidden` from
+   `<ul class="timeline" id="worksheets" hidden>`.
+3. **Fill in an entry.** The template block is already there — edit it, then
+   copy it for each further worksheet:
+
+```html
+<li>
+  <span class="when">MATH 406</span>
+  <span class="what">
+    <span class="title"><a href="assets/teaching/math406-quadratic-reciprocity.pdf">Quadratic reciprocity</a></span>
+    <span class="where">One line on what it covers or when it was used.</span>
+  </span>
+</li>
+```
+
+The left column takes the course code; if you'd rather show a date or week
+number, put that there instead — it's just text.
+
+If the list grows past a dozen or so, group it by course with an `<h3>` heading
+before each block, and give each course its own `<ul class="timeline">`.
+
+### Course terms
+
+The course list currently shows course codes but not the semesters. If you want
+terms, either add them to the `<span class="where">` line
+("University of Maryland, College Park — Fall 2022") or move the code into the
+title and put the term in the left column.
+
+
+---
+
+## Adding a transcription
+
+`transcriptions.html` expects **two files per entry** — the compiled PDF and the
+source — both in `assets/transcriptions/`, named the same apart from the
+extension:
+
+```
+assets/transcriptions/ngo-support.pdf
+assets/transcriptions/ngo-support.tex
+```
+
+If the source is more than one file (figures, a bibliography, several chapters),
+zip it and upload `ngo-support.zip` instead, then change the second link's text
+from "TeX source" to "Source (zip)".
+
+Then copy the template block — it's in a comment at the bottom of the file:
+
+```html
+<li>
+  <span class="when">1998</span>
+  <span class="what">
+    <span class="title">Title of the paper</span>
+    <span class="where">Original Author. <em>Journal</em> 12 (1998), 1–40.
+      Translated from the French.</span>
+    <span class="filelinks">
+      <a href="assets/transcriptions/slug.pdf">PDF</a>
+      <a href="assets/transcriptions/slug.tex">TeX source</a>
+    </span>
+  </span>
+</li>
+```
+
+The left column takes the **original paper's** year, not the year you typed it
+up, so the page reads as a bibliography.
+
+**Uploading many at once.** The browser uploader takes up to 100 files per
+commit, so you can drag a whole folder of PDFs and sources in one go — but
+remember to click *into* `assets/transcriptions` first, or they land at the repo
+root. If you find yourself doing this often, git from the command line is much
+less fiddly: `git add assets/transcriptions && git commit -m "Add transcriptions" && git push`.
+
+The two existing entries are listed by author only — their titles were never on
+the old site. Search `transcriptions.html` for `TODO` to find them.
