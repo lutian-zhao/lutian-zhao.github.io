@@ -1,0 +1,452 @@
+% Compile with latexmk -pdf, or run pdflatex three times.
+% The standard article class is styled below to match the Ng\^o/SMF layout.
+% Avoiding a conditional smfart branch makes the file compile identically on
+% different TeX installations.
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts}
+\IfFileExists{microtype.sty}{\usepackage[protrusion=true,expansion=false]{microtype}}{}
+
+% Ng\^o's text and mathematics fonts.  In the New TX branch amssymb is not
+% loaded, since amssymb and newtxmath both define \Bbbk.
+\IfFileExists{newtxtext.sty}{%
+  \IfFileExists{newtxmath.sty}{%
+    \usepackage{newtxtext,newtxmath}%
+  }{%
+    \usepackage{amssymb}%
+    \IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}%
+  }%
+}{%
+  \usepackage{amssymb}%
+  \IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}%
+}
+
+\usepackage{xcolor}
+\definecolor{linknavy}{RGB}{0,60,130}
+\definecolor{citegreen}{RGB}{0,100,60}
+\usepackage[
+  colorlinks=true,
+  linkcolor=linknavy,
+  citecolor=citegreen,
+  urlcolor=linknavy,
+  linktocpage=false,
+  bookmarksnumbered=true,
+  pdftitle={On the Harder-Narasimhan Filtration of Principal Bundles},
+  pdfauthor={V.B. Mehta and S. Subramanian}
+]{hyperref}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{}
+
+\AtBeginDocument{%
+  \renewcommand*{\contentsname}{Contents}%
+  \renewcommand*{\appendixname}{Appendix}%
+  \renewcommand*{\proofname}{Proof}%
+  \renewcommand*{\refname}{References}%
+  \renewcommand*{\figurename}{Figure}%
+  \renewcommand*{\tablename}{Table}%
+}
+\pagestyle{plain}
+\hbadness=10000
+\vbadness=10000
+\tolerance=9999
+\emergencystretch=3em
+
+% Define theorem styles
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theorem}[proposition]{Theorem}
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{definition}[proposition]{Definition}
+\newtheorem{remark}[proposition]{Remark}
+\newtheorem{corollary}[proposition]{Corollary}
+
+\begin{document}
+
+
+\title{On the Harder-Narasimhan Filtration of Principal Bundles}
+\author{V.B. Mehta and S. Subramanian}
+\date{}
+\maketitle
+
+\section{}
+
+Let $X$ be a nonsingular projective curve over a field $k$ of characteristic $p > 0$ and let $E \to X$ be a principal $G$-bundle on $X$ with $G$ a reductive group over $k$, or more generally, let $\mathcal{G} \to X$ be a reductive group scheme over $X$ (we observe that given a principal $G$-bundle $E \to X$, we can obtain a group scheme $E(G) \to X$ over $X$, by taking the associated fibre space to $E$ for the conjugacy action of $G$ on itself). If $\mathcal{G} \to X$ is not semistable (see \cite{ramanathan-moduli} for the notion of semistability of principal bundles, and \cite{behrend} for that of group schemes), then Behrend (in \cite{behrend}), Atiyah-Bott (in \cite{atiyah-bott}) and A. Ramanathan (in \cite{ramanathan-moduli}) have each defined the Harder-Narasimhan filtration (or the canonical filtration) of $\mathcal{G}$. Moreover, if $\mathfrak{p}$ denotes the Lie algebra bundle of the canonical parabolic $\mathcal{P}$ and $\mathfrak{g}$ that of $\mathcal{G}$, then Behrend (see \cite[Conjecture 7.6]{behrend}) conjectures that
+\[
+H^0(X, \mathfrak{g}/\mathfrak{p}) = 0.
+\]
+This conjecture implies that the canonical parabolic descends over purely inseparable field extensions.
+
+We recall (from \cite{imp}) that if $G$ is a reductive group over an algebraically closed field $k$ and $\alpha = \sum k_i \alpha_i$ is a root of $G$ where the $\alpha_i$ are simple roots and $k_i$ are integers, then the height of $\alpha$ is defined to be $\sum k_i$. Let $h(G)$ denote the height of the highest root of $G$. In Section 3 in this article, we show that the canonical parabolic of Behrend coincides with the canonical parabolic of Atiyah-Bott if $\operatorname{char} k = p > \max(2 \dim G, 4h(G))$. As a consequence, we obtain a proof of Behrend's conjecture (see Corollary~\ref{cor:3.6}) when $\operatorname{char} k = p > \max(2 \dim G, 4h(G))$. In Section 4, we show that if $\operatorname{char} k = p > 3$ and $\mu_{\min}(TX) \geq 0$ (where $TX$ is the tangent bundle of $X$: in Section 4, $X$ is a nonsingular projective variety of arbitrary dimension), then Behrend's conjecture is true.
+
+For the definition of the Harder-Narasimhan filtration of a vector bundle $V$, $\mu_{\min}(V)$, $\mu_{\max}(V)$, and the $\beta$-subbundle of $V$, we refer to \cite[pages 588--589]{atiyah-bott}, where $\mu_{\min}(V)$ is denoted by $\inf V$, $\mu_{\max}(V)$ is denoted by $\sup V$, and the $\beta$-subbundle is $E_1$, the first step in the Harder-Narasimhan filtration.
+
+\section{}
+
+Let $X$ be a nonsingular curve over a field $k$. Let $E \to X$ be a principal $G$-bundle on $X$, where $G$ is a reductive group defined over $k$. Let $\mathfrak{g}$ be the Lie algebra of $G$ and let $E(\mathfrak{g})$ be the Lie algebra bundle obtained from $E$ by the adjoint representation of $G$ on $\mathfrak{g}$. Let
+\begin{equation}\label{star}\tag{$*$}
+E(\mathfrak{g})_{-r} \subset E(\mathfrak{g})_{-r+1} \subset \cdots \subset E(\mathfrak{g})_{-1} \subset E(\mathfrak{g})_0 \subset E(\mathfrak{g})_1 \subset \cdots \subset E(\mathfrak{g})_s = E(\mathfrak{g})
+\end{equation}
+be the Harder-Narasimhan filtration of the vector bundle $E(\mathfrak{g})$. Here we have indexed the filtration so that
+\[
+\mu(E_i / E_{i-1}) < 0 \quad \text{for } i \geq 1 \quad \text{and} \quad \mu(E_{-j} / E_{-j-1}) \geq 0 \quad \text{for } j \geq 0,
+\]
+where $\mu(V)$ denotes the slope degree $V / \operatorname{rank} V$ for a vector bundle $V$ on $X$.
+
+\begin{lemma}\label{lem:2.1}
+Let $G = GL(n)$ and $V \to X$ a rank $n$ vector bundle on $X$ so that $E \to X$ is the frame bundle of $V$. Then the Lie algebra bundle $E(\mathfrak{gl}(n)) = V^* \otimes V$. Let $E(\mathfrak{gl}(n))_0$ be as in \eqref{star} above for $E(\mathfrak{gl}(n))$. Then $E(\mathfrak{gl}(n))_0$ is a bundle of parabolic subalgebras of $E(\mathfrak{gl}(n))$ if $\operatorname{char} k = p > 2n$.
+\end{lemma}
+\begin{proof}
+Let
+\[
+V_1 \subset V_2 \subset \cdots \subset V_\ell = V
+\]
+be the Harder-Narasimhan filtration of $V$. Let
+\[
+0 = E^{-\ell} \subset E^{-\ell+1} \subset \cdots \subset E^{-1} \subset E^0 \subset E^1 \subset \cdots \subset E^\ell = \operatorname{End}(V)
+\]
+be the filtration of $\operatorname{End}(V)$ defined by
+\[
+E^j = \{ \varphi \in \operatorname{End}(V) \mid \varphi(V_i) \subset V_{i+j}, \ \text{for all } i = 1, \ldots, \ell \}
+\]
+with the convention that $V_i = 0$ for $i \leq 0$ and $V_i = V$ for $i \geq \ell$. Then we can see that
+\[
+E^j / E^{j-1} \cong \bigoplus_i \operatorname{Hom}(V_i / V_{i-1}, V_{i+j} / V_{i+j-1}).
+\]
+
+From the definition of the $E^j$, $E^0$ consists of endomorphisms of $V$ preserving the given flag in $V$, and hence $E^0$ is a bundle of parabolic subalgebras of $\operatorname{End}(V)$. Consider the map
+\[
+E^0 \subset \operatorname{End}(V) \to \operatorname{End} V/E_{s-1},
+\]
+where $E_{s-1}$ denotes $E(\mathfrak{gl}(n))_{s-1}$ (and in general, we will let $E_i$ denote $E(\mathfrak{gl}(n))_i$).
+
+
+\medskip
+\noindent\textbf{Claim.}\emph{ The map $E^0 \to \operatorname{End} V/E_{s-1}$ is zero.}
+
+\begin{proof}[Proof of Claim]
+Consider the composite map
+\[
+E^{-\ell+1} \subset E^0 \to \operatorname{End} V/E_{s-1}.
+\]
+Since $E^{-\ell+1} \cong \operatorname{Hom}(V_\ell/V_{\ell-1}, V_1)$, $E^{-\ell+1}$ is semistable if $\operatorname{char} k = p > \operatorname{rank}(V_\ell/V_{\ell-1}) + \operatorname{rank} V_1$, in particular, if $p > 2n$. (Here, and subsequently, we use the fact that if $V_1$ and $V_2$ are semistable vector bundles with $\operatorname{rank} V_1 + \operatorname{rank} V_2 < p$, then $V_1 \otimes V_2$ is semistable, from \cite{imp}). Also,
+\[
+\mu(E^{-\ell+1}) = -\mu(V_\ell/V_{\ell-1}) + \mu(V_1) > 0.
+\]
+Since $\operatorname{End} V/E_{s-1}$ is semistable with $\mu(\operatorname{End} V/E_{s-1}) < 0$, it follows that the map $E^{-\ell+1} \to \operatorname{End} V/E_{s-1}$ is zero. Hence the map $E^0 \to \operatorname{End} V/E_{s-1}$ factors through a map $E^0/E^{-\ell+1} \to \operatorname{End} V/E_{s-1}$. Now consider the composite map
+\[
+E^{-\ell+2}/E^{-\ell+1} \subset E^0/E^{-\ell+1} \to \operatorname{End} V/E_{s-1}.
+\]
+Since
+\[
+E^{-\ell+2}/E^{-\ell+1} \cong \operatorname{Hom}(V_\ell/V_{\ell-1}, V_2/V_1) \oplus \operatorname{Hom}(V_{\ell-1}/V_{\ell-2}, V_1),
+\]
+and the maps
+\[
+\operatorname{Hom}(V_\ell/V_{\ell-1}, V_2/V_1) \to \operatorname{End} V/E_{s-1}
+\]
+and
+\[
+\operatorname{Hom}(V_{\ell-1}/V_{\ell-2}, V_1) \to \operatorname{End} V/E_{s-1}
+\]
+are both zero if $p > 2n$ (since $\mu$ (left handside) $> 0 > \mu$ (right handside)), it follows that
+\[
+E^{-\ell+2}/E^{-\ell+1} \to \operatorname{End} V/E_{s-1}
+\]
+is zero, and so the map
+\[
+E^0/E^{-\ell+1} \to \operatorname{End} V/E_{s-1}
+\]
+factors through a map
+\[
+E^0 / E^{-\ell+2} \to \operatorname{End} V/E_{s-1}.
+\]
+
+Arguing inductively as above, we obtain that the map
+\[
+E^0 \to \operatorname{End} V/E_{s-1}
+\]
+factors through a map
+\[
+E^0 / E^{-1} \to \operatorname{End} V/E_{s-1}.
+\]
+Since
+\[
+E^0 / E^{-1} \cong \bigoplus_i \operatorname{Hom}(V_i/V_{i-1}, V_i/V_{i-1})
+\]
+and the maps
+\[
+\operatorname{Hom}(V_i/V_{i-1}, V_i/V_{i-1}) \to \operatorname{End} V/E_{s-1}
+\]
+are zero if $p > 2n$, it follows that the map $E^0 \to \operatorname{End} V/E_{s-1}$ is zero if $p > 2n$. This shows the claim.
+\end{proof}
+
+We hence obtain that $E^0 \subset E_{s-1} = E(\mathfrak{gl}(n))_{s-1}$. Considering the map
+\[
+E^0 \to E_{s-1}/E_{s-2},
+\]
+and arguing as before, we see that this map is also zero and hence $E^0 \subset E_{s-2}$. Continuing this, we obtain $E^0 \subset E_0$.
+
+Conversely, consider the map
+\[
+E_0 \to \operatorname{End} V/E^{\ell-2} = E^{\ell-1}/E^{\ell-2},
+\]
+where $E_0 = E(\mathfrak{gl}(n))_0$. Since $\operatorname{End} V/E^{\ell-2} \cong \operatorname{Hom}(V_1, V/V_{\ell-1})$, we have
+\[
+\mu(\operatorname{End} V/E^{\ell-2}) = -\mu(V_1) + \mu(V/V_{\ell-1}) < 0.
+\]
+Also, $\mu_{\min}(E_0) \geq 0$. Hence the map
+\[
+E_0 \to \operatorname{End} V/E^{\ell-2}
+\]
+is zero if $p > 2n$ (since $p > 2n \implies \operatorname{Hom}(V_1, V/V_{\ell-1})$ is semistable), and $E_0 \subset E^{\ell-2}$. Continuing this argument, we obtain $E_0 \subset E^0$.
+
+It follows that $E_0 = E^0$ and hence $E_0 = E(\mathfrak{gl}(n))_0$ is a bundle of parabolic subalgebras of $\operatorname{End}(V)$.
+\end{proof}
+
+\begin{proposition}\label{prop:2.2}
+Let $G$ be a reductive group and $E \to X$ a principal $G$-bundle on $X$. Let $E_0 = E(\mathfrak{g})_0$ be as in \eqref{star}, a subbundle of $E(\mathfrak{g})$. Then $E_0$ is a bundle of parabolic subalgebras, if $\operatorname{char} k = p > \max(2 \dim G, 4h(G))$.
+\end{proposition}
+
+\begin{proof}
+It is easy to see that it is enough to consider the case when $G$ is a group with trivial centre. So we assume that the adjoint representation $\operatorname{Ad}: G \to GL(\mathfrak{g})$ is faithful. Let $E(GL(\mathfrak{g}))$ be the principal $GL(\mathfrak{g})$ bundle associated to $E$ by the representation $\operatorname{Ad}$. Let $E(\mathfrak{gl}(\mathfrak{g}))$ be the Lie algebra bundle of $E(GL(\mathfrak{g}))$. Since $\mathfrak{g} \subset \mathfrak{gl}(\mathfrak{g})$ by the adjoint representation, we obtain $E(\mathfrak{g}) \subset E(\mathfrak{gl}(\mathfrak{g}))$. We now appeal to the Main Theorem in \cite{serre} (see also \cite{imp}) which states that a $G$-module is semisimple if $p > 2 \cdot \text{height of the module}$, to obtain that
+\[
+\mathfrak{gl}(\mathfrak{g}) = \mathfrak{g} \oplus W
+\]
+as $G$-modules, if $\operatorname{char} k = p > 4h(G)$ (we observe that height of $\mathfrak{gl}(\mathfrak{g})$ as a $G$-module is $2h(G)$). Hence we obtain the decomposition
+\[
+E(\mathfrak{gl}(\mathfrak{g})) = E(\mathfrak{g}) \oplus E(W)
+\]
+of the associated bundles. It is then easy to see that
+\[
+E(\mathfrak{gl}(\mathfrak{g}))_0 = E(\mathfrak{g})_0 \oplus E(W)_0
+\]
+with notation as in \eqref{star}. By Lemma~\ref{lem:2.1}, $E(\mathfrak{gl}(\mathfrak{g}))_0$ is a bundle of parabolic subalgebras, if $p > 2 \dim G$. Consider $E(\mathfrak{g}) \subset E(\mathfrak{gl}(\mathfrak{g}))$ and fix a closed point $x \in X$. There exists $t \in GL(\mathfrak{g})$ such that $t E(\mathfrak{gl}(\mathfrak{g}))_{0,x} t^{-1}$ intersects $E(\mathfrak{g})_x$ in a parabolic subalgebra of $E(\mathfrak{g})_x$, where the subscript $x$ denotes the fibre of the corresponding bundle at $x$. Consider the subgroup $tGt^{-1}$ of $GL(\mathfrak{g})$ with Lie algebra $t\mathfrak{g}t^{-1}$. The Lie algebra bundle $E_G(\mathfrak{g})$ is isomorphic to the Lie algebra bundle $E_{tGt^{-1}}(t\mathfrak{g}t^{-1})$ where $E_{tGt^{-1}}$ is the principal $tGt^{-1}$ bundle on $X$ obtained by translating the principal $G$ bundle $E_G$. The isomorphism
+\[
+E_G(\mathfrak{g}) \cong E_{tGt^{-1}}(t\mathfrak{g}t^{-1})
+\]
+takes $E_G(\mathfrak{g})_0$ to $E_{tGt^{-1}}(t\mathfrak{g}t^{-1})_0$. But $E(\mathfrak{gl}(\mathfrak{g}))_{0,x}$ intersects $E_{tGt^{-1}}(t\mathfrak{g}t^{-1})_x$ in a parabolic subalgebra by choice of $t$. Thus
+\[
+E_{tGt^{-1}}(t\mathfrak{g}t^{-1})_{0,x} = E(\mathfrak{gl}(\mathfrak{g}))_{0,x} \cap E_{tGt^{-1}}(t\mathfrak{g}t^{-1})_x
+\]
+is a parabolic subalgebra, and hence so is $E_G(\mathfrak{g})_{0,x}$. Since $x$ is an arbitrary closed point of $X$, we obtain that $E(\mathfrak{g})_0$ is a parabolic subalgebra bundle.
+\end{proof}
+
+\section{}
+
+Let $E \to X$ be a principal $G$-bundle on $X$, where $X$ is a nonsingular projective curve.
+
+\begin{definition}\label{def:3.1}
+A reduction of structure group $E_P \subset E$ of $E$ to a parabolic subgroup $P$ of $G$ is said to be canonical, or the Harder-Narasimhan filtration of $E$, if, letting $E(G) \to X$ be the group scheme associated to $E$ by the adjoint action of $G$ on itself, and $E(P) \to X$ the parabolic subgroup scheme of $E(G)$ associated to $E_P$ by the adjoint action of $P$ on itself, the following conditions are satisfied:
+\begin{itemize}
+    \item[(i)] $\deg E(P) > 0$ (for any group scheme $\mathcal{G} \to X$ over $X$, $\deg \mathcal{G}$ denotes the degree of the Lie algebra bundle of $\mathcal{G}$ on $X$, regarded as a vector bundle on $X$),
+    \item[(ii)] for any parabolic subgroup scheme $Q \subset E(G)$, $\deg Q \leq \deg E(P)$,
+    \item[(iii)] for any parabolic subgroup scheme $Q$ containing $E(P)$, $\deg Q < \deg E(P)$,
+    \item[(iv)] the associated bundle $E_P(P/R_u(P))$ is semistable, where $R_u(P)$ is the unipotent radical of $P$.
+\end{itemize}
+\end{definition}
+
+With this definition, our notion of the canonical reduction (or Harder-Narasimhan filtration) coincides with that of Behrend (see \cite[definition 5.6, and the proof of Proposition 7.2]{behrend}).
+
+We need the following lemmas:
+
+\begin{lemma}\label{lem:3.2}
+Let $V \to X$ be a vector bundle on $X$ such that $\mu_{\min}(V) \geq 0$ (recall that $\mu_{\min}(V)$ is the smallest slope that occurs in the Harder-Narasimhan filtration of $V$). Let $S \subset V$ be a subbundle of $V$. Then $\deg S \leq \deg V$.
+\end{lemma}
+\begin{proof}
+We use induction on the rank of $V$. Let $W \subset V$ be the $\beta$-subbundle of $V$ (recall that the $\beta$-subbundle is the first step in the Harder-Narasimhan filtration of $V$). Let $\mathcal{S}$ and $\mathcal{W}$ be the sheaves associated to the bundles $S$ and $W$ respectively. Let $\overline{\mathcal{S} \cap \mathcal{W}}$ denote the saturation of the sheaf intersection $\mathcal{S} \cap \mathcal{W}$. Then $\overline{\mathcal{S} \cap \mathcal{W}}$ is a subbundle of $V$. We have the exact sequence
+\[
+0 \to \overline{\mathcal{S} \cap \mathcal{W}} \to S \to S / \overline{\mathcal{S} \cap \mathcal{W}} \to 0,
+\]
+and $S / \overline{\mathcal{S} \cap \mathcal{W}}$ is a subbundle of $V/W$. Since $\operatorname{rank}(V/W) < \operatorname{rank} V$ and $\mu_{\min}(V/W) \geq 0$ (since $\mu_{\min}(V/W) = \mu_{\min}(V)$), we have by induction
+\[
+\deg(S / \overline{\mathcal{S} \cap \mathcal{W}}) \leq \deg(V/W).
+\]
+Also, $\overline{\mathcal{S} \cap \mathcal{W}}$ is a subbundle of $W$, and hence
+\[
+\deg \overline{\mathcal{S} \cap \mathcal{W}} \leq \deg W.
+\]
+
+From those two inequalities, we obtain
+\begin{align*}
+\deg S &= \deg(\overline{\mathcal{S} \cap \mathcal{W}}) + \deg(S / \overline{\mathcal{S} \cap \mathcal{W}}) \\
+&\leq \deg W + \deg(V / W) = \deg V.
+\end{align*}
+\end{proof}
+
+
+\begin{lemma}\label{lem:3.3}
+Let $V \to X$ be a vector bundle such that $\mu_{\max}(V) < 0$ (recall that $\mu_{\max}(V)$ is the largest slope that occurs in the Harder-Narasimhan filtration of $V$). Let $S \subset V$ be a subsheaf of $V$. Then $\deg S < 0$.
+\end{lemma}
+\begin{proof}
+We again use induction on the rank of $V$. Let
+\[
+V_1 \subset V_2 \subset \cdots \subset V_{k-1} \subset V
+\]
+be the Harder-Narasimhan filtration of $V$. Consider the composite map
+\[
+\varphi: S \to V / V_{k-1}.
+\]
+We have an exact sequence of sheaves
+\[
+0 \to \ker \varphi \to S \to \operatorname{image} \varphi \to 0.
+\]
+Since $\operatorname{image} \varphi$ is a subsheaf of $V / V_{k-1}$ which is semistable of negative degree, we obtain
+\[
+\deg(\operatorname{image} \varphi) < 0.
+\]
+Also, $\ker \varphi \subset V_{k-1}$, $\mu_{\max}(V_{k-1}) < 0$, $\operatorname{rank} V_{k-1} < \operatorname{rank} V$. Hence by induction
+\[
+\deg(\ker \varphi) < 0.
+\]
+We hence obtain
+\[
+\deg S = \deg(\ker \varphi) + \deg(\operatorname{image} \varphi) < 0.
+\]
+\end{proof}
+
+\begin{proposition}\label{prop:3.4}
+Let $E \to X$ be a principal $G$ bundle and $E_0 = E(\mathfrak{g})_0$ be the subbundle of the adjoint bundle $E(\mathfrak{g})$ as in \eqref{star} of Section 2. Then by Proposition~\ref{prop:2.2}, $E_0$ is a bundle of parabolic subalgebras if $\operatorname{char} k = p > \max(2 \dim \mathfrak{g}, 4h(G))$. Let $P$ be the parabolic subgroup scheme with Lie algebra $E_0$ of the group scheme $E(G)$ associated to $E$. Then $P$ is the Harder-Narasimhan filtration of $E$ (see Definition~\ref{def:3.1}) if $E$ is not semistable, and $\operatorname{char} k = p > \max(2 \dim G, 4h(G))$.
+\end{proposition}
+
+\begin{remark}\label{rem:3.5}
+A parabolic subgroup scheme of $E(G)$ is the same as a reduction of structure group of $E$ to a parabolic subgroup.
+\end{remark}
+
+\begin{proof}[Proof of Proposition~\ref{prop:3.4}]
+We assume that $E$ is not semistable. Then $E(\mathfrak{g})$ is not semistable, and $\deg P = \deg E_0 > 0$. Let $Q$ be any parabolic subgroup scheme of $E(G)$, and let $\mathfrak{q}$ be its Lie algebra bundle. The $\mathfrak{q}$ is a subbundle of $E(\mathfrak{g})$. Let
+\[
+\mathfrak{q}_{-\ell} \subset \mathfrak{q}_{-\ell+1} \subset \cdots \subset \mathfrak{q}_{-1} \subset \mathfrak{q}_0 \subset \mathfrak{q}_1 \subset \cdots \subset \mathfrak{q}_m = \mathfrak{q}
+\]
+be the Harder-Narasimhan filtration of $\mathfrak{q}$ with $\mu(\mathfrak{q}_i / \mathfrak{q}_{i-1}) \geq 0$ for $i \leq 0$ and $\mu(\mathfrak{q}_i / \mathfrak{q}_{i-1}) < 0$ for $i \geq 1$. Then $\mu_{\min}(\mathfrak{q}_0) \geq 0$, and the composite map $\mathfrak{q}_0 \to E(\mathfrak{g}) / E_0$ is zero, since $\mu_{\max}(E(\mathfrak{g}) / (E_0)) < 0$. Hence $\mathfrak{q}_0 \subset E_0$. Since $\mu_{\min}(E_0) = 0$, we have by Lemma~\ref{lem:3.2} above that $\deg \mathfrak{q}_0 \leq \deg E_0$. But $\deg \mathfrak{q}_0 \geq \deg \mathfrak{q}$, hence $\deg \mathfrak{q} \leq \deg E_0$, or in other words $\deg Q \leq \deg P$. This verifies condition (ii) of Definition~\ref{def:3.1}.
+
+Now suppose $Q$ is a parabolic subgroup scheme of $E(G)$ containing $P$, and again let $\mathfrak{q}$ denote its Lie algebra bundle. Then $E_0 \subset \mathfrak{q}$ (since $P \subset Q$). We have the exact sequence
+\[
+0 \to E_0 \to \mathfrak{q} \to \mathfrak{q} / E_0 \to 0,
+\]
+and $\mathfrak{q} / E_0 \subset E(\mathfrak{g}) / E_0$. Since $\mu_{\max}(E(\mathfrak{g}) / E_0) < 0$, we obtain from Lemma~\ref{lem:3.3} that $\deg(\mathfrak{q} / E_0) < 0$. Hence
+\[
+\deg \mathfrak{q} = \deg E_0 + \deg(\mathfrak{q} / E_0) < \deg E_0,
+\]
+i.e., $\deg Q < \deg P$. This verifies condition (iii) of Definition~\ref{def:3.1}.
+
+Consider the filtration \eqref{star} of Section 2. If the Killing form of $G$ is non-degenerate (which is the case if $\operatorname{char} k = p > 2 \dim G$ as in our hypothesis), then we can see that $E(\mathfrak{g})_i = E(\mathfrak{g})_{-i-1}^{\perp}$ for $i \geq 0$, where $\perp$ is taken with respect to the Killing form. In particular $E(\mathfrak{g})_{-1} = E_0^\perp$. Since $E_0$ is a bundle of parabolic subalgebras, it follows that $E(\mathfrak{g})_{-1}$ is the nilpotent radical of $E_0$ (if $\mathfrak{p}$ is a parabolic subalgebra of $\mathfrak{g}$, then $\mathfrak{p}^\perp$ is the nilpotent radical of $\mathfrak{p}$). Therefore, the Lie algebra bundle of $P / R_u(P)$ (where $R_u(P)$ is the unipotent radical of $P$) is $E(\mathfrak{g})_0 / E(\mathfrak{g})_{-1}$. Since $E(\mathfrak{g})_0 / E(\mathfrak{g})_{-1}$ is a semistable vector bundle of degree zero, it follows that $P / R_u(P)$ is a semistable group scheme. This verifies condition (iv) of Definition~\ref{def:3.1}.
+
+We have thus shown that $P$ is the canonical reduction of $E$.
+\end{proof}
+
+\begin{corollary}\label{cor:3.6}
+Let $E \to X$ be a principal $G$ bundle and let $E_P \subset E$ be the canonical reduction (the Harder-Narasimhan filtration) to a parabolic $P$, and let $E(\mathfrak{g})$ and $E_P(\mathfrak{p})$ be the adjoint bundles of $E$ and $E_P$. Then
+\[
+H^0(X, E(\mathfrak{g})/E_P(\mathfrak{p})) = 0
+\]
+if $\operatorname{char} k = p > \max(2 \dim G, 4h(G))$.
+\end{corollary}
+\begin{proof}
+We know that $E_P(\mathfrak{p}) = E(\mathfrak{g})_0$, where $E(\mathfrak{g})_0$ is as in the filtration \eqref{star} of Section 2. Since $\mu_{\max}(E(\mathfrak{g})/E(\mathfrak{g})_0) < 0$, it follows that
+\[
+H^0(X, E(\mathfrak{g})/E(\mathfrak{g})_0) = 0.
+\]
+\end{proof}
+
+\section{}
+In this section, we will consider a nonsingular projective variety $X$, of arbitrary dimension, over a field $k$ of characteristic $p > 3$, and a polarisation $H$ on $X$. All notions of semistability of bundles on $X$ will be with respect to this polarisation $H$. We remark that all principal bundles, reductions of structure group, associated bundles, will be defined over open sets $U$ such that \emph{codimension}$(X - U) \geq 2$ (see section 4 in \cite{ramanan-ramanathan}), so in this section, $X$ will stand for an unspecified open subset $U$ with \emph{codimension}$(X - U) \geq 2$. We show the following:
+
+\begin{theorem}\label{thm:4.1}
+Let $E \to X$ be a principal $G$-bundle on $X$, where $G$ is a reductive group over $k$. Suppose that $\mu_{\min}(TX) \geq 0$, where $TX$ is the tangent bundle of $X$. Then we have:
+\begin{itemize}
+    \item[(i)] If $E \to X$ is semistable, so is $F^*E \to X$, where $F$ is the absolute Frobenius of $X$.
+    \item[(ii)] If $E \to X$ is not semistable, and $E_P \to X$ the canonical reduction of structure group of $E$ (see Definition~\ref{def:3.1}), $E(\mathfrak{g})$ the adjoint bundle of $E$, and $E(\mathfrak{p})$ the adjoint bundle of $E_P$, then
+    \[
+    \mu_{\max}(E(\mathfrak{g})/E(\mathfrak{p})) < 0
+    \]
+    and, in particular,
+    \[
+    H^0(X, E(\mathfrak{g})/E(\mathfrak{p})) = 0.
+    \]
+\end{itemize}
+\end{theorem}
+\begin{proof}
+We prove the assertion by induction on the semisimple rank of the group $G$. So we suppose that (i) and (ii) are true for groups of semisimple rank less than that of $G$. Let $E \to X$ be a principal $G$ bundle and suppose $F^*E \to X$ is not semistable. Let $\widetilde{E}_P \to X$ be the canonical reduction (the Harder-Narasimhan filtration) of $F^*E$. Then $\widetilde{E}_P$ is defined by a section $\sigma:X\to (F^*E)/P$ of the $G/P$ bundle $F^*E/P\to X$. Then we have a map
+\[
+TX \to N_\sigma,
+\]
+where $N_\sigma$ is the pullback by $\sigma$ of the normal bundle of $\sigma(X)$ in $F^*E/P$.
+
+This map is defined as follows: Let $D$ be a local section of $TX$ and $I$ the ideal sheaf of $\sigma(X)$ in $F^*E/P$. Then we have the diagram
+\[
+\begin{array}{ccccc}
+I & \to & \mathcal{O} & & \\
+ & & \downarrow D &&\\
+& &\mathcal{O} & \to & \mathcal{O}/I
+\end{array}
+\]
+The composite map $I \to \mathcal{O}/I$ vanishes on $I^2$ and hence defines a map
+\[
+I/I^2 \to \mathcal{O}/I
+\]
+which is $\mathcal{O}/I$ linear. Hence we get a map of sheaves
+\[
+TX \to N_\sigma = \operatorname{Hom}(I/I^2, \mathcal{O}/I).
+\]
+
+If this map is zero, then $\sigma$ descends to a section $\sigma_1$ of $E/P$. It is easy to see that
+\[
+N_\sigma = F^*E(\mathfrak{g})/\widetilde{E}_P(\mathfrak{p}),
+\]
+where $F^*E(\mathfrak{g})$ is the adjoint bundle of $F^*E$ and $\widetilde{E}_P(\mathfrak{p})$ is the adjoint bundle of $\widetilde{E}_P$. If $\mathfrak{g}/\mathfrak{p}$ is regarded as a $P$-module, then $F^*E(\mathfrak{g})/\widetilde{E}_P(\mathfrak{p})$ is the bundle $\widetilde{E}_P(\mathfrak{g}/\mathfrak{p})$ associated to $\widetilde{E}_P$ by the representation of $P$ on $\mathfrak{g}/\mathfrak{p}$. Let $P = MU$ be the Levi decomposition of $P$, where $U$ is the unipotent radical of $P$ and $M$ the Levi subgroup of $P$. Let
+\[
+V_1 \subset V_2 \subset \cdots \subset V_m = \mathfrak{g}/\mathfrak{p}
+\]
+be a Jordan-Holder filtration of $\mathfrak{g}/\mathfrak{p}$ as a $P$-module. Then each $V_i / V_{i-1}$ is an $M$-module (since $U$ acts trivially), and the $M$-modules which occur thus are duals of the $M$-modules which occur in $\mathfrak{u}$ (where $\mathfrak{u}$ is the Lie algebra of $U$; see \cite[Remark 6, Section 3]{azad-barry-seitz}). In particular, the vector bundles $\widetilde{E}_M(V_i / V_{i-1})$ are dual to the elementary vector bundles (see \cite{behrend}) associated to $\widetilde{E}_P$. Since the elementary vector bundles have positive degree (by \cite{behrend}), it follows that the $\widetilde{E}_M(V_i / V_{i-1})$ have negative degree. Further, by the definition of canonical reduction, $\widetilde{E}_M$ is semistable. Also, since the semisimple rank of $M$ is smaller than that of $G$, by the inductive hypothesis, $F^{n*}\widetilde{E}_M$ is semistable for all $n \geq 1$. Hence by a theorem of Ramanan and Ramanathan (see \cite[Theorem 3.23]{ramanan-ramanathan}), the vector bundles $\widetilde{E}_M(V_i / V_{i-1})$ are semistable too. Thus $\widetilde{E}_P(\mathfrak{g}/\mathfrak{p})$ has a filtration with subquotients which are semistable bundles of negative degree. Hence
+$
+\mu_{\max}(\widetilde{E}_P(\mathfrak{g}/\mathfrak{p})) (= \mu_{\max}(N_\sigma)) < 0.
+$
+Therefore the map $T_X \to N_\sigma$ is zero. Hence the section $\sigma : X \to F^*E/P$ descends to a section $\sigma_1 : X \to E/P$, and $\sigma_1$ defines a reduction of structure group of $E$ contradicting the semistability of $E$. Hence $F^*E$ is semistable. This proves (i).
+
+As for (ii), we observe that the argument given above to show that
+\[
+\mu_{\max}(\widetilde{E}_P(\mathfrak{g}/\mathfrak{p})) < 0,
+\]
+does the job for us.
+
+It remains to start the induction. So let $G$ be a reductive group of semisimple rank 1 (in fact, we can reduce to the case $G = PSL(2)$) and $E \to X$ a principal $G$-bundle which is semistable. Suppose $F^*E \to X$ is not semistable and $\sigma : X \to F^*E/P$ is a reduction contradicting semistability. Then we observe that $F^*E/P \to X$ is a $\mathbb{P}^1$ bundle, and hence the normal bundle $N_\sigma$ of the section $\sigma(X)$ in $F^*E/P$ is a line bundle. Since $\sigma$ contradicts semistability, $N_\sigma = F^*E(\mathfrak{g}/\mathfrak{p})$ has negative degree, and hence the canonical map $T_X \to N_\sigma$ is zero (since $\mu_{\min}(T_X) \geq 0$). It follows that the section $\sigma$ descends to a section $\sigma_1 : X \to E/P$ contradicting the semistability of $E \to X$.
+
+\end{proof}
+
+\begin{thebibliography}{9}
+
+\bibitem{atiyah-bott}
+M.F. Atiyah, R. Bott, \emph{The Yang-Mills equations over Riemann surfaces}, Phil. Trans. R. Soc. London \textbf{A 308} (1982), 523--615. \href{https://doi.org/10.1098/rsta.1983.0017}{doi:10.1098/rsta.1983.0017}
+
+\bibitem{azad-barry-seitz}
+H. Azad, M. Barry, G. Seitz, \emph{On the structure of parabolic subgroups}, Comm. in Algebra, \textbf{18} (2) (1990), 551--562.
+
+\bibitem{anchouche-azad-biswas}
+B. Anchouche, H. Azad, I. Biswas, \emph{Harder-Narasimhan reduction for principal bundles over a compact Kahler manifold}, Preprint.
+
+\bibitem{behrend}
+K.A. Behrend, \emph{Semistability of reductive group schemes over curves}, Math. Ann. \textbf{301} (1995), 281--305. \href{https://doi.org/10.1007/BF01446630}{doi:10.1007/BF01446630}
+
+\bibitem{imp}
+S. Ilangovan, V.B. Mehta, A.J. Parameswaran, \emph{Semistability and semisimplicity in representations of low height in positive characteristic}, Preprint.
+
+\bibitem{ramanan-ramanathan}
+S. Ramanan, A. Ramanathan, \emph{Some remarks on the instability flag}, Tohoku Math. Journal \textbf{36} (1984), 269--291. \href{https://doi.org/10.2748/tmj/1178228852}{doi:10.2748/tmj/1178228852}
+
+\bibitem{ramanathan-moduli}
+A. Ramanathan, \emph{Moduli for principal bundles}, In: Algebraic Geometry Proceedings, Copenhagen, 1978, 527--533, Lecture Notes Math., vol. 732, Springer. \href{https://doi.org/10.1007/BFb0066661}{doi:10.1007/BFb0066661}
+
+\bibitem{serre}
+J.P. Serre, \emph{Moursund Lectures}, University of Oregon, 1998.
+
+\end{thebibliography}
+
+\bigskip
+\noindent
+\textsc{School of Mathematics, Tata Institute of Fundamental Research,\\
+Homi Bhabha Road, Colaba, Mumbai 400 005, India} \\
+E-mail: \href{mailto:vikram@math.tifr.res.in}{\texttt{vikram@math.tifr.res.in}}, \href{mailto:subramnn@math.tifr.res.in}{\texttt{subramnn@math.tifr.res.in}}
+
+\end{document}
