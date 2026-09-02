@@ -1,0 +1,1357 @@
+%%=================================================================
+%%  Gerd Faltings, "Stable G-bundles and projective connections"
+%%  J. Algebraic Geometry 2 (1993) 507-568.
+%%  Re-typeset transcription -- unified preamble.
+%%=================================================================
+\documentclass[12pt,english]{smfart}
+\usepackage{smfenum}
+
+\usepackage[T1]{fontenc} \usepackage[utf8]{inputenc} \usepackage[english]{babel} \usepackage{amsmath,amsthm,amsfonts} \usepackage{mathrsfs}
+\DeclareFontFamily{U}{rsfs}{\skewchar\font127}
+\DeclareFontShape{U}{rsfs}{m}{n}{<->rsfs10}{}
+
+%% Ng\^o's text and mathematics fonts.  smfart may make AMS symbols
+%% available before this point, so clear \Bbbk before newtxmath defines it.
+\usepackage{newtxtext}
+\let\Bbbk\relax
+\usepackage{newtxmath}
+
+\usepackage[ top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, marginparwidth=1.7cm, marginparsep=0.3cm ]{geometry} \usepackage{xcolor} \IfFileExists{marginnote.sty}{%
+  \usepackage{marginnote}%
+}{%
+  \newcommand{\marginfont}{}%
+  \newcommand{\marginnote}[1]{\marginpar{#1}}%
+} \IfFileExists{microtype.sty}{\usepackage[protrusion=true,expansion=false]{microtype}}{}
+
+%% ---------------- hyperref (loaded late) -------------------------
+\definecolor{linknavy}{RGB}{20,60,120} \definecolor{citegreen}{RGB}{20,100,60} \definecolor{urlmaroon}{RGB}{130,30,60} \usepackage[ colorlinks=true, linkcolor=linknavy, citecolor=citegreen, urlcolor=urlmaroon, filecolor=urlmaroon, bookmarks=true, bookmarksnumbered=true, bookmarksopen=true, bookmarksopenlevel=1, pdfstartview={FitH}, pdfpagemode=UseOutlines, pdftitle={Stable G-bundles and projective connections}, pdfauthor={Gerd Faltings}, pdfsubject={J. Algebraic Geometry 2 (1993), 507-568}, pdfkeywords={stable G-bundles, Higgs bundles, moduli spaces, projective connections, abelianisation, parabolic structures}, breaklinks=true, hypertexnames=false ]{hyperref}
+
+%% ---------------------------------------------------------------
+%%  Notation macros (script letters as in the original)
+%% ---------------------------------------------------------------
+\newcommand{\sA}{\mathscr{A}} \newcommand{\sB}{\mathscr{B}} \newcommand{\sC}{\mathscr{C}} \newcommand{\sD}{\mathscr{D}} \newcommand{\sE}{\mathscr{E}} \newcommand{\sF}{\mathscr{F}} \newcommand{\sG}{\mathscr{G}} \newcommand{\sH}{\mathscr{H}} \newcommand{\sI}{\mathscr{I}} \newcommand{\sJ}{\mathscr{J}} \newcommand{\sK}{\mathscr{K}} \newcommand{\sL}{\mathscr{L}} \newcommand{\sM}{\mathscr{M}} \newcommand{\sN}{\mathscr{N}} \newcommand{\sO}{\mathscr{O}} \newcommand{\sP}{\mathscr{P}} \newcommand{\sQ}{\mathscr{Q}} \newcommand{\sR}{\mathscr{R}} \newcommand{\sS}{\mathscr{S}} \newcommand{\sT}{\mathscr{T}} \newcommand{\sU}{\mathscr{U}} \newcommand{\sV}{\mathscr{V}} \newcommand{\sW}{\mathscr{W}} \newcommand{\sX}{\mathscr{X}} \newcommand{\sY}{\mathscr{Y}} \newcommand{\sZ}{\mathscr{Z}} \newcommand{\sMod}{\mathscr{M}} \newcommand{\Gs}{\mathscr{G}} \newcommand{\Gm}{\mathbb{G}_m} \newcommand{\CH}{\mathscr{C}\mathscr{H}}
+
+%% fraktur
+\newcommand{\Ab}{\mathfrak{A}} \newcommand{\Bb}{\mathfrak{B}} \newcommand{\FA}{\mathfrak{A}} \newcommand{\FB}{\mathfrak{B}} \newcommand{\g}{\mathfrak{g}} \newcommand{\n}{\mathfrak{n}} \newcommand{\h}{\mathfrak{h}} \newcommand{\hh}{\mathfrak{h}} \newcommand{\p}{\mathfrak{p}} \newcommand{\ttt}{\mathfrak{t}} \newcommand{\zz}{\mathfrak{z}} \newcommand{\slt}{\mathfrak{sl}_2} \newcommand{\sltwo}{\mathfrak{sl}_2}
+
+%% sheaf-valued functors (calligraphic head, roman tail)
+\newcommand{\shHom}{\mathscr{H}\!om} \newcommand{\shEnd}{\mathscr{E}\!nd} \newcommand{\shAut}{\mathfrak{A}ut} \newcommand{\End}{\mathscr{E}\!nd} \newcommand{\Isom}{\mathscr{I}\!som} \newcommand{\Char}{\mathscr{C}\!har} \newcommand{\Conn}{\mathscr{C}\!onn} \newcommand{\Diff}{\mathscr{D}\!iff} \newcommand{\Bor}{\mathscr{B}or} \newcommand{\Flag}{\mathscr{F}\!lag} \renewcommand{\Im}{\mathscr{I}\!m}
+
+%% operators
+\DeclareMathOperator{\Hom}{Hom} \DeclareMathOperator{\Ext}{Ext} \DeclareMathOperator{\Der}{Der} \DeclareMathOperator{\rank}{rank} \DeclareMathOperator{\rk}{rk} \DeclareMathOperator{\Spec}{Spec} \DeclareMathOperator{\depth}{depth} \DeclareMathOperator{\genus}{genus} \DeclareMathOperator{\Lie}{Lie} \DeclareMathOperator{\Ad}{Ad} \DeclareMathOperator{\ad}{ad} \DeclareMathOperator{\id}{id} \DeclareMathOperator{\tr}{tr} \DeclareMathOperator{\ch}{ch} \DeclareMathOperator{\Td}{Td} \DeclareMathOperator{\gr}{gr} \DeclareMathOperator{\Pic}{Pic} \DeclareMathOperator{\Aut}{Aut} \DeclareMathOperator{\Out}{Out} \DeclareMathOperator{\Gal}{Gal} \DeclareMathOperator{\PGL}{PGL} \DeclareMathOperator{\GL}{GL} \DeclareMathOperator{\SL}{SL} \DeclareMathOperator{\Ima}{Im} \newcommand{\HDR}{H_{\mathrm{DR}}} \newcommand{\Mpar}{\sM^{0}_{\theta}(\sG)_{\mathrm{par}}}
+
+%% ---------------------------------------------------------------
+%%  Sectioning: I, II, III, IV, V as in the original
+%% ---------------------------------------------------------------
+%% long unbreakable formulas: give TeX a little slack instead of
+%% letting them stick into the margin
+\hbadness=10000
+\vbadness=10000
+\tolerance=9999
+\emergencystretch=3em
+\pagestyle{plain}
+
+\renewcommand{\thesection}{\Roman{section}} \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+
+%% ---------------------------------------------------------------
+%%  Theorem environments.  The original numbers statements by hand
+%%  (I.1, ..., II.9, III.1, ...), so each environment takes the
+%%  number as a mandatory argument and remains \label-able.
+%% ---------------------------------------------------------------
+\theoremstyle{plain} \newtheorem{innerthm}{Theorem} \newtheorem{innerlem}{Lemma} \newtheorem{innerprop}{Proposition} \newtheorem{innercor}{Corollary} \theoremstyle{definition} \newtheorem{innerdefn}{Definition} \newtheorem{innerconstr}{Construction} \theoremstyle{remark} \newtheorem*{remark}{Remark} \newtheorem*{remarks}{Remarks} \newtheorem*{applications}{Applications}
+
+\newenvironment{theorem}[1]%
+  {\renewcommand{\theinnerthm}{#1}\begin{innerthm}}{\end{innerthm}} \newenvironment{lemma}[1]%
+  {\renewcommand{\theinnerlem}{#1}\begin{innerlem}}{\end{innerlem}} \newenvironment{proposition}[1]%
+  {\renewcommand{\theinnerprop}{#1}\begin{innerprop}}{\end{innerprop}} \newenvironment{corollary}[1]%
+  {\renewcommand{\theinnercor}{#1}\begin{innercor}}{\end{innercor}} \newenvironment{definition}[1]%
+  {\renewcommand{\theinnerdefn}{#1}\begin{innerdefn}}{\end{innerdefn}} \newenvironment{construction}[1]%
+  {\renewcommand{\theinnerconstr}{#1}\begin{innerconstr}}{\end{innerconstr}}
+
+%% cross-reference shorthands -- all produce clickable links
+\newcommand{\refthm}[1]{\hyperref[thm:#1]{Theorem~#1}} \newcommand{\reflem}[1]{\hyperref[lem:#1]{Lemma~#1}} \newcommand{\refprop}[1]{\hyperref[prop:#1]{Proposition~#1}} \newcommand{\refcor}[1]{\hyperref[cor:#1]{Corollary~#1}} \newcommand{\refdef}[1]{\hyperref[def:#1]{Definition~#1}} \newcommand{\refconstr}[1]{\hyperref[constr:#1]{Construction~#1}} \newcommand{\refsec}[1]{\hyperref[sec:#1]{\S#1}}
+
+%% ---------------------------------------------------------------
+%%  Original journal pagination, shown in the margin
+%% ---------------------------------------------------------------
+\renewcommand{\marginfont}{\scriptsize\color{gray!80!black}} \newcommand{\pg}[1]{%
+  \marginnote{[#1]}%
+  \phantomsection\label{page:#1}\ignorespaces}
+
+
+%% ---------------------------------------------------------------
+%%  External links: DOIs, MathSciNet
+%% ---------------------------------------------------------------
+\newcommand{\doi}[1]{{\footnotesize\href{https://doi.org/#1}{\texttt{doi:#1}}}} \newcommand{\doix}[2]{{\footnotesize #1: \href{https://doi.org/#2}{\texttt{doi:#2}}}} \newcommand{\mr}[1]{{\footnotesize\href{https://mathscinet.ams.org/mathscinet-getitem?mr=#1}{\texttt{MR\,#1}}}} \newcommand{\zbl}[1]{{\footnotesize\href{https://zbmath.org/?q=an\%3A#1}{\texttt{Zbl\,#1}}}}
+
+%% unnumbered footnote, as in the original; smfart otherwise prints an empty
+%% pair of parentheses for a footnote with an empty number.
+\makeatletter
+\newcommand{\blfootnote}[1]{%
+  \begingroup
+  \renewcommand{\thefootnote}{}%
+  \def\@makefnmark{}%
+  \def\@makefntext##1{##1}%
+  \begin{NoHyper}\footnotetext{#1}\end{NoHyper}%
+  \endgroup}
+\makeatother
+
+\AtBeginDocument{\renewcommand{\refname}{Bibliography}}
+
+\title{\bfseries Stable $G$-Bundles and Projective Connections}
+\author{Gerd Faltings}
+\date{}
+
+\begin{document}
+
+
+
+{\footnotesize\noindent J.\ \textsc{Algebraic Geometry}\\
+\textbf{2} (1993) 507--568\hfill\mr{1211997}\quad\zbl{0790.14019}\par}
+
+\vspace{2.2\baselineskip}
+\begin{center}
+  {\large\bfseries STABLE $G$-BUNDLES\\[2pt] AND PROJECTIVE CONNECTIONS}
+
+  \vspace{1.1\baselineskip}
+  {\normalsize\scshape Gerd Faltings}
+\end{center}
+\vspace{0.8\baselineskip}
+
+\blfootnote{Received June 12, 1992 and, in revised form, December 9, 1992. The work was supported by the NSF, grant DMS 90-02744.}
+
+\phantomsection
+\addcontentsline{toc}{section}{Introduction}
+\section*{Introduction}\label{page:507}
+
+This paper deals with various questions related to the moduli-space of stable bundles on an algebraic curve. It came into existence because I could not follow all the arguments in the literature, and also because I could not find there some assertions which should hold. The main topics are construction and compactification of moduli-spaces of Higgs-bundles, and of the projective connection governing the behaviour under change of the underlying curve.
+
+We restrict ourselves to characteristic zero because we need that the tensor-product of two stable bundles is stable and semisimple. The only known proof of this fact is analytic, using the theorem of Narasimhan-Seshadri. Also we need the analogue (due to Hitchin) for Higgs-bundles.
+
+In the first section I give a new construction of the moduli-space and its compactification, avoiding geometric invariant theory. However I do not claim at all that this theory should be avoided, but only that sometimes it may be good to have an alternative. In fact use of geometric invariant theory would allow us to shorten the arguments. The only really new fact is that the normalisation of the ring of theta-functions suffices to embed the moduli-space.
+
+After that I study in \refsec{II} principal bundles over groups different from $\mathrm{GL}_d$. Here the main new result is a semistable reduction-theorem, after which the rest is straightforward. Much of the section is taken up by estimates for the codimension of various boundaries. Previously $G$-bundles had been defined by A.~Ramanathan, but his treatment is less algebraic than ours. Also we are slightly more general, by allowing twisted forms of reductive groups.
+
+In \refsec{III} we treat (following N.~J.~Hitchin) abelianisation, using roots and weights. This allows us to extend the theory to exceptional groups. After that we construct the projective connection, inspired somehow by
+\pg{508}
+the paper of N.~J.~Hitchin but mostly copying the approach of Witten. We have tried to be careful in treating the complications arising from the boundary, because this has not always been done in the literature. Finally at the end parabolic structures (in the sense of C.~S.~Seshadri) are treated. There the new point is a study of nilpotent degenerations. I have also an announcement (without proofs) of Beilinson-Drinfeld-Ginsburg where they construct rings of differential operators using the theory of Kac-Moody algebras, which generalises some of our results. However it does not treat the projective connection.
+
+I thank P.~Deligne and C.~S.~Seshadri, as well as the referee, for several relevant comments.
+
+\section{The theorem of the cube}\label{sec:I}
+
+In this section we consider a family of curves $\pi\colon C\to S$. Here $S$ is a noetherian base-scheme, $\pi$ is proper, and all its fibers have dimension $\le 1$. Furthermore we assume that $\pi_*(\sO_C)=\sO_S$. These hypotheses are invariant under flat base-change $S'\to S$. It is also well known that $\pi$ is locally (in $S$) projective. One just has to construct a line-bundle which has positive degree on each irreducible component of any fibre, which is easy using Cartier-divisors.
+
+If $\sF$ is any coherent sheaf on $C$ which is flat over $\sO_S$ we may form the determinant $\lambda(H^*(\sF))$ of its cohomology, as follows (using EGA III,7): Locally in $S$ there exists a finite complex $\sK^{\textstyle\cdot}$ of finitely generated free $\sO_S$-modules, such that for any coherent sheaf $\sG$ on $S$, the higher direct images of $\sF\otimes\pi^*(\sG)$ are naturally isomorphic to the cohomology of $\sK^{\textstyle\cdot}\otimes\sG$. $\sK^{\textstyle\cdot}$ is uniquely determined up to a unique quasi-isomorphism. Thus the alternating tensor-product of the determinants of the $\sK^i$ is, again up to canonical isomorphism, independent of all choices, and is defined to be the determinant of cohomology $\lambda(H^*(\sF))$. We also defined $\chi(\sF)$ as the alternating sum of the ranks of the $\sK^i$. This is a locally constant function on $S$.
+
+We also remark that we may choose $\sK^{\textstyle\cdot}$ of length two: $\sK^0\to\sK^1$. If $\chi(\sF)$ vanishes then $\sK^0$ and $\sK^1$ have the same rank, so the determinant of the map defines a canonical section $\theta$ of $\det(H^*(\sF))^{\otimes-1}$. This section is called the theta-function, and it will be our method of choice to produce global sections of various line-bundles. It vanishes at the points $s\in S$ where the restriction of $\sF$ to $C_s$ has nontrivial cohomology, i.e.\ has a global section.
+
+\pg{509}
+$\chi(\sF)$ and $\det(H^*(\sF))$ are additive respectively multiplicative: Any short exact sequence
+\[
+0\to\sF_1\to\sF_2\to\sF_3\to 0
+\]
+of $\sO_S$-flat coherent $\sO_C$-modules induces an isomorphism
+\[
+\lambda(H^*(\sF_2))\cong\lambda(H^*(\sF_1))\otimes\lambda(H^*(\sF_3)),
+\]
+and also
+\[
+\chi(\sF_2)=\chi(\sF_1)+\chi(\sF_3).
+\]
+It follows that $\det(H^*(\sF))$ and $\chi(\sF)$ factor over a suitably defined $K$-group. In fact they define the first respectively zeroth Chern-class of the direct image in $K$-theory.
+
+From the Riemann-Roch theorem (when it is applicable) one sees that the isomorphy-class of $\det(H^*(\sF))$ is ``quadratic'' in the Chern-classes of $\sF$. The main result of this section will be a general theorem to this extent. To state it we need a somewhat technical condition:
+
+Suppose that $\sF$ and $\sG$ are $\sO_S$-flat coherent sheaves on $C$. We say that $\sF$ and $\sG$ \emph{coincide generically in $K$-theory} if the following holds: For each $s\in S$ such that $\depth(\sO_{S,s})=0$, the difference of $\sF$ and $\sG$ in the $K$-theory of coherent $\sO_S$-flat sheaves on $C\times_S\Spec(\sO_{S,s})$ is represented by a finite complex $\sF^{\textstyle\cdot}$ of coherent sheaves, such that the support of cohomology of $\sF^{\textstyle\cdot}$ has relative dimension zero over $\Spec(\sO_{S,s})$, i.e.\ is finite over it.
+
+This condition is stable under flat base-change. Also if $S$ is reduced, it is equivalent to the fact that $\sF$ and $\sG$ define the same class in the $K$-theory of $\sO_{C,x}$, for any point $x$ of codimension one in a generic fibre of $\pi$.
+
+\begin{theorem}{I.1}\label{thm:I.1}
+Suppose we are given two $\sO_S$-flat coherent sheaves $\sF$ and $\sG$ on $C$, which coincide generically in $K$-theory. Suppose further that $\Ab$ and $\Bb$ are vector-bundles on $C$, of the same rank.
+
+Then one can associate functorially to any isomorphism of their determinants $\phi\colon\det(\Ab)\cong\det(\Bb)$ an isomorphism
+\[
+\psi\colon
+\det(H^*(\Ab\otimes\sF))\otimes\det(H^*(\Bb\otimes\sG))
+\cong
+\det(H^*(\Bb\otimes\sF))\otimes\det(H^*(\Ab\otimes\sG)).
+\]
+
+Furthermore $\psi$ depends on $\phi$ in the following way: If $\lambda\in\sO_S^*$ is an invertible function, then
+\[
+\psi(\lambda\cdot\phi)=\lambda^{\chi(\sF)-\chi(\sG)}\cdot\psi(\phi).
+\]
+
+In particular if $\chi(\sF)$ and $\chi(\sG)$ coincide, then $\psi$ is independent of the choice of $\phi$ (two $\phi$'s differ by a $\lambda$, as $\pi_*(\sO_C)=\sO_S$).
+
+\pg{510}
+Finally, $\psi$ is additive in $\Ab$ and $\Bb$, in the following sense: Suppose
+\[
+0\to\Ab_1\to\Ab_2\to\Ab_3\to 0,\qquad
+0\to\Bb_1\to\Bb_2\to\Bb_3\to 0
+\]
+are short exact sequences of vector-bundles of the same rank, and suppose we have isomorphisms $\phi_i\colon\det(\Ab_i)\cong\det(\Bb_i)$, for $i=1,2,3$, compatible (i.e.\ $\phi_2=\phi_1\otimes\phi_3$ under the usual identifications). Then the isomorphisms $\psi$ are compatible as well, that is $\psi_2=\psi_1\otimes\psi_3$.
+\end{theorem}
+
+\begin{proof}
+We proceed by induction on $\rank(\Ab)=\rank(\Bb)$. If this is one then $\Ab$ and $\Bb$ are isomorphic line-bundles, and the determinants of their cohomology are naturally isomorphic as well. The claimed dependence on scaling follows if we show that
+\[
+\chi(\sF)-\chi(\sG)=\chi(\Ab\otimes\sF)-\chi(\Ab\otimes\sG).
+\]
+It suffices to check this equality in the generic points of $S$, i.e.\ we may assume that $S$ is the spectrum of an artinian local ring. The assertion depends only on the difference of the classes of $\sF$ and $\sG$ in the $K$-theory of $\sO_S$-flat coherent sheaves on $C$. By the assumption on $\sF$ and $\sG$ this difference can be represented by a finite complex $\sF^{\textstyle\cdot}$ of such sheaves, which is acyclic in the generic points of $C$, and thus the support of its cohomology has dimension zero. As $\Ab$ can be trivialised near this support the assertion now follows easily.
+
+The next (and hardest) step is to consider the case where $\Ab$ and $\Bb$ have rank two. For this we note that the assertion is local in $S$, so we may assume that $S$ is the spectrum of a local ring with algebraically closed residue-field $k=\kappa(s)$. Choose a very ample line-bundle $\sL$ on $C$. We replace if necessary $\sL$ by a high power, so that $\shHom(\Ab,\sL)$ and $\shHom(\Bb,\sL)$ are both globally generated, and have trivial cohomology. For each closed point $x\in C(k)$ the set of maps $\alpha\in\Hom(\Ab,\sL)$ (taken on the closed fibre $C_s$) vanishing at $x$ has codimension two in $\Hom(\Ab,\sL)$. As $C_s$ has dimension one it follows that a generic $\alpha$ has no zero on $C_s$. As we can lift it to $\sO_{S,s}$ we derive that there exists a surjection $\alpha\colon\Ab\to\sL$, whose kernel must be isomorphic to $\det(\Ab)\otimes\sL^{\otimes-1}$. If we apply the same reasoning to $\Bb$, we obtain a surjection $\beta\colon\Bb\to\sL$, with its kernel isomorphic to that of $\alpha$. By the additivity of the determinant of cohomology we obtain the desired isomorphism, and also its behaviour under scaling. It remains to be seen that it is independent of the choice of $\sL$, $\alpha$ and $\beta$.
+
+First consider the dependence on $\alpha$ and $\beta$. Consider the projective bundle $P\to S$ associated to (the dual of) $\Hom_C(\Ab,\sL)\oplus\Hom_C(\Bb,\sL)$. So over $P$ we have universal homomorphisms $\alpha\colon\Ab\to\sL(1)$ and $\beta\colon\Bb\to\sL(1)$,
+\pg{511}
+and there exists an open subset $U\subset P$, dense in each fiber (over $S$), such that $\alpha$ and $\beta$ are surjective over $U$. It follows by the previous that over $U$ we have an isomorphism (of pullbacks of line-bundles)
+\[
+\psi\colon
+\det(H^*(\Ab\otimes\sF))\otimes\det(H^*(\Bb\otimes\sG))
+\cong
+\det(H^*(\Bb\otimes\sF))\otimes\det(H^*(\Ab\otimes\sG))
+\]
+and if we show that $\psi$ extends to $P$ it must be induced from $S$, and the assertion follows.
+
+To check extendability it suffices to consider points of $P$ where the local ring has depth $\le 1$. These are either generic points of fibres $P_t$, where $\sO_{S,t}$ has depth $\le 1$, or points of codimension $\le 1$ in fibres $P_t$ with $\depth(\sO_{S,t})=0$. The first type of point lies in $U$, so we can concentrate on the second and assume that $t$ is the closed point of $S$, so that $\sO_{S,s}$ has depth zero. The assertion again depends only on the difference of $\sF$ and $\sG$ in $K$-theory, and by assumption it can be represented by a complex $\sF^{\textstyle\cdot}$ whose cohomology has support of relative dimension zero (i.e.\ is finite) over $S$. We derive that, up to fibrewise codimension $\ge 2$, $\alpha$ and $\beta$ are surjective on the support of $\sF^{\textstyle\cdot}$. This also holds at the finite set of points of $C_s$ where $C_s$ has depth zero. So if we base-change by the local ring of $P$ in a point of codimension one in $P_t$, we arrive at the following situation:
+
+Now our base is of the form $S'=\Spec(R)$, $R$ a local ring of depth one. Furthermore we have on $C'=C\times_S S'$ a complex $\sF^{\textstyle\cdot}$ of coherent $R$-flat sheaves, and a map $\alpha\colon\Ab\to\sL$ which is surjective near the support of $H^*(\sF^{\textstyle\cdot})$, and also at all points of $C$ which have depth $\le 1$. Finally there exists a regular element $f\in R$ such that over the localisation $R_f$ $\alpha$ is surjective in general, thus inducing (over $R_f$) an extension
+\[
+0\to\sM=\det(\Ab)\otimes\sL^{\otimes-1}\to\Ab\to\sL\to 0
+\]
+and an isomorphism between $\det(H^*(\Ab\otimes\sF^{\textstyle\cdot}))$ and the product of $\det(H^*(\sM\otimes\sF^{\textstyle\cdot}))$ and $\det(H^*(\sL\otimes\sF^{\textstyle\cdot}))$. We have to show that this isomorphism extends to $R$. For this we note that the map from $\sM$ to $\Ab$ is regular where $\alpha$ is surjective, so it extends to $C'$ as the complement contains only points where $C'$ has depth $\ge 2$. We then have a complex as above which is exact on the support of $H^*(\sF^{\textstyle\cdot})$, so after tensoring with $\sF^{\textstyle\cdot}$ we obtain a quasi-isomorphism between $\sM\otimes\sF$ and the mapping cone of $\alpha\otimes 1\colon\Ab\otimes\sF^{\textstyle\cdot}\to \sL\otimes\sF^{\textstyle\cdot}$. The induced isomorphism on determinants of cohomology is the desired extension.
+
+This finishes the case of rank two, except for the independence from the choice of $\sL$. Before we come to that we finish the induction: If the rank is at least three, we can repeat the previous construction. But
+\pg{512}
+now $\alpha$ and $\beta$ are surjective up to a set of fibrewise codimension $\ge 2$, so $U$ already contains all points of depth $\le 1$, and the isomorphism extends automatically. All in all this proves the assertion if we can choose globally an ample line-bundle $\sL$, provided we restrict $\Ab$ and $\Bb$ to a suitably bounded family such that the general position-arguments work with a fixed power of $\sL$. For example this holds if $\Ab$ and $\Bb$ can be parametrised by an $S$-scheme of finite type.
+
+Under these assumptions we first show that the isomorphism $\psi=\psi(\sL)$ is additive in $\Ab$. So suppose we are given short exact sequences
+\[
+0\to\Ab_1\to\Ab_2\to\Ab_3\to 0,\qquad
+0\to\Bb_1\to\Bb_2\to\Bb_3\to 0
+\]
+of vector-bundles of corresponding ranks, and compatible isomorphisms $\det(\Ab_i)\cong\det(\Bb_i)$. We have to show that the natural compatibility between isomorphisms $\psi$ of determinants of cohomology holds:
+
+Over $S\times\mathbb{P}^1$ we can deform both extensions to split extensions: For example consider $\Ab_1(1)\to(\Ab_1(1)\oplus\Ab_2)/\Ab_1\to\Ab_3$, which over $S\times\{0\}$ gives the previous extension and splits over $S\times\{\infty\}$. As all determinant-bundles involved are induced from $S$, the $\psi$-maps are constant along the $\mathbb{P}^1$-fibres, so have the same value at $0$ as at $\infty$. In short we may assume that the extensions are split. Then we can use induction except for the case that $\Ab_1$ and $\Ab_3$ are line-bundles, as otherwise one of them surjects onto $\sL$. However then $\Ab_2\cong\Ab_1\oplus\Ab_3\cong\Bb_1\oplus\Bb_3\cong\Bb_2$, and if we use these isomorphisms to identify the $\Ab$'s and $\Bb$'s $\psi$ becomes the identity and we are done.
+
+Now suppose that we are given a second ample line-bundle $\sM$, which we assume to be much more ample than $\sL$ as to make the following considerations valid. We want to show that $\psi(\sL)=\psi(\sM)$. This certainly holds if $\Ab$ and $\Bb$ are line-bundles. If they have rank at least two choose surjections $\alpha\colon\Ab\to\sL$ and $\beta\colon\Bb\to\sL$, which induce exact sequences as above (with $\Ab_3=\Bb_3=\sL$). By induction $\psi(\sL)=\psi(\sM)$ for the kernels as well as for $\sL$ (where we get the identity). By construction $\psi(\sL)$ is compatible with the exact sequences, as is $\psi(\sM)$ by the above considerations, and the assertion follows. This finishes the proof of the theorem.
+\end{proof}
+
+\medskip
+\noindent\textbf{Applications.} (a). Assume $\sL$, $\sM$ and $\sN$ are
+line-bundles on $C$, $\sF$ an $\sO_S$-flat coherent sheaf. Then we may apply the theorem above to $\Ab=\sL\oplus\sM$, $\Bb=\sO_C\oplus\sL\otimes\sM$, $\sG=\sF\otimes\sN$. We derive the usual cubical behaviour of the cohomology of a curve. In fact the determinant of cohomology is the inverse of a theta-bundle on the Jacobian, and our theorem implies the theorem of the cube for this bundle.
+
+\medskip
+\pg{513}
+(b) Let $C$ denote a smooth proper curve over a field $k$ (which need not be algebraically closed), of genus bigger than one, $\omega=\omega_C$ the canonical bundle on $C$, $f_1,\cdots,f_d$ global sections of $\omega^{\otimes1},\cdots,\omega^{\otimes d}$. We can define a flat degree-$d$ covering $D\to C$ such that the direct image of $\sO_D$ is the direct sum of $\sO_C,\omega^{\otimes-1},\cdots,\omega^{\otimes1-d}$, and such that coherent sheaves on $D$ correspond naturally to coherent sheaves $\sF$ on $C$, together with a map $\theta\colon\sF\to\sF\times\omega$ satisfying $f(\theta)=0$, where $f(T)=T^d-f_1\cdot T^{d-1}+f_2\cdot T^{d-2}-\cdots$. Generically (in $C$ or $D$) each such sheaf is the successive extension of simple objects, which correspond to the irreducible factors of $f(T)$ over the generic point of $C$. Especially interesting is the case where $\sF$ is a vector-bundle of rank $d$ on $C$, and $f(T)=\det(T\cdot 1-\theta)$. The corresponding sheafs are all generically equal in $K$-theory.
+
+We thus can apply our theorem to a family of such sheaves, over a reduced base $S$: Assume $\Ab$ denotes a vector-bundle on $D$, of rank $r$, such that $\det(\Ab)$ is trivial, and let $\Bb=\sO_D^r$. Then the line-bundle $\det(H^*(\Ab\otimes\sF))\otimes\det(H^*(\sF))^{\otimes-r}$ is isomorphic to $\det(H^*(\Ab\otimes\sG))\otimes\det(H^*(\sG))^{\otimes-r}$, if $\sG$ denotes the restriction of $\sF$ to some fibre $D_s$, thus constant on $S$. So for example if $\chi(\sF)$ vanishes then the same holds for $\chi(\Ab\otimes\sF)$, so the theta-function of $\Ab\otimes\sF$ is defined, and we get a global section of $\det(H^*(\sF))^{\otimes-r}$ which vanishes precisely at the points $s\in S$ where the cohomology of $\Ab\otimes\sF$ on $C_s$ is nontrivial, i.e.\ where $\Ab\otimes\sF$ has a nontrivial section on $C_s$.
+
+The example (b) is the key to the construction, via theta-functions, of global sections of determinant-bundles on the moduli-space of Higgs-bundles. Recall that a Higgs-bundle on $C$ is a vector-bundle $\sF$ together with a section $\theta$ of $\Gamma(C,\shEnd(\sF)\otimes\omega_C)$. The coefficients of the characteristic polynomial of $\theta$ then define global sections $f_i\in\Gamma(C,\omega^{\otimes i})$. The affine space classifying such sections is called the characteristic variety $\Char$ (which depends on the rank $d$ of $\sF$), and $\sF$ defines a point $\operatorname{char}(\sF)$ in $\Char$. All this generalises obviously to families of curves and Higgs-bundles.
+
+To see that the theta-functions have no common zero we need the following result:
+
+Use the notation as before, i.e.\ $C$ is a smooth proper connected curve over $k$, and $D$ the covering defined by $f_i\in\Gamma(C,\omega^{\otimes i})$. We also identify $\sO_D$-modules with their direct image on $C$, which are $\sO_C$-modules together with an endomorphism $\theta$ satisfying the spectral equation. Recall that $(\sF,\theta)$ is called \emph{stable} if for any $\theta$-stable sub-bundle $\sG\subset\sF$, different from $(0)$ and $\sF$ itself, the ratio $\deg(\sG)/\rank(\sG)$ of degree (as
+\pg{514}
+vector-bundle on $C$) and rank is strictly less than $\deg(\sF)/\rank(\sF)$. Here, unless noted otherwise, by $\deg(\sF)$ and $\rank(\sF)$ we always mean the degree and rank as vector-bundle on $C$. If $\sF$ also happens to be a vector-bundle on $D$, then its $D$-rank is equal to $\rank_D(\sF)=\rank_C(\sF)/d$, and its $D$-degree differs from its $C$-degree by a constant multiple of its rank. If $\sE$ is a $D$-vector-bundle, then the Euler-characteristic $\chi(\sE\otimes\sF)$ vanishes iff
+\[
+\deg_D(\sE)/\rank(\sE)+\deg(\sF)/\rank(\sF)=\genus(C)-1,
+\]
+so this condition depends only on the ratio $\deg_D(\sE)/\rank(\sE)$.
+
+\begin{theorem}{I.2}\label{thm:I.2}
+Suppose $(\sF,\theta)$ is a stable Higgs-bundle. Then there exists a vector-bundle $\sE$ on $D$ such that $\sE\otimes\sF$ (tensor-product over $\sO_D$) has trivial cohomology.
+\end{theorem}
+
+\begin{proof}
+There certainly exists a vector-bundle $\sE_0$ such that $\chi(\sE_0\otimes\sF)$ vanishes. For example if $\sL$ is an ample line-bundle on $D$, a suitable linear combination $\sO_D^a\oplus\sL^b$ will do. Our strategy will be to choose for $\sE$ a deformation of $\sE_0^r$, where the integer $r$ will be chosen very big. First one finds (for each $r$) a smooth base-scheme $S$, and a vector-bundle $\sE$ on $D\times S$, such that the restriction $\sE_s$ of $\sE$ to some fibre is isomorphic to $\sE_0^r$, and such that for each $s\in S$ the map (describing the deformation) $t_{S,s}\to H^1(D,\shEnd(\sE_s))$ is surjective ($t_{S,s}=$ tangent-space to $S$ in $s$): For example one chooses a sufficiently ample line-bundle $\sL$, and lets $S$ parametrise the data consisting of a vector-bundle $\sE$ of the same rank as $\sE_0^r$, and a basis of $\Gamma(D,\sE\otimes\sL)$, up to isomorphism. This is smooth as obstructions tend to lie in a second cohomology-group which vanishes because $D$ has dimension one.
+
+Making $S$ smaller we may assume that, for each $s\in S$, $\sE_s^*\otimes\sL$ is globally generated and has trivial first cohomology, $\sL$ as before chosen independently of $r$ (one only has to test for $\sE_0$).
+
+We claim that for $r$ big enough there exists an $s\in S$ such that $\sE_s\otimes\sF$ has trivial cohomology. As $\chi(\sE_s\otimes\sF)$ vanishes it suffices to consider the global sections. If the assertion were wrong then, after replacing $S$ by a nonempty open subset, we may assume that the dimension of $\Gamma(D,\sE_s\otimes\sF)$ is constant (and positive) on $S$. By deformation-theory the image of the surjective map $t_{S,s}\to H^1(D,\shEnd(\sE_s))$ consists of classes which annihilate $\Gamma(D,\sE_s\otimes\sF)$, i.e.\ the natural pairing
+\[
+H^1(D,\shEnd(\sE_s))\times\Gamma(D,\sE_s\otimes\sF)\to
+H^1(D,\sE_s\otimes\sF)
+\]
+is trivial.
+
+\pg{515}
+Recall that $D$ (being Gorenstein) admits a dualising sheaf $\omega_D=\shHom(\sO_D,\omega_C)$. Using it the $H^1$'s can be translated into $H^0$'s, and we derive that the pairing (obtained by contracting the $\sF$'s)
+\[
+\Gamma(D,\sE_s\otimes\sF)\times\Hom(\sE_s\otimes\sF,\omega_D)\to
+\Hom(\sE_s,\sE_s\otimes\omega_D)
+\]
+vanishes as well. It follows that there exists a $\theta$-stable subbundle $\sG_s\subset\sF_s$ such that
+\[
+\Gamma(D,\sE_s\otimes\sF)=\Gamma(D,\sE_s\otimes\sG_s)
+\]
+and
+\[
+\Hom(\sE_s\otimes\sF,\omega_D)=\Hom(\sE_s\otimes(\sF/\sG_s),\omega_D).
+\]
+In fact we may assume that $\sG_s$ is generically (in $D$) generated by $\Gamma(D,\sE_s\otimes\sG_s)$, and also (making $S$ smaller) that the $\sG_s$ patch together to a $\theta$-stable subbundle $\sG\subset\sF$. Also $\sG$ is different from zero and $\sF$, as both spaces above have the same dimension ($\chi(\sE_s\otimes\sF)=0$) which is assumed to be positive.
+
+We then know that the ratio degree/rank is smaller for $\sG_s$ than for $\sF$, by stability, and also that $\sG_s\otimes\sL$ is generically generated by its global sections. From the second property we derive a uniform bound for the dimension of $\Hom(\sG_s,\sF/\sG_s)$, independent of $r$ and $s$:
+
+Choose a point $p\in C$. If there exists a nontrivial $\theta$-linear map $\gamma\colon\sG_s\to\sF/\sG_s$ which has a zero of order $N$ at $p$, then $\sG\otimes\sL$ as well as $\Im(\gamma)\otimes\sL(-N\cdot p)$ are generically generated by their global sections, so have degree $\ge 0$. We thus obtain a $\theta$-stable subbundle of $\sF$ whose degree is bounded below by $N-\rank(\sF)\cdot\deg(\sL)$. Because of stability this cannot happen for big enough $N$. It then follows that for such an $N$ the dimension of $\Hom(\sG_s,\sF/\sG_s)$ is bounded by $N\cdot\rank(\sG)\cdot\rank(\sF/\sG)$. On the other hand the variation of $\sG_s$ with $s$ is described by a map $t_{S,s}\to\Hom(\sG_s,\sF/\sG_s)$. If a tangent-vector lies in the kernel of this map the corresponding first-order deformation fixes $\sG_s$, so its image in $H^1(D,\shEnd(\sE_s))$ is contained in the bilinear kernel of the pairing
+\[
+H^1(D,\shEnd(\sE_s))\times\Gamma(D,\sE_s\otimes\sG_s)\to
+H^1(D,\sE_s\otimes\sG_s).
+\]
+Again dualising it means that the pairing
+\[
+\Gamma(D,\sE_s\otimes\sG_s)\times\Hom(\sE_s\otimes\sG_s,\omega_D)\to
+\Hom(\sE_s,\sE_s\otimes\omega_D)
+\]
+has its image contained in a subspace of some fixed dimension, independent of $r$. As there are $\le\rank(\sF)$ elements of $\Gamma(D,\sE_s\otimes\sG_s)$ which generate $\sG_s$ generically, so that no nontrivial element of the second term can be perpendicular to all of them, it follows that the dimension of
+\pg{516}
+$\Hom(\sE_s\otimes\sG_s,\omega_D)$ is bounded independently of $r$. This is also the dimension of $H^1(D,\sE_s\otimes\sG_s)$. However by the Riemann-Roch theorem (applied to the direct image on $C$) $\chi(\sE_s\otimes\sG_s)/\rank(\sG)$ is equal to
+\[
+\chi(\sE_s\otimes\sF)/\rank(\sF)+\rank_D(\sE)\cdot
+\big(\deg(\sG)/\rank(\sG)-\deg(\sF)/\rank(\sF)\big),
+\]
+so $-\chi(\sE_s\otimes\sG_s)$ grows like a positive multiple of $r$. This contradiction proves the theorem.
+\end{proof}
+
+\begin{remark}
+In fact we have shown a stronger statement, namely that a generic deformation of high enough rank satisfies the condition. For example it follows that we can choose $\sE$ as a deformation of $\sE_0^r$ such that $\det(\sE)$ is isomorphic to $\det(\sE_0)^{\otimes r}$: For a suitable choice of deformations $\sE_i$, their direct sum $\sE=\bigoplus\sE_i$ has the right determinant. Also it suffices if $\sF$ is only semistable (apply the previous to a composition-series).
+\end{remark}
+
+Recall that for a general Higgs-bundle $(\sF,\theta)$, there is a decreasing Harder-Narasimhan filtration (see \cite{HN}) by $\theta$-stable subbundles $F^\alpha(\sF)$, $\alpha\in\mathbb{Q}$, such that the quotient $\gr_F^\alpha(\sF)$ of $F^\alpha(\sF)$ by the union of all $F^\beta(\sF)$, $\beta>\alpha$, is semistable, with ratio $\deg/\rank$ equal to $\alpha$. The following result, due to S.~Langton, shows that (except for the fact that its existence may be in doubt) the moduli-space of semistable Higgs-bundles is proper over the characteristic variety.
+
+\begin{theorem}{I.3}\label{thm:I.3}
+Suppose $V$ is a complete discrete valuation-ring, $K$ its fraction-field, $C$ a smooth proper connected curve over $V$, and $(\sF,\theta)$ a semistable Higgs-bundle on the generic fibre $C\otimes_V K$, such that $\operatorname{char}(\sF)$ is integral over $V$, i.e.\ the coefficients $f_i$ of the characteristic polynomial are regular on all of $C$. Then $(\sF,\theta)$ extends to a Higgs-bundle on $C$ whose restriction to the special fibre is semistable as well.
+\end{theorem}
+
+\begin{proof}
+The integrality of the $f_i$ implies that there exists an extension of $\sF$ and its endomorphism $\theta$. We may choose $\sF$ reflexive hence locally free, as $C$ is regular of dimension two. If the special fibre $\sF_s$ is not semistable denote by $F^\alpha(\sF_s)$ the first nontrivial term in its Harder-Narasimhan filtration. We assume that the extension $\sF$ has been chosen such that it minimises $\alpha$, and also (among the $\alpha$-minimising extension) the rank of $F^\alpha(\sF_s)$. We get a new-model $\sF'=\ker(\sF\to\sF_s/F^\alpha(\sF_s))$, and an extension
+\[
+0\to\sF_s/F^\alpha(\sF_s)\to\sF_s'\to F^\alpha(\sF_s)\to 0.
+\]
+It follows that $F^\alpha(\sF_s')$ injects into $F^\alpha(\sF_s)$, so by minimality $F^\alpha(\sF_s')\cong F^\alpha(\sF_s)$. Continuing this way we obtain a decreasing sequence of models for $\sF_K$. Their intersection is a formal (and thus algebraic) $\theta$-stable subbundle $\sG\subset\sF$ such that $\sG_s\cong F^\alpha(\sF_s)$. Thus $\deg(\sG_K)/\rank(\sG_K)=\alpha$,
+\pg{517}
+which is bigger than the ratio for $\sF_K$ because $\sF_s$ is not semistable. It follows that $\sF_K$ is not semistable.
+\end{proof}
+
+The next result will be used to show that the theta-functions separate points in the moduli-space of Higgs-bundles. Obviously any semistable Higgs-bundle has a (Jordan-H\"older) filtration by subbundles such that the successive quotients are stable, of constant ratio degree/rank. Furthermore the isomorphism classes and multplicities of these stable components are independent of the filtration. Two semistable Higgs-bundles are called \emph{JH-equivalent} if these coincide.
+
+\begin{theorem}{I.4}\label{thm:I.4}
+Suppose $B$, $C$ are proper smooth connected curves over the algebraically closed field $k$ of characteristic zero, $\sF$ a vector-bundle on $B\times C$, $\theta\colon\sF\to\sF\otimes\omega_C$ a morphism, such that the restriction to each fibre $C_b=\{b\}\times C$ defines a semistable Higgs-bundle $(\sF_b,\theta_b)$ with $\deg(\sF_b)/\rank(\sF_b)=\genus(C)-1$. Assume that $\det(H^*(C,\sF))$ has degree zero on $B$.
+
+Then all $\sF_b$ are $JH$-equivalent.
+\end{theorem}
+
+\begin{proof}
+The characteristics of all $\sF_b$ coincide, so define the same covering $D$ of $C$. We can find a $D$-bundle $\sE$, with trivial determinant, such that, for some $b\in B$, $\sE\otimes\sF_b$ has trivial cohomology. The theta-function for $\sE\otimes\sF$ defines a global section of $\det(H^*(C,\sE\otimes\sF))^{\otimes-1}= \det(H^*(C,\sF))^{\otimes-\rank_D(\sE)}$, so because of the assumption about degrees this bundle is trivial, the theta-function has no zeros, and all $\sE\otimes\sF_b$ have trivial cohomology. For simplicity let us first replace $\sF$ by $\sE\otimes\sF$, so we now assume that all $\sF_b$ have trivial cohomology. We shall lift this restriction later on. Incidently we have also shown that the degree of $\det(H^*(C,\sF))$ is never positive. Thus if $\sL$ is any line-bundle of degree zero on $C$, then $\sF^2$ and $\sF\otimes(\sL\oplus\sL^{\otimes-1})$ have the same determinant of cohomology, so $\det(H^*(C,\sF\otimes\sL))$ has degree zero as well. Thus for generic $\sL$ the bundles $\sF_b\otimes\sL$ have trivial cohomology, for all $b\in B$.
+
+Choose any finite set of points $S\subset C$, and a line-bundle $\sL$ of $\deg(\sL)=\operatorname{order}(S)$. Then if $\sL(-S)$ is generic, for each $b$ the map $\Gamma(C,\sF_b\otimes\sL)\to\bigoplus_{s\in S}\sF_b(s)\otimes\sL(s)$ (fibre in $s$) is an isomorphism. We derive that the restrictions of $\sF$ to all fibres $B\times\{s\}$ are isomorphic:
+
+For $s,t\in C$, choose $\sL$ of degree one such that $\sL(-s)$ and $\sL(-t)$ are generic. Then both restrictions are isomorphic to the direct image (under $B\times C\to B$) of $\sF\otimes\sL$. Let $\sG$ denote a bundle on $B$ isomorphic to all restrictions. At this stage we can get rid of the auxiliary bundle $\sE$: For arbitrary $\sF$ it follows that the restrictions of $\sE\otimes\sF$ to the fibres $B\times\{s\}$ are all isomorphic. These are direct sums of $\rank_D(\sE)$ copies of the
+\pg{518}
+restriction of $\sF$. By the uniqueness of decomposition into indecomposable bundles it follows also that all restrictions of $\sF$ are isomorphic to a fixed $\sG$. If $A=\Gamma(B,\shEnd(\sG))$ denotes the algebra of endomorphisms of $\sG$, the direct image of $\shHom(\sF,\sG)$ under $B\times C\to C$ is a vector-bundle which is locally free of rank one over $A\otimes\sO_C$ (check the cohomology on fibres, and use the semicontinuity theory), and $\sF$ is obtained from the pullback of $\sG$ by twisting with a class in $H^1(C,(A\otimes\sO_C)^*)$.
+
+We next reduce to the case of semistable $\sG$ (as bundle over $B$): Let $F^\alpha(\sG)=\sG^\alpha$ denote its Harder-Narasimhan-filtration. We can refine it to a decreasing $A$-stable filtration (again denoted by $\sG^\alpha$) such that the successive quotients are direct sums of isomorphic stable bundles: For example the smallest $\sG^\alpha$ contains a stable subbundle with ratio degree/rank equal to $\alpha$. Take the sum of all stable subbundles isomorphic to it, and apply induction to the quotient. Twisting defines a decreasing filtration $\sF^\alpha$ on $\sF$, which is respected by $\theta$ because this is true for the restriction to each $B\times\{s\}$. As $A$ operates by a semisimple quotient on each $\gr^\alpha(\sG)$ we derive that the successive quotients $\gr^\alpha(\sF)$ are isomorphic to a tensor-product $\sV_\alpha\otimes\sW_\alpha$, where $\sV_\alpha$ is stable on $B$, and $\sW_\alpha$ a Higgs-bundle on $C$. Furthermore for the $\sV_\alpha$ the ratio degree/rank is monotone (nondecreasing) in $\alpha$. To simplify notation define
+\begin{align*}
+\mu(\sV_\alpha)&=\operatorname{degree}(\sV_\alpha)/\rank(\sV_\alpha),\\
+\mu(\sW_\alpha)&=\operatorname{degree}(\sW_\alpha)/\rank(\sW_\alpha)
+-\genus(C)+1.
+\end{align*}
+As $\sF$ is supposed to be semistable for each $\alpha$ we must have that
+\[
+\sum_{\beta\ge\alpha}\rank(\sV_\beta)\cdot\rank(\sW_\beta)\cdot\mu(W_\beta)\le0,
+\]
+with equality if we sum over all $\beta$.
+
+On the other hand an easy induction and application of Riemann-Roch (to $C$) shows that the degree of $H^*(C,\sF)$ is equal to the sum over all $\rank(\sV_\alpha)\cdot\rank(\sW_\alpha)\cdot\mu(\sV_\alpha)\cdot\mu(\sW_\alpha)$, which coincides with
+\[
+\sum_\alpha(\mu(\sV_\alpha)-\mu(\sV_{\alpha+1}))\cdot
+\sum_{\beta\le\alpha}\rank(\sV_\beta)\cdot\rank(\sW_\beta)\cdot\mu(\sW_\beta).
+\]
+Here all summands have the same sign, so they must vanish. If we return to the original Harder-Narasimhan filtration $\sG^\alpha$ of $\sG$ this translates into the fact that all $\sF^\alpha$ occurring in the original Harder-Narasimhan filtration are semistable, with ratio degree/rank equal to $\genus(C)-1$ (as for $\sF$ itself). It suffices to show that the associated graded is $JH$-constant, so we may assume that $\sG$ is semistable. We shall show that
+\pg{519}
+under this assumption all fibres $\sF_b$ are isomorphic. To do this consider the direct sum of all $\gr^\alpha(\sF)\cong\sV_\alpha\otimes\sW_\alpha$, filter it by the direct sums of $\gr_\beta(\sF)$, $\beta\le\alpha$, and define a unipotent group-scheme $\sU$ on $B\times C$ as the filtered automorphisms of this bundle, which induce the identity on the associated graded. As we are in characteristic zero this group-scheme is isomorphic to its Lie-algebra, whose underlying module is just the direct sum, over all pairs $\alpha<\beta$, of $\shHom(\sV_\alpha,\sV_\beta)\otimes\shHom(\sW_\alpha,\sW_\beta)$. Also $\sU$ has a central-series with subquotients isomorphic to such vector-bundles. As the filtration by the $\sF^\alpha$ splits locally, $\sF$ is described by a class in $H^1(B\times C,\sU)$. We are interested in its image in $\Gamma(B,R^1\pi_{B*}(\sU))$, which describes the isomorphism class of $\sF$ locally in $B$.
+
+For this consider the direct image $\sU_C=\pi_{B*}(\sU)$ on $C$. It is unipotent again, with Lie-algebra equal to the direct sum (over $\alpha<\beta$) of $\Hom_B(\sV_\alpha,\sV_\beta)\otimes\shHom(\sW_\alpha,\sW_\beta)$. Note that the first term in the tensor-product is either $k$ or zero, depending on whether $\sV_\alpha$ and $\sV_\beta$ are isomorphic or not. The central series on $\sU$ induces such a series on $\sU_C$, with the obvious compatibilities. Furthermore there are natural maps $H^1(C,\sU_C)\to H^1(B\times C,\sU)\to\Gamma(B,R^1\pi_{B*}(\sU))$, whose images consist of bundles which are constant on the fibres. It thus suffices to prove the following:
+
+\begin{lemma}{I.5}\label{lem:I.5}
+The map $H^1(C,\sU_C)\to\Gamma(B,R^1\pi_{B*}(\sU))$ is surjective.
+\end{lemma}
+
+\begin{proof}
+We use induction over the length of a central series of $\sU$, of the type described above, starting with length zero. So we have a central subgroup
+\[
+\sZ\cong\shHom(\sV_\alpha,\sV_\beta)\otimes\shHom(\sW_\alpha,\sW_\beta)\subset\sU,
+\]
+and assume that the assertion already holds for $\sU/\sZ$. The group $R^1\pi_{B*}(\sZ)$ operates on $R^1\pi_{B*}(\sU)$, and the quotient is isomorphic to $R^1\pi_{B*}(\sU/\sZ)$. ($R^2\pi_{B*}(\sZ)$ vanishes for dimensional reasons, or simpler just lift cocycles from $\sU/\sZ$ to $\sU$.) If we start with a global section of $R^1\pi_{B*}(\sU)$, we may assume that its image in $R^1\pi_{B*}(\sU/\sZ)$ is in the image of $H_1(C,\sU_C/\sZ_C)$ and thus also the image of a $c\in H^1(C,\sU_C)$ (same argument as for $R^1\pi_{B*}$). Thus locally in $B$ our class differs from $c$ by the action of elements of $R^1\pi_{B*}(\sZ)$. Now an element of $R^1\pi_{B*}(\sZ)$ stabilises $c$ if and only if it is in the image of the connecting homomorphism from $\pi_{B*}(\sU^C/\sZ)$. Here $\sU^C$ denotes the twisted form of $\sU$ defined (via the adjoint action) by $c$, and the connecting homomorphism sits in an exact sequence (of group-schemes)
+\[
+\pi_{B*}(\sU^c)\to\pi_{B*}(\sU^c/\sZ)\to R^1\pi_{B*}(\sZ).
+\]
+\pg{520}
+By the exponential we can replace in all three terms the groups by their Lie-algebras. These are filtered with successive quotients of the form $\shHom(\sV_\gamma,\sV_\delta)\otimes\shHom(\sW_\gamma,\sW_\delta)$. The direct images of these bundles are direct sums of copies of $\shHom(\sV_\gamma,\sV_\delta)$, so are semistable of slope zero. As maps between such bundles are strict, by devissage the same is true for the direct images of the Lie-algebras, i.e.\ they are also semistable of slope zero. But
+\[
+R^1\pi_{B*}(\sZ)\cong
+\shHom(\sV_\alpha,\sV_\beta)\otimes\Ext^1(C;\sW_\alpha,\sW_\beta)
+\]
+is the direct sum of stable bundles of slope zero, so the image of the connecting homomorphism is a direct summand in it. We derive that our class in $R^1\pi_{B*}(\sU)$ differs from the image of $c$ by a well-defined global section of $\Gamma(B,R^1\pi_{B*}(\sZ))=\Hom_B(\sV_\alpha,\sV_\beta)\otimes \Ext^1(C;\sW_\alpha,\sW_\beta)=H^1(C,\sZ_C)$. Modifying $c$ by this class proves the lemma, and it follows that all $\sF_b$ are isomorphic.
+\end{proof}
+
+However we still have to treat the $\theta$'s, which requires a variant of the argument above.
+
+In general if $G$ is a sheaf of groups on a ringed space, $\sE$ a sheaf of $G$-modules and $\theta\colon G\to\sE$ a 1-cocycle, one can define cohomology-groups $H^i(G\to\sE)$, $i=0,1$, as follows: Giving $\theta$ is equivalent to giving an extension of $G$-modules $\sE\to\sF\to\sO$, together with a (not necessarily $G$-linear) section $s\colon\sO\to\sF$. Then $H^0(G\to\sE)$ is the set of global sections of $G$ which stabilise $s$. For $H^1$ recall that for any principal homogeneous $G$-space $P$ we can define a twisted extension $\sE_P\to\sF_P\to\sO$. Then $H^1(G\to\sE)$ is the set of isomorphism-classes of pairs $(P,s_P)$, where $P$ is a principal homogeneous $G$-space and $s_P$ a section of the twisted extension. This construction has the usual properties of nonabelian cohomology. For example for each class in $H^1(G\to\sE)$ we obtain a twisted complex given by $G_P=\shAut_G(P)$, and the twisted extension together with $s_P$. Also various rudiments of exact sequences still exist. Finally if $G$ is abelian and $\sE$ a trivial $G$-module the cohomology $H^i(G\to\sE)$ is just the hypercohomology of the complex $G\to\sE$, and thus can be defined for all $i$.
+
+We apply this theory to the $G=\sU$ as before, the unipotent radical of the group of filtered automorphisms of the direct sum of all $\sV_\alpha\otimes\sW_\alpha$, $\sE=\Lie(\sU)\otimes\omega_C$, and $\theta(g)=\Ad(g)(\theta)-\theta$ the commutator with the direct sum of the Higgs-endomorphisms $1\otimes\theta_\alpha$ on the $\sW_\alpha$. $H^1(B\times C,(\sU_C\to\Lie(\sU_C)\otimes\omega_C))$ classifies Higgs-bundles on $B\times C$ with the given associated graded, like for example our $\sF$. Sheafifying on $B$ leads to a first direct image $R^1\pi_{B*}(\sU\to\Lie(\sU)\otimes\omega_C)$, which
+\pg{521}
+classifies isomorphy-classes locally in $B$. One easily checks that $\sU$ admits a central series $\sU_i$ with $\theta(\sU_i)\subset\Lie(\sU_i)\otimes\omega_C$, and consecutive quotients isomorphic to $\shHom(\sV_\alpha,\sV_\beta)\otimes\shHom(\sW_\alpha,\sW_\beta)$, $\alpha<\beta$. Also the direct image defines a pair $(\sU_C,\theta_C)$ on $C$.
+
+\begin{lemma}{I.6}\label{lem:I.6}
+The map
+\[
+H^1(C,(\sU_C\to\Lie(\sU_C)\otimes\omega_C))\to
+\Gamma(B,R^1\pi_{B*}(\sU\to\Lie(\sU)\otimes\omega_C))
+\]
+is surjective.
+\end{lemma}
+
+\begin{proof}
+As usual we use induction over the length of a good central series. So we may assume that we have a central $\sZ=\shHom(\sV_\alpha,\sV_\beta)\otimes\shHom(\sW_\alpha,\sW_\beta)\subset\sU$, and that the assertion is already known for $\sU/\sZ$. As $\sZ\to\Lie(\sZ)\otimes\omega_C$ is isomorphic to the tensor-product of $\shHom(\sV_\alpha,\sV_\beta)$ and the commutator with $\theta$ on $\shHom(\sW_\alpha,\sW_\beta)$, it follows from the definitions that for all $i$
+\[
+\Gamma(B,R^i\pi_{B*}(\sZ\to\Lie(\sZ)\otimes\omega_C))=
+H^i(C,(\sZ_C\to\Lie(\sZ_C)\otimes\omega_C)).
+\]
+
+Now if we start with a class in $H^1(C,(\sU_C\to\Lie(\sU_C)\otimes\omega_C))$, its reduction modulo $\sZ$ lies by induction in the image of $H^1(C,(\sU_C/\sZ_C\to\Lie(\sU_C/\sZ_C)\otimes\omega_C))$. If we try to lift to $\sU_C$ we encounter an obstruction in $H^2(C,(\sZ_C\to\Lie(\sZ_C)\otimes\omega_C))$, which vanishes because this is true after mapping to $\sZ$. So as before our class is locally the twist of an element $c\in H^1(C,(\sU_C\to\Lie(\sU_C)\otimes\omega_C))$ by elements of $R^1\pi_{B*}(\sZ\to\Lie(\sZ)\otimes\omega_C)$, well determined modulo the image of $\pi_{B*}(\sU^c/\sZ\to\Lie(\sU^c/\sZ)\otimes\omega_C)$. By the same type of argument as before this image is a direct summand, and the assertion follows.
+\end{proof}
+
+Thus finally \refthm{I.4} has been shown.
+\end{proof}
+
+Now we can construct and compactify the moduli-space of stable Higgs-bundles on $C$. We fix the rank and degree of the bundles $\sF$ in question. As no term in the Harder-Narasimhan filtration (as bundle, forgetting the Higgs-structure) of a semistable Higgs-bundle is $\theta$-invariant, one derives that consecutive slopes have difference $\le\deg(\omega_C)$, which easily leads to $\sF$-independent bounds for all the slopes. Now suppose that $C$ is a relative smooth proper curve, of genus $>1$, over some normal noetherian base $B$ of characteristic zero. The characteristic variety of possible Higgs-characteristics is an affine bundle $\Char$ over $B$. From general boundedness it follows that there exists a $B$-scheme $S$ of finite type and a family $(\sF,\theta)$ of semistable Higgs-bundles on $C\times_B S$, such that for each geometric point $X$ of $B$ and for each semistable Higgs-bundle on the fibre of $C(x)$ at $x$, with the prescribed degree and rank, $x$ lifts to a point $y$
+\pg{522}
+in $S$ such that the bundle is isomorphic to the restriction $\sF(y)$ of $\sF$ to $C\times_B\{y\}$. For example $S$ could represent the isomorphism-classes of semistable Higgs-bundles $(\sF,\theta)$ together with a base of $\Gamma(C,\sF\otimes\sL)$, $\sL$ a sufficiently ample line-bundle. Furthermore there exists an open subscheme $S^0\subset S$ such that $y$ lies in $S^0$ if and only if $\sF(y)$ is stable, and we may assume that $S^0$ is smooth over $B$, and constitutes a versal deformation. The latter condition means the following: Deformations of $(\sF,\theta)$ are controlled by the first hyper-cohomology of the complex
+\[
+\shEnd(\sF)\to\shEnd(\sF)\otimes\omega_C,
+\]
+where the differential is $\operatorname{ad}(\theta)=$ commutator with $\theta$, and for $s\in S^0$ the tangent-spaces $t_{S,s}$ should surject onto that group. $S$ and $S^0$ admit natural maps into $\Char$, and thus we can define over them the cover $D\to C$.
+
+From now on replace $S$ by the normalisation of the closure of $S^0$. If $\sE$ is any $D$-vector-bundle with the right quotient $\operatorname{degree}(\sE)/\rank(\sE)$, such that $\sE\otimes\sF$ has Euler-charactristic zero, there is a line-bundle $\sL(\sE)=\det(H^*(C,\sE\otimes\sF))^{\otimes-1}$ on $S$, together with a canonical global section $\theta(\sE\otimes\sF)$. Furthermore if $\sE'$ is another such bundle, of $\rank(\sE')=s\cdot\rank(\sE)$, and such that $\det(\sE')\cong\det(\sE)^{\otimes s}$, then up to product with the pullback of a line-bundle on $B$, $\sL(\sE')\cong\sL(\sE)^{\otimes s}$ over $S$ and in particular over $S^0$, by \refthm{I.1}.
+
+On $S^0\times_B S^0$ we can define a groupoid $\Isom(\mathrm{pr}_1^*(\sF,\theta),\mathrm{pr}_2^*(\sF,\theta))$ classifying the isomorphisms between stable Higgs-bundles. It contains the constant groupoid given by the scalars $\mathbb{G}_m$ (by scalar multiplication on $\sF$), and the quotient $\Isom(\mathrm{pr}_1^*(\sF,\theta),\mathrm{pr}_2^*(\sF,\theta))/\mathbb{G}_m$ exists and embeds as a closed subscheme into $S^0\times_B S^0$.
+
+For the existence choose (\'etale locally in $B$) a point $p$ in $C$ and consider Higgs-bundles $\sF$ with a trivialisation of $\det(\sF)$ in $p$. This reduces the structure-group to roots of unity of order dividing $\rank(\sF)$, and a quotient exists because $\Isom(\mathrm{pr}_1^*(\sF,\theta),\mathrm{pr}_2^*(\sF,\theta))$ is quasi-projective relative $S^0\times_B S^0$.
+
+The map from the quotient is an embedding. To see that it is closed we need properness; that is, we have to show that for a discrete valuation-ring $V$, and a pair of stable Higgs-bundles on $C_V$, any isomorphism on the generic fibre extends up to scalars. This follows because a suitable multiple extends to a map whose restriction to the special fibre does not vanish, and thus must be an isomorphism as well.
+
+Finally from deformation-theory the two projections to $S^0$ from
+\pg{523}
+$\Isom(\mathrm{pr}_1^*(\sF,\theta),\mathrm{pr}_2^*(\sF,\theta))$ are smooth, and the quotient $\sMod_\theta^0$ exists as an algebraic space (form slices to reduce to an \'etale equivalence relation). It is the moduli-space of stable Higgs-bundles, of given rank and degree.
+
+The universal $(\sF,\theta)$ does not descend naturally to $\sMod_\theta^0$ because $\mathbb{G}_m$ does not operate trivally on it. However if $\sE$ is a vector-bundle on $D$ such that $\chi(\sE\otimes\sF)$ vanishes, $\mathbb{G}_m$ operates trivially on $\sL=\det(H^*(C,\sE\otimes\sF))^{\otimes-1}$, so $\sL$ descends to $\sMod_\theta^0$. The same is true for its canonical section $\theta(\sE)$. Furthermore if $\sE'$ satisfies $\rank(\sE')=s\cdot\rank(\sE)$, $\det(\sE')=\det(\sE)^{\otimes s}$, then naturally $\sL(\sE')\cong\sL(\sE)^{\otimes s}$ on $\sMod_\theta^0$.
+
+It follows from \refthm{I.2} that \'etale locally in $B$ we can find finitely many $\sE$'s as above such that the $\theta(\sE)$'s have no common zero on $S$. Namely for a given point $s\in S$ any sufficiently generic $\sE$ of high enough rank will work, and by quasi-compactness we need only finitely many. We can also assume that all the $\sE$'s have the same rank and determinant (use powers), so all $\sL(\sE)$ are isomorphic. We thus have constructed a line-bundle $\sL$ on $S$, $S^0$ and $\sMod_\theta^0$ which is generated by its global sections $\theta(\sE)$.
+
+They define maps from $S$, $S^0$ and $\sMod_\theta^0$ to $\mathbb{P}^N\times\Char$. We claim that in $S^0$ the isomorphism classes of $(\sF,\theta)$ stay constant on the connected components of the fibres of this map: Otherwise we obtain an affine smooth curve $B^0$ (over an algebraically closed field $k$) mapping to one of these fibres, such that the pullback of $(\sF,\theta)$ is not constant on $B^0$. By the valuative criterion this pullback extends to a semistable Higgs-bundle on $B\times C$, $B$ the compactification of $B^0$. The $\theta(\sE)$ define global sections of some power of the inverse of its determinant-bundle, which have no common zero (as this is true on $S$), and whose ratio is constant on $B^0$ and thus also on $B$. It follows that the determinant-bundle has degree zero; thus $\sF$ must be $JH$-constant, thus constant as it is generically stable.
+
+It follows that the map is quasi-finite on $\sMod_\theta^0$. If $\sMod_\theta$ denotes the normalisation of $\mathbb{P}^N\times\Char$ in $\sMod_\theta^0$, $\sMod_\theta^0$ embeds as an open subscheme into $\sMod_\theta$, by Zariski's main-theorem. Also $\sMod_\theta$ is projective over $\Char$, and $S$ maps to $\sMod_\theta$ such that the pullback of the ample line-bundle on $\sMod_\theta$ is $\sL$.
+
+The map is surjective by the valuative criterion, and as before one sees that up to $JH$-equivalence the isomorphism-class of $(\sF,\theta)$ is constant on connected components of fibres. Conversely one sees easily that
+\pg{524}
+two $JH$-equivalent bundles define the same point in $\sMod_\theta$: We can easily deform each semistable bundle to a semisimple bundle, by deforming over $\mathbb{P}^1$ the various extensions to the split ones. The determinant of cohomology is constant under such a deformation, so $\mathbb{P}^1$ maps to a point in $\sMod$. We derive that to each point in $\sMod$ there correspond finitely many $JH$-equivalence classes, such that the image of a point in $S$ is determined by the $JH$-equivalence class of $(\sF,\theta)$. For two different points the corresponding sets of $JH$-equivalence classes are disjoint, and a $JH$-equivalence class lies in one of these sets if and only if it can be obtained by deforming a stable Higgs-bundle. It also follows that $\sMod_\theta$ is independent of the choice of the $\sE$'s, hence can be defined globally over $B$:
+
+It suffices to show that we get the same $\sMod_\theta$ if we add more bundles to the list of $\sE$'s. The new $\sMod_\theta$ dominates the old one, with finite fibres (look at $JH$-equivalence classes), so is finite and birational over it, hence isomorphic to $\sMod_\theta$.
+
+Finally one easily obtains the following universal property for $\sMod_\theta$: If $T$ is a normal $B$-scheme, $(\sF,\theta)$ a semistable Higgs-bundle on $T\times_B C$, with the prescribed rank and degree, and which is stable over an open dense subset $T^0\subset T$, then the map $T^0\to\sMod_\theta^0$ classifying $(\sF,\theta)$ on $T^0$ extends to $T\to\sMod_\theta$. Under the extension a point $t\in T$ maps to the point in $\sMod_\theta$ associated to the $JH$-equivalence-class of the fibre of $(\sF,\theta)$ in $t$.
+
+\section{\texorpdfstring{$G$}{G}-bundles}\label{sec:II}
+
+Suppose $k$ is a field of characteristic zero, $G$ a connected linear algebraic group over $k$, $C$ a smooth connected projective curve. Recall that a principal homogeneous $G$-space or $G$-torsor $P$ over $C$ is defined by a smooth map $P\to C$ such that $G$ operates on $P$, and that locally in the flat topology on $C$ $P$ is isomorphic to $G\times C$. If this holds then $P$ can be trivialised locally in the \'etale topology. Associated to $P$ is a group-scheme $\Gs=G_P=\shAut_G(P)^{\mathrm{opp}}$ on $C$. $G_P$ is a twisted inner form of $G$, and for any representation $G\to\mathrm{GL}(E)$ we obtain an associated vector-bundle $\sE=E_P$ on $C$, on which $\Gs$ operates. For example if $G$ is a closed subgroup of $\mathrm{GL}(E)$, defined as the stabiliser of certain tensors in $E^{\otimes a}\otimes E^{t\otimes b}$, then these tensors define global sections of $\sE^{\otimes a}\otimes\sE^{t\otimes b}$, and $\Gs$ is their stabiliser.
+
+More generally we consider an affine connected reductive group-scheme $\Gs$ over $C$. It is locally (in the \'etale topology) isomorphic to some fixed
+\pg{525}
+$G$, and we have a theory of principal homogeneous $\Gs$-torsors. In general if we have a smooth connected affine group-scheme $\Gs$ over $C$, we can consider its Lie-algebra $\Lie(\Gs)$. We call $\Gs$ \emph{semistable} if $\Lie(\Gs)$ is a semistable vector-bundle of degree zero. More generally we may consider pairs consisting of a $\Gs$ as above, and a global $\omega_C$-valued derivation $\theta$ of $\Lie(\Gs)$, i.e.\ a global section $\theta$ of $\Der(\Lie(\Gs))\otimes\omega_C$. We assume that $\theta$ lies in the Lie-algebra of automorphisms of $\Gs$, and call $(\Gs,\theta)$ semistable if $(\Lie(\Gs),\theta)$ is a semistable Higgs-bundle of degree zero.
+
+As before for any representation of $\Gs$ on a vector-bundle $\sE$ we obtain a twisted form $\sE_P$. Furthermore if $\theta$ is an inner derivation defined by a global section of $\Lie(\Gs_P)\otimes\omega_C$, $\sE_P$ becomes a Higgs-bundle. If $\Lie(\Gs_P)$ is semistable of degree zero it stabilises the Harder-Narasimhan filtration on $\sE_P$, so the same is true for $\Gs_P$. It thus must correspond to a filtration of $\sE$ by $\Gs$-stable subbundles. On the determinants of the successives quotients of $\sE$, $\Gs$ operates via a character $\Gs\to\mathbb{G}_m$, so the determinants of the corresponding subquotients in $\sE_P$ are the line-bundles determined by the image of the class of $P$ under $H^1(C,\Gs)\to H^1(C,\mathbb{G}_m)$. In particular if $\Gs$ does not admit any nontrivial homomorphism into $\mathbb{G}_m$ these determinants are trivial, so $\sE_P$ is semistable of degree zero. Similarly if $\Gs$ is reductive and $\sE$ indecomposable as $\Gs$-module, the largest split subtorus in the centre of $\Gs$ acts by scalars on $\sE$, and it follows that the Harder-Narasimhan filtration has constant slope, so $\sE_P$ is again semistable.
+
+The usual constructions on algebraic groups work in this context:
+
+\begin{lemma}{II.1}\label{lem:II.1}
+Suppose $(\Gs,\theta)$ is a semistable pair. Then there exist smooth closed subgroups $\sZ\subset\Gs$, $\sN\subset\sR\subset\Gs$, such that at each $x\in C$ the fibres $\sZ_x$, $\sN_x$, $\sR_x$, respectively are the connected center, the unipotent radical, and the radical of $\Gs_x$, respectively. Furthermore their Lie-algebras are $\theta$-invariant, and define semistable pairs.
+\end{lemma}
+
+\begin{proof}
+The Lie-algebra of the center is the kernel of the adjoint representation $\Lie(\Gs)\to\shEnd(\Lie(\Gs))$. As both domain and range are semistable of degree zero the map is strict, and its kernel $\Lie(\sZ)$ is semistable of degree zero as well. Similarly if we choose a faithful representation of $\Gs$ on a Higgs-bundle $\sE$, the trace-form of this representation defines a map $\Lie(\Gs)\to\Lie(\Gs)^t$ with kernel $\Lie(\sN)$, so this is also semistable of degree zero. (Note that $\Lie(\sN)$ is contained in the kernel. Furthermore if at $x\in C$ $\sH(x)$ is a Levi-factor in $\Gs(x)$, the trace-form is nondegenerate on $\Lie(\sH(x))$, for example because over $\mathbb{C}$ $\sH(x)$ admits a compact form.) Finally $\sR/\sN$ is the centre of $\Gs/\sN$.
+\end{proof}
+
+In short the usual constructions lead again to semistable pairs. We leave it to the reader to prove this for the central series of $\sN$. Now return to the
+\pg{526}
+general case, but assume that $\Gs$ (that is, all fibres $\Gs(x)$) are reductive. Recall the following well-known results:
+
+\begin{lemma}{II.2}\label{lem:II.2}
+Suppose $\mathfrak{g}$ is a reductive Lie-algebra.
+
+(i) If $\mathfrak{n}\subset\mathfrak{g}$ a unipotent sub-algebra, then the codimension in $\mathfrak{g}$ of the normaliser $N(\mathfrak{n})$ is $\ge\dim(\mathfrak{n})$, with equality if and only if this normaliser is a parabolic, and $\mathfrak{n}$ contained in its unipotent radical.
+
+(ii) if a unipotent $\mathfrak{n}$ is equal to the unipotent radical of its normaliser $N(\mathfrak{n})$, this normaliser is a parabolic.
+\end{lemma}
+
+\begin{proof}
+(i) $G$ operates by conjugation on the space of nilpotent subalgebras of a fixed dimension, which is a closed subvariety of some Grassmannian and thus proper over $k$. Furthermore for each nilpotent $\mathfrak{n}$ its normaliser is perpendicular to it under the trace-form of a faithful representation, thus has codimension $\ge\dim(\mathfrak{n})$. So all $G$-orbits have dimension $\ge\dim(\mathfrak{n})$, and are closed if we have equality. But this happens only if the stabiliser is a parabolic.
+
+(ii) Again $N(\mathfrak{n})\subset\mathfrak{n}^\perp$, and $\mathfrak{n}=N(\mathfrak{n})\cap N(\mathfrak{n})^\perp$. If $\mathfrak{n}^\perp$ were different from $N(\mathfrak{n})$, we could find an element $Z\in\mathfrak{n}^\perp$ which is not in $N(\mathfrak{n})$, but such that $[Z,\mathfrak{n}]\subset N(\mathfrak{n})$. But one checks that $[Z,\mathfrak{n}]$ is perpendicular to $N(\mathfrak{n})$, thus contained in $\mathfrak{n}$, and $Z$ lies in $N(\mathfrak{n})$ contrary to the assumptions.
+\end{proof}
+
+We apply this as follows: Suppose first that $(\Gs,\theta)$ is not semistable. Then the Harder-Narasimhan filtration (indexed by slopes) $F^\alpha(\Lie(\Gs))$ satisfies $[F^\alpha,F^\beta]\subset F^{\alpha+\beta}$. Thus $\mathfrak{p}=F^0$ normalises the nilpotent subalgebra $\mathfrak{n}=\mathfrak{p}^\perp=\bigcup_{\alpha>0}F^\alpha$ and has codimension equal to $\dim(\mathfrak{n})$. It follows that (in the fibre at each $x\in C$) $\mathfrak{p}$ is a parabolic and $\mathfrak{n}$ its unipotent radical (because the trace-form is nondegenerate on $\mathfrak{p}/\mathfrak{n}$). Furthermore $\mathfrak{p}$ has positive degree.
+
+Now assume that $(\Gs,\theta)$ is semistable and semisimple (as an algebraic group), but that there exists no nontrivial subbundle of parabolics $\mathfrak{p}\subset\Lie(\Gs)$, of degree zero. We claim that $\Lie(\Gs)$ is the direct sum of stable Higgs-bundles. For this consider the socle $\mathfrak{s}$ of $\Lie(\Gs)$, that is, the sum of all its stable subbundles, which is a Lie-subalgebra of $\Lie(\Gs)$. If it is different from $\Lie(\Gs)$ its normaliser is different from $\Gs$, so the space $N(\mathfrak{s})^\perp$ does not vanish. If the Killing-form were nondegenerate on $N(\mathfrak{s})$ then $N(\mathfrak{s})^\perp$ would be a direct summand in $\Lie(\Gs)$ and would meet $\mathfrak{s}$, a contradiction. Thus $\mathfrak{n}=N(\mathfrak{s})\cap N(\mathfrak{s})^\perp$ is a unipotent subalgebra of $\Lie(\Gs)$, of degree zero. If it is not equal to the unipotent radical of its normaliser (all semistable of degree zero), replace it by that. Continue until the process stops. Then the normaliser of $\mathfrak{n}$ is a parabolic of degree zero, contrary to our assumptions.
+
+
+\pg{527}
+If $G$ is not semisimple the assertion does not quite hold for the center, which is the Lie-algebra of a constant algebraic torus over $C$. The $\theta$-action may not be semisimple, thus destroying this picture. A possible remedy is to require that $\theta$ is given by the adjoint action of a global section of $\Lie(\sG_P)\otimes\omega_C$. From now on we shall use this definition, which however has in general the disadvantage that it does not behave so well when restricting to subgroups.
+
+\begin{definition}{II.3}\label{def:II.3}
+Suppose $\sG$ is a reductive connected algebraic group over $C$, a smooth projective connected curve over a field $k$. A $\sG$-torsor $P$ on $C$, together with an element $\theta\in\Gamma(C,\Lie(\sG_P)\otimes\omega_C)$ is called \emph{semistable} if $(\Lie(\sG_P),\ad(\theta))$ is a semistable Higgs-bundle of degree zero, or equivalently if $\Lie(\sG_P)$ contains no nontrivial $\ad(\theta)$-stable subbundle of parabolics of positive degree. It is called \emph{stable} if in addition there is no such subbundle of degree zero.
+\end{definition}
+
+Thus if $(\Lie(\sG_P),\ad(\theta))$ is stable then $(P,\theta)$ is stable, which in turn implies that $(\Lie(\sG_P),\ad(\theta))$ is the direct sum of stable bundles. Also it is obvious how to extend the definition to a flat family of curves $C\to S$.
+
+Also in the stable case all $\theta$-invariant global sections in $\Gamma(C,\Lie(\sG_P))$ lie in the centre: If $Z$ is such a global section, the spectrum of $\ad(Z)$ is constant on $C$. If it contains a nonzero eigenvalue, the corresponding generalised eigenspace is a unipotent semistable subalgebra of degree zero. From it we construct, as above, a semistable parabolic of degree zero.
+
+If all eigenvalues vanish, $Z$ becomes nilpotent if one subtracts a suitable central element, and generates a unipotent semisimple subalgebra of degree zero, and we go on as before.
+
+Finally the automorphism-group ($=$ the commutator of $\theta$ in $\Gamma(C,\sG_P)$) of a stable $P$ is finite, modulo the global sections $\Gamma(C,Z(\sG))$ of the centre of $\sG$: It is an affine algebraic group, whose Lie-algebra vanishes by the above. However it may be nontrivial: For example consider two nonisomorphic stable bundles $\sE_1$, $\sE_2$ with nondegenerate quadratic forms $q_1$, $q_2$, and the orthogonal group of their direct sum.
+
+If $\sG$ is an inner form of a constant reductive $G$, and $\phi_1,\cdots,\phi_l$ ($l=\rank(G)$) denote generators of the conjugation-invariant polynomials on $\Lie(G)$, of degrees $e_1,\cdots,e_l$, then $\phi_i(\theta)\in\Gamma(C,\omega_C^{\otimes e_i})$ define the characteristic of the Higgs-bundle. As for the case of $\GL_d$ one obtains a characteristic variety $\Char=\Char_G$, and any Higgs-bundle defines a rational point in it. Note that the characteristic determines the projection of $\theta$ onto the centre of $\Lie(\sG)$.
+
+For general $\sG$ we could use generators for the invariants under all automorphisms. The corresponding characteristic variety would be the
+\pg{528}
+quotient of the previous one by the finite group of outer automorphisms of $G$, and may not be smooth. A better way is to use twisted characteristics, as follows: Consider the algebra $I=I(G)$ of invariant functions on $\Lie(G)$. If $I_+$ denotes the ideal generated by elements of positive degree, $U=I_+/I_+^2$ is a vector-space of dimension $l$, and for any lift to a graded subspace of $I_+$ defines an isomorphism between $I$ and the polynomial-algebra in $U$. Now the group of outer automorphisms acts on $I$ and $U$, and if we choose an $\Out(G)$-invariant lift the isomorphism is invariant too. $\sG$ defines a class in $H^1(C,\Out(G))$, so we may twist $U$ by it to obtain a graded vector-bundle on $C$. Tensoring the degree-$i$-part by $\omega_C^{\otimes i}$ gives a new bundle in which the characteristic functions of $\theta$ take its values. For example in the case of $\GL_d$, the invariant functions of $Z$ are the coefficients of the characteristic polynomial $\det(T\cdot 1-Z)$. Under the outer automorphism $Z\to -Z^t$, these get a sign $\pm 1$. So the $\phi_i(\theta)$ are naturally global sections of a power of the product of $\omega$ with a bundle with trivial square.
+
+Next we show a semistable reduction theorem:
+
+\begin{theorem}{II.4}\label{thm:II.4}
+Suppose $V$ is a complete discrete valuation-ring, $K$ its field of fractions, $C\to V$ a smooth projective curve (with geometrically connected fibres), $\sG$ a connected reductive algebraic group over $C$, $(P_K,\theta_K)$ a semistable pair on the generic fibre $C_K$, whose characteristic is integral over $V$. Then there exists a finite extension $V\subset V'$, such that the base-extension of $(P_K,\theta_K)$ extends to a semistable pair on $C_{V'}$.
+
+If the special fibre of this extension is stable, then any other semistable extension is isomorphic to it.
+\end{theorem}
+
+\begin{proof}
+We first treat the case where $\sG$ is semisimple and adjoint. In the following all bundles will have a canonical Higgs-endomorphism. To simplify the presentation we speak in the following only of the bundles, and leave it to the reader to insert the prefixes ``Higgs-'' at the right places. By the usual stable reduction-theorem the bundle $\Lie(\sG_{P,K})$ extends to a semistable bundle $\sE$ on $C$. Then $\End(\sE)$ is semistable of degree zero, and $\Lie(\sG_{P,K})$ extends to a subbundle of Lie-algebras $\g\subset\End(\sE)$ which has degree zero, so that the special fibre is semistable of degree zero. Also the inclusion from the special fibre is strict, so that $\g$ is locally a direct summand in $\End(\sE)$. Also it is the Lie-algebra of a closed flat subgroup of $\GL(\sE)$, necessarily equal to the closure of $\sG_{P,K}$. This can be seen as follows:
+
+The affine algebra $A$ of $\GL(\sE)$ is a filtering increasing union of semistable bundles of slope zero $A=\bigcup A_\alpha$, and so the ideal $I$ defining the
+\pg{529}
+closure of $\sG_{P,K}$ is a corresponding union of subbundles $I_\alpha=I\cap A_\alpha$. If we show that all $I_\alpha$ have degree $\ge 0$, the inclusion $I_\alpha\subset A_\alpha$ must be strict, the quotients are locally free, and the closure is flat over $\sO_C$. To estimate the degrees we may pass to the general fibre. But there the quotient $(A_\alpha/I_\alpha)_K$ injects into the affine algebra of $\sG_{P,K}$ and thus into the affine algebra of some infinitesimal neighbourhood of the origin in $\sG_{P,K}$. But this affine algebra is semistable of slope zero, being a successive extension of duals of symmetric powers of the Lie-algebra, and so $(A_\alpha/I_\alpha)_K$ has degree $\le 0$.
+
+Let $\g^t\subset\Lie(\sG_{P,K})\subset\End(\sE)_K$ denote the dual of $\g$ for the trace-form, which is isomorphic to the dual-bundle. Denote by $\delta(\g)$ the length of the quotient $\g^t/\g$, in the generic point of the special fibre $C_k$. Choose a Lie-algebra-extension $\g$ of $\Lie(\sG_{P,K})$ such that the special fibre $\g_k$ is semistable, and such that $\delta(\g)$ is minimal among such extensions. Then $\g$ is a relative maximal element in the set of semistable extensions. The closure of $\sG_{P,K}$ in $\End(\g)$ defines a flat and thus smooth group-scheme $\sG_P$ which extends $\sG_{P,K}$, and has Lie-algebra $\g$. Let $\n\subset\g_k$ denote the preimage of the Lie-algebra of the nilpotent radical of $\g_k$, i.e.\ the preimage of the radical of the Killing-form on $\g_k$. If $\pi$ denotes a uniformiser of $V$, we claim that $\pi$ annihilates $\g^t/\g$ and even stronger $\g^t/\n$:
+
+In the following all bundles will be semistable of degree zero, and maps will be strict, by the usual argument which we do not repeat. Consider the map
+\[
+\pi^{-1}\cdot\n\cap\pi\cdot\g^t\longrightarrow \pi^{-1}\cdot\n/\g .
+\]
+If its image is not trivial it contains elements annihilated by $\n$. Their preimage defines a lattice $\g'\subset\pi\cdot\g^t$, not contained in $\g$, such that $[\g',\n]\subset\g\cap\pi\cdot\g^t=\n$. Thus the normaliser of $\n$ is a lattice strictly larger than $\g$, a contradiction.
+
+It follows that $\pi^{-1}\cdot\n\cap\pi\cdot\g^t$ is equal to $\g\cap\pi\cdot\g^t=\n$, thus $\pi^{-2}\cdot\n\cap\g^t=\pi^{-1}\cdot\n\cap\g^t$, and the assertion follows. We derive that $\g^t=\pi^{-1}\cdot\n+\g$.
+
+We now pass to totally ramified extensions $V'\supseteq V$, of ramification-degree $e$ and obtained by adjoining a root $\pi'=\pi^{1/e}$. Over such an extension our previous construction gives a new model $\g'$, sandwiched between $\g\otimes_V V'$ and $\g^t\otimes_V V'$, which has a new invariant $\delta(\g')\in(1/e)\cdot\mathbb{Z}$, and such that $\g'^t/\g'$ is annihilated by the new uniformiser $\pi'$. Furthermore this $\g'$ will be invariant under the Galois-group of $V'/V$. We claim that the infimum of all these invariants is attained by a specific Galois-invariant $\g'$, defined over some $V'$:
+
+There exists a decreasing $\g$-stable filtration $F^\alpha$ of $\n/\pi\cdot\g$, indexed by rational numbers $\alpha$ between $0$ and $1$, with denominator dividing $e$, such
+\pg{530}
+that $F^\alpha$ is the image of $\pi'^{e\cdot\alpha}\cdot\g'\cap\n$ in $\n/\pi\cdot\g=\n/\pi'\cdot\g'$, $F^0=\n/\pi\cdot\g$. That is, $F^\alpha$ denotes the elements which become divisible by $\pi^\alpha$ in $\g'$. Then one checks the following facts:
+\begin{itemize}
+\item[(i)] $\g'=\g\otimes_V V'+\sum_\alpha \pi^{-\alpha}\cdot F^\alpha$.
+\item[(ii)] If $\alpha+\beta\le 1$, then $[F^\alpha,F^\beta]\subset F^{\alpha+\beta}$.
+\item[(iii)] If $\alpha+\beta>1$, then $F^\alpha$ and $F^\beta$ commute in
+$\n/\pi\cdot\g$. Furthermore, if we choose (locally in $C$) elements $n_\alpha\in F^\alpha$, $n_\beta\in F^\beta$, and lift them to $\n$, then the commutator $\pi^{-1}\cdot[n_\alpha,n_\beta]\in\g/\pi\cdot\g$ is modulo $F^{\min(\alpha,\beta)}$ independent of the liftings. It lies in $F^{\alpha+\beta-1}\subset\g/\pi\cdot\g$.
+\end{itemize}
+
+Conversely for any filtration $F^\alpha$ with properties (ii) and (iii), the sum
+\[
+\g'=\g\otimes_V V'+\sum_\alpha \pi^{-\alpha}\cdot F^\alpha
+\]
+is a Galois-invariant Lie-algebra lattice with $\delta$-invariant equal to
+\[
+\delta(\g')=\delta(\g)-2\cdot\sum_\alpha \alpha\cdot\rank\gr_\alpha(\n/\pi\cdot\g).
+\]
+
+We now consider lattices of this type, associated to a decreasing $\g$-stable filtration $F^\alpha$ of $\n/\pi\cdot\g$. The number of different $F^\alpha$'s in such a filtration is bounded by the rank of $\n/\pi\cdot\g$. If we fix these, say as $F^1\supseteq F^2\supseteq\cdots\supseteq F^r$, two filtrations differ only by the fact that we may assign different indices $\alpha$ to the $F^i$. This is described by a monotone mapping from $\{1,\cdots,r\}$ to $\mathbb{Q}$, sending $i$ to $\alpha(i)$, $0\le\alpha(i)\le 1$. This mapping must be such that conditions (i) and (ii) above are satisfied. These conditions define a rational convex polyhedron in the space of all maps. For example condition (i) and the first part of (ii) amount to the following: For each pair $i,j$ such that $F^i$ and $F^j$ do not commute, choose the maximal $l$ such that $[F^i,F^j]\subset F^l$. Then $\alpha(i)+\alpha(j)\le\alpha(l)$.
+
+Similarly for the rest of (ii). Thus the optimal $\alpha$ takes values in $\mathbb{Q}$. Also for different $\g$-stable filtrations $F^j$ only finitely many polyhedra arise; i.e.\ for example in the reformulation above there are only finitely many possibilities for the map which sends $(i,j)$ to $l=l(i,j)$. Thus there is an optimal solution, which defines a lattice $\g'$ over some totally ramified finite extension $V'$ of $V$. Replacing $V$ by this extension we may assume that $\g$ is already optimal. But then, for any $e$, $\g^t$ is contained in $\pi^{-1/e}\cdot\g$ (pass to a ramified extension), so $\g^t=\g$, and the special fibre $\g\otimes_V k$ must be a semisimple Lie-algebra. This also holds for $\sG_P$.
+
+If the special fibre of $\g$ is stable (and semisimple as a Lie-algebra), and if $\g'$ denotes another extension with semistable special fibre, consider the map $\g\cap\g'\to\g$, which is associated to a corresponding map of algebraic
+\pg{531}
+groups. If we restrict to the special fibre its image must be reductive, as otherwise the special fibre of $\g$ would contain a nilpotent subalgebra, semistable of slope zero, and thus also a parabolic. It follows that modulo $\pi$ its kernel is equal to the radical of the Killing-form. It then must contain the kernel of the reduction modulo $\pi$ of $\g\cap\g'\to\g'$, so if an element of $\g\cap\g'$ is divisible by $\pi$ in $\g'$ it is also divisible by $\pi$ and thus in $\g\cap\g'$. Thus $\g\cap\g'=\g'$, hence $\g'\subset\g$, so they are equal because the Killing-forms are nondegenerate.
+
+It follows that the theorem is true for semisimple $\sG$ of adjoint type, because for them extending the principal homogeneous-space $P_K$ to $C$ amounts almost to the same as lifting $\Lie(\sG_{P,K})$. One only has to check that the extension can be chosen as an inner twist of $\sG$, which is easy: We obtain a class in $H^1(C,\Out(\Lie(\sG)))$ (\'etale cohomology), which vanishes on the general fibre and thus is zero.
+
+For a general $\sG$ one divides first by the center, after which $P_K$ extends. Trying to lift the extension leads to a class in $H^2(C)$ with values in the centre of the derived group, which vanishes on $C_K$ and thus on $C$, after passing to a finite extension of $K$. This reduces the problem to the case of a torus.
+
+We can trivialise the torus over a finite Galois-cover of $C$. The problem then reduces to that of extending graded vector-bundles with an equivariant Galois-action, which is easy.
+\end{proof}
+
+\begin{remarks}
+(i) A ramified extension is necessary for the theorem. An example: Suppose $\sE_1$ and $\sE_2$ are stable bundles over $C$, together with nondegenerate quadratic forms $q_1$, $q_2$. Then the orthogonal group of the quadratic form $q_1\oplus\pi\cdot q_2$ on $\sE=\sE_1\oplus\sE_2$ gives a counter-example.
+
+(ii) The arguments also show that any reductive connected $\sG_K$ over the generic fibre extends, after replacing $K$ by a finite extension: Our proof (by deleting all references to semistable) shows this for semisimple groups. For tori we have to extend the character-group, which can be done by Abhyankhar's lemma, and the general case is easily reduced to these.
+\end{remarks}
+
+We now can construct a moduli-space for semistable $\sG$-bundles and pairs. We fix as before a normal base-scheme $B$, a curve $C$ over $B$ of genus bigger than one, and a reductive connected group $\sG$ over $C$. We also fix a faithful representation of $\sG$ on a vector-bundle $\sF$ on $C$ (this exists locally in $B$).
+
+By the theory of Hilbert-schemes one easily constructs locally quasi-projective $B$-schemes $S^0\subset S$, and over $S$ a semistable pair consisting of a $\sG$-torsor $P$ together with a global section $\theta\in\Lie(\sG_P)\otimes\omega_C$, such that each
+\pg{532}
+such pair over any geometric point of $B$ is isomorphic to one occurring in $S$. For example if there are no homomorphisms from $\sG$ to $\sG_m$ we might choose $S$ parametrising the pairs $(P,\theta)$ as above, together with a basis of $\Gamma(C,\sF_P\otimes\sL)$ for a sufficiently ample line-bundle $\sL$ on $C$. For general $\sG$ we may obtain infinitely many components, distinguished by the degrees of $\det(\sF_P)$, as it happens for $\sG_m$.
+
+As usual $S^0\subset S$ denotes the open subset where $(P,\theta)$ is stable. $S^0$ is (or can be chosen to be) smooth, and at each point its tangent-bundle surjects to the tangent-space of the versal deformation of $P$. This tangent-space is the first hypercohomology $H^1(C,\cdots)$ of the complex $\Lie(\sG_P)\to\Lie(\sG_P)\otimes\omega_C$, the differential given by $\ad(\theta)$. Also $S$ maps to $\Char$. Over $S^0\times_{\Char}S^0$ there exists a smooth groupoid $\Isom(\mathrm{pr}_1^*(P),\mathrm{pr}_2^*(P))$. It contains the constant groupoid defined by the global sections of the centre of $\sG$, and we may divide it by that. Then the map from the quotient to $S^0\times S^0$ becomes finite, and a closed immersion over the open subset where the bundles have no further automorphisms besides $\Gamma(C,Z(\sG))$. We thus can form the quotient which is an algebraic stack $\sM_\theta^0(\sG)$, and maps to its coarse moduli-space $M_\theta^0(\sG)$.
+
+Now assume for simplicity that $\sG$ admits no homomorphisms into $\sG_m$, so all bundles $\sE_P$ are semistable and have trivial determinant. Tensoring with a bundle $\sE$ on the covering $D\to C$ parametrised by $\Char$, of the right slope, we have the theta-function $\theta(\sE)$, which is a global section of the inverse of $\det(H^*(C,\sE\otimes\sF_P))$, which is isomorphic to a power of $\sL=\det(H^*(C,\sF_P))^{\otimes-1}$. Both $\sL$ and $\theta(\sE)$ are defined on $S$ and invariant under automorphisms of $P$, so they descend to $\sM_\theta^0(\sG)$ and $M_\theta(\sG)$. Also locally in $B$ we can find finitely many $\sE$'s such that the $\theta(\sE)$ have no common zero. As before this defines a quasi-finite morphism from $M_\theta^0(\sG)$ to some projective space $\mathbb{P}^N$. If we denote by $M_\theta(\sG)$ the normalisation of $\mathbb{P}^N$ in $M_\theta^0(\sG)$, then $M_\theta(\sG)$ is projective over $\Char$, independent of all choices, and contains $M_\theta^0(\sG)$ as open subscheme. Also $S$ maps to $M_\theta(\sG)$, and the bundle $\sF_P$ is $JH$-constant on the connected components of the fibres. This map is surjective by the stable-reduction theorem.
+
+If $\sG$ admits homomorphisms into $\sG_m$ the result is very much the same: Let $X(\sG)=\Hom_C(\sG,\sG_m)$ denote the group of characters of $\sG$. These define, for any base $S$ and for any $\sG$-torsor $P$ on $C\times S$, line-bundles on $S$ whose degrees are locally constant. So we get a locally constant map $\deg_P$ from $S$ to the dual $X(\sG)^*$. The torus with character-group $X(\sG)$
+\pg{533}
+injects into the group of characters of $\Gamma(C,Z(\sG))$, with finite cokernel. On any indecomposable $\sG$-module $\sF$, $\Gamma(C,Z(\sG))$ acts by a character, which defines an element of $X(\sG)\otimes\mathbb{Q}$. The difference between the slope of $\sF$ and that of $\sF_P$ is given by pairing this element with $\deg_P$. Thus for our versal $S$ the fibres of $\deg_P$ are quasi-compact.
+
+\begin{theorem}{II.5}\label{thm:II.5}
+$M_\theta^0(\sG)$ is quasi-projective, of relative dimension $2\cdot\dim(\sG/C)\cdot(\genus(C)-1)+2\cdot\rank(X(\sG))$ over $B\times X(\sG)^*$. It admits a compactification (relative to $\Char\times X(\sG)^*$) $M_\theta(\sG)$ such that some power of $\sL$ (the inverse of the determinant of cohomology) extends to an ample line-bundle on $M(\sG)$. Also the tangent-bundle of the stack $\sM_\theta^0(\sG)$ is isomorphic to the first hyper-cohomology of the complex $\Lie(\sG_P)\to\Lie(\sG_P)\otimes\omega_C$. It thus admits a nondegenerate symplectic structure (by combining Serre-duality and the trace-form for the representation of $\sG_P$ on $\sF_P$).
+
+The fibres of the map $\sM_\theta^0(\sG)\to\Char$ are Lagrangian, that is generically the tangent-bundles to their irreducible components are isotropic for the symplectic form. Thus the map is flat, and all fibres have the same dimension.
+\end{theorem}
+
+\begin{proof}
+Only the last statement (due to G. Laumon) has not been shown. It comes down to the following assertion: Suppose we have a smooth irreducible scheme $S$ over an algebraically closed field $k$, and a pair $(P,\theta)$ on $C\times S$, such that the characteristic of $\theta$ is constant on $S$. This defines for each $s\in S$ a tangent-map from $t_{S,s}$ to the first hypercohomology of the complex $\Lie(\sG_P)\to\Lie(\sG_P)\otimes\omega_C$. Its image is claimed to be isotropic.
+
+We prove this, without making any assumptions about semistability. Over the generic point of $C\times S$ a Jordan-decomposition $\theta=\theta_s+\theta_n$ is possible. $\theta_n$ lies in the Lie-algebra unipotent radical $\sU$ of a parabolic $\sP\subset\sG_P$ (and $\theta$ in $\Lie(\sP)$), which extends to the generic fibre $C_\eta$ ($\eta=$ generic point of $S$) and to $C\times S$, if we replace $S$ by a suitable open subset. The tangent-map of the deformation factors over the first hypercohomology of the subcomplex $\Lie(\sP)\to\Lie(\sP)\otimes\omega_C$, and the inner product over the projection to the Levi-component $\sL=\sP/\sU$. In short we can replace $\sG_P$ by $\sL$ and assume that generically $\theta$ is semisimple.
+
+Next we note that we are allowed to replace $C$ by a finite cover $C'$. We thus may assume that the eigenvalues of $\theta$ on $\sF_P$, the twist of a faithful $\sG$-representation $\sF$, are all in $\Gamma(C,\omega_C)$. If we choose a generic $\mathbb{Q}$-valued $\mathbb{Q}$-linear form on $\Gamma(C,\omega_C)$, and order the eigenvalues according to their image, we again find generically a parabolic containing $\theta$, and such that the projection of $\theta$ lies in the centre of the Levi-component
+\pg{534}
+of the parabolic. As before we may assume that it extends to $C\times S$, and which reduces us first to the case where $\sG$ is a torus, and finally to $\sG=\sG_m$ (pass to a finite cover of $C$).
+
+In this case $\sM_\theta(\sG)$ is the cotangent-bundle of $\Pic^0(C)$, the fibres of the characteristic map are isomorphic to $\Pic^0(C)$, and the symplectic form is the exterior derivative of a one-form on $\sM_\theta(\sG)$. This one-form is closed on the fibres, so they are isotropic. By the way the same type of argument shows that the 2-form on $M_\theta^0(\sG)$ is closed.
+\end{proof}
+
+We also remark that the compactification is independent of the choice of $\sF$: As usual two such compactifications can be dominated by a third. It thus suffices to show that any map between compactifications has finite fibres. This follows because the bundle $\sF_P$ is $JH$-constant on the connected components of the fibres of $S\to M_\theta(\sG)$, which implies that the same is true for any other $\sG$-bundle $\sF'$.
+
+Next we want to estimate the codimensions.
+
+\begin{theorem}{II.6}\label{thm:II.6}
+Suppose either $\genus(C)>2$, or that $\sG$ does not admit any nontrivial homomorphism into $\PGL(2,\sF)$, $\sF$ a rank-two vector-bundle on $C$.
+\begin{itemize}
+\item[(i)] The boundary $M_\theta(\sG)-M_\theta^0(\sG)$ has codimension $\ge 4$.
+On the fibres of the characteristic map $M_\theta(\sG)\to\Char$ the codimension of the boundary is at least two.
+\item[(ii)] The locus of points in $M_\theta^0(\sG)$ where the bundle has
+nontrivial automorphisms (i.e.\ where $\sM_\theta^0(\sG)$ is not isomorphic to $M_\theta^0(\sG)$) has codimension $\ge 4$.
+\item[(iii)] The locus of points where $P$ is not a stable $\sG$-torsor
+(forgetting the Higgs-structure) has codimension $\ge 2$.
+\item[(iv)] $M_\theta^0(\sG)$ surjects onto $B$.
+\end{itemize}
+In the excluded case the codimension in (i) and (ii) is two (respectively one on the fibres to $\Char$), and one in (iii).
+\end{theorem}
+
+\begin{proof}
+We place ourselves over a fixed geometric point of $B$, i.e.\ assume that $B$ is the spectrum of an algebraically closed field $k$. We may divide $\sG$ by its centre, so assume that $G$ is semisimple adjoint.
+
+(i) Denote by $d$ the dimension of $M_\theta(\sG)-M_\theta^0(\sG)$, and choose an irreducible component of dimension $d$. Replacing it by a nonempty open subset we may assume that there exists a $d$-dimensional irreducible subscheme $X$ of $S-S^0$ which is quasi-finite over our component. The universal $\sF_P$ cannot be $JH$-constant on any irreducible curve in $X$, because otherwise the curve would be contained in a fibre. Also in the algebraic closure of the generic point of $X$ the universal torsor $P$ is not stable,
+\pg{535}
+so $\Lie(\sG_P)$ contains a parabolic of positive degree which we choose to be minimal. Replacing $X$ by an \'etale cover of a nonempty open subset we may assume that there exists a parabolic $\sQ\subset\sG_P$, with unipotent radical $\sU$, such that the structure-group of $P$ reduces to $\sQ$, and such that the induced torsor over $\sH=\sQ/\sU$ is stable. Then $\sF_P$ admits a $\sQ$-stable filtration such that $\sU$ operates trivially on the subquotients, which are twists of a fixed subquotient by cocycles in $H^1(C,\sH)$. So $\sF_P$ is $JH$-constant on the fibres of the map $X\to M_\theta^0(\sH)$ classifying this torsor, so the fibres must be discrete, and $d$ is bounded above by $\dim(M_\theta^0(\sH))$. All in all we obtain that the codimension of $M_\theta(\sG)-M_\theta^0(\sG)$ is bounded below by the infimum of
+\[
+2\cdot(\dim(\sG)-\dim(\sH))\cdot(g-1)-2\cdot\dim(\Gamma(C,Z(\sH))),
+\]
+for the Levi-component $\sH$ of a proper parabolic of a twist of $\sG$. The dimension $s$ of $Z(\sH)$ is the difference in semisimple ranks of $\sG$ and $\sH$. Also $s\ge 1$, and the number of roots in $\sH$ is at least $2\cdot s$ less than in $\sG$. So the infimum is usually at least four, with equality possible only if $G$ contains a direct factor of type $A_1$, and the parabolic is induced from this factor. On the other hand the absolute size of the second term is bounded by $2\cdot s$. It follows that the right-hand side is at least two, and even four unless we have factors $\SL_2$ or $\PGL_2$.
+
+Let us analyse this case: The product of all $\PGL_2$-factors in $G$ is stable under $\Aut(G)$, so defines such a factor in $\sG$. This reduces us to the case where $G=\PGL_2^s$. The group of outer automorphisms of $G$ is then the group of permutations in $s$ letters, and the cocycle in $H^1(C,\Out(G))$ defining $\sG$ induces an \'etale covering of $C$, of degree $s$, such that $\sG$ is the direct image of an inner $\PGL_2$-form on this cover. The same is true for $\sG_P$ and also the parabolic $\sQ$. We are only interested in cases where a component of this cover has genus two. It then must be isomorphic to $C$. In short we are reduced to $\genus(C)=2$, $G=\PGL_2$.
+
+Then $\sG=\PGL(\sF)$, where $\sF$ is a vector-bundle of rank two. The corresponding moduli-space has two components, distinguished by the parity of the degree of $\sF_P$. For odd degree the moduli-space is proper, while in the even case the boundary has codimension two: The pairs $(\sF,\theta)$ with $\sF=\sL\oplus\sL^{\otimes-1}$ ($\sL$ a line-bundle of degree $0$), $\theta=(\alpha,-\alpha)$ ($\alpha\in\Gamma(C,\omega_C)$), form a four-dimensional family of $\SL_2$-torsors. Finally the same analysis applies to the fibres of the characteristic map, except that all dimensions have to be halved.
+
+(ii) The possible nontrivial automorphisms lie in a discrete set, so it
+\pg{536}
+suffices to estimate the possible dimension of families consisting of a torsor $P$ and a nontrivial automorphism of $P$, of finite order. Here the structure-group reduces to the centraliser $\sH\subset\sG_P$ of this automorphism, and the same type of analysis applies.
+
+(iii) Finally a more challenging topic is to estimate the codimension of the $P$'s which are stable as Higgs-bundles, but not as bundles without Higgs-structure (i.e.\ if we replace $\theta$ by zero). By the same technique as before we may assume that over some smooth $k$-scheme $X$ we have a stable family $(P,\theta)$, and that $\sG_P$ contains a parabolic $\sQ$ (not $\theta$-stable) with $\deg(\Lie(\sQ))\ge 0$. If $\sU$ denotes the unipotent radical of $\sQ$, $\sH=\sQ/\sU$, we may further assume that $\sH$ is semistable of degree zero, without proper parabolic, so that global sections of $\Lie(\sH)$ are all central. We may also assume that the dimension of $\Gamma(C,\Lie(\sG_P))$ is constant in the family. Under these conditions we want to estimate from above the dimension of the image of $X\to M_\theta^0(\sG)$, and it suffices to estimate for generic $x\in X$ the rank of its tangent-map, from $t_{X,x}$ to the first hyper-cohomology of the complex $\Lie(\sG_P)\to\Lie(\sG_P)\otimes\omega_C$. This cohomology maps to $H^1(C,\Lie(\sG_P))$, and from deformation-theory we know that $t_{X,x}$ maps to classes in there which lie in the image of $H^1(C,\Lie(\sQ))$, and are annihilated by $\ad(Z)$ for any global section $Z$ of $\Lie(\sG_P)$ (at $x$).
+
+From now on we denote by $P$, $\theta$ etc.\ the objects defined by $x\in X$. The image of the map from the first hyper-cohomology of the complex $\Lie(\sG_P)\to\Lie(\sG_P)\otimes\omega_C$ to $H^1(C,\Lie(\sG_P))$ is equal to the kernel of the map $\Ad(\theta)\colon H^1(C,\Lie(\sG_P))\to H^1(C,\Lie(\sG_P)\otimes\omega_C)$.
+
+Now $H^1(C,\Lie(\sG_P))$ is dual to $\Gamma(C,\Lie(\sG_P)\otimes\omega_C)$. The image of $H^1(C,\Lie(\sQ))$ is perpendicular to $\Gamma(C,\Lie(\sU)\otimes\omega_C)$, and the elements commuting with a $Z\in\Gamma(C,\Lie(\sG_P))$ to the image of $\ad(Z)$. We denote by $V$ the sum of these spaces. Note that $V$ contains the commutator of $\theta$ with $\Gamma(C,\Lie(\sG_P))$. Also $H^1(C,\Lie(\sG_P)\otimes\omega_C)$ is dual to $\Gamma(C,\Lie(\sG_P))$, by Killing-form and Serre-duality. So the difference $\dim(V)-\dim(\Gamma(C,\Lie(\sG_P)))$ gives a lower bound for the codimension, and we shall see that it is $\ge 2$ with the one possible exception.
+
+If $\Gamma(C,\Lie(\sG_P))$ vanishes, the dimension of $V$ is bounded below by that of $\Gamma(C,\Lie(\sU)\otimes\omega_C)$, which is at least equal to
+\[
+(g-1)\cdot\dim(\sU)+\deg(\Lie(\sU)),
+\]
+which in turn is $\ge 2$ except if $G$ has a $\PGL_2(\sF)$-factor, $\genus(C)=2$ and $P$ is semi-stable but not stable.
+
+\pg{537}
+So from now on $\Lie(\sG_P)$ has global sections.
+
+Assume first that, for all $Z\in\Gamma(C,\Lie(\sG_P))$, $\ad(Z)$ is nilpotent on $\sG_P$. We shall see that in this case the codimension is always at least two. Now $\Gamma(C,\Lie(\sG_P))=\Gamma(C,\Lie(\sU))$, and $\Lie(\sU)$ has a Harder-Narasimhan filtration where all slopes are $\ge 0$. We thus can apply the following results to the subquotients:
+
+\begin{lemma}{II.7}\label{lem:II.7}
+Suppose $\sE$ is a stable bundle of rank $r$ on a curve $C$ of genus $g\ge 2$, and slope $\ge 0$.
+\begin{itemize}
+\item[(i)] If $r=1$, then either $\sE\cong\sO_C$, or
+$\dim(\Gamma(C,\sE))\le\deg(\sE)$. Here equality holds only if either $\sE$ is a nontrivial line-bundle of degree zero, or $\sE\cong\sO(p)$ ($p$ a point), or $C$ is hyper-elliptic, $\sE\cong\sO(2\cdot p)$, $p$ a Weierstrass-point.
+\item[(ii)] If $r>1$, then $\dim(\Gamma(C,\sE))\le r+\deg(\sE)-2$.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+(i) For line-bundles the dimension of the space of global sections is
+\[
+\deg(\sE)+\dim(\Hom_C(\sE,\omega_C))+1-g.
+\]
+For degree at most one the assertion is clear. If $\sE$ has degree at least two, the dimension of the Hom-space is $\le g-1$, with equality only in the cases listed.
+
+(ii) If $r>1$ and $\deg(\sE)=0$, $\sE$ can have no global sections. If $0<\deg(\sE)<r$, then, for each $p\in C$, $\sE(-p)$ has no global sections, so $\Gamma(C,\sE)$ injects into the fibre of $\sE$ at $p$. It follows that the space of sections has dimension at most $r$, and if we have equality it generates $\sE$ which then must be trivial. Thus the dimension is at most $r-1$. Finally if $\deg(\sE)\ge r$, apply induction to $\sE(-p)$.
+\end{proof}
+
+Applying this to a refinement of the Harder-Narasimhan filtration of $\Lie(\sU)$, such that the subquotients are stable. If $l$ is the number of steps where the subquotient is not isomorphic to $\sO$,
+\[
+\dim(\Gamma(C,\Lie(\sU))\le\dim(\sU)+\deg(\Lie(\sU))-l,
+\]
+with equality only if all subquotients are line-bundles of degree zero or isomorphic to $\sO(p)$ respectively (for some $C$ and $p$) to $\sO(2p)$, as in case (i) of the lemma. Thus
+\begin{equation*}\tag{$*$}
+\begin{split}
+\dim(\Gamma(C,\Lie(\sU)\otimes\omega_C)&-\dim(\Gamma(C,\Lie(\sU))\\
+&\ge\dim(\sU)\cdot(g-2)+l\ge l,
+\end{split}
+\end{equation*}
+so we are done if $l\ge 2$.
+
+If all subquotients have degree zero then $\Lie(\sU)$ is semistable of slope zero, so its global sections generate a constant subbundle which is locally
+\pg{538}
+a direct summand. It follows that
+\[
+\dim(\Gamma(C,\Lie(\sU)\otimes\omega_C))\ge g\cdot\dim(\Gamma(C,\Lie(\sU))).
+\]
+Also the constant subbundle is not $\theta$-stable, which implies that
+\[
+\dim(V)-\dim(\Gamma(C,\Lie(\sU)))\ge\dim(\Gamma(C,\Lie(\sU)))\cdot(g-1)+1\ge 2.
+\]
+
+Finally if $l=1$, the only nonconstant subquotient is $\sO(p)$ or $\sO(2p)$, and we have equality in $(*)$, then the global sections of $\Lie(\sU)$ do not lie in a subbundle of smaller rank. As $\Lie(\sU)$ is not $\theta$-stable, $\ad(\theta)$ does not map $\Gamma(C,\Lie(\sU))$ into $\Gamma(C,\Lie(\sU)\otimes\omega_C)$, so the dimension of $V$ is strictly larger than that of $\Gamma(C,\Lie(\sU)\otimes\omega_C)$, and again
+\[
+\dim(V)-\dim(\Gamma(C,\Lie(\sU)))\ge\dim(\sU)\cdot(g-2)+l+1\ge 2.
+\]
+
+Finally in general if $Z$ is a global section in $\Gamma(C,\Lie(\sG_P))$, the eigenvalues of $\ad(Z)$ are constant on $C$. It follows that the semisimple part $\ad(Z)_{ss}$ in the Jordan-decomposition of $\ad(Z)$ is a polynomial with constant coefficients in $\ad(Z)$, thus defines a derivation of $\Lie(\sG_P)$ which is inner, thus a new global section $Z_{ss}$. Now choose a maximal subspace of commuting semisimple elements in $\Gamma(C,\Lie(\sG_P))$. Its centraliser is a reductive subgroup of $\sG_P$, and our space is equal to the Lie-algebra of the maximal trivial torus in its center. In short we have found a torus $T\cong\sG_m^s\subset\sG$ such that all global sectons of $\Lie(Z(T))/\Lie(T)$ are nilpotent. We can decompose $V$ and $\Gamma(C,\Lie(\sG_P))$ into the direct sum of the $T$-invariants and their natural complements, and estimate the differences separately. First we apply the previous type of estimate to the quotient $Z(T)/T$, to get that for the $T$-invariants $\dim(V^T)\ge\dim(\Gamma(C,\Lie(\sG_P)^T))-\dim(T)$.
+
+On the other hand $V$ differs from $(\Gamma(C,\Lie(\sG_P)\otimes\omega_C))$ only on the space of $T$-invariants. By Riemann-Roch we obtain that the contribution of their complements to $\dim(V)-\dim(\Gamma(C,\Lie(\sG_P)))$ is equal to
+\[
+(g-1)\cdot\dim(\sG_P/Z(T)),
+\]
+which is at least twice the dimension of $T$, with equality only if $g=2$, and $\PGL_2$-factors in $G$. The family parametrised by $X$ must consist of stable Higgs-bundles of rank two, with a nontrivial semisimple automorphism. They are of the form $\FA\oplus\FB$, $\FA$ and $\FB$ line-bundles, and inspection shows that one gets families of codimension at least two except if $\FA$ and $\FB$ have the same degree, where we obtain codimension one.
+
+(iv) We show that there exists a stable $\sG$-torsor $P$ (with $\theta=0$). There certainly exists at least one torsor, namely the trivial one. Also there exists
+\pg{539}
+a versal torsor $P$ over a smooth base-scheme $S^0$ (constructed as before), as there are no obstructions to deformations. If generically the torsor $P$ is not stable, we may assume (passing if necessary to an \'etale covering of an open subscheme) that $\Lie(\sG_P)$ contains a parabolic $\p$ of degree $\ge 0$. Then $\Lie(\sG_P)/\p$ has degree $\le 0$, so nontrivial first cohomology, so there exists a deformation of $P$ over $V=k[\![t]\!]$ such that $\p$ does not extend to the first infinitesimal neighbourhood of the special fibre. This contradicts versality of $S^0$.
+\end{proof}
+
+Next we investigate line-bundles on $\sM_\theta^0(\sG)$, which all will be of the following type. Define spaces $S^0\subset S$ as before, classifying $\sG$-torsors $P$ together with a basis for certain $\Gamma(C,\sF_{iP}\otimes\sL)$, for various $\sG$-modules $\sF_i$ (not related to $\sF$) and a very ample line-bundle $\sL$.
+
+\begin{construction}{II.8}\label{constr:II.8}
+Suppose $\sF$ is a vector-bundle on $C$ on which $\sG$ acts. The dual $\sL(\sF)=\det(H^*(C,\sF_P))^{\otimes-1}$ of the determinant of cohomology of $\sF_P$ is a $\Gamma(C,Z(\sG))$-equivariant line-bundle on $S^0$. If on a component of $\sM_\theta^0(\sG)$ the automorphisms of $P$ act trivially on it, $\sL(\sF)$ descends to $M_\theta^0(\sG)$, and some power extends to $M_\theta(\sG)$. This is also true if only $\Gamma(C,Z(\sG))$ acts trivially.
+\end{construction}
+
+The last assertion holds by construction if $\sF$ is faithful (then $\sL(\sF)$ is ample), and the general case follows. Also on each indecomposable $\sG$-module $\sF$ $\Gamma(C,Z(\sG))$ acts by a character, and thus on the determinant by raising this character to the power $\chi(C,\sF_P)$.
+
+Before we can go on we try to get an overview of the possible $\sG$-bundles. This will have the effect that the line-bundles will be well defined only in the relative Picard-group, that is, modulo line-bundles which are locally (in $B$) induced from $B$. Fix a maximal torus $T\subset G$, and let $X=X(T)$ denote its group of characters. $X^{ss}\subset X$ denotes the characters trivial on the maximal connected central torus, and $X^c=X/X^{ss}$ the characters of this central torus. $X^{ss}$ contains the root-system $\Phi$, and the Weil-group $W=W(\Phi)$ acts on $X$ (trivial on $X^c$). After tensoring with $\mathbb{Q}$ the extension splits, so that $X$ is canonically the direct sum of $X^{ss}$ and $X^c$. In the generic point $\eta$ of $C$ we can choose a maximal subtorus $\sT_\eta\subset\sG_\eta$. Over the algebraic closure of $k(\eta)$ there exists an isomorphism between $(G,T)$ and $(\sG_\eta,\sT_\eta)$, and its transforms under the Galois-group define representations $\Gal(\overline\eta/\eta)\to\Aut(G,T)\to\Aut(T)=\Aut(X(T))$. The representation on $\Aut(X(T))$ respects $X^{ss}$, $\Phi$ and $W$. Let $W'$ denote the subgroup generated by its image and $W$. Then $W$ is a normal subgroup of $W'$, and the quotient $W'/W$ injects into $\Aut(X^c)\times\Out(G^{\mathrm{der}})$. The corresponding representation of $\Gal(\overline\eta/\eta)$ is unramified,
+\pg{540}
+and describes the twisting of the central torus, as well as the obstruction to $\sG$ being an inner form of $G$.
+
+Also in this picture the group $X(\sG)$ is equal to the $W'$-invariants of $X$, and one easily sees that the kernel of $\sG\to\Hom(X(\sG),\sG_m)$ is connected. The character-group of a maximal torus in it is $X/X^{W'}$. Now recall that the irreducible representations of $G$ are parametrised by dominant characters, or equivalently by $W$-orbits in $X$. Moreover the representation-ring $K(G)$ is isomorphic to $\mathbb{Z}[X]^W$, the invariants in the group-ring of $X$. The isomorphism is given by restricting to $T$ and decomposing into eigenspaces. We want to extend this to the twisted form $\sG$.
+
+Locally in the \'etale topology each $\sG$-representation $\sF$ decomposes into irreducibles, parametrised by $W$-orbits, and the sum of all representations in a fixed $W'$-orbit is globally a direct summand in $\sF$. Conversely for any $W'$-orbit, choose a dominant weight $\lambda$ in it. The stabiliser of $W(\lambda)$ defines an unramified cover $C'\to C$, and over $C'$ there exists a $\sG$-representation locally isomorphic to the irreducible $G$-module with highest weight $\lambda$ (the obstruction lies in the Brauer-group of $C'$, which is trivial). This representation is unique up to tensoring with a line-bundle on $C'$, and its direct image on $C$ is an indecomposable representation of $\sG$. Over $C'$ we can tensor it with a suitable vector-bundle such that the determinant becomes trivial, and dividing the direct image by the rank of this bundle defines a class in $K(C,\sG)\otimes\mathbb{Q}$ with trivial determinant, which is now independent of all choices (use that $K(C')=\mathbb{Z}\oplus\Pic(C')$). Twisting it by $P$ gives a class on $C\times S$. The determinant of the twisted class is given by pushout via the homomorphism $\sG\to\sG_m$ determined by $\tr(\phi)$. All in all we get
+\[
+\rho\colon \mathbb{Q}[X]^{W'}\to K(C\times S,\sG_P)\otimes\mathbb{Q}.
+\]
+
+Locally $\rho$ associates to a class-function $\phi$ a representation with this character. If over some component of $S$ we tensor with an element of $K(C)\otimes\mathbb{Q}$ of rank one and suitable degree (determined by the value of $\deg_P$ on that component), $\Gamma(C,Z(\sG))$ acts via a character of finite order on the determinant of cohomology, we obtain a class in $\Pic(\sM^0(\sG))\otimes\mathbb{Q}$. The same is true if we use representations on which $\Gamma(C,Z(\sG))$ acts via a character of finite order, and tensor them with an arbitrary element of $K(C)\otimes\mathbb{Q}$. These representations correspond to elements in the group-ring of the sub-lattice of $X$ generated by the images $(w-1)(X)$, $w$ running over the elements of $W'$. A prominent example is of course the adjoint representation.
+
+For an element $\phi\in\mathbb{O}[X]^{W'}$, the value of $\phi$ and its first and second
+\pg{541}
+derivative at the origin define a constant $\rk(\phi)$, as well as $W'$-invariant linear respectively quadratic forms $\tr(\phi)$ and $Q(\phi)$ on $X$. $Q(\phi)$ is just the trace-form for the representation corresponding to $\phi$. This form is positive semi-definite for effective representations.
+
+By assigning to $\phi\in\mathbb{O}[X]^{W'}$ the negative of the determinant of the cohomology of suitable twists of $\rho(\phi)$ by line-bundles on $C$, over each component of $S$, we define a map from $\mathbb{O}[X]^{W'}$ to $\Pic(\sM_\theta^0(\sG))\otimes\mathbb{Q}$.
+
+\begin{theorem}{II.9}\label{thm:II.9}
+This map factors over $(\tr,Q)$; that is, two elements with the same forms $\tr(\phi)$ and $Q(\phi)$ define isomorphic bundles, up to torsion. Furthermore its restriction to the kernel of $\tr$ is independent of the chosen line-bundle on $C$.
+\end{theorem}
+
+\begin{proof}
+We first study isomorphisms between these determinant-bundles. As before the spaces $S\supseteq S^0$ may be chosen to classify $\sG$-torsors $P$ together with a basis for certain $\Gamma(C,\sF_{iP}\otimes\sL)$, for various $\sG$-modules $\sF_i$ (not related to $\sF$) and a very ample line-bundle $\sL$. On $S$ there is an action by a group $\prod\GL(d_i)$ which describes change of basis. The group $\Gamma(C,Z(\sG))$ injects as a central subgroup into $\prod\GL(d_i)$, and the action on $S$ factors over the quotient which acts almost freely on $S^0$, with quotient $\sM^0(\sG)$. Next we replace the moduli-problem defining $S$ and $S^0$ by requiring that $\det(\Gamma(C,\sF_{iP}\otimes\sL))$ are trivialised. This reduces the structure-group to $\prod\SL(d_i)$, and replaces $\Gamma(C,Z(\sG))$ by the finite intersection with this subgroup. Especially it acts trivial on some power of any equivariant bundle.
+
+We intend to apply the Riemann-Roch theorem to the map $C\times S\to S$, and the twists of bundles $\sF_P$, which will compute the class of $\sL(\sF)$ in $\Pic(S)\otimes\mathbb{Q}$. Then we claim that on $S^0$ this also allows us to determine the class in the group of line-bundles with equivariant action of $\prod\SL(d_i)$, that is, in $\Pic(\sM^0(\sG)\otimes\mathbb{Q})$. Namely as $S^0$ is normal two different equivariant actions on the same bundle differ by a (necessarily trivial) character of the group. So from now on we work in $\Pic(S^0)\otimes\mathbb{Q}$, and allow twists by arbitrary line-bundles on $C$. The previous condition on slopes was only necessary to control the action of $\Gamma(C,Z(\sG))$.
+
+Now let $\sF$ denote a twist of $\rho(\phi)$. By the Riemann-Roch theorem the image of $\sL(\sF)$ is equal to the negative of the projection of the term of degree two in $\ch(\sF_P)\cdot\Td(\sT_C)$, that is the projection of
+\[
+-(c_1(\sF)\cdot c_1(\sT_C)+c_1(\sF)^2-2\cdot c_2(\sF))/2,
+\]
+where $c_i$ denotes Chern-classes with values in the Chow-groups of $C\times S^0$. The first Chern-class depends only on $\tr(\phi)$, and its product with $c_1(\sT_C)$
+\pg{542}
+does not change under a twist by $K(C)\otimes\mathbb{Q}$. Similarly if we twist by an element of $K(C)\otimes\mathbb{Q}$, the change in $c_1^2(\sF)-2\cdot c_2(\sF)$ depends only on $c_1(\sF)$. It now suffices to show that $(c_1^2-2\cdot c_2)(\rho(\phi))$ depends only on $Q(\phi)$. Let us choose a Galois-covering $C''\to C$ such that over $C''$ $\sG$ is a twist of the constant $G$ by a cocycle with values in the derived group of $G$. In particular $C''$ splits the central torus of $\sG$, and contains the covers $C'$ used earlier to construct representations. It is enough to show equality of Chern-classes after pullback to $C''\times S$.
+
+We want to argue that we may replace $\sG$ by the constant group-scheme $G$. First twisting defines on $C''$ an equivalence of categories between $G$- and $\sG$-modules, preserving determinants because we twist by a semisimple group. For a weight $\lambda$ in $X(T)$ we defined a $\sG$-representation as direct image of an irreducible $\sG$-module on $C'$ modeled on the irreducible $G$-module with highest weight $\lambda$, normalised such that it has trivial determinant. Its pullback to $C''$ is the sum of all its conjugates under the covering group, and the twist of that is the direct sum of constant irreducible $G$-modules parametrised by the $W'$-orbit of $\lambda$. Finally we twist that by the universal $G$-torsor $P$ (on $C\times S$).
+
+Let $\Bor(\sG_P)\to C\times S$ denote the variety of Borel-subgroups of $\sG_P$. It can be constructed by choosing a Borel $B$ in $G$, and dividing $P$ by $B$. The pullback-map to $\Bor(\sG_P)$ is injective on Chow-groups, so it suffices to show the assertion for the pullback to $\Bor(\sG_P)\times_C C''$. There we have the universal Borel $\sB\subset\sG_P$, with unipotent radical $\sN$, and $\sB/\sN=\sT$ is a split torus isomorphic to $T\subset G$. Furthermore the structure-group of $P$ reduces to $\sB$, and the twisted bundle has a filtration such that the subquotients are annihilated by $\sN$, thus $\sT$-modules, and their structure-group reduces to $\sT$. So in $K$-theory the our bundle is given by a sum
+\[
+\rho(\phi)=\sum_{\mu\in X}m(\mu)\cdot\sL(\mu),
+\]
+where $\sL(\mu)$ denotes the $P$-twist of the trivial line-bundle, via the character $\mu$ of $\sT$, and the $m(\mu)$ are the multiplicities of eigenspaces. In particular,
+\[
+\phi=\sum_{\mu\in X}m(\mu)\cdot\exp(\mu).
+\]
+Thus
+\[
+(c_1^2-2\cdot c_2)(\rho(\phi))=\sum_{\mu\in X}m(\mu)\cdot c_1(\sL(\mu))^2,
+\]
+which is more or less the same as $Q(\phi)$.
+\end{proof}
+
+\pg{543}
+\section{Abelianisation}\label{sec:III}
+
+We intend to work out Hitchin's construction, using roots and weights. So as before $\sG$ denotes a twisted form of the connected reductive algebraic group $G$, over a curve $C$ of genus at least two. Also $X=X(T)$ denotes the group of characters of a maximal torus $T\subset G$, $X_{ss}\subset X$ the group of characters of the quotient of $T$ by the connected center $Z(G)^0$. On $X$ there operates a finite group $W'$ containing the Weil-group $W$ as a normal subgroup. Furthermore $W'/W$ is a quotient of the fundamental group of $C$, and is contained in $\Aut(X/X_{ss})\times\Out(G^{\mathrm{der}})$. Finally if $G^{sc}$ denotes the simply connected covering group of $G^{\mathrm{der}}$, $G$ is a quotient of $Z(G)^0\times G^{sc}$ by the fundamental group $\pi_1(G^{\mathrm{der}})$. If $X_{sc}\supseteq X_{ss}$ denotes the weight-lattice this displays $X$ as the kernel of a surjection $(X/X_{ss})\oplus X_{sc}\to X_{sc}/X_{ss}$, whose second component is the projection. Let $X^*_{W'}$ denote the largest quotient of the dual of $X$ on which $W'$ operates trivially, that is, the quotient by the sum of all $(w-1)(X^*)$, $w\in W'$. Its quotient by the dual $X^*_{sc}$ will be of interest for us, because it will classify the connected components of $\sM_\theta(\sG)$ as well as the moduli-space $\sM(\sG)$ of stable $\sG$-torsors. Here we only describe a map between these sets: $X^*_{W'}/X^*_{sc}$ surjects onto $X(\sG)^*$, with finite kernel. The map from $\sM(\sG)$ and $\sM_\theta(\sG)$ to $X(\sG)^*$ is the degree map $\deg_P$ of the universal torsor $P$. Also for any finite quotient $Y$ of $X^*_{W'}/X^*_{sc}$, one naturally constructs extensions of $G$ and $\sG$ by the Tate-twist $Y(1)$. For example if $G$ is semisimple and $W'=W$, we may choose $Y=X^*/X^*_{sc}$, and obtain $G^{sc}$, respectively $\sG^{sc}$. The connecting homomorphism from $H^1(C,\sG)$ to $H^2$ now defines a map into $Y$. There exists a unique lift $\sM(\sG)\to X^*_{W'}/X^*_{sc}$ which induces these maps to $X(\sG)^*$, respectively $Y$, for all quotients $Y$.
+
+Next we have to study the characteristic variety $\Char$. It is an affine space, and the product of the characteristic variety for the connected center $Z(\sG)^0$ and that for the derived group $\sG^{\mathrm{der}}$. What we do will be trivial for the center, so we assume that $G$ and $\sG$ are semisimple. Only the final statements will refer to a general $G$.
+
+Let $\Phi\subset X$ denote the roots of $G$. Recall that the conjugation invariant functions on $\g=\Lie(G)$ coincide with $W$-invariant functions on $\ttt=\Lie(T)=X^*\otimes k$, which are a polynomial algebra in $l=\rank(G)$ variables $\phi_1,\cdots,\phi_l$, of degree $e_i\ge 2$. So the quotient $\ttt/W$ is an affine space again. Furthermore the discriminant of the covering $\ttt\to\ttt/W$ (that is, the square of the determinant of the associated tangent-map) is defined by the invariant function $\prod_{\alpha\in\Phi}\alpha$, which is a polynomial in the $\phi_i$. It defines a subvariety $\Delta$ of codimension one in $\ttt/W$, which is smooth outside the
+\pg{544}
+set $\Delta_s$ (of codimension two in $\ttt$) where at least two root-pairs $\pm\alpha$ vanish. Furthermore every point in $\Delta-\Delta_s$ defines a $W$-orbit of roots which vanish over it, thus a conjugacy-class of embeddings $\sltwo\subset\g$. For $\sG$ we obtain a corresponding twisted version over $C$: We can lift the homomorphism $\pi_1(C)\to\Out(G)$ (defined by $\sG$) to an action on $X$ normalising $W$, and thus on $\ttt$ and $\ttt/W$. The invariants now become a semistable bundle of slope zero. In addition we twist the linear functions on $\ttt$ by $\omega_C$, and similarly the invariants (where we twist by powers $\omega_C^{\otimes e_i}$). We get a covering of affine $C$-spaces $\sT\to\CH$, and a subvariety $\sD\subset\CH$ of codimension one, smooth outside $\sD_s\subset\sD$ which is of codimension two. One then checks easily that the invariants are generated by global sections, so $C\times\Char$ surjects fibrewise onto $\CH$.
+
+\begin{definition}{III.1}\label{def:III.1}
+A point in $x\in\Char$ is called \emph{generic} if the image of $C\times\{x\}$ does not meet $\sD_s$, and is transversal to $\sD-\sD_s$.
+\end{definition}
+
+By the general theory the generic points form a dense open subset in $\Char$. From now on study a semistable pair $(P,\theta)$ with generic characteristic. Let $C^0\subset C$ denote the open subset where $\theta$ is regular. Over it the centraliser $\sZ(\theta)\subset\sG_P$ is a maximal torus. Its Lie-algebra extends to $C$ as a Lie-algebra $\Lie(\sZ(\theta))\subset\Lie(\sG_P)$. We shall see that, on all of $C$, $\sZ(\theta)$ is smooth with this Lie-algebra. What is clear so far is that at any point of $x\in C-C^0$, the determinant of $\ad(\theta)$ on $\Lie(\sG_P)/\Lie(\sZ(\theta))$ has a simple zero, and that to $x$ there is associated a $W'$-conjugacy class of roots $\alpha\in\Phi$. Furthermore if for each such conjugacy-class we sum over all $x$ mapping to it, we obtain a divisor equivalent to a positive multiple of $\omega_C$. It follows that each $W'$-orbit in $\Phi$ is obtained. The following result holds for general reductive $G$.
+
+\begin{theorem}{III.2}\label{thm:III.2}
+\begin{itemize}
+\item[(i)] Over $C^0$, $\sZ(\theta)\subset\sG_P$ is the connected torus
+corresponding to a surjective representation $\pi_1(C^0)\to W'$, lifting the representation into $W/W'$ defined by $\sG$.
+\item[(ii)] Let $x\in C-C^0$. Complete the local ring of $C$ in $x$. For a local
+parameter $t$ in the completion (isomorphic to $k[\![t]\!]$) there exists over $k[\![t]\!]$ a constant torus $T_0\subset\sG_P$, and an embedding of the product of $T_0$ with one of the groups $\SL_2$, $\GL_2$ or $\PGL_2$ into $\sG_P$, such that $\sZ(\theta)$ is isomorphic to the product of $T_0$ and the centraliser of the $2\times 2$-matrix with diagonal entries zero, and off-diagonal entries $t$ and $1$ (that is, multiplication by $t^{1/2}$ on $k[\![t^{1/2}]\!]$, considered as $k[\![t]\!]$-module of rank two).
+\item[(iii)] $\sZ(\theta)$ is smooth at $x$. Its group of connected components
+$\sZ(\theta)/\sZ(\theta)^0$ at $x$ is trivial except for the $\SL_2$-case, where it has order two.
+\pg{545}
+\item[(iv)] $H^1(C,\sZ(\theta))$ is an algebraic group, whose connected component
+of the identity is an abelian variety. Its group of connected components is $X^*_{W'}/X^*_{sc}$.
+\item[(v)] The fibre of $M_\theta(\sG)\to\Char$ through $(P,\theta)$ is contained
+in the open subset of $M_\theta^0(\sG)$ classifying pairs with only the minimal group of automorphisms. $H^1(C,\sZ(\theta))$ operates on it, and the fibre is a principal homogeneous space under $H^1(C,\sZ(\theta))$.
+\end{itemize}
+\end{theorem}
+
+\begin{corollary}{III.3}\label{cor:III.3a}
+The set of connected components of the moduli-space $\sM^0(\sG)$ of stable $\sG$-bundles coincides with that of $\sM_\theta^0(\sG)$, $M_\theta(\sG)$ as well as that of a generic fibre of $\sM_\theta^0(\sG)\to\Char$, under the natural mappings. All are isomorphic to $X^*_{W'}/X^*_{sc}$.
+\end{corollary}
+
+\begin{proof}
+(i) Over $C^0$, $\theta$ defines a regular semisimple conjugacy-class, conjugate to an element of $\ttt$ well determined up to $W'$-action. This shows that $\sZ(\theta)$ is defined by a representation of the fundamental group into $W'$, and its quotient modulo $W$ is the representation defined by $\sG$, thus surjective. It thus suffices to show that the image contains $W$. For this we may replace $C$ by an unramified cover, so assume that $\sG=G$ is constant. The characteristic defines a section of the affine bundle over $C$ obtained by twisting $\ttt/W$. Pulling back (the corresponding twist of) $\ttt\to\ttt/W$ gives a covering $D\to C$ with group $W$ which locally (in $C$) trivialises $\sZ(\theta)$. Furthermore the covering is ramified at $x$, with inertia conjugate to the subgroup of $W$ of order two generated by the reflection corresponding to the root $\alpha$ associated to $x$. Furthermore over any covering of $C^0$ which trivialises $\sZ(\theta)$ $\sG_P$ contains a torus $(\sZ(\theta))$ isomorphic to $T$ with a conjugacy-class $(\theta)$ lifting the characteristic, so this covering must trivialise $D$. It thus suffices to show that $D$ is connected.
+
+Let $U\subset\Char$ denotes the open set of generic characteristics. The coverings $D$ define a scheme over $U$, which is fibered over the $\omega_C$-twist of $C\times\ttt$ with fibres open subsets of affine spaces. So the total space is irreducible, which implies that (now again over a fixed point of $U$) the decomposition group of each component of $D$ is normal in $W$. As it meets the conjugacy-class of each reflection it must coincide with $W$.
+
+(ii) All assertions are local, so we may assume that $G=\sG$ is constant, and $P$ is trivial. Now $\theta$ is just an element of $\g[\![t]\!]$ such that applied to $\theta$ the invariant polynomial $\prod_{\alpha\in\Phi}\alpha$ has a simple zero. Over some ramified extension $k[\![t^{1/e}]\!]$ $\theta$ will be conjugate (over the fraction-field) to an element in $\theta_0$ in $\ttt[\![t^{1/e}]\!]$. By our assumptions on $\theta$ there exists precisely one pair of roots $\pm\alpha$ vanishing on the constant term $\theta_0(0)$. It follows that $\theta(0)$
+\pg{546}
+is a subregular element, that is its adjoint has $l+2$ eigenvalues zero. We derive that there exists an orthogonal $\ad(\theta)$-stable decomposition
+\[
+\g[\![t]\!]=\h\oplus\h^\perp,
+\]
+such that $\ad(\theta)$ is topologically nilpotent on $\h$, and an isomorphism on $\h^\perp$. Modulo $t$ $\h$ is the centraliser of the semisimple component of $\theta(0)$, thus contains a maximal torus. This torus lifts to $\h$ (lift a regular element $Z$ such that $\ad(Z)$ is bijective on $\h^\perp$), and we may assume that it is equal to $\ttt[\![t]\!]$. Then $\h$ is equal to the direct sum of $\ttt[\![t]\!]$ and the root-spaces to $\pm\alpha$, $\alpha\in\Phi$ the same root as before. So as Lie-algebra $\h$ is isomorphic to the direct sum of its center and a copy of $\sltwo[\![t]\!]$. $\h$ integrates to a connected reductive subgroup $H\subset G$ which contains $\sZ(\theta)$: If $R$ is an artinian $k[\![t]\!]$-algebra, and a $g\in G(R)$ centralises $\theta$, then $g$ respects $\h$, so is the product $g=w\cdot h$ with $w\in W$ normalising $H$, and $h\in H$. Furthermore $w$ centralises the semisimple component of $\theta(0)$, which lies in the center of $\h$ and thus in $\ttt$. As the centraliser of any element of $\ttt$ is generated by the reflections in it, it follows that $w$ is also in $H$ and we are done.
+
+All in all we now can replace $G$ by $H$. Also the centraliser of $\theta$ only depends on the projection of $\theta$ onto the $\sltwo$-factor. For a suitable choice of the uniformiser $t$ this projection is conjugate to the off-diagonal element with entries $1$ and $t$, as in the statement of the theorem.
+
+The three cases listed there now arise if we try to match-up the $\sltwo$-factor of $H$ with its center:
+
+(a) If the quotient of $H$ by its connected center is $\SL_2$, $H$ is isomorphic to a product $T_0\times\SL_2$. This happens if and only if $\alpha$ is divisible by two in $X$.
+
+(b) If the quotient is $\PGL_2$ and $H$ is not a product, then the line $\mathbb{Z}\cdot\alpha\subset X$ does not have a complement stable under the reflection $s_\alpha$. It follows that there exists a $\chi\in X$ whose product $\langle\chi,\alpha\rangle$ with $\alpha$ is odd. We can choose $\chi$ such that $\alpha$ and $\chi$ generate a sublattice of rank 2, and decomposing $X$ into this sublattice and a complement defines an isomorphism between $H$ and a product $T_0\times\GL_2$. This case is characterised by the fact that $\alpha$ is not divisible by two and that the inner product $\langle\chi,\alpha\rangle$ is a surjection from $X$ to $\mathbb{Z}$.
+
+(c) Finally $H$ can be a product $T_0\times\PGL_2$. This happens if $\alpha$ is not divisible by two, but each $\langle\chi,\alpha\rangle$ is.
+
+(iii) This follows from the previous, as now everything can be explicitly computed: The multiplicative group of $k[\![t^{1/2}]\!]$ defines a smooth con-
+
+\pg{547}
+
+nected group-scheme, and $\sZ(\theta)$ is the product of $T_0$ and this scheme (GL$_2$-case), respectively its elements of norm one (SL$_2$-case), or its quotient by $\Gm$ (PGL$_2$-case).
+
+(iv) Generically $\sZ(\theta)$ is trivialised by a Galois-cover $\pi\colon D\to C$, with group $W'$. Over $C^0$ the $\sZ(\theta)$ is isomorphic to the $W'$-invariants in $\pi_*(X^*\otimes\sO_D^*)$, and the norm defines a surjection $\pi_*(X^*\otimes\sO_D^*)\to\sZ(\theta)$. From the local theory one derives that both the inclusion and the norm extend to a regular map on $C$, and define an isogeny between $H^1(C,\sZ(\theta))$ and the $W'$-invariants in $\Pic(D)\otimes X^*$. It follows that $H^1(C,\sZ(\theta))$ is representable by an algebraic group, whose connected component of the identity is an abelian variety.
+
+Furthermore the norm-map from $\Pic(D)\otimes X^*$ defines a map from $X^*$ to the group of connected components of $H^1(C,\sZ(\theta)^0)$ and of $H^1(C,\sZ(\theta))$. This map factors over the covariants $X^*_{W'}$, and we show that it induces the claimed isomorphisms. We already know that it is an isogeny. First we show that we get an isomorphism from $X^*_{W'}$ onto the group of connected components of $H^1(C,\sZ(\theta)^0)$. It suffices if we obtain an isomorphism modulo $n$, for each integer $n$. We use that in the \'etale or flat topology $H^2(C,\sZ(\theta)^0)$ vanishes:
+
+Let $j\colon\{\eta\}\subset C$ denote the inclusion of the generic point. Then $R^1j_*(\sZ(\theta)^0)$ vanishes by a variant of Satz 90, as do all higher direct images by reasons of cohomological dimension (one only needs that $\sZ(\theta)^0$ is generically connected). Also $j_*(\sZ(\theta)^0)$ differs from $\sZ(\theta)^0$ by a sky-scraper-sheaf, so $H^2(C,\sZ(\theta)^0)=H^2(\{\eta\},\sZ(\theta)^0)$ vanishes because of the theorem of Tsen (see \cite{Se}).
+
+It follows that $H^1(C,\sZ(\theta)^0)/n$ is isomorphic to $H^2(C,\sZ(\theta)^0[n])$, which is dual to the $W'$-invariants in $X/n\cdot X$, thus equal to the covariants in $X^*$ reduced modulo $n$.
+
+Finally the group of connected components of $H^1(C,\sZ(\theta))$ is isomorphic to the quotient of that of $H^1(C,\sZ(\theta)^0)$, by the image of the global sections of $\sZ(\theta)/\sZ(\theta)^0$. This quotient is a sky-scraper sheaf concentrated at the points $x\in C$ where the SL$_2$-case occurs. There the fibre is $\mathbb{Z}/2\mathbb{Z}$, and one easily checks that a generator maps to the following class in $X^*_{W'}$: Suppose $\alpha$ is the root corresponding to $x$, so that $\alpha$ is divisible by $2$ in $X$. Then the map which sends $\chi$ to $\langle\chi,\alpha\rangle$ is an element in $X^*$, well defined modulo $W'$, and represents the image of a generator.
+
+We thus have to show that, in $X^*_{W'}$ these classes generate the image of $X^*_{sc}$. It suffices to do this module $W$. Also everything lies in $X^*_{ss}$, so we
+
+\pg{548}
+
+may assume that $G$ is semisimple. First the integrality property of weights means that all $\langle\chi,\alpha\rangle$ lie in $X^*_{sc}$. Conversely we have to show that any $W$-invariant homomorphism $X^*\to\mathbb{Z}/n\cdot\mathbb{Z}$ which vanishes on the $\langle\chi,\alpha\rangle$ $(\alpha\in 2\cdot X)$ also vanishes on $X^*_{sc}$. The homomorphism is reduction modulo $n$ of an element $\chi\in X$. $W$-invariance means that for all roots $\alpha$, the product $\langle\chi,\alpha\rangle\cdot\alpha$ is divisible by $n$. It follows that either $\langle\chi,\alpha\rangle$ itself is divisible by $n$, or at least by $n/2$ and $\alpha$ divisible by two. However for this exception we use the assumption about the SL$_2$-case. It follows that all $\langle\chi,\alpha\rangle$ are divisible by $n$, so $\chi$ lies in $n\cdot X_{sc}$, and we are done.
+
+(v) Any automorphism of $(P,\theta)$ is a global section of $\sZ(\theta)$, and its pullback to $D$ is a $W'$-invariant homomorphism from $X$ to $k^*$. Furthermore at the points $x\in C-C^0$ where we are in the PGL$_2$-case this map satisfies a local condition, as there $\sZ(\theta)$ has index two in the $W'$-invariants of $\pi_*(X^*\otimes\sO_D^*)$. One checks that together all these mean that the automorphism is an element of $\Gamma(C,Z(\sG))$.
+
+Next, as $\sZ(\theta)\subset\sG_P$, we can twist $P$ by a class in $H^1(C,\sZ(\theta))$ to obtain a new pair $(P',\theta')$ with the same characteristic. If this new pair were not stable, $\theta'$ would be contained in a destabilising parabolic. Over $C^0$ this parabolic contains $\sZ(\theta')$, so its set of roots is stable under $W'$ and a union of connected components of $\Phi$. We easily derive a contradiction. (We even showed that all pairs with generic characteristic are stable.) It follows that $H^1(C,\sZ(\theta))$ operates on the fibre through $(P,\theta)$ of the characteristic map.
+
+To show that this operation is simply transitive amounts to the following: Assume two pairs $(P,\theta)$ and $(P',\theta')$ have the same generic characteristic. Then they are isomorphic locally in the flat (or \'etale) topology on $C$. Equivalently $\theta$ and $\theta'$ are conjugate in suitable local trivialisations.
+
+We then may assume that $W'=W$. The assertion holds over $C^0$. At a point $x\in C-C^0$ the semisimple parts of the constant terms $\theta(0)$ and $\theta'(0)$ are conjugate, so we assume them to be equal, and especially $\theta$ and $\theta'$ define the same $H\subset G$. Furthermore conjugating in $H$ we may assume that they both have the same projection onto the semisimple part $\slt$ (given by the off-diagonal matrix with entries $1$, $t$), and modulo $t$ this is also true for the projection onto the center of $\hh$. Also from the local structure one finds an element $h\in H(k((t^{1/2})))$ such that both $\ad(h)(\theta)$ and $\ad(h)(\theta')$ lie in $\ttt[\![t]\!]$ (check in SL$_2$, GL$_2$, respectively PGL$_2$). These two element are in the same $W$-orbit (all invariant functions take the same value) and have the same constant term equal to the semisimple part of $\theta(0)$. An element of $W$ conjugating them must centralise this constant
+
+\pg{549}
+
+term, so is either the identity or $s_\alpha$. Projecting onto $\slt$ rules out $s_\alpha$, so $\ad(h)(\theta)=\ad(h)(\theta')$ and $\theta=\theta'$.
+
+We also remark that the characteristic map is surjective, by dimensional reasons.
+
+The assertion about connected components, as well as the corollary are derived as follows: First all the spaces admit locally constant maps $\deg_P$ into $X^*_{W'}/X^*_{sc}$. On the fibre through a generic characteristic this map is compatible with the operation of $H^1(C,\sZ(\theta))$, so it must induce an isomorphism on connected components. It follows that on the fibres of $\deg_P$ the fibres of the projection $M_\theta(\sG)\to\Char$ are generically smooth and connected. By the connectedness-theorem (EGA III) all fibres are connected, and so is $M_\theta(\sG)$ itself. Also it contains as dense open subset the cotangent-bundle to the moduli-space of stable $\sG$-bundles. So for all these spaces $\deg_P$ induces an isomorphism on connected components.
+\end{proof}
+
+Let us state the main applications of abelianisation.
+
+\begin{corollary}{III.3}\label{cor:III.3b}
+(i) On each connected component of $\sM^0_\theta(\sG)$, all global functions are obtained by pullback from $\Char$.
+
+(ii) Let $\sM^0(\sG)$ denote the moduli-space of stable $\sG$-bundles (no $\theta$), and assume that either $\genus(C)>2$ or that $\sG$ does not admit a surjection to $\mathrm{PGL}(\sF)$, $\sF$ a bundle of rank two. Suppose $M\subset\sM^0(\sG)$ is a connected component, i.e.\ the locus where the invariant $\deg_P\in X^*_{W'}/X^*_{sc}$ takes a fixed value. Then $\Gamma(M,S^{\textstyle\cdot}(\sT^0_M(\sG)))$ is isomorphic to the space of regular functions on $\Char$. This isomorphism preserves gradings. In particular the space of vector-fields on $M$ is equal to $H^1(C,\Lie(\sZ(\sG)))$. Also if $G$ is semisimple and simple, $M$ has no vector-fields, and $\Gamma(M,S^{\textstyle\cdot}(\sT_{M^0(\sG)}))$ is isomorphic to $H^1(C,\sT_C)$.
+\end{corollary}
+
+\begin{proof}
+(i) follows because the generic fibre of the projection to $\Char$ is smooth and connected, and the boundary has codimension $\ge 2$. For (ii) note that the cotangent-bundle to $\sM^0(\sG)$ is an open dense subset of $\sM_\theta(\sG)$, whose complement has codimension $\ge 2$.
+\end{proof}
+
+Recall that for a $\sG$-representation $\sF$ we could almost (up to torsion) define a line-bundle $\sL(\sF)$ on $\sM^0_\theta(\sG)$, essentially the inverse of the determinant of the cohomology of $\sF_P$. On the fibre over a generic characteristic we obtain by pullback a line-bundle on $H^1(C,\sZ(\theta))$, well defined up to translation. Associated to it is an alternating form on the Tate-module $T_l(A)$ of $A$, the connected component of the identity. From the description of $\sZ(\theta)$ we derive easily that $T_l(A)\otimes\mathbb{Q}_l$ is isomorphic to $H^1_P(C^0,X^*\otimes\mathbb{Q}_l)=H^1(C,j_*(X^*\otimes\mathbb{Q}_l))$, where $j$ denotes the inclusion $C^0\subset C$ and $X^*\otimes\mathbb{Q}_l$ the smooth sheaf on $C^0$ defined by the $W'$-module
+
+\pg{550}
+
+$X^*$. The symmetric bilinear form $Q(\sF)$ on $X^*$ defines together with Poincar\'e-duality a symplectic form on $T_l(A)\otimes\mathbb{Q}_l$, and we claim that this is associated to $\sL(\sF)$:
+
+The assertion depends only on the restriction to $\sZ(\theta)$ of the $\sG_P$-representation $\sF_P$. This restriction decomposes into indecomposables, which are parametrised by $W'$-orbits of elements $\chi\in X$. Associated to such an orbit is a covering $D\to C$, unramified over $C^0$, and a $\mathbb{Q}$-morphism from $A$ into $J(D)$, such that the line-bundle corresponding to the orbit is the pullback of the theta-bundle on $J(D)$. This reduces us to the Jacobian, and there it is well known that the pairing defined by the theta-divisor defines Poincar\'e-duality. It follows that $\sL(\sF)$ defines an isogeny from $A$ to its dual if $Q(\sF)$ is nondegenerate.
+
+\begin{corollary}{III.4}\label{cor:III.4}
+The symplectic form on the tangent-bundle of $\sM^0_\theta(\sG)$ defines a Poisson-bracket $\{f,g\}$ for local functions, and associates to any local function $f$ a vector-field $H_f$.
+
+(i) For any $f\in\Gamma(\sM^0_\theta(\sG),\sO)$, $H_f$ is tangential to the fibres of the characteristic maps, or equivalently $\{f,g\}$ vanishes for two functions $f,g$.
+
+(ii) Assume $\sF$ is such that $Q(\sF)$ is nonsingular. Multiplication by $c_1(\sL(\sF))\in H^1(\sM^0_\theta(\sG),\Omega^1)$ applied to $H_f$ defines a derivation from $\Gamma(\sM^0_\theta(\sG),\sO)$ to $H^1(\sM^0_\theta(\sG),\sO)$. $f$ lies in the kernel of this map only if it is constant.
+\end{corollary}
+
+\begin{proof}
+Assertion (i) follows because $f$ locally is a pullback of a function on $\Char$, and generically the fibres of the projection are maximally isotropic. For (ii) use that on the fibres over generic characteristics no nontrivial vector-field is annihilated by $c_1(\sL(\sF))$.
+\end{proof}
+
+\section{Projective connections}\label{sec:IV}
+
+From now on our main emphasis will be on the moduli-space $\sM^0(\sG)$. We also assume that $G$ is semisimple. At the end we shall add some remarks about general reductive groups. In the following it will be important that our curve $C$ is not kept constant. We thus assume as given a smooth base-scheme $B$, over an algebraically closed field $k$ of characteristic zero. All assertions will be functorial in $B$, so we may assume that it is some type of moduli-space for $C$ (and $\sG$). All spaces will be smooth over $B$, and products taken relative to it. Over $B$ we want to construct projective connections on the spaces $\Gamma(\sM^0(\sG),\sL(\sF))$. This construction will follow the approach in \cite{APW}, and will be mostly local in $\sM^0(\sG)$ and
+
+\pg{551}
+
+certainly local in $B$. We thus may assume that $B$ is affine.
+
+The main topic of this section is the existence of various types of connections on line-bundles. For this purpose tensoring with flat bundles is trivial. Also connections on $\sL^{\otimes n}$ are in one-to-one correspondence with connections on $\sL$, so we can work in $\Pic\otimes\mathbb{Q}$. We use this freedom to argue with line-bundles like $\sL^{\otimes 1/n}$, although the root may only exist locally.
+
+We also assume that $\sF$ has trivial determinant, and normalise $\sL(\sF)$ as the negative of the determinant of cohomology of $\sF_P$. For example to $\sF=\Lie(\sG)$ (with the adjoint representations) $\sL(\sF)$ is equal to the determinant of the tangent-bundle (relative to $B$) on $\sM^0(\sG)$, dual to the canonical bundle.
+
+An $\Omega_C$-connection $\nabla$ on a $\sG$-torsor $P$ (over $C\times S$) is a $\sG$-invariant lift of the tangent-bundle $\sT_C$ to $P$. Such lifts exist locally in $C\times S$, and if $P$ is stable even locally in $S$, because the obstruction lies in $H^1(C,\Lie(\sG_P)\otimes\omega_C)$ which vanishes. Also two such connections differ by a section in $\Gamma(C,\Lie(\sG_P)\otimes\omega_C)$. Finally a connection on $P$ induces connections on all twists $\sF_P$, that is, maps $\nabla_P\colon\sF_P\to\sF_P\otimes\Omega_C$ satisfying the usual connection rule.
+
+We could also define connections with values in $\Omega_S$ or $\Omega_{S/B}$. Their existence is obstructed by classes in $H^1(C,\Lie(\sG_P))$, and they also have a curvature-form in $\Lie(\sG_P)\otimes\Omega^2_{C\times S}$.
+
+Let $\sM^0_\nabla(\sG)$ denote the moduli-stack classifying pairs $(P,\nabla)$ consisting of a stable $\sG$-torsor $P$ and an $\Omega_C$-connection on it. It is fibered over $\sM^0(\sG)$, and a torsor under the cotangent-bundle. In a moment we shall compute its class in $H^1(\sM^0(\sG),\Omega)$.
+
+Over the complex numbers $\sM^0_\nabla(\sG)$ classifies bundles with integrable connections, that is, representations of $\pi_1(C)$. It follows that it is invariant under deformations of $C$. This also can be shown algebraically, using that it classifies vector-bundles on the crystalline topos of $C$. We conclude that $\sM^0_\nabla(\sG)$ has an integrable connection relative to $B$, that is, the tangent-bundle $\sT_B$ lifts to a subbundle of its tangent-bundle, and this subbundle is closed under the Lie-bracket. Its complement is canonically isomorphic to $\HDR^1(C,\Lie(\sG_P))$, the only nonvanishing cohomology-group of the de Rham complex $\Lie(\sG_P)\to\Lie(\sG_P)\otimes\Omega_C$ defined by the universal connection on $\Lie(\sG_P)$. The de Rham cohomology is filtered by the Hodge-filtration, that is, by the subbundle $\Gamma(C,\Lie(\sG_P)\otimes\omega_C)$ which is the tangent-space of the fibres of the projection into $\sM^0(\sG)$, and the
+
+\pg{552}
+
+quotient $H^1(C,\Lie(\sG_P))$ is the tangent-space of the base.
+
+This filtration is not invariant under the Lie-bracket with $\sT_B$:
+
+\begin{theorem}{IV.1}\label{thm:IV.1}
+Suppose $Z$ is a tangent-vector on $B$. The variation of $C$ in direction $Z$ defines a class in $H^1(C,\sT_C)$ and thus using the cup-product a linear map $\Gamma(C,\Lie(\sG_P)\otimes\omega_C)\to H^1(C,\Lie(\sG_P))$, which is the image of $Z$ in the tangent-space at $\Gamma(C,\Lie(\sG_P)\otimes\omega_C)$ of the Grassmannian of $\HDR^1(C,\Lie(\sG_P))$.
+\end{theorem}
+
+\begin{proof}
+This is a straightforward computation.
+\end{proof}
+
+Fix a locally faithful $\sG$-representation $\sF$, and let $\sL=\sL(\sF)$ denote the associated line-bundle on $\sM^0(\sG)$. We intend to compute the first Chern-class of $\sL$ in the de Rham cohomology of $\sM^0_\nabla(\sG)$. Recall that in general for any line-bundle $\sL$ on a smooth scheme $S$, we define its Chern-class $c_1(\sL)\in\HDR^2(S)$ as follows:
+
+Choose an open cover $U_i$ of $S$, and on each $U_i$ a connection $\nabla_i\colon\sL\to\sL\otimes\Omega_S$. The curvatures $\beta_i=\nabla_i^2$ are 2-forms on $U_i$, and on $U_i\cap U_j$ they differ by 1-forms $\alpha_{ij}$ such that $d\alpha_{ij}=\beta_i-\beta_j$. It follows that the $\beta_i$ and $\alpha_{ij}$ define a class $c_1(\sL)\in\HDR^2(S)$. It lies in the first stage of the Hodge-filtration, and its projection to $H^1(S,\Omega^1_S)$ is represented by the $\alpha_{ij}$, and represents the obstruction to the existence of a global connection on $\sL$.
+
+In fact the use of the term de Rham cohomology is not quite justified, as we really use as cohomology-theory the direct sum of $H^{2p}(X,\tau_{\ge p}(\Omega^*_X))$, where $\tau_{\ge p}(\Omega^*_X)$ denotes the truncated de Rham complex where all terms $\Omega^q$ with $q<p$ have been replaced by zero. Also we later apply the Riemann-Roch theorem (with coefficients in this cohomology-theory) to the projection from $\sM^0(\sG)\times C$ to $\sM^0(\sG)$. We justify this by embedding $C$ into some projective space, and the usual deformation to the normal cone. This works although $\sM^0(\sG)$ is only a stack and not a scheme.
+
+Similarly for a vector-bundle $\sF$ one defines higher Chern-classes as follows: Let $T=\Flag(\sF)$ denote the full flag-variety of $\sF$. Over $T$ the pullback of $\sF$ is filtered by line-bundles, and the symmetric polynomials in their first Chern-classes define classes $c_i(\sF)\in\HDR^{2i}(T)$. One shows that $\HDR^*(S)$ injects canonically into $\HDR^*(T)$, and contains these symmetric functions.
+
+We need this construction for the following argument: Suppose we are on a space $C\times S$, and our bundle $\sF$ already admits an $\Omega_C$-connection. We can filter the de Rham complex $\Omega^*_{C\times S}$ by $G^i(\Omega^*_{C\times S})=\Omega^i_S\wedge\Omega^*_{C\times S}$.
+
+\begin{lemma}{IV.2}\label{lem:IV.2}
+The Chern-classes $c_i(\sF)$ of $\sF$ lift naturally to
+
+\pg{553}
+
+$H^{2i}(C\times S,G^i(\Omega^*_{C\times S}))$ and their projections to $H^{2i}(C\times S,\mathrm{gr}^i_G(\Omega^*_{C\times S})) =\Omega^i_S\otimes\HDR^i(C)$ are (for $S$ affine) given as follows: The obstruction to lift the connection to $\Omega_S$ defines a class in $\Omega_S\otimes\HDR^1(C,\End(\sF))$. Either apply to it the trace $\End(\sF)\to\sO$, or square it and apply the trace-form $Q(\sF)$. The result is the projection of $c_1(\sF)$, respectively $c_1(\sF)^2-2\cdot c_2(\sF)$.
+\end{lemma}
+
+\begin{proof}
+For line-bundles this follows from the description above. For a general vector-bundle one uses that the $\Omega_C$-connection defines a lift of $\sT_C$ to the tangent-bundle of the flag-variety $T$, and an action of this lift on the pullback of $\sF$ which respects the filtration. Now apply the previous argument to the subquotients.
+\end{proof}
+
+We intend to apply the lemma to the bundle $\sF_P$ on $C\times\sM^0_\nabla(\sG)$. The class describing the projection to $\mathrm{gr}_G$ is a map from the tangent-bundle to $\HDR^1(C,\End(\sF_P))$, which is the composition of the projection onto $\HDR^1(C,\Lie(\sG_P))$ and the map on $\HDR^1$ induced from the representation of $\Lie(\sG_P)$ on $\sF_P$. If we want to compute the first Chern-class of the pullback of $\sL$ to $\sM^0_\nabla(\sG)$, the Riemann-Roch theorem (in de Rham cohomology) shows that on each connected component of $\sM^0_\nabla(\sG)$ it is the projection (under $C\times\sM^0_\nabla(\sG)\to\sM^0_\nabla(\sG)$) of a $c_2(\sF_P)$ ($c_1(\sF_P)$ vanishes). Also by reasons of degree the projection vanishes on $H^4(C\times\sM^0_\nabla(\sG),G_3(\Omega^*))$, so $c_1(\sL)$ can be computed from its projection onto $\mathrm{gr}^2_G$. The projection lies in the second stage of the Hodge-filtration; that is, $\sL$ has a connection whose curvature is a closed 2-form on $\sM^0_\nabla(\sG)$ which represents $c_1(\sL)$. The previous arguments allow us to compute the curvature.
+
+\begin{theorem}{IV.3}\label{thm:IV.3}
+The pullback of $\sL$ to $\sM^0_\nabla(\sG)$ has a connection $\nabla$ with curvature $\nabla^2$ as follows: The tangent-bundle projects onto $\HDR^1(C,\Lie(\sG_P))$, and the trace-form $Q(\sF)$ on $\Lie(\sG_P)$ together with Poincar\'e-duality define an alternating bilinear form on the target. Pulling back defines a symplectic form on the tangent-bundle, with kernel equal to the lift of $\sT_B$. The curvature $\nabla^2$ is $-1/2$ of this 2-form. Also $\nabla$ is trivial on the fibres of the projection $\sM^0_\nabla(\sG)\to\sM^0(\sG)$.
+\end{theorem}
+
+\begin{proof}
+Only the last assertion still needs an argument. Since $\Gamma(C,\Lie(\sG_P)\otimes\omega_C)$ is isotropic in $\HDR^1(C,\Lie(\sG_P))$ the restriction to the fibres differs from the trivial connection by a closed relative 1-form $\alpha$. As the relative de Rham cohomology of an affine bundle is trivial, $\alpha$ will be locally (in $\sM^0(\sG)$) the derivative of a function, and globally the derivative of an $f\in\Gamma(\sM^0(\sG),\pi_*(\sO)/\sO)$, $\pi$ the projection from $\sM^0_\nabla(\sG)$ to $\sM^0(\sG)$. We claim that it vanishes, and thus have to study $\pi_*(\sO)$.
+\end{proof}
+
+\pg{554}
+
+For simplicity abbreviate $\sM^0(\sG)=S$. Denote by $\Diff^{\le 1}(\sL)$ the bundle of differential operators (relative to $B$) on $\sL$, of degree at most one. We always consider it as an $\sO_S$-module via multiplication by functions from the left. It is an extension of $\sO_S$ by $\sT_{S/B}$, whose class is another incarnation of $c_1(\sL)\in H^1(S,\Omega_{S/B})$. Associated to it is a homogeneous space $\Conn(\sL)$ which classifies connections on $\sL$. Another way to describe it is via its affine algebra. Namely the symmetric power $S^\nu(\Diff^{\le 1}(\sL))$ is the algebra of functions which are polynomial of degree $\le\nu$ on the fibres. We shall show below that $\sM^0_\nabla(\sG)$ is isomorphic to $\Conn(\sL)$. Granting this we can finish the proof. Assume first that the genus of $C$ is at least three. If $\nu$ denotes the order of $f$, $f$ has a leading term which is a global section of $S^\nu(\sT_{S/B})$. So $\nu$ cannot be one as $S$ has no global vector-fields. The obstruction to lift the leading term modulo $S^{\nu-2}(\Diff^{\le 1}(\sL))$ vanishes, but is on the other hand equal to the product with $c_1(\sL)\in H^1(S,\Omega_{S/B})$. By \hyperref[cor:III.4]{Lemma~III.4} ii) the leading term must also vanish. If the genus is two we choose an unramified cover $C'\to C$. This is possible over a finite \'etale cover $B'$ of $B$. The pullback to $C'$ defines maps on moduli-spaces which are unramified, and some power of $\sL$ is the pullback of the corresponding line-bundle for $C'$. The connection for this bundle pulls back to a connection $\nabla$ for which the theorem holds.
+
+It remains to show the following
+
+\begin{lemma}{IV.4}\label{lem:IV.4}
+$\sM^0_\nabla(\sG)$ is isomorphic to $\Conn(\sL)$.
+\end{lemma}
+
+\begin{proof}
+We show that the two homogeneous spaces have, up to a factor $-1/2$, the same class in $H^1(S,\Omega_{S/B})$. Apply the Riemann-Roch theorem downstairs to $\sF_P$ on $C\times S$, but this time only in Hodge-cohomology and only relative $T$. This will compute the image of $c_1(\sL)$ in $H^1(S,\Omega^1_{S/B})$. Just as before it is the projection of $c_2$. The obstruction to the existence of a connection is a class $\rho=\rho_C+\rho_S\in H^1(C\times S,\End(\sF_P)\otimes (\Omega_{C/B}\oplus\Omega_{S/B}))$, and we have to compute $-1/2$ of the projection of $\rho^2$, that is, the projection of $-\rho_C\cup\rho_S$. As $\Omega_C$-connections exist locally in $S$, $\rho_C$ lies in $H^1(S,\pi_*(\End(\sF_P)\otimes\omega_C))=H^1(S,\Omega_{S/B})$ ($\pi\colon C\times S\to S$ the projection), and describes the isomorphism-class of the bundle $\sM^0_\nabla(\sG)$. The cup-product then depends only on the image of $\rho_S$ in $\Gamma(S,R^1\pi_*(\End(\sF_P))\otimes\Omega_{S/B})$, which is another incarnation of the isomorphism $\sT_{S/B}\cong R^1\pi_*(\End(\sF_P))$. It then follows that $c_1(\sL)$ classifies the isomorphism class of $\sM^0_\nabla(\sG)$, and $\sM^0_\nabla(\sG)$ is
+
+\pg{555}
+
+also the classifying space for $\Omega_{S/B}$-connections on $\sL$.
+\end{proof}
+
+\begin{remark}
+For questions of connections only the class of $\sL$ in $\Pic(\sM^0(\sG))\otimes\mathbb{Q}$ matters. We have seen that this class depends only on the trace-form $Q(\sF)$, which is a $W'$-invariant form in $S^2(X)$. It is the sum of multiples of Killing-forms on simple factors in $\Lie(G)$, and one sees easily that each such form arises. Also two nondegenerate forms differ by a $G$-linear selfadjoint automorphism of $\Lie(G)$. It also acts on $\sM^0_\nabla(\sG)$ and $H^1(S,\Omega_{S/B})$. It follows that in a more invariant formulation we get a family of line-bundles $\sL(Q)$ indexed by $W'$-invariants $Q$ in $S^2(X)$, and on $\sM^0_\nabla(\sG)$ we can choose connections on each of them such that $\sL(Q_1)\otimes\sL(Q_2)\cong\sL(Q_1+Q_2)$, respecting connections on $\sM^0_\nabla(\sG)$. The curvature of the connection on $\sL(Q)$ is induced from the alternating form on $\HDR^1(C,\Lie(\sG_P))$ induced by $Q$ and the Poincar\'e-duality.
+\end{remark}
+
+Because of the curvature on $\sM^0_\nabla(\sG)$ the operation of tangent-vectors on $\sL$ does not respect the Poisson-bracket. However we get an operation of the lift of $\sT_B$ which does. Also for an ample $\sL$ the curvature of the connection on $\sL$ makes $\sM^0_\nabla(\sG)$ into a symplectic manifold relative $B$. That is, we have an $\sO_B$-linear Poisson-bracket $\{f,g\}$, which associates to any local function $f$ a vector-field. By the connection it acts on $\sL$. If we add the linear endomorphism $f$ to it we get an operator $H_f$, by which local functions act on $\sL$. This action preserves brackets, i.e.\ $H_{\{f,g\}}$ is the commutator of $H_f$ and $H_g$, and is compatible with the action of vector-fields $Z\in\sT_B$. Also if $\phi$ is a local function on $\sM^0(\sG)$ then its associated vector-field is tangential to the fibres of $\sM^0_\nabla(\sG)\to\sM^0(\sG)$, and we can generate all such tangents. Thus a section $\psi$ of $\sL$ on $\sM^0_\nabla(\sG)$ descends to $\sM^0(\sG)$ iff $H_\phi(\psi)=\phi\cdot\psi$ for all such $\phi$.
+
+The action of such a $Z$ does not descend to $\sM^0_\nabla(\sG)$ itself because $Z$ does not respect vector-fields which are tangential to the fibres, as documented by \refthm{IV.1}. This can be made more precise: Let us fix $\sF$ and $\sL$. Upstairs at a point in $\sM^0_\nabla(\sG)$ $Z$ defines a map from $\Gamma(C,\Lie(\sG_P)\otimes\omega_C)$ to $H^1(C,\Lie(\sG_P))$, which is dual to $\Gamma(C,\Lie(\sG_P)\otimes\omega_C)$ via the symplectic form on $\sM^0_\nabla(\sG)$. Thus we associate to $Z$ an element $\rho(Z)$ of $S^2(\sT_{S/B})$, and this element is constant along the fibres and defines a global section of $S^2(\sT_{S/B})$ over $S$. One derives that for a local function $\phi$ on $\sM^0_\nabla(\sG)$ $Z(\phi)$ has degree $\le 1$ along the fibres, that is, lies in $\Diff^{\le 1}(\sL)$, and its symbol is obtained by contracting $d\phi$ with $\rho(Z)$.
+
+\pg{556}
+
+Now suppose that over an open subset $U$ in $\sM^0(\sG)$ we choose a function $h$ on $\sM^0_\nabla(\sG)$ which has degree $\le 2$ on the fibres (i.e.\ is in $S^2(\Diff^{\le 1}(\sL))$) and has leading term $\rho(Z)$. It follows that $Z(\phi)-\{h,\phi\}$ is constant on the fibres, and that if $\psi$ is a local section of $\sL$ over $U$, then $Z(\psi)-H_h(\psi)$ is constant along the fibres and thus again a local section of $\sL$. If in addition we lift $Z$ on $U$ to a vector-field and also to an action $\widetilde{Z}$ on $\sL$, associating to any local section $\psi$ of $\sL$ over $U$ the difference $Z(\psi)-\widetilde{Z}(\psi)-H_h(\psi)$ defines an $\sO_B$-linear differential operator of degree $\le 1$ on $\sL$. There is a unique $h$ (with leading term $\rho(Z)$) for which this vanishes. More globally choose local lifts $\widetilde{Z}_i$ on an open cover $U_i$ of $\sM^0(\sG)$. Over the intersection $U_i\cap U_j$ their difference is an element $h_{ij}\in\Diff^{\le 1}(\sL)$, whose symbol represents the obstruction to lift $Z$ to a global tangent-vector in $\sM^0(\sG)$. By the previous we obtain over $U_i$ sections $h_i$ of $S^2(\Diff^{\le 1}(\sL))$, with leading term $\rho(Z)$, such that $h_{ij}=h_i-h_j$.
+
+To construct the connection we need elements $h_i$ of $\Diff^{\le 2}(\sL)$ which satisfy the condition above. We want them to have symbol $\rho(Z)$, and they exist if the obstruction in $H^1(\sM^0(\sG),\Diff^{\le 1}(\sL))$ to the existence of a differential operator with this symbol is represented by the cocycle $h_{ij}$, or equivalently by the obstruction in $H^1(\sM^0(\sG),\Diff^{\le 1}(\sL))$ to lift in $S^2(\Diff^{\le 1}(\sL))$. Here all differential operators are relative $B$, and the $\sO_S$-module structure on $\Diff^{\le 1}(\sL)$ is via left-multiplication.
+
+To relate these two we make the following general observation: Suppose we have a smooth scheme $S$, a line-bundle $\sL$ on $S$, and a global section $\rho$ of $S^2(\sT_S)$. There are obstructions $a(\rho,\sL)$, $b(\rho,\sL)\in H^1(S,\Diff^{\le 1}(\sL))$ to lift $\rho$ to either $\Diff^{\le 2}(\sL)$ or $S^2(\Diff^{\le 1}(\sL))$. Also if $\sK$ denotes the canonical bundle, there is an anti-automorphism $\Diff(\sL)\cong\Diff(\sK\otimes\sL^{\otimes-1})$ sending $D$ to its adjoint $D^t$, characterised by the fact that for local sections $f$, $g$ $\langle D(f),g\rangle+\langle f,D^t(g)\rangle=d(L(f,g)) \in\sK$ is canonically an exterior derivative, where $L(f,g)$ is a differential operator in $f$. Now we can state:
+
+\begin{proposition}{IV.5}\label{prop:IV.5}
+There exists a class $c(\rho)\in H^1(S,\sO_S)$, independent of $\sL$, such that
+\[
+2\cdot\bigl(a(\rho,\sL)-c(\rho)\bigr)
+= b(\rho,\sL)+b(\rho,\sK\otimes\sL^{\otimes-1})^t .
+\]
+\end{proposition}
+
+\begin{proof}
+On an open cover we choose connections $\nabla$ on $\sL$ and $\sK$. For any local vector-field $Z$ there exists a function $l(Z)$ (depending only
+
+\pg{557}
+
+on the connection on $\sK$) such that the adjoint of $\nabla(Z)$ is given by
+\[
+\nabla(Z)^t=-\nabla(Z)-l(Z).
+\]
+$l(Z)$ is the difference between the Lie-derivative $L_Z$ and $\nabla(Z)$ on $\sK$. It is not linear in $Z$, but satisfies $l(f\cdot Z)=f\cdot l(Z)+Z(f)$.
+
+For local vector-fields $X$, $Y$ the differential operator
+\[
+-\nabla(X)^t\cdot\nabla(Y)-\nabla(Y)^t\cdot\nabla(X)
+\]
+is bilinear and symmetric in $X$ and $Y$, factors over $S^2(\sT_S)$, and has symbol $X\otimes Y+Y\otimes X$, so we get a splitting of the surjection $\Diff^{\le 2}(\sL)\to S^2(\sT_S)$. Changing the connection then defines a cocycle. Similarly we use the connections to lift vector-fields to $\Diff^{\le 1}(\sL)$, lifting $X$ to $\nabla(X)$. Now suppose that on an overlap the two connections on $\sL$ differ by a one-form $\lambda$, and those on $\sK$ by $\mu$, so that on $\sK\otimes\sL^{\otimes-1}$ we obtain $\mu-\lambda$. Also $l(Z)$ changes by $-\mu$. Let us evaluate the change in liftings on an element $\rho=Z\otimes Z$, which suffices as these span $S^2(\sT_S)$:
+
+(i) The difference in lifts to $\Diff^{\le 2}(\sL)$ is
+\begin{align*}
+&(\lambda-\mu)(Z)\cdot\nabla(Z)-\nabla(Z)^t\cdot\lambda(Z)
++\lambda(Z)\cdot(\lambda-\mu)(Z)\\
+&\quad=(\lambda-\mu)(Z)\cdot\nabla(Z)+\nabla(Z)\cdot\lambda(Z)
++l(Z)\cdot\lambda(Z)+\lambda(Z)\cdot(\lambda-\mu)(Z).
+\end{align*}
+
+(ii) For $S^2(\Diff^{\le 1}(\sL))$ we get
+\[
+2\cdot\lambda(Z)\cdot\nabla(Z)+\lambda(Z)^2 .
+\]
+
+(iii) Finally $S^2(\Diff^{\le 1}(\sK\otimes\sL^{\otimes-1}))$ gives
+\[
+2\cdot(\mu-\lambda)(Z)\cdot\nabla(Z)+(\mu-\lambda)(Z)^2,
+\]
+whose adjoint is
+\[
+2\cdot\nabla(Z)\cdot(\lambda-\mu)(Z)+2\cdot l(Z)\cdot(\lambda-\mu)(Z)
++(\lambda-\mu)(Z)^2 .
+\]
+
+So on the overlaps $2\cdot a(\rho,\sL)-b(\rho,\sL) -b(\rho,\sK\otimes\sL^{\otimes-1})$ is represented by
+\[
+2\cdot l(Z)\cdot\mu(Z)+2\cdot Z(\mu(Z))-\mu(Z)^2 .
+\]
+Formally this is the difference between $-2\cdot Z(l(Z))-l(Z)^2$, computed for the different connections, but the bilinear form
+\[
+B(X,Y)=X(l(Y))+Y(l(X))+l(X)\cdot l(Y)
+\]
+
+\pg{558}
+
+does not factor over $S^2(\sT_S)$ (i.e.\ $B(f\cdot X,Y)=B(X,f\cdot Y)-[X,Y](f)$), so it is a cocycle which may or may not be a coboundary, and defines $2\cdot c(\rho)$.
+\end{proof}
+
+Now we come back to our previous situation, choosing local lifts $\widetilde{Z}$ for a vector-field $Z$ on $B$, which differ on the overlaps by $h_{ij}\in\Diff^{\le 1}(\sL)$. As before $\widetilde{Z}$ has a formal adjoint $\widetilde{Z}^t$ which acts on $\sK_S\otimes\sL^{\otimes-1}$. We would like to define it instead on $\sK_{S/T}\otimes\sL^{\otimes-1}$. For this choose locally in $B$ a generator $\alpha$ of $\sK_B$. Then $L_Z(\alpha)/\alpha$ is a function on $B$, and tensoring by $\alpha$ defines an isomorphism between $\sK_{S/B}$ and $\sK_S$. The sum of $L_Z(\alpha)/\alpha$ and $\widetilde{Z}^t$ then is an operator on $\sK_{S/B}\otimes\sL^{\otimes-1}$, independent of $\alpha$.
+
+From now on assume that $\sL$ is a power of the canonical bundle $\sK=\sK_{S/T}$: $\sL=\sK^{\otimes\sigma}$, with $\sigma\in\mathbb{Q}$. If we lift $Z$ locally as a vector-field there is a unique way to lift to compatible actions $\widetilde{Z}=\widetilde{Z}_\sigma$ on all $\sK^{\otimes\sigma}$ such that $\widetilde{Z}_0$ is the vector field (i.e.\ fixes the constant functions), and $\widetilde{Z}^t_\sigma=-\widetilde{Z}_{1-\sigma}$. It follows that for the differences of local lifts also $h^t_{ij,\sigma}=-h_{ij,1-\sigma}$. We want to translate this into a property for the $h_i$. The leading term of $h_i$ is defined by $Z$. However this rule involves the trace-form for the representation defining $\sL$, so we have to fix one to make everything well defined. Take $\sK$ for that purpose. Then to $Z$ we associate a global section $\rho(Z)$ of $S^2(\sT_{S/B})$, and now for $\sK^{\otimes\sigma}$ the $h_i$ have as new leading term $\sigma^{-1}\cdot\rho(Z)$. We derive that $b(\rho,\sK^{\otimes\sigma})$ is represented by the cocycle $\sigma\cdot h_{ij,\sigma}$, and by the proposition $a(\rho,\sK^{\otimes\sigma})-c(\rho)$ is represented in $H^1(S,\Diff^{\le 1}(\sK^{\otimes\sigma}))$ by $(\sigma-1/2)\cdot h_{ij,\sigma}$.
+
+We first apply this to $\sO_S$, i.e.\ to $\sigma=0$. Note that $\sO_S$ is a direct summand in $\Diff(\sO_S)$, with complement the differential operators $D$ which annihilate $1$. The projection to $H^1(S,\sO_S)$ annihilates all terms in the equation above except for $c(\rho)$, which thus must vanish.
+
+For arbitrary $\sigma$ the sums of local lifts of $\rho$ and of $(\sigma-1/2)\cdot\widetilde{Z}$ define a global differential operator $D_\sigma(Z)$ on $\sK^{\otimes\sigma}$, which has order $\le 2$, symbol $\rho(Z)$, and whose commutator with a function $f$ on $B$ is $(\sigma-1/2)\cdot Z(f)$. In particular for $\sigma=1/2$ $D_{1/2}(Z)$ is $\sO_B$-linear. Furthermore we can normalise them such that $D_0(Z)$ annihilates the constants, $D_\sigma(Z)^t=D_{1-\sigma}(Z)$, and such that its dependence on $\sigma$ in a local trivialisation of $\sK$ is of the form
+\[
+D_\sigma(Z)=D_2+\sigma\cdot D_1+\sigma^2\cdot D_0,
+\]
+
+\pg{559}
+
+where the $D_i$ are differential operators of degree $\le i$.
+
+Now assume that either the genus is at least three, or $\sG$ does not map to a form of PGL$_2$. Then $\Gamma(S,\sT_{S/B})$ vanishes, so these properties determine the $D_\sigma$ up to addition of a function $\sigma\cdot(1-\sigma)\cdot\alpha(Z)$, $\alpha$ a differential 1-form on the base.
+
+If we divide by $\sigma-1/2$ they will form our projective connection. To determine its curvature we have to check what happens to commutators. So assume that $Z_1$ and $Z_2$ are two commuting vector-fields on $T$. Then the commutator of $D_\sigma(Z_1)$ and $D_\sigma(Z_2)$ is $\sO_B$-linear and has order $\le 3$. Its symbol is the Poisson-bracket between the local functions $h(Z_i)$, so vanishes as these are in involution. So the degree is at most two, and the symbol is a global section $\rho$ of $S^2(\sT_{S/B})$. The obstruction to lift $\rho$ to a differential operator modulo constants is multiplication by $c_1(\sK^{2\sigma-1})$, so $\rho$ vanishes if $\sigma\ne 1/2$. By continuity this holds for all $\sigma$. As an $S$ admits no vector-fields the commutator is a constant function. This function vanishes for $\sigma=0$ (as constants are annihilated), for $\sigma=1$ (by adjointness), and for $\sigma=1/2$ because there the commutator is anti-selfadjoint.
+
+We also want to consider what happens for general line-bundles. The Lie-algebra of $G$ is the direct sum of simple components, which are permuted by $W'/W$. The adjoint group $G^{\mathrm{ad}}$ thus becomes a product $G^{\mathrm{ad}}=\prod G_\alpha$, and similarly $\sG^{\mathrm{ad}}$ is the product of factors $\sG_\alpha$. The corresponding map from $\sM^0(\sG)$ to the product of the $\sM^0(\sG_\alpha)$ is \'etale, and up to torsion a general $\sL$ is the product of pullbacks of powers of canonical bundles $\sK_\alpha$ on $\sM^0(\sG_\alpha)$. By pullback from the factors we get also differential operators on a general $\sL$.
+
+\begin{theorem}{IV.6}\label{thm:IV.6}
+Suppose that $G$ is semisimple, and that either $\genus(C)>2$ or $\sG$ does not admit any nontrivial map into $\mathrm{PGL}(\sF)$, $\sF$ of rank two. If $B(\sF)+1/2\cdot B(\Lie(\sG))$ is nondegenerate, then there exists a flat projective connection on $\sL(\sF)$ relative to $B$, acting by quadratic differential operators.
+\end{theorem}
+
+For a general reductive $G$ we can similarly reduce the problem to the product of $\sG^{\mathrm{ad}}$ and of the connected center, so we are reduced to consider abelian varieties. There the theory is well known. One can proceed as above if one makes use of the symmetry $-1$ and first restricts to symmetric line-bundles: The only new difficulty arising comes from the fact that the moduli-space admits vector-fields. However these are never symmetric under the involution. Also general $\sL$ can now be treated by using translations.
+
+\pg{560}
+
+\section{Infinitesimal parabolic structure}\label{sec:V}
+
+As before $C$ denotes a smooth geometrically connected projective curve of genus at least two, over some base $B$, and $\sG$ a reductive connected algebraic group over $C$. Suppose further that we are given different points ($=$ disjoint sections over $B$) $x_1,\cdots,x_s\in C(B)$, making up a divisor $\{\infty\}$. Recall that a parabolic structure on a vector-bundle $\sF$ on $C$ consists of flags in the fibres $\sF(x_i)$, together with weights assigned to the quotients. We treat the case where these weights are very small. Then the parabolic bundle is semistable if it is semistable without its parabolic structure, and stable if in addition for any subbundle of the same slope a certain stability-condition holds for the fibres at the $x_i$. The easiest way to make this precise is the following: Choose a cyclic Galois-covering $D\to C$ of degree $N\gg 0$, which is totally ramified over the $x_i$. We denote the unique point over $x_i$ as $y_i$, and by $t_i$ a local uniformiser in $y_i$. To any bundle $\sF$ on $C$ with parabolic structure in the $x_i$, we associate the following bundle $\sE$ on $D$: Away from the $y_i$, $\sE$ coincides with the pullback of $\sF$, while at $y=y_i$ its stalk is given by $\sE_y=\sum t_i^{-j}\cdot F^j(\sF_x)$. Obviously $\sE$ is Galois-equivariant, so its Harder-Narasimhan filtration is induced from a filtration on $\sF$. It then follows that for big $N$ $\sE$ is semistable (as bundle on $D$) if and only if $\sF$ is semistable as parabolic bundle on $C$. Also stability of $\sF$ is equivalent to equivariant stability of $\sE$. All in all because of this construction all the main results about stability carry over. For example tensor-products of semistable parabolic bundles are semistable again.
+
+We translate this construction into $\sG$-torsors. However we only consider the analogue of complete flags.
+
+\begin{definition}{V.1}\label{def:V.1}
+An \textit{infinitesimal parabolic structure} on a $\sG$-torsor $P$ associates to any $x_i$ a Borel-subgroup $B_i\subset\sG_P(x_i)$, and an integral element $H_i$ in the Lie-algebra $\ttt_i$ of its maximal torus $T_i=B_i/N_i$ such that $\langle H_i,\alpha\rangle$ is a positive integer for each root $\alpha$ in $B$ (that is, $H_i$ is dominant and integral).
+\end{definition}
+
+It obviously suffices to exhibit $H_i$, since it determines $B_i$. Also the numbers $\langle H_i,\alpha\rangle$ (for $\alpha$ running over a base of $\Phi$) are called the weights at $x_i$. For a Galois-covering $D\to C$ as before, of degree $N$ much bigger than all $\langle H_i,\alpha\rangle$, we can define a Galois-equivariant $\sG$-torsor $Q$ on $D$ by the rule that for any $\sG$-representation $\sF$, $\sF_Q$ is obtained from the pullback of $\sF_P$ (on $C$) by transforming at $y=y_i$ with an element $g_i\in T_i$ (fraction-field of $\sO_{Y,y}$) such that for each character $\lambda\colon T_i\to\Gm$ the valuation of $\lambda(g_i)$ is $d\lambda(H_i)$. As before the parabolic structure on
+
+\pg{561}
+
+$P$ is called stable if $Q$ is stable in the equivariant sense; that is, if each Galois-stable nontrivial parabolic in $\Lie(\sG_Q)$ has negative degree. Similarly for semistable (where we can drop the qualifier Galois-equivariant), and parabolic semistability implies semistability without parabolic structures.
+
+The parabolic analogue of a Higgs-bundle consists of a pair $(P,\theta)$, where the section $\theta$ of $\Lie(\sG_P)\otimes\omega_C$ has simple poles at the $x_i$, such that its residue lies in the Lie-algebra of the unipotent radical $N_i$ of $B_i$. Again this corresponds to an equivariant Higgs-structure on $Q$, because we assumed that $H_i$ is strictly dominant. The characteristic of $\theta$ is defined by the $\phi_j(\theta)$, which are global sections of $\omega_C^{\otimes e_j}$ with poles of order $<e_j$ at the $x_i$. Especially for the Killing-form we obtain an invariant in $\Gamma(C,\omega_C^{\otimes2}(\infty))$, which is dual to the space $H^1(C,\sT_C(-\infty))$ which classifies infinitesimal deformations of $C$ and the $x_i$.
+
+Let us check how all the previous theory carries over.
+
+(i) \textit{The semistable reduction-theorem.} Suppose $V$ is a discrete valuation-ring, and we are given a parabolic semistable $\sG$-torsor $P_\eta$ over $C_\eta$. We want to extend it to $C$, after replacing $V$ by a finite extension. It suffices to construct a Galois-equivariant extension of $Q_\eta$. As before one reduces to the case of a semisimple adjoint group $G$, and inspection of the proof of the semistable reduction theorem for $Q_\eta$ shows that everything can be done equivariantly.
+
+(ii) \textit{The construction of} $\sM^0(\sG)_{\mathrm{par}}$, $M^0(\sG)_{\mathrm{par}}$, $M(\sG)_{\mathrm{par}}$, \textit{and} $\sM^0_\theta(\sG)_{\mathrm{par}}$, $M^0_\theta(\sG)_{\mathrm{par}}$, $M_\theta(\sG)_{\mathrm{par}}$. Can be copied, or take closures in the moduli-spaces for $D$. The $\sM_\theta$ map to $\Char$, with Lagrangian fibres.
+
+(iii) \textit{Estimates of codimensions.} As before. There are no new exceptional cases. For $\mathrm{PGL}(\sF)$ with $\sF$ of rank two over a curve of genus two each $x_i$ adds one respectively two to the codimensions. All $\sM^0(\sG)_{\mathrm{par}}$ are nonempty, and contain as dense open subset the product $\sN^0(\sG)$ of flag-spaces $\Bor(\sG_P(x_i))$ over the usual moduli-space of stable bundles. Except for the usual $\mathrm{PGL}(\sF)$ ($\sF$ of rank two, $C$ of genus two) the complement has codimension $\ge 2$. For fixed weights the connected components are the same as for $\sM^0(\sG)$.
+
+(iv) \textit{Construction of line-bundles} $\sL(\sF)$. We could use the determinant of cohomology of $\sF_P$ on $C$. However we get new line-bundles, namely the determinant of the fibres $\sF_P(x_i)$, and the eigenspaces of $H_i$ on $\Lie(\sG_P)(x_i)$. The first type of line-bundle is parametrised by $X(\sG)$ and more or less associated to the center, while the second corresponds to
+
+\pg{562}
+
+characters $\lambda_i$ of the maximal torus $T_i$. Over the moduli-space $\sN^0(\sG)$ these line-bundles are the natural equivariant bundles on the flag-spaces $\Bor(\sG_P(x_i))$.
+
+These come up in variants of our basic construction. For example the $N$th power of the determinant of $H^*(C,\Lie(\sG_P))$ is essentially the determinant of $H^*(C,\Lie(\sG_P)\otimes\sO_D)$, and we could consider instead the determinant of $H^*(D,\Lie(\sG_Q))$. These two differ, up to powers of the fibre $\omega_C(x_i)$, by the tensor-product of the line-bundle $\sL(\lambda_i)$ associated to the weights $\lambda_i=\sum_{\alpha\in\Phi}\alpha(H_i)\cdot\alpha$ of $\ttt_i$. Similar for a general $\sF_P$.
+
+(v) \textit{Abelianisation.} This is more complicated, and will be treated below.
+
+From now on assume that $G$ is semisimple.
+
+(vi) $\sM^0_\nabla(\sG)_{\mathrm{par}}$, \textit{and the connections} $\nabla$. As before, with the following modifications: The relevant moduli-space is that for the covering $D\to C$, or essentially that for the punctured curve $(C,\{x_i\})$. $\sM^0_\nabla(\sG)_{\mathrm{par}}$ parametrises torsors $P$ and connections $\nabla$ with simple poles at the $x_i$, whose residues lie in $\Lie(B_i)$ and are modulo $\Lie(N_i)$ equal to $H_i$. These induce equivariant connections on $D$ regular at $y_i$. As a space $\sM^0_\nabla(\sG)_{\mathrm{par}}$ has a $B$-connection, and the complement of the horizontal lift of $\sT_B$ is the space of Galois-invariants in $\HDR^1(D,\Lie(\sG_Q))$. Assume that $G$ is semisimple, and denote by $\sL$ the negative of the determinant of $H^1(D,\Lie(\sF_Q))$. Then $\sM^0_\nabla(\sG)_{\mathrm{par}}$ is isomorphic to $\Conn(\sL)$, and the pullback of $\sL$ to it has an absolute connection $\nabla$ whose curvature is given by the 2-form derived from the symplectic form on the Galois-invariants in $\HDR^1(D,\Lie(\sG_Q))$. The tangent-space to the fibres of the projection to $\sM^0(\sG)_{\mathrm{par}}$ acts on the pullback by its canonical action.
+
+All this follows by pullback from $D$.
+
+(vii) If $Z$ denotes a tangent-vector for $B$, its horizontal lift in $\sM^0_\nabla(\sG)_{\mathrm{par}}$ does not respect the fibres of the projection to $\sM^0(\sG)_{\mathrm{par}}$. However the failure is determined by the following quadratic form on the cotangent-bundle of $\sM^0(\sG)_{\mathrm{par}}$:
+
+The cotangent-bundle to $\sM^0(\sG)_{\mathrm{par}}$ consists of differentials in $\Gamma(C,\Lie(\sG_P)\otimes\omega_C(\infty))$ whose residue at each $x_i$ lies in $\Lie(N_i)$. The trace-form $\tr_\sF$ applied to two such differentials produces a global section of $\omega_C^{\otimes2}(\infty)$, to which we apply the image of $Z$ in $H^1(C,\sT_C(-\infty))$ to get $\rho(Z)$. Note that (the restriction to $\sN^0(\sG)$ of) $\rho(Z)$ is independent of the choice of weights $\langle H_i,\alpha\rangle$.
+
+(viii) For $\sL$ as before we can locally in $\sM^0(\sG)_{\mathrm{par}}$ lift $Z$ to a differential operator acting on $\sL$. The difference of two lifts defines a co-
+
+\pg{563}
+
+cycle $h_{ij}(\sL)$ in $\Diff^{\le 1}(\sL)$ (differential operators relative $B$), whose cohomology-class is the obstruction to lift $\rho(Z)$ (computed using $Q(\sF)$) to a global section of $S^2(\Diff^{\le 1}(\sL))$. Also after restricting to $\sN^0(\sG)$ the bundles $\sL$ corresponding to certain choices of $\sF$ and all possible weights $\langle H_i,\alpha\rangle$ are all of the form $\sL=\sK^{\otimes\sigma}\otimes\sL(\lambda)$, where $\sK$ denotes the canonical bundle of $\sN^0(\sG)$ (relative $B$) and $\sL(\lambda)$ is for an $r$-tuple of weights $\lambda=(\lambda_1,\cdots,\lambda_r)$ the corresponding line-bundle on the product of the full flag-varieties at $x_i$. We can choose the local lifts $\widetilde{Z}$ of $Z$ and the $h_{ij}(\sL)$ such that they are compatible with tensor-products and transposes. Then $\sigma\cdot h_{ij}(\sK^{\otimes\sigma}\otimes\sL(\lambda))$ represents the obstruction to lift $\rho(Z)$ (now computed with the Killing-form) to $S^2(\Diff^{\le 1})$. As before the obstruction to lift to $\Diff^{\le 2}$ is then given by $(\sigma-1/2)\cdot h_{ij}$.
+
+(ix) There exist differential operators $D(Z)$ on $\sK^{\otimes\sigma}\otimes\sL(\lambda)$, of order $\le 2$ with symbol $\rho(Z)$, and which have order $\le 1$ and symbol $Z$ over $B$. Also $D(Z)^t=D(Z)$, and in local trivialisations the $D(Z)$ are of the form $D_0+D_1+D_2$, where $D_i$ is a differential operator of degree $\le i$ which is polynomial in $\sigma$ and $\lambda$ of degree $\le 2-i$. For two commuting $Z$'s the commutator of the corresponding $D(Z)$'s is constant (i.e.\ induced from $B$). If $\sigma$ is different from $1/2$ the operators $(2\sigma-1)^{-1}\cdot D(Z)$ define a projective connection on $\sK^{\otimes\sigma}\otimes\sL(\lambda)$, and also on its direct images in $\sM^0(\sG)$. If all $\lambda_i$ are strictly dominant the direct image of $\sK^{\otimes\sigma}\otimes\sL(\lambda)$ is the tensor-product of $\sK^{\otimes\sigma}$ (differentials on $\sM^0(\sG)$) and the tensor-product $\sE=\sE(\lambda)$ of the irreducible $\sG(x_i)$-modules with highest weight $\lambda_i-2\sigma\cdot\rho$. So these inherit (if $\sigma\ne1/2$) a projective connection by differential operators of degree $\le2$, with scalar-symbol given by $\rho(Z)$.
+
+(x) The case of a general $\sF$ is reduced to this by decomposing $\sG^{\mathrm{ad}}$ into factors. For general reductive $\sG$ one then reduces to tori.
+
+All in all:
+
+\begin{theorem}{V.2}\label{thm:V.2}
+Assume that $G$ is semisimple, and that either $C$ has genus $>2$, or that $\sG$ does not map to $\mathrm{PGL}(\sF)$, $\sF$ of rank two. Choose for each $x_i$ a representation $E_i$ of $\sG(x_i)$, and thus a vector-bundle $\sE=\otimes E_{i,P}$ over $\sM^0(\sG)$. Then for $\sigma\ne1/2$ the bundle $\sE\otimes\sK^{\otimes\sigma}$ has a flat projective connection over $B$.
+\end{theorem}
+
+It remains to study the abelianisation-procedure. A new feature will be the study of conjugacy-classes of nilpotent elements. This will be local in the \'etale topology, and it essentially suffices to treat the case of a simple and semisimple Lie-algebra $\g$. Recall that each nonzero nilpotent element $X\in\g$ can be extended to an $\slt$-triple $\{X,H,Y\}$. Under the $\slt$-action
+
+\pg{564}
+
+$\g$ decomposes into irreducibles, whose number is equal to the dimension of the centraliser of $X$ (or of $Y$). This number is at least equal to the rank $l$ of $\g$, and equality holds if and only if $X$ is a regular nilpotent. Then $X$ lies in a unique Borel-algebra, and $H$ in a Cartan-subalgebra $\ttt$. Furthermore $\alpha(H)=2$ for all simple roots $\alpha$, while $X=\sum X_\alpha$ has nonzero component $X_\alpha$ for all such $\alpha$.
+
+Recall also \cite{Bo} that the product over all reflections $s_\alpha$, $\alpha$ simple, defines a Coxeter-element $\sigma\in W$. Its order is the Coxeter number $h$, and the number of elements in $\Phi$ is $l\cdot h$. For each primitive $h$th root of unity $\zeta$ the eigenspace in $\ttt$ where $\sigma$ acts as $\zeta$ has dimension one, and the restriction of any root $\alpha\in\Phi$ to it is nonzero. Finally the degrees $e_i$ of the generators $\phi_i$ of conjugation-invariant polynomials on $\g$ are determined by $\sigma$ because the eigenvalues of $\sigma$ are the $(e_i-1)$st powers of $\zeta$. Especially the last generator $\phi_l$ has degree $e_l=h$.
+
+Suppose now that $\theta(t)\in\g[\![t]\!]$ is an element with nilpotent constant term $\theta(0)$, so that all $\phi_i(\theta(t))$ vanish at the origin. The first coefficient of the polynomial $\det(T\cdot\id-\ad(\theta))$ which does not vanish identically is that of $T^l$, and it is homogeneous of degree $l\cdot h$. As it is a polynomial in the $\phi_i$ it follows that applied to $\theta(t)$ it has a zero of order at least $l$, and precisely $l$ if and only if $\phi_l(\theta(t))$ vanishes only to the first order, and if the monomial $\phi_l^l$ appears in the coefficient of $T^l$. We first show that the last condition holds:
+
+Let $H\in\ttt$ denote a generator of the $\zeta$-eigenspace of $\sigma$, and consider over $k[\![t^{1/h}]\!]$ the element $X=t^{1/h}\cdot H$. On it $\mathrm{Gal}(k[\![t^{1/h}]\!]/k[\![t]\!])$ acts like $\sigma$, so the invariant functions $\phi_i(X)$ all lie in $k[\![t]\!]$ and vanish for $t=0$. On the other hand the coefficient of $T^l$ in $\det(T\cdot\id-\ad(X))$ is $\prod_{\alpha\in\Phi}t^{1/h}\cdot\alpha(H)$, which is a constant multiple of $t^l$. So the monomial $\phi_l^l$ must have a nonzero coefficient in it.
+
+We thus define $\theta(t)$ to have \textit{generic nilpotent characteristics} if $\theta(0)$ is nilpotent and $\phi_l(\theta(t))$ has only a first-order zero, or equivalently the coefficient of $T^l$ in $\det(T\cdot\id-\ad(\theta(t))$ has a zero of order $l$.
+
+\begin{proposition}{V.3}\label{prop:V.3}
+Suppose $\theta(t)\in\g[\![t]\!]$ has generic nilpotent characteristics. Then $\theta(0)\in\g$ is a regular nilpotent, and the centraliser $\sZ(\theta)$ of $\theta$ in the adjoint group $G^{\mathrm{ad}}$ is smooth and connected over $k[\![t]\!]$. Furthermore two such $\theta(t)$ on which the $\phi_i$ take the same values are conjugate under $G^{\mathrm{ad}}(k[\![t]\!])$.
+\end{proposition}
+
+\begin{proof}
+In the factorisation $\det(T\cdot\id-\ad(\theta(t))=T^l\cdot Q(T,t)$, $Q$ has degree $l\cdot h$ and the coefficient of $T^{l\cdot h-j}$ is graded homogeneous (of degree
+
+\pg{565}
+
+$j$) in the $\phi_i$ which all vanish at $t=0$. So they have $t$-order $\ge j/h$, with equality for the last coefficient, and it follows that over the algebraic closure of $k((t))$ the roots of $Q(T,t)$ all have valuation $1/h$.
+
+Over the fraction-field $k((t))$, $\theta(t)$ is a regular element and its centraliser a maximal torus. It follows that the centraliser $\zz(\theta)\subset\g[\![t]\!]$ is a sublattice of rank $l$. Also over an extension $k((t^{1/N}))$, $Z(\theta)$ is conjugate by an element $g\in G^{\mathrm{ad}}(k((t^{1/N})))$ to the constant torus $T$. Then $\ad(g)(\theta(t))=H(t^{1/N})$ lies in $\ttt((t^{1/N}))$ and in fact in $t^{1/h}\cdot\ttt[\![t^{1/N}]\!]$, because all $\alpha(H(t^{1/N}))$ are integral and have valuation $1/h$. Furthermore there exists a $\sigma\in W$ such that under Galois-action $H(\zeta\cdot t^{1/N})=\sigma(H(T^{1/N}))$ ($\zeta$ a primitive $N$th root of unity). $\sigma$ may be different from the Coxeter-element, but we shall see that it behaves very much the same way.
+
+Our next claim is that $\sigma$ has no invariants in $\ttt$: Everything is defined over $\mathbb{Q}$, so it suffices to show that $\sigma$ has no invariants in the rational subspace spanned by the roots. Otherwise choose a $\sigma$-invariant in this space. By conjugating with $W$ we may assume that it lies in the positive Weyl-chamber, and its centraliser in $W$ is now generated by the simple reflections contained in it. It follows that there exists a proper subroot-system $\Phi'\subset\Phi$, generated by some of the simple roots of $\Phi$, such that $\sigma$ is $W$-conjugate to an element of the Weyl-group $W'$ of $\Phi'$. Inspection of the tables in \cite{Bo} (or maybe a neater argument) shows that each irreducible component of $\Phi'$ has Coxeter-number strictly less than $h$, and it follows that the algebra of $W'$-invariant polynomials on $\ttt$ has generators of degree $<h$. Their value at (a suitable $W$-conjugate of) $H(t^{1/N})$ is Galois-invariant and vanishes at the origin, so is at least divisible by $t$. As $\phi_l(\theta(t))=\phi_l(H(t^{1/N}))$ is a polynomial in these where all monomials have degree at least two, it must be divisible by $t^2$ which is a contradiction.
+
+Apply this as follows: Assume $X(t)$ lies in $\zz(\theta(t))\subset\g[\![t]\!]$. Then its $g$-conjugate lies in $\ttt[\![t^{1/N}]\!]$ (the roots take integral values) and has constant term invariant under $\sigma$, thus trivial. It follows that for two such elements the value of the Killing-form $B(X_1(t),X_2(t))$ vanishes at the origin; that is, $B$ is divisible by $t$ on $\zz(\theta(t))\times\zz(\theta(t))$.
+
+Finally the determinant of $\ad(\theta(t))$ on $\g[\![t]\!]/\zz(\theta(t))$ is $t^l\cdot\text{unit}$, so the quotient of $\g[\![t]\!]$ by the direct (check over $k((t))$!) sum $\zz(\theta(t))\oplus[\theta(t),\g[\![t]\!]]$ has length $l$. However $[\theta(t),\g[\![t]\!]]$ is contained in $\zz(\theta(t))^\perp$, and the map $\zz(\theta(t))\to\g[\![t]\!]/\zz(\theta(t))^\perp\cong\zz(\theta(t))^*$ is given by the Killing-form on $\zz(\theta(t))\times\zz(\theta(t))$, so is divisible by $t$ and has a cokernel of length at least $l$. It follows that $[\theta(t),\g[\![t]\!]]=\zz(\theta(t))^\perp$ and that the image of this lattice in $\g=\g[\![t]\!]/t\cdot\g[\![t]\!]$ has cokernel of dimension $l$, so $\theta(0)$ is a
+
+\pg{566}
+
+regular nilpotent. Also the special fibre of $\zz(\theta(t))$ is the centraliser of $\theta(0)$ in $\g$, so $\sZ(\theta)$ must be smooth with this Lie-algebra. Finally its special fibre is connected: Otherwise it would contain an element $g\in G^{\mathrm{ad}}$ of finite order. After suitable conjugation $g$ lies in the torus $T$, and $\alpha(g)=1$ for all simple roots $\alpha$ (because $\theta(0)$ has nonzero $\alpha$-component). As we are in the adjoint group $g=1$. Of course the general fibre of $\sZ(\theta)$ is a maximal torus and connected as well.
+
+Finally we want to show that two $\theta$'s with the same invariants are conjugate. Extend $\theta(0)=X$ to an $\slt$-tuple $\{X,H,Y\}$. It is known (Bourbaki, Example 17 for Chapter VIII, 11) that $(\phi_1,\cdots,\phi_l)$ defines an algebraic isomorphism from $X+\ker(\ad(Y))$ to the affine space $k^l$. We only need that the mapping has invertible differential at $X$.
+
+Now assume that we are given a second generic element $\theta'$. The constant terms of $\theta$ and $\theta'$ are both regular nilpotents and thus conjugate. So we may assume that both elements coincide modulo $t^{n-1}$, and have to check that we may conjugate one of them so that this extends to $t^n$. If $Z$ denotes the constant term of $(\theta'-\theta)/t^n$, we have to show that $Z$ lies in the image of $\ad(X)$. Conjugating we may assume that $Z$ lies in the complement $\ker(\ad(Y))$ to this image. However then derivatives in $Z$-direction of the $\phi_i$ vanish at $X$, so $Z=0$. This finishes the proof of the proposition.
+\end{proof}
+
+Now coming back to Higgs-bundles we say that a section $\theta\in\Gamma(C,\Lie(\sG_P)\otimes\omega_C(\infty))$ has generic characteristics if this holds away from $\infty$, and if at a point $x\in\{\infty\}$ with local coordinate $t$ the projection to all simple factors of $\theta$ divided by $dt/t$ is generic in the sense above. This defines an open dense subset in $\Char$. Choose $\theta$ with generic characteristics, and let $C^0\subset C-\{\infty\}$ denote the open subset where $\theta$ is not regular semisimple. We now can simply repeat:
+
+\begin{theorem}{V.4}\label{thm:V.4}
+(i) Over $C^0$ $\sZ(\theta)\subset\sG_P$ is the connected torus corresponding to a surjective representation $\pi_1(C^0)\to W'$, lifting the representation into $W/W'$ defined by $\sG$.
+
+(ii) Let $x\in C-C^0$. Complete the local ring of $C$ in $x$. If $x$ is not in $\{\infty\}$ for a local parameter $t$ in the completion (isomorphic to $k[\![t]\!]$) there exists over $k[\![t]\!]$ a constant torus $T_0\subset\sG_P$, and an embedding of the product of $T_0$ with one of the groups $\mathrm{SL}_2$, $\mathrm{GL}_2$ or $\mathrm{PGL}_2$ into $\sG_P$, such that $\sZ(\theta)$ is isomorphic to the product of $T_0$ and the centraliser of the $2\times2$-matrix with diagonal entries zero, and off-diagonal entries $t$ and $1$ (that is, multiplication by $t^{1/2}$ on $k[\![t^{1/2}]\!]$, considered as $k[\![t]\!]$-module of rank two).
+
+
+\pg{567}
+
+(iii) $\sZ(\theta)$ is smooth at $x$. Its group of connected components $\sZ(\theta)/\sZ(\theta)^{0}$ at $x$ is trivial except for the $\SL_{2}$-case, where it has order two.
+
+(iv) $H^{1}(C,\sZ(\theta))$ is an algebraic group, whose connected component of the identity is an abelian variety. Its group of connected components is $X^{*\,W'}/X^{*}_{sc}$.
+
+(v) The fibre of $M_{\theta}(G)\to\Char$ through $(P,\theta)$ is contained in the open subset of $M^{0}(\sG)$ classifying pairs with only the minimal group of automorphisms. $H^{1}(C,\sZ(\theta))$ operates transitively on it, and this action induces an isomorphism on the set of connected components.
+\end{theorem}
+
+\begin{corollary}{V.5}\label{cor:V.5}
+The set of connected components of the moduli-space $\sM^{0}(\sG)_{\mathrm{par}}$ of stable $\sG$-bundles coincides with that of $\sM^{0}_{\theta}(\sG)_{\mathrm{par}}$, $M_{\theta}(\sG)_{\mathrm{par}}$ as well as that of a generic fibre of $\sM^{0}_{\theta}(\sG)_{\mathrm{par}}\to\Char$, under the natural mappings. All are isomorphic to $(X^{*}/X^{*}_{sc})_{W'}$.
+\end{corollary}
+
+\begin{proof}
+As before. $H^{1}(C,\sZ(\theta))$ has the structure of an algebraic group because it is a quotient of a product of Jacobians (of a cover of $C$ which splits $\sZ(\theta)$), under the norm-map.
+\end{proof}
+
+\begin{corollary}{V.6}\label{cor:V.6}
+(i) On each connected component of $\sM^{0}_{\theta}(\sG)_{\mathrm{par}}$, all global functions are obtained by pullback from $\Char$.
+
+(ii) Let $\sN^{0}(\sG)$ denote the moduli-space of stable $\sG$-bundles (no $\theta$) with parabolic structures, and assume that either $\{\infty\}$ is nonempty, or $\genus(C)>2$, or that $\sG$ does not admit a surjection to $\PGL(\sF)$, $\sF$ a bundle of rank two and even degree. Suppose $N\subset\sN^{0}(\sG)$ is a connected component; i.e.\ the locus where the invariant $\deg_{P}\in X^{*}_{W'}/X^{*}_{sc}$ takes a fixed value. Then $\Gamma(N,S^{\textstyle\cdot}(\sT_{\sN^{0}(\sG)}))$ is isomorphic to the space of regular functions on $\Char$. This isomorphism preserves gradings. Especially the space of vector-fields on $N$ is equal to $H^{1}(C,\Lie(\sZ(\sG)))$. Also if $G$ is semisimple and simple, $N$ has no vector-fields, and $\Gamma(N,S^{\textstyle\cdot}(\sT_{\sM^{0}(\sG)}))$ is isomorphic to $H^{1}(C,\sT_{C}(-\infty))$.
+\end{corollary}
+
+Assume $\sF$ is a $\sG$-representation, defining $\sL(\sF)$.
+
+\begin{corollary}{V.7}\label{cor:V.7}
+The symplectic form on the tangent-bundle of $\sM^{0}_{\theta}(\sG)_{\mathrm{par}}$ defines a Poisson-bracket $\{f,g\}$ for local functions, and associates to any local function $f$ a vector-field $H_{f}$.
+
+(i) For any $f\in\Gamma(\sM^{0}_{\theta}(\sG)_{\mathrm{par}},\sO)$ the vector-field $H_{f}$ is tangential to the fibres of the characteristic maps, or equivalently $\{f,g\}$ vanishes for two functions $f$, $g$.
+
+(ii) Assume $\sF$ is such that $Q(\sF)$ is nonsingular. Multiplication by
+\pg{568}
+$c_{1}(\sL(\sF))\in H^{1}(\sM^{0}_{\theta}(\sG)_{\mathrm{par}},\Omega^{1})$ applied to $H_{f}$ defines a derivation from $\Gamma(\sM^{0}_{\theta}(\sG)^{\mathrm{par}},\sO)$ to $H^{1}(\sM^{0}_{\theta}(\sG)_{\mathrm{par}},\sO)$. $f$ lies in the kernel of this map only if it is constant.
+\end{corollary}
+
+
+% Bibliography
+
+\phantomsection
+\addcontentsline{toc}{section}{Bibliography}
+\begin{thebibliography}{[TUY]}
+
+\bibitem[APW]{APW} S. Axelrod, S. D. Pietra, and E. Witten,
+\emph{Geometric quantisation of Chern-Simons gauge theory}, J. Differential Geom. \textbf{33} (1991), 787--902.
+\doi{10.4310/jdg/1214446565}
+
+\bibitem[BNR]{BNR} A. Beauville, M. S. Narasimhan, and S. Ramanan,
+\emph{Spectral curves and the generalised theta divisor}, J. Reine Angew. Math. \textbf{398} (1989), 169--179.
+\doi{10.1515/crll.1989.398.169}
+
+\bibitem[Bo]{Bo} N. Bourbaki, \emph{Groupes et algebres de Lie},
+Hermann, Paris, 1975, Chapters 7 and 8.
+\doix{Springer reprint, 2006}{10.1007/978-3-540-33977-9}
+
+\bibitem[HN]{HN} G. Harder and N. Narasimhan,
+\emph{On the cohomology-groups of moduli-spaces of vector bundles over a curve}, Math. Ann. \textbf{212} (1975), 215--248.
+\doi{10.1007/BF01357141}
+
+\bibitem[H1]{H1} N. J. Hitchin, \emph{Stable bundles and integrable
+connections}, Duke Math. J. \textbf{54} (1987), 91--114.
+\doi{10.1215/S0012-7094-87-05408-1}
+
+\bibitem[H2]{H2} \rule{2em}{0.4pt}, \emph{The self-dual equations on a
+Riemann surface}, Proc. London Math. Soc. \textbf{55} (1987), 59--126.
+\doi{10.1112/plms/s3-55.1.59}
+
+\bibitem[H3]{H3} \rule{2em}{0.4pt}, \emph{Flat connections and geometric
+quantization}, Comm. Math. Phys. \textbf{131} (1990), 347--380.
+\doi{10.1007/BF02161419}
+
+\bibitem[La]{La} S. Langton, \emph{Valuative criteria for families of vector
+bundles on algebraic varieties}, Ann. of Math. (2) \textbf{101} (1975), 88--110.
+\doi{10.2307/1970987}
+
+\bibitem[Lau]{Lau} G. Lauman, \emph{Un analogue global du c\^one nilpotent},
+Duke Math. J. \textbf{57} (1988), 647--671.
+\doi{10.1215/S0012-7094-88-05729-8}
+
+\bibitem[MS]{MS} V. Mehta and C. S. Seshadri, \emph{Moduli of vector bundles
+on curves with parabolic structures}, Math. Ann. \textbf{248} (1980), 205--239.
+\doi{10.1007/BF01420526}
+
+\bibitem[NS]{NS} M. S. Narasimhan and C. S. Seshadri, \emph{Stable and
+unitary vector bundles on a compact Riemann surface}, Ann. of Math. (2) \textbf{82} (1965), 540--567.
+\doi{10.2307/1970710}
+
+\bibitem[R]{R} A. Ramanathan, \emph{Stable principal bundles on a compact
+Riemann surface}, Math. Ann. \textbf{213} (1975), 129--152.
+\doi{10.1007/BF01343949}
+
+\bibitem[S]{S} C. S. Seshadri, \emph{Space of unitary vector bundles on a
+compact Riemann surface}, Ann. of Math. (2) \textbf{85} (1967), 303--336.
+\doi{10.2307/1970444}
+
+\bibitem[Se]{Se} J.-P. Serre, \emph{Cohomologie galoisienne}, Lecture Notes
+in Math., Vol. 5, Springer-Verlag, 1973.
+\doi{10.1007/978-3-662-21553-1}
+
+\bibitem[TUY]{TUY} A. Tsuchiya, K. Ueno and Y. Yamade, \emph{Conformal field
+theory on universal families of stable curves with gauge symmetries}, Adv. Stud. Pure Math., Vol. 19, Academic Press, Boston, 1989, pp. 459--566.
+\doi{10.2969/aspm/01910459}
+
+\end{thebibliography}
+
+
+\textsc{Department of Mathematics, Princeton University, Princeton, New
+Jersey 08540}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Note on this edition}
+\section*{Note on this edition}\label{sec:editionnote}
+
+{\small This is a re-typeset transcription of the paper as printed in \emph{J.\ Algebraic Geometry} \textbf{2} (1993), 507--568; it is not the publisher's version. The grey numbers in the margin give the pagination of the printed original, so that references to it remain usable: the marker $[n]$ stands at the first word of journal page~$n$.
+
+The text follows the printed page word for word. In particular the original numbering of the statements has been kept exactly as printed, including the fact that \emph{two} different corollaries are printed as ``Corollary III.3'' (\hyperref[cor:III.3a]{p.~545} and \hyperref[cor:III.3b]{p.~549}), and that the reference on p.~554 to ``Lemma III.4'' means what is printed on p.~550 as \refcor{III.4}; that reference has been linked accordingly. Misprints of the original have likewise been left standing, among them ``multplicities'' (p.~517), ``Euler-charactristic'' (p.~522), ``does not operate trivally'' (p.~523), ``the successives quotients'' (p.~525), ``sectons'' (p.~538), ``the our bundle'' (p.~542), the blackboard $\mathbb{O}[X]^{W'}$ for $\mathbb{Q}[X]^{W'}$ (p.~541), and the shift between $\sK_{S/T}$ and $\sK_{S/B}$ (p.~558).
+
+The bibliography is reproduced as printed, with a link added to each item. Several of the entries are inaccurate in the original: [APW] is by S.~Della Pietra (not ``S.~D.\ Pietra''); [H1] is titled \emph{Stable bundles and integrable systems}; [H2] is titled \emph{The self-duality equations on a Riemann surface}; [HN] is by G.~Harder and M.~S.\ Narasimhan and titled \emph{On the cohomology groups of moduli spaces of vector bundles on curves}; [Lau] is by G.~Laumon; and [TUY] is by Y.~Yamada. }
+
+\end{document}
